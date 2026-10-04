@@ -7,3 +7,4 @@ dist/
 .astro/
 # ancienne version Python, gardée le temps de valider le site Astro
 ancien/
+.wrangler/
