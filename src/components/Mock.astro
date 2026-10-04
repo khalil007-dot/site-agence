@@ -1,0 +1,13 @@
+---
+// Maquette dessinée en CSS (fenêtre de navigateur), utilisée quand un projet n'a pas encore d'image
+interface Props { kind: string; url?: string }
+const { kind, url = 'votre-marque.be' } = Astro.props;
+const bars: Record<string, string> = { serp: 'google.be · « fleuriste ixelles »', logos: 'pistes-logo.pdf', uptime: 'suivi du site · 30 derniers jours' };
+---
+<div class="mock" aria-hidden="true"><div class="mock-bar"><i></i><i></i><i></i><span>{bars[kind] ?? url}</span></div><div class="mock-body">{
+  kind === 'shop' ? <Fragment><div class="bar title"></div><div class="bar w60"></div><div class="grid-3"><div class="prod"></div><div class="prod"></div><div class="prod"></div></div></Fragment>
+  : kind === 'serp' ? <div class="serp"><div class="top"><b>Votre entreprise</b><span style="width:80%"></span></div><div><span style="width:50%"></span><span style="width:75%"></span></div><div><span style="width:40%"></span><span style="width:65%"></span></div></div>
+  : kind === 'logos' ? <div class="logos"><div><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#F7A8FF" stroke-width="5"/></svg></div><div><svg viewBox="0 0 40 40"><path d="M8 32L20 8l12 24z" fill="#fff"/></svg></div><div><svg viewBox="0 0 40 40"><rect x="8" y="8" width="24" height="24" rx="7" fill="#D44DF0"/><circle cx="20" cy="20" r="5" fill="#141414"/></svg></div></div>
+  : kind === 'uptime' ? <Fragment><div class="uptime">{Array.from({ length: 30 }, () => <i></i>)}</div><div class="stat-row"><span>Sauvegardes</span><b>Chaque nuit</b></div><div class="stat-row"><span>Mises à jour</span><b>À jour</b></div></Fragment>
+  : <Fragment><div class="bar title"></div><div class="bar w80"></div><div class="bar w60"></div><div class="pill-mock"></div></Fragment>
+}</div></div>

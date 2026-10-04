@@ -1,0 +1,50 @@
+---
+// Page Services : générée à partir de src/data/services.json
+import Base from '../layouts/Base.astro';
+import Final from '../components/Final.astro';
+import { BRAND, FAMS, ORG_ID, SITE_URL, SV, prixDepart } from '../lib/site';
+
+const devisLabel = (court: string) => (['SEO', 'Google Ads'].includes(court) ? court : court.toLowerCase());
+const SERVICES_LD = {
+  '@context': 'https://schema.org', '@type': 'ItemList', name: 'Services de ' + BRAND,
+  itemListElement: SV.map((s, i) => {
+    const price = String(s.prix_unique || s.prix_mensuel);
+    return {
+      '@type': 'ListItem', position: i + 1,
+      item: {
+        '@type': 'Service', name: s.nom, url: SITE_URL + '/services.html#' + s.id, description: s.pour_qui, provider: { '@id': ORG_ID },
+        areaServed: [{ '@type': 'City', name: 'Bruxelles' }, { '@type': 'Country', name: 'Belgique' }],
+        offers: { '@type': 'Offer', priceCurrency: 'EUR', price, priceSpecification: { '@type': 'UnitPriceSpecification', price, priceCurrency: 'EUR', unitText: s.prix_mensuel ? 'MONTH' : 'projet', valueAddedTaxIncluded: false } },
+      },
+    };
+  }),
+};
+---
+<Base fichier="services.html" title={`Création de sites, SEO et logos à Bruxelles | ${BRAND}`} desc="Création de site vitrine, boutique en ligne, application, logo, devanture, SEO, Google Ads et réseaux sociaux à Bruxelles : contenu, délais et prix." current="services" schema={[SERVICES_LD]} crumbs={[['Services', 'services.html']]}>
+  <section class="page-head" aria-labelledby="page-title">
+    <div class="wrap reveal">
+      <h1 class="poster" id="page-title">Nos services web à Bruxelles</h1>
+      <p class="lead">Dix services pour créer votre site, soigner votre image et faire venir des clients. Chaque offre indique ce qui est inclus, le délai et le prix de départ.</p>
+    </div>
+  </section>
+  <nav class="jump" aria-label="Familles de services"><div class="wrap">{FAMS.map(f => <a href={`#${f.id}`} style={`--c:var(--${f.couleur})`}>{f.nom_court}</a>)}</div></nav>
+{FAMS.map(f => (
+  <section class="section" id={f.id} aria-labelledby={`${f.id}-title`} style="padding-top:clamp(48px,6vw,80px)">
+    <div class="wrap">
+      <div class="fam-banner" style={`background:var(--g-${f.couleur})`}><h2 class="d-lg" id={`${f.id}-title`}>{f.nom}</h2><p>{f.accroche}</p></div>
+      {SV.filter(s => s.famille === f.id).map(s => (
+      <article class="svc" id={s.id} aria-labelledby={`${s.id}-t`}>
+        <div>
+          <h3 id={`${s.id}-t`}>{s.nom}</h3>
+          <p class="for">{s.pour_qui}</p>
+          <dl class="svc-facts"><div><dt>À partir de</dt><dd>{prixDepart(s)}</dd></div>{s.infos.map(x => <div><dt>{x.label}</dt><dd>{x.valeur}</dd></div>)}</dl>
+          <a class="btn btn-primary" href={`devis.html?service=${s.id}`}>Devis {devisLabel(s.nom_court)}</a>
+        </div>
+        <ul class="included" style={`--c:var(--${f.couleur})`}>{s.inclus.map(x => <li>{x}</li>)}</ul>
+      </article>
+      ))}
+    </div>
+  </section>
+))}
+<Final title="Plusieurs services vous intéressent ?" text="Estimez le total sur la page d'accueil, ou cochez-les directement dans le formulaire de devis." btn="Composer mon devis" />
+</Base>

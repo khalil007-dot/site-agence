@@ -1,0 +1,6 @@
+---
+// Groupe de boutons radio du formulaire de devis (le premier est coché)
+interface Props { name: string; options: string[] }
+const { name, options } = Astro.props;
+---
+<div class="pick radio">{options.map((o, i) => <Fragment><input type="radio" id={`${name}-${i}`} name={name} value={o} checked={i === 0}><label for={`${name}-${i}`}>{o}</label></Fragment>)}</div>

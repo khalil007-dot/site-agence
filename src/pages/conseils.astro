@@ -1,0 +1,23 @@
+---
+// Page Conseils : liste des articles de src/content/articles
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Final from '../components/Final.astro';
+import PostCard from '../components/PostCard.astro';
+import { BRAND, ORG_ID, SITE_URL } from '../lib/site';
+
+const posts = (await getCollection('articles')).sort((a, b) => a.data.ordre - b.data.ordre);
+const BLOG_LD = { '@context': 'https://schema.org', '@type': 'Blog', name: 'Conseils ' + BRAND, url: SITE_URL + '/conseils.html', inLanguage: 'fr-BE', publisher: { '@id': ORG_ID } };
+---
+<Base fichier="conseils.html" title={`Conseils site internet et SEO pour PME | ${BRAND}`} desc="Prix d'un site, choix de plateforme e-commerce, référencement local, logo et réseaux sociaux : nos conseils pour les indépendants et PME en Belgique." current="conseils" schema={[BLOG_LD]} crumbs={[['Conseils', 'conseils.html']]}>
+  <section class="page-head" aria-labelledby="page-title">
+    <div class="wrap reveal">
+      <h1 class="poster" id="page-title">Conseils pour votre site et votre visibilité</h1>
+      <p class="lead">Des réponses concrètes aux questions qu'on nous pose avant de lancer un site, une boutique ou une campagne.</p>
+    </div>
+  </section>
+  <section aria-labelledby="posts-title">
+    <div class="wrap"><h2 class="d-md" id="posts-title" style="margin-bottom:24px">Tous les articles</h2><div class="posts">{posts.map(p => <PostCard post={p} />)}</div></div>
+  </section>
+<Final title="Une question précise sur votre projet ?" text="Posez-la dans le formulaire de devis. On vous répond, même si vous n'êtes pas encore prêt à vous lancer." btn="Poser ma question" />
+</Base>

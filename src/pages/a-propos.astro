@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Final from '../components/Final.astro';
+import { BRAND, NB, ORG_ID, SITE_URL } from '../lib/site';
+---
+<Base fichier="a-propos.html" title={`Agence web bruxelloise : qui sommes-nous ? | ${BRAND}`} desc="Studio Ébauche, agence web à Bruxelles, aide commerçants et indépendants de toute la Belgique : site, logo, devanture et visibilité avec une seule équipe." current="a-propos" schema={[{ '@context': 'https://schema.org', '@type': 'AboutPage', url: SITE_URL + '/a-propos.html', about: { '@id': ORG_ID } }]} crumbs={[['À propos', 'a-propos.html']]}>
+  <section class="page-head" aria-labelledby="page-title">
+    <div class="wrap reveal">
+      <h1 class="poster" id="page-title">Une petite équipe bruxelloise qui fait tout de A à Z.</h1>
+      <p class="lead">Studio Ébauche aide les commerçants et les indépendants à exister en ligne, sans jargon et sans multiplier les prestataires.</p>
+    </div>
+  </section>
+  <section aria-label="Notre histoire">
+    <div class="wrap about-grid">
+      <div class="portrait"><p class="ph">[Photo du fondateur ou de l'équipe, au travail ou dans l'atelier]</p></div>
+      <div class="story">
+        <h2 class="d-md">Pourquoi Studio Ébauche existe</h2>
+        <p>[Votre histoire en 3 ou 4 phrases : votre parcours, le déclic qui vous a fait créer l'agence et le type de clients que vous aimez accompagner.]</p>
+        <p>Une « ébauche », c'est le premier croquis d'un projet. C'est là que tout commence, et c'est pour ça qu'on vous montre une maquette avant d'écrire la moindre ligne de code.</p>
+        <p>[Ce qui vous distingue concrètement : spécialité métier, zone géographique, méthode, outils.]</p>
+        <a class="btn btn-primary" href="devis.html" style="justify-self:start">Travailler ensemble</a>
+      </div>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="figures-title">
+    <div class="wrap">
+      <div class="section-head"><h2 class="d-xl" id="figures-title">En quelques chiffres</h2></div>
+      <div class="figures">
+        <div class="figure"><b>[00]</b><span>projets livrés</span></div>
+        <div class="figure"><b>48{NB}h</b><span>pour recevoir un devis</span></div>
+        <div class="figure"><b>10</b><span>services sous un même toit</span></div>
+        <div class="figure"><b>[0,0]</b><span>note moyenne Google</span></div>
+      </div>
+      <p class="note" style="margin-top:16px">Les chiffres entre crochets sont à remplacer par vos données réelles.</p>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="values-title">
+    <div class="wrap">
+      <div class="section-head"><h2 class="d-xl" id="values-title">Nos engagements</h2></div>
+      <div class="values">
+        <div class="value"><h3>Tout au même endroit</h3><p>Site, logo, devanture et publicité sont pensés ensemble. Vous n'avez pas à coordonner trois prestataires.</p></div>
+        <div class="value"><h3>Vous validez avant qu'on construise</h3><p>Chaque page passe par une maquette. Le développement commence après votre accord écrit.</p></div>
+        <div class="value"><h3>On reste après la mise en ligne</h3><p>Un mois de corrections offert, puis une maintenance sans engagement de durée si vous le souhaitez.</p></div>
+      </div>
+    </div>
+  </section>
+<Final title="Envie de travailler ensemble ?" text={'Racontez-nous votre projet. On vous répond sous 48' + NB + 'h avec un devis clair.'} />
+</Base>

@@ -1,0 +1,41 @@
+---
+// Page Réalisations : un fichier par projet dans src/content/projets (modifiable depuis l'admin)
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Final from '../components/Final.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { BRAND, CATS, NB } from '../lib/site';
+
+const projets = (await getCollection('projets')).sort((a, b) => a.data.ordre - b.data.ordre);
+---
+<Base fichier="realisations.html" title={`Nos réalisations web en Belgique | ${BRAND}`} desc="Sites vitrine, boutiques en ligne, logos, devantures et campagnes réalisés pour des indépendants et PME à Bruxelles et en Belgique." current="realisations" crumbs={[['Réalisations', 'realisations.html']]}>
+  <section class="page-head" aria-labelledby="page-title">
+    <div class="wrap reveal">
+      <h1 class="poster" id="page-title">Nos réalisations</h1>
+      <p class="lead">Sites, boutiques, logos et campagnes réalisés pour des commerces et des indépendants.</p>
+    </div>
+  </section>
+  <section aria-labelledby="projets-title">
+    <div class="wrap">
+      <h2 class="d-md" id="projets-title" style="margin-bottom:20px">Projets récents</h2>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px">
+        <div class="chips" role="group" aria-label="Filtrer par type de projet"><button class="chip" type="button" data-filter="tout" aria-pressed="true">Tout</button>{CATS.map(([c, l]) => <button class="chip" type="button" data-filter={c} aria-pressed="false">{l}</button>)}</div>
+        <span class="muted small" id="filter-count" aria-live="polite"></span>
+      </div>
+      <div class="projects">{projets.map(p => <ProjectCard projet={p} filtre />)}</div>
+      <p class="note" style="margin-top:20px">Emplacements à remplir avec de vrais projets : capture, nom du client et résultat mesurable.</p>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="avis-title">
+    <div class="wrap">
+      <div class="section-head"><h2 class="d-xl" id="avis-title">Ce qu'en disent nos clients</h2></div>
+      <div class="values">
+        <figure class="value" style="margin:0"><blockquote style="margin:0"><p style="color:var(--ink);font-size:1.1875rem">[Avis client réel, idéalement avec un résultat concret.]</p></blockquote><figcaption class="muted small">[Prénom Nom], [métier, ville]</figcaption></figure>
+        <figure class="value" style="margin:0"><blockquote style="margin:0"><p style="color:var(--ink);font-size:1.1875rem">[Avis client réel.]</p></blockquote><figcaption class="muted small">[Prénom Nom], [métier, ville]</figcaption></figure>
+        <figure class="value" style="margin:0"><blockquote style="margin:0"><p style="color:var(--ink);font-size:1.1875rem">[Avis client réel.]</p></blockquote><figcaption class="muted small">[Prénom Nom], [métier, ville]</figcaption></figure>
+      </div>
+      <p class="note" style="margin-top:20px">Les avis doivent être authentiques. Vous pouvez aussi intégrer vos avis Google.</p>
+    </div>
+  </section>
+<Final title="Votre projet pourrait être le prochain" text={'Décrivez-le en deux minutes et recevez un devis sous 48' + NB + 'h.'} />
+</Base>

@@ -1,0 +1,115 @@
+---
+// Page devis : deux parcours (devis écrit en 3 étapes, ou rendez-vous téléphonique)
+import Base from '../layouts/Base.astro';
+import Radios from '../components/Radios.astro';
+import Stars from '../components/Stars.astro';
+import { BRAND, EMAIL, FAMS, NB, SV } from '../lib/site';
+---
+<Base fichier="devis.html" title={`Devis gratuit site internet à Bruxelles | ${BRAND}`} desc="Demandez un devis gratuit pour votre site internet, boutique en ligne, logo ou référencement à Bruxelles et en Belgique, ou réservez un appel de 30 minutes." current="devis" sticky={false} crumbs={[['Devis', 'devis.html']]}>
+  <section class="page-head" aria-labelledby="page-title" style="padding-bottom:32px">
+    <div class="wrap reveal">
+      <h1 class="poster" id="page-title">Parlons de votre projet</h1>
+      <p class="lead">Recevez un devis détaillé sous 48{NB}h, ou réservez un appel de 30 minutes. Dans les deux cas, c'est gratuit et sans engagement.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="modes" role="tablist" aria-label="Comment souhaitez-vous avancer ?">
+        <button class="mode" type="button" role="tab" id="tab-devis" aria-controls="pane-devis" aria-selected="true">Recevoir un devis écrit</button>
+        <button class="mode" type="button" role="tab" id="tab-appel" aria-controls="pane-appel" aria-selected="false" tabindex="-1">Réserver un appel</button>
+      </div>
+      <p class="audit-note" id="audit-note" hidden></p>
+    </div>
+    <div class="wrap quote-layout">
+      <div>
+      <div role="tabpanel" id="pane-devis" aria-labelledby="tab-devis">
+      <form class="form-card" id="quote-form" novalidate>
+        <ol class="progress" aria-label="Étapes du devis"><li aria-current="step">Vos besoins</li><li>Votre projet</li><li>Vos coordonnées</li></ol>
+
+        <div class="step" id="step-1">
+          <h2>De quoi avez-vous besoin ?</h2>
+          <p>Cochez un ou plusieurs services.</p>
+          {FAMS.map(f => <div class="pick-group"><h3 style={`--c:var(--${f.couleur})`}>{f.nom_court}</h3><div class="pick">{SV.filter(s => s.famille === f.id).map(s => <Fragment><input type="checkbox" id={`s-${s.id}`} name="services" value={s.id}><label for={`s-${s.id}`}>{s.nom.split(' (')[0]}</label></Fragment>)}</div></div>)}
+          <p class="step-error" id="err-step-1" role="alert"></p>
+          <div class="step-actions"><span></span><button class="btn btn-primary" type="button" data-next>Continuer</button></div>
+        </div>
+
+        <div class="step" id="step-2" hidden>
+          <h2>Parlez-nous de votre projet</h2>
+          <p>Ces réponses nous aident à chiffrer au plus juste.</p>
+          <div class="pick-group"><h3>Budget envisagé</h3><Radios name="budget" options={["Je ne sais pas encore","Moins de 1 000 €","1 000 à 3 000 €","3 000 à 8 000 €","Plus de 8 000 €"]} /></div>
+          <div class="pick-group"><h3>Pour quand ?</h3><Radios name="delai" options={["Pas de date précise","Dans le mois","D'ici 3 mois"]} /></div>
+          <div class="field"><label for="msg">Votre activité en quelques mots <span class="opt">(facultatif)</span></label><textarea id="msg" name="msg" rows="4" placeholder="Ex. : je vends des bougies artisanales et je veux une boutique en ligne avant Noël…"></textarea></div>
+          <div class="field"><label for="site">Site actuel <span class="opt">(facultatif)</span></label><input type="text" id="site" name="site" inputmode="url" autocomplete="url" spellcheck="false" placeholder="www.votre-site.be…"></div>
+          <div class="step-actions"><button class="btn btn-secondary" type="button" data-prev>Retour</button><button class="btn btn-primary" type="button" data-next>Continuer</button></div>
+        </div>
+
+        <div class="step" id="step-3" hidden>
+          <h2>Où vous envoyer le devis ?</h2>
+          <p>Votre chef de projet vous écrit sous 48{NB}h ouvrées.</p>
+          <div class="row-2">
+            <div class="field"><label for="nom">Nom</label><input type="text" id="nom" name="nom" autocomplete="name" required aria-describedby="err-nom"><p class="error" id="err-nom"></p></div>
+            <div class="field"><label for="entreprise">Entreprise <span class="opt">(facultatif)</span></label><input type="text" id="entreprise" name="entreprise" autocomplete="organization"></div>
+          </div>
+          <div class="row-2">
+            <div class="field"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" spellcheck="false" required aria-describedby="err-email"><p class="error" id="err-email"></p></div>
+            <div class="field"><label for="tel">Téléphone <span class="opt">(facultatif)</span></label><input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="0470 12 34 56…"></div>
+          </div>
+          <div class="step-actions"><button class="btn btn-secondary" type="button" data-prev>Retour</button><button class="btn btn-primary" type="submit">Recevoir mon devis gratuit</button></div>
+          <p class="reassure">Vos coordonnées servent uniquement à préparer votre devis. <a class="link" href="mentions-legales.html#donnees">Confidentialité</a></p>
+        </div>
+
+        <div class="step done-box" id="step-done" hidden>
+          <span class="ok" aria-hidden="true"></span>
+          <h2 tabindex="-1">Demande reçue</h2>
+          <p class="muted">Votre devis pour <strong style="color:var(--ink)" id="recap"></strong> arrive à l'adresse <strong style="color:var(--ink)" id="recap-mail"></strong> sous 48{NB}h ouvrées.</p>
+          <p class="note">Démo : rien n'a été envoyé.</p>
+          <a class="btn btn-secondary" href="realisations.html">Voir nos réalisations en attendant</a>
+        </div>
+      </form>
+      </div>
+
+      <div role="tabpanel" id="pane-appel" aria-labelledby="tab-appel" hidden>
+      <form class="form-card" id="call-form" novalidate>
+        <div id="call-step">
+          <h2 class="d-md" style="margin-bottom:8px">Choisissez un créneau de 30 minutes</h2>
+          <p class="muted" style="margin-bottom:24px">Votre futur chef de projet vous appelle à l'heure choisie. Heure de Bruxelles.</p>
+          <div class="days" id="days" role="radiogroup" aria-label="Jour"></div>
+          <div class="slots" id="slots" role="radiogroup" aria-label="Heure"></div>
+          <p class="step-error" id="err-slot" role="alert"></p>
+          <div class="row-2" style="margin-top:22px">
+            <div class="field"><label for="c-nom">Nom</label><input type="text" id="c-nom" name="nom" autocomplete="name" required aria-describedby="err-c-nom"><p class="error" id="err-c-nom"></p></div>
+            <div class="field"><label for="c-tel">Téléphone</label><input type="tel" id="c-tel" name="tel" autocomplete="tel" inputmode="tel" required placeholder="0470 12 34 56…" aria-describedby="err-c-tel"><p class="error" id="err-c-tel"></p></div>
+          </div>
+          <div class="field"><label for="c-sujet">Sujet de l'appel <span class="opt">(facultatif)</span></label><input type="text" id="c-sujet" name="sujet" placeholder="Ex. : refonte de mon site et fiche Google…"></div>
+          <div class="step-actions"><span class="muted small" id="slot-recap">Aucun créneau choisi</span><button class="btn btn-primary" type="submit">Confirmer le rendez-vous</button></div>
+        </div>
+        <div class="done-box" id="call-done" hidden>
+          <span class="ok" aria-hidden="true"></span>
+          <h2 class="d-md" tabindex="-1">Rendez-vous confirmé</h2>
+          <p class="muted">On vous appelle <strong style="color:var(--ink)" id="call-recap"></strong> au <strong style="color:var(--ink)" id="call-tel"></strong>.</p>
+          <p class="note">Démo : rien n'a été envoyé.</p>
+        </div>
+      </form>
+      </div>
+      </div>
+
+      <aside class="side" aria-label="Informations">
+        <div class="side-card grad">
+          <h2>Ce qui se passe ensuite</h2>
+          <ol><li>Sous 48{NB}h : votre devis détaillé, ou l'appel au créneau choisi</li><li>Un chef de projet dédié répond à toutes vos questions</li><li>Vous signez seulement si la proposition vous convient</li></ol>
+        </div>
+        <div class="side-card plain">
+          <p class="rating" style="margin:0"><Stars /><span><b>[4,9]/5</b> · [00] avis Google</span></p>
+          <blockquote style="margin:0"><p style="font-size:1.0625rem">[Courte citation d'un client réel sur la qualité du suivi.]</p></blockquote>
+          <p class="muted small">[Prénom Nom], [métier, ville]</p>
+        </div>
+        <div class="side-card plain">
+          <h2>Vous préférez écrire ?</h2>
+          <a class="big link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <p class="muted small">Lundi au vendredi, 9{NB}h à 18{NB}h</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>

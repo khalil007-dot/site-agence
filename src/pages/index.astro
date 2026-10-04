@@ -1,0 +1,275 @@
+---
+// Page d'accueil (inspirée de Digidop, Simplébo et Huemor)
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Mock from '../components/Mock.astro';
+import PostCard from '../components/PostCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Stars from '../components/Stars.astro';
+import { BRAND, FAMS, NB, ORG, ORG_ID, SITE_URL, SV, e } from '../lib/site';
+
+const spotTxt: Record<string, string> = {
+  creer: 'Site vitrine, boutique en ligne ou application, conçus pour être faciles à utiliser sur téléphone.',
+  visibilite: 'Référencement Google et IA, publicité et réseaux sociaux pour que les bons clients vous trouvent.',
+  image: 'Logo, devanture, photos et vidéo par drone pour une image cohérente partout.',
+  entretenir: 'Hébergement, sauvegardes et petites modifications chaque mois, sans engagement.',
+};
+const spotMock: Record<string, [string, string?]> = { creer: ['shop', 'boutique-exemple.be'], visibilite: ['serp'], image: ['logos'], entretenir: ['uptime'] };
+
+const METIERS: [string, string, string, string[], string[]][] = [
+  ['restaurants', 'Restaurants et cafés', "Vos clients regardent la carte, les photos et les horaires sur Google avant de choisir où manger.",
+    ['Carte en ligne facile à mettre à jour', 'Réservation de table depuis Google et le site', 'Photos et vidéo du lieu par drone', 'Instagram alimenté chaque semaine'],
+    ['site-vitrine', 'drone', 'reseaux-sociaux']],
+  ['artisans', 'Artisans et bâtiment', "Vos futurs clients cherchent « plombier » ou « menuisier » suivi du nom de leur ville, et appellent le premier qui inspire confiance.",
+    ['Galerie de chantiers avant / après', 'Demande de devis en ligne avec photos', 'Fiche Google et avis clients mis en avant', "Pages par ville de votre zone d'intervention"],
+    ['site-vitrine', 'seo', 'logo']],
+  ['sante', 'Santé et bien-être', "Vos patients veulent comprendre vos soins et prendre rendez-vous en deux clics, à toute heure.",
+    ['Pages claires pour chaque soin ou spécialité', 'Prise de rendez-vous en ligne intégrée', 'Plan d’accès, tarifs et informations pratiques', 'Respect des règles de communication de votre ordre'],
+    ['site-vitrine', 'seo']],
+  ['commerces', 'Commerces de proximité', "Vos clients passent devant votre vitrine, mais comparent aussi en ligne avant de se déplacer.",
+    ['Devanture et enseigne cohérentes avec votre logo', 'Click and collect ou boutique en ligne', 'Horaires, stocks et promotions à jour', 'Publicité locale autour de votre magasin'],
+    ['devanture', 'e-commerce', 'google-ads']],
+  ['liberales', 'Professions libérales', "Avocats, consultants, architectes : on vous choisit sur votre crédibilité, avant même le premier rendez-vous.",
+    ['Présentation de votre expertise et de vos domaines', 'Articles qui répondent aux questions de vos clients', 'Prise de rendez-vous ou formulaire qualifié', 'Identité visuelle sobre et professionnelle'],
+    ['logo', 'site-vitrine', 'seo']],
+  ['marques', 'Marques et e-commerçants', "Vous vendez déjà, ou vous voulez vendre partout en Belgique et en Europe. Il vous faut une boutique qui convertit et des visiteurs qualifiés.",
+    ['Boutique rapide, pensée pour le paiement sur téléphone', 'Fiches produit qui répondent aux objections', 'Campagnes Google Shopping et réseaux sociaux', 'Suivi des ventes et du coût par commande'],
+    ['e-commerce', 'google-ads', 'reseaux-sociaux']],
+];
+const SVNAME = Object.fromEntries(SV.map(s => [s.id, s.nom_court]));
+
+const FAQ = [
+  ['Combien de temps faut-il pour créer un site ?', 'Trois semaines en moyenne pour un site vitrine, six pour une boutique en ligne et environ dix pour une application. Le délai exact figure sur votre devis.'],
+  ['Est-ce que je pourrai modifier mon site moi-même ?', 'Oui. Textes, photos, produits et prix se modifient depuis une interface simple. Une heure de formation est incluse à la livraison.'],
+  ["Qu'est-ce que la visibilité dans les IA ?", 'De plus en plus de clients posent leurs questions à ChatGPT, Perplexity ou aux réponses IA de Google. On structure votre site et vos informations pour que ces outils vous citent quand on cherche votre métier dans votre ville.'],
+  ["Je n'ai pas encore de logo. Par quoi commencer ?", 'Par le logo. Les couleurs et la typographie du site en découlent, ce qui évite de refaire le design ensuite. La formule Lancement regroupe les deux.'],
+  ['Le budget publicitaire Google Ads est-il compris ?', 'Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond.'],
+  ['Comment se passe le paiement ?', "En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 12 mensualités sans frais. Les services mensuels s'arrêtent avec un mois de préavis."],
+];
+
+
+const projets = (await getCollection('projets', p => p.data.accueil)).sort((a, b) => a.data.ordre - b.data.ordre).slice(0, 2);
+const posts = (await getCollection('articles')).sort((a, b) => a.data.ordre - b.data.ordre).slice(0, 3);
+
+const WEBSITE = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_URL + '/#site', url: SITE_URL + '/', name: BRAND, inLanguage: 'fr-BE', publisher: { '@id': ORG_ID } };
+const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+---
+<Base fichier="index.html" title={`Agence web à Bruxelles, création de sites | ${BRAND}`} desc="Agence web à Bruxelles : création de site internet, boutique en ligne, logo, SEO et Google Ads pour indépendants et PME en Belgique. Devis gratuit sous 48 h." current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap reveal">
+      <h1 class="poster" id="hero-title"><span class="h1-kicker">Agence web à Bruxelles et partout en Belgique</span>Des sites et des marques qui font venir des clients.</h1>
+      <div class="hero-foot">
+        <p class="lead">Création de site internet, boutique en ligne, logo, devanture, référencement Google et IA, réseaux sociaux. Un chef de projet dédié s'occupe de tout, du premier croquis aux premières commandes.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#estimer">Estimer mon projet</a>
+          <a class="btn btn-secondary" href="devis.html?mode=appel">Réserver un appel</a>
+        </div>
+      </div>
+      <div class="proof-row">
+        <p class="rating"><Stars /><span><b>[4,9]/5</b> sur Google · [00] avis</span></p>
+        <ul class="badges" aria-label="Nos engagements">
+          <li>Devis gratuit sous 48{NB}h</li><li>Maquette validée avant le code</li><li>Le site vous appartient</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Nos quatre familles de services">
+    <div class="wrap">
+      <div class="spots">
+        {FAMS.map((f, i) => {
+          const n = SV.filter(s => s.famille === f.id).length;
+          const [kind, url] = spotMock[f.id];
+          return <a class={`spot ${f.couleur}`} href={`services.html#${f.id}`} style={`--i:${i}`}>
+          <span class="kicker">{n} service{n > 1 ? 's' : ''}</span>
+          <h2 class="spot-title">{f.nom}</h2>
+          <p>{spotTxt[f.id]}</p>
+          <Mock kind={kind} url={url} />
+        </a>;
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="logos-band" aria-labelledby="logos-title">
+    <div class="wrap">
+      <h2 class="small muted" id="logos-title">Ils nous ont confié leur site, leur logo ou leur visibilité</h2>
+      <ul class="logo-row">{Array.from({ length: 6 }, () => <li>[Logo client]</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section" id="metiers" aria-labelledby="metiers-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="metiers-title">On connaît votre métier</h2>
+        <p class="subhead">Choisissez votre activité pour voir ce qu'on met en place et les services qui comptent le plus pour vous.</p>
+      </div>
+      <div class="metiers">
+        <div class="mtabs" role="tablist" aria-label="Votre activité">{METIERS.map(([k, n], i) => <button class="mtab" type="button" role="tab" id={`mt-${k}`} aria-controls={`mp-${k}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{n}</button>)}</div>
+        {METIERS.map(([k, n, pb, items, svcs], i) => <div class="mpanel" role="tabpanel" id={`mp-${k}`} aria-labelledby={`mt-${k}`} hidden={i !== 0}>
+          <div><h3 class="d-md">{n}</h3><p class="lead" style="margin-top:14px">{pb}</p>
+            <div class="rec"><span class="muted small">Services recommandés</span><div class="rec-tags">{svcs.map(s => <span class="tag">{SVNAME[s]}</span>)}</div></div>
+            <a class="btn btn-primary" href={`devis.html?service=${svcs.join(',')}`}>Devis pour mon activité</a></div>
+          <ul class="included" style="--c:var(--violet)">{items.map(x => <li>{x}</li>)}</ul>
+        </div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="audit" aria-labelledby="audit-title">
+    <div class="wrap">
+      <div class="audit">
+        <div>
+          <h2 class="d-lg" id="audit-title">Audit gratuit de votre visibilité</h2>
+          <p class="lead" style="color:rgba(255,255,255,.85);margin-top:16px">On analyse votre site, votre fiche Google et votre présence dans les IA. Vous recevez un rapport clair avec trois actions prioritaires, sous 72{NB}h.</p>
+        </div>
+        <form class="audit-form" action="devis.html" method="get">
+          <input type="hidden" name="service" value="seo">
+          <input type="hidden" name="audit" value="1">
+          <label for="audit-url">Adresse de votre site</label>
+          <div class="audit-row">
+            <input id="audit-url" name="site" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="www.votre-site.be…" required>
+            <button class="btn btn-primary" type="submit">Recevoir mon audit</button>
+          </div>
+          <p class="small" style="color:rgba(255,255,255,.75)">Pas encore de site ? Indiquez le nom de votre entreprise.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="estimer" aria-labelledby="est-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="est-title">Estimez votre budget en 30 secondes</h2>
+        <p class="subhead">La plupart de nos projets se situent entre {e(1200)} et {e(5000)}. Sélectionnez vos services pour une première estimation.</p>
+      </div>
+      <div class="estimator" id="estimator">
+        <div class="est-groups">{FAMS.map(f => <div class="est-group"><h3 style={`--c:var(--${f.couleur})`}>{f.nom_court}</h3><div class="toggles">{SV.filter(s => s.famille === f.id).map(s =>
+          <button class="toggle" type="button" aria-pressed="false" data-id={s.id} data-once={s.prix_unique} data-monthly={s.prix_mensuel}>{s.nom_court} <span class="p">{s.prix_unique ? `dès ${e(s.prix_unique)}` : `${e(s.prix_mensuel)}/mois`}</span></button>)}</div></div>)}</div>
+        <div class="est-total" aria-live="polite">
+          <span class="label">Budget de départ estimé</span>
+          <span class="big" id="est-once">0{NB}€</span>
+          <span class="monthly" id="est-monthly">Aucun abonnement</span>
+          <span class="count" id="est-count">Sélectionnez au moins un service</span>
+          <a class="btn btn-primary" id="est-cta" href="devis.html" aria-disabled="true">Recevoir le devis détaillé</a>
+          <span class="note">Estimation indicative basée sur nos prix de départ, hors taxes.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="formules" aria-labelledby="plans-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="plans-title">Ou partez d'une formule</h2>
+        <div style="display:grid;gap:18px;justify-items:start">
+          <p class="subhead">Les combinaisons les plus demandées, moins chères que les services séparés.</p>
+          <div class="billing" role="group" aria-label="Mode de paiement">
+            <button type="button" class="bill" data-bill="once" aria-pressed="true">En une fois</button>
+            <button type="button" class="bill" data-bill="monthly" aria-pressed="false">En 12 mois</button>
+          </div>
+        </div>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <h3>Lancement</h3>
+          <p class="muted">Pour créer son entreprise avec une image pro dès le premier jour.</p>
+          <p class="price" data-once={e(1190)} data-monthly={e(99)} data-once-l="une fois" data-monthly-l="par mois, 12 mois"><span class="pv">{e(1190)}</span> <small class="pl">une fois</small></p>
+          <ul><li>Logo et mini charte graphique</li><li>Site vitrine jusqu'à 5 pages</li><li>Fiche Google Business optimisée</li><li>Cartes de visite prêtes à imprimer</li></ul>
+          <a class="btn btn-secondary" href="devis.html?service=logo,site-vitrine">Choisir Lancement</a>
+        </article>
+        <article class="plan featured">
+          <span class="flag">Recommandé pour vendre en ligne</span>
+          <h3>Commerce</h3>
+          <p class="muted">Pour ouvrir une boutique en ligne et vendre dès le premier mois.</p>
+          <p class="price" data-once={e(3290)} data-monthly={e(275)} data-once-l="une fois" data-monthly-l="par mois, 12 mois"><span class="pv">{e(3290)}</span> <small class="pl">une fois</small></p>
+          <ul><li>Logo et identité visuelle</li><li>Boutique en ligne complète</li><li>Photos de vos 20 premiers produits</li><li>3 mois de référencement offerts</li></ul>
+          <a class="btn btn-primary" href="devis.html?service=logo,e-commerce,seo">Choisir Commerce</a>
+        </article>
+        <article class="plan">
+          <h3>Visibilité</h3>
+          <p class="muted">Pour faire venir plus de clients sur un site qui existe déjà.</p>
+          <p class="price" data-once={e(790)} data-monthly={e(790)} data-once-l="par mois" data-monthly-l="par mois"><span class="pv">{e(790)}</span> <small class="pl">par mois</small></p>
+          <ul><li>Référencement Google et visibilité dans les IA</li><li>Campagnes Google Ads</li><li>2 réseaux sociaux, 12 publications</li><li>Un rapport clair chaque mois</li></ul>
+          <a class="btn btn-secondary" href="devis.html?service=seo,google-ads,reseaux-sociaux">Choisir Visibilité</a>
+        </article>
+      </div>
+      <p class="note" style="margin-top:16px">Paiement en 12 mois sans frais, par prélèvement. Prix hors taxes.</p>
+    </div>
+  </section>
+
+  <section class="section" id="methode" aria-labelledby="methode-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="methode-title">Comment se passe un projet</h2>
+        <p class="subhead">Vous savez à chaque étape ce qui est fait et ce que vous devez valider.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Découverte</h3><p>Un appel de 30 minutes pour comprendre votre activité, vos clients et vos objectifs.</p><span class="when">Jour 1</span></li>
+        <li><h3>Stratégie et maquette</h3><p>Structure, design et plan de visibilité. Vous validez avant qu'on construise.</p><span class="when">Semaine 1</span></li>
+        <li><h3>Création</h3><p>Développement, textes, photos et tests sur téléphone, à suivre sur un lien privé.</p><span class="when">Semaines 2 à 5</span></li>
+        <li><h3>Lancement et suivi</h3><p>Mise en ligne, une heure de formation, puis un rapport de résultats chaque mois.</p><span class="when">Dernière semaine</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="work-title">Des résultats, pas seulement des maquettes</h2>
+        <p class="subhead"><a class="link" href="realisations.html">Voir toutes les études de cas</a></p>
+      </div>
+      <div class="projects">
+        {projets.map(p => <ProjectCard projet={p} />)}
+      </div>
+      <div class="videos">
+        {['magenta', 'coral', 'violet'].map(c => <figure class="video" style={`background:var(--g-${c})`}><span class="play" aria-hidden="true"></span><figcaption><b>[Prénom Nom]</b><span>[Métier, ville]</span></figcaption></figure>)}
+      </div>
+      <p class="note" style="margin-top:16px">Emplacements pour vos études de cas et témoignages vidéo réels.</p>
+    </div>
+  </section>
+
+  <section class="section" id="garanties" aria-labelledby="garanties-title">
+    <div class="wrap">
+      <div class="section-head"><h2 class="d-xl" id="garanties-title">Ce qu'on vous garantit</h2></div>
+      <div class="guarantees">
+        <div class="g"><h3>Un chef de projet dédié</h3><p>Une seule personne suit votre projet du début à la fin et connaît votre activité.</p></div>
+        <div class="g"><h3>Maquette refaite si elle ne vous plaît pas</h3><p>Si la première proposition ne vous convient pas, on repart de zéro, sans frais.</p></div>
+        <div class="g"><h3>Support 5 jours sur 7</h3><p>Par téléphone, e-mail ou chat, avec une réponse sous 24{NB}h ouvrées.</p></div>
+        <div class="g"><h3>Tout vous appartient</h3><p>Nom de domaine, contenus et fichiers du logo sont à votre nom. Vous partez quand vous voulez.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="blog-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="blog-title">Conseils</h2>
+        <p class="subhead"><a class="link" href="conseils.html">Tous les articles</a></p>
+      </div>
+      <div class="posts">{posts.map(p => <PostCard post={p} />)}</div>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <div><h2 class="d-xl" id="faq-title">Questions fréquentes</h2><p class="subhead" style="margin-top:18px">Une autre question ? Posez-la lors d'un appel de 30 minutes, gratuit.</p></div>
+      <div class="faq-list">
+        {FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="final-title">
+    <div class="wrap">
+      <div class="final">
+        <h2 class="d-xl" id="final-title">Les meilleurs projets commencent par une discussion</h2>
+        <p class="lead" style="color:rgba(255,255,255,.85)">Recevez un devis écrit sous 48{NB}h, ou réservez directement un appel de 30 minutes avec votre futur chef de projet.</p>
+        <div class="btn-row" style="justify-content:center">
+          <a class="btn btn-primary" href="devis.html">Recevoir mon devis gratuit</a>
+          <a class="btn btn-glass" href="devis.html?mode=appel">Réserver un appel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

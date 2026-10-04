@@ -1,0 +1,11 @@
+---
+// Carte d'article (page Conseils, accueil, « À lire aussi »)
+import type { CollectionEntry } from 'astro:content';
+interface Props { post: CollectionEntry<'articles'> }
+const { id, data } = Astro.props.post;
+const titre = data.titre_carte || data.titre;
+const href = data.a_paraitre ? null : `${id}.html`;
+---
+{href
+  ? <a class="post" href={href}><span class="cat" style={`--c:var(--${data.couleur})`}>{data.categorie}</span><h3>{titre}</h3><p>{data.resume}</p><div class="foot"><span class="read">Lire l'article</span><span>{data.lecture} min</span></div></a>
+  : <article class="post" aria-label={`${titre} (à paraître)`}><span class="cat" style={`--c:var(--${data.couleur})`}>{data.categorie}</span><h3>{titre}</h3><p>{data.resume}</p><div class="foot"><span>À paraître</span></div></article>}

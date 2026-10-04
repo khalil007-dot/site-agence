@@ -1,0 +1,14 @@
+{
+  "name": "site-agence",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/markdown-satteri": "^0.4.2",
+    "astro": "^7.3.5"
+  }
+}

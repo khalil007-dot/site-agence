@@ -1,0 +1,14 @@
+---
+// Bandeau d'appel à l'action en bas de page
+interface Props { title: string; text: string; btn?: string; href?: string }
+const { title, text, btn = 'Recevoir mon devis gratuit', href = 'devis.html' } = Astro.props;
+---
+  <section class="section" aria-labelledby="final-title">
+    <div class="wrap">
+      <div class="final">
+        <h2 class="d-xl" id="final-title">{title}</h2>
+        <p class="lead" style="color:rgba(255,255,255,.85)">{text}</p>
+        <a class="btn btn-primary" href={href}>{btn}</a>
+      </div>
+    </div>
+  </section>

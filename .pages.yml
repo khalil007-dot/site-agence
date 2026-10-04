@@ -1,0 +1,227 @@
+# Espace d'administration Pages CMS (https://pagescms.org)
+# Décrit ce que l'on peut modifier sans toucher au code. Les champs doivent rester
+# cohérents avec src/content.config.ts.
+
+media:
+  input: src/assets/projets
+  output: /src/assets/projets
+  categories: [image]
+  rename: safe
+
+content:
+  - name: projets
+    label: Réalisations
+    type: collection
+    path: src/content/projets
+    filename: "{primary}.md"
+    view:
+      primary: client
+      fields: [client, categorie, accueil]
+      sort: [ordre, client]
+      default:
+        sort: ordre
+        order: asc
+    fields:
+      - name: client
+        label: Nom du client
+        type: string
+        required: true
+      - name: categorie
+        label: Type de projet
+        description: Sert au filtre de la page Réalisations.
+        type: select
+        required: true
+        options:
+          values:
+            - { name: site, label: Site vitrine }
+            - { name: ecom, label: E-commerce }
+            - { name: logo, label: Logo et devanture }
+            - { name: visibilite, label: SEO et publicité }
+            - { name: video, label: Drone et vidéo }
+      - name: image
+        label: Capture ou photo du projet
+        description: Format paysage conseillé (16/10). Elle est réduite et compressée automatiquement.
+        type: image
+        options:
+          extensions: [jpg, jpeg, png, webp, avif]
+      - name: image_alt
+        label: Description de l'image
+        description: Ce que montre l'image, en une phrase. Lu par Google et par les personnes malvoyantes.
+        type: string
+      - name: resultat_chiffre
+        label: Résultat (chiffre)
+        description: "Ex. : +40 %, 25, x2"
+        type: string
+      - name: resultat_texte
+        label: Résultat (texte)
+        description: "Ex. : de ventes en ligne en 6 mois"
+        type: string
+      - name: etiquette
+        label: Étiquette
+        description: Laisser vide pour afficher le type de projet.
+        type: string
+      - name: accueil
+        label: Afficher sur la page d'accueil
+        description: Les deux premiers projets cochés apparaissent sur l'accueil.
+        type: boolean
+        default: false
+      - name: ordre
+        label: Ordre d'affichage
+        description: Les plus petits nombres apparaissent en premier.
+        type: number
+        default: 100
+      - name: couleur
+        label: Couleur de fond
+        type: select
+        default: violet
+        options:
+          values: [violet, orange, magenta, coral]
+      - name: maquette
+        label: Maquette si pas d'image
+        type: select
+        default: site
+        options:
+          values:
+            - { name: site, label: Site }
+            - { name: shop, label: Boutique }
+            - { name: logos, label: Logos }
+            - { name: serp, label: Résultats Google }
+
+  - name: articles
+    label: Conseils (articles)
+    type: collection
+    path: src/content/articles
+    filename: "{primary}.md"
+    view:
+      primary: titre
+      fields: [titre, categorie, a_paraitre]
+      default:
+        sort: ordre
+        order: asc
+    fields:
+      - name: titre
+        label: Titre de l'article
+        type: string
+        required: true
+      - name: resume
+        label: Résumé
+        description: Deux lignes affichées sur la carte de l'article.
+        type: text
+        required: true
+      - name: categorie
+        label: Catégorie
+        description: "Ex. : Budget, Référencement, E-commerce"
+        type: string
+        required: true
+      - name: a_paraitre
+        label: À paraître
+        description: Coché, l'article apparaît dans la liste sans lien ni page.
+        type: boolean
+        default: false
+      - name: date
+        label: Date de publication
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: lecture
+        label: Temps de lecture (minutes)
+        type: number
+      - name: titre_carte
+        label: Titre court pour la carte
+        description: Facultatif. Sinon, le titre de l'article est utilisé.
+        type: string
+      - name: titre_seo
+        label: Titre pour Google
+        description: Facultatif. Environ 60 caractères.
+        type: string
+      - name: description
+        label: Description pour Google
+        description: Facultatif. Environ 155 caractères. Sinon, le résumé est utilisé.
+        type: text
+      - name: fil_ariane
+        label: Nom court dans le fil d'Ariane
+        type: string
+      - name: couleur
+        label: Couleur de la catégorie
+        type: select
+        default: violet
+        options:
+          values: [violet, orange, magenta, coral]
+      - name: ordre
+        label: Ordre d'affichage
+        type: number
+        default: 100
+      - name: body
+        label: Texte de l'article
+        description: "Markdown : ## pour un intertitre, **gras**, - pour une liste."
+        type: code
+        options:
+          format: markdown
+
+  - name: reglages
+    label: Réglages du site
+    type: file
+    path: src/data/reglages.json
+    format: json
+    fields:
+      - name: marque
+        label: Nom de l'entreprise
+        type: string
+        required: true
+      - name: url_site
+        label: Adresse du site
+        description: "Avec https:// et sans / à la fin. Ex. : https://www.mon-site.be"
+        type: string
+        required: true
+      - name: email
+        label: E-mail de contact
+        type: string
+        required: true
+      - name: date_maj
+        label: Date de dernière mise à jour
+        type: date
+        options:
+          format: yyyy-MM-dd
+
+  - name: services
+    label: Services et prix
+    type: file
+    path: src/data/services.json
+    format: json
+    fields:
+      - name: familles
+        label: Familles de services
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{nom_court}"
+        fields:
+          - { name: id, label: Identifiant, type: string, readonly: true }
+          - { name: couleur, label: Couleur, type: select, options: { values: [violet, orange, magenta, coral] } }
+          - { name: nom_court, label: Nom court, type: string }
+          - { name: nom, label: Titre, type: string }
+          - { name: accroche, label: Accroche, type: text }
+      - name: services
+        label: Services
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{nom}"
+        fields:
+          - { name: id, label: Identifiant (adresse de l'ancre), type: string, required: true }
+          - { name: famille, label: Famille, type: select, options: { values: [creer, visibilite, image, entretenir] } }
+          - { name: nom, label: Nom, type: string, required: true }
+          - { name: nom_court, label: Nom court, type: string }
+          - { name: prix_unique, label: Prix de départ (une fois), description: 0 si le service est mensuel., type: number }
+          - { name: prix_mensuel, label: Prix de départ (par mois), description: 0 si le service est payé une fois., type: number }
+          - { name: pour_qui, label: Pour qui, type: text }
+          - name: infos
+            label: Infos clés
+            type: object
+            list: { max: 3 }
+            fields:
+              - { name: label, label: Intitulé, type: string }
+              - { name: valeur, label: Valeur, type: string }
+          - { name: inclus, label: Ce qui est inclus, type: string, list: true }

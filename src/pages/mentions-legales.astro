@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { BRAND } from '../lib/site';
+---
+<Base fichier="mentions-legales.html" title={`Mentions légales | ${BRAND}`} desc={`Mentions légales et politique de confidentialité de ${BRAND}, agence web à Bruxelles.`} noindex>
+  <section class="page-head" aria-labelledby="page-title">
+    <div class="wrap">
+      <h1 class="d-xl" id="page-title">Mentions légales et confidentialité</h1>
+      <p class="lead">Modèle à compléter. Les éléments <mark style="background:rgba(0,153,255,.18);color:#fff;padding:0 4px;border-radius:4px">surlignés</mark> sont à remplacer par vos informations.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap legal">
+      <h2>Éditeur du site</h2>
+      <p><mark>[Raison sociale]</mark>, <mark>[forme juridique]</mark> au capital de <mark>[montant]</mark>, inscrite à la Banque-Carrefour des Entreprises sous le numéro <mark>[BCE / TVA BE0000.000.000]</mark>, dont le siège est situé <mark>[adresse]</mark>.</p>
+      <p>Directeur de la publication : <mark>[nom]</mark>. Contact : <mark>[e-mail]</mark>, <mark>[téléphone]</mark>.</p>
+      <h2>Hébergement</h2>
+      <p><mark>[Nom de l'hébergeur, adresse et téléphone]</mark>.</p>
+      <h2>Propriété intellectuelle</h2>
+      <p>Les textes, visuels et logos de ce site appartiennent à <mark>[raison sociale]</mark> ou à leurs auteurs. Toute reproduction sans autorisation est interdite.</p>
+      <h2 id="donnees">Données personnelles</h2>
+      <p>Les informations envoyées via le formulaire de devis servent uniquement à répondre à votre demande. Elles sont conservées <mark>[durée, ex. 3 ans]</mark> puis supprimées, et ne sont jamais revendues.</p>
+      <p>Vous pouvez demander l'accès, la correction ou la suppression de vos données en écrivant à <mark>[e-mail]</mark>. Vous pouvez aussi adresser une réclamation à l'Autorité de protection des données (APD).</p>
+      <h2>Cookies</h2>
+      <p><mark>[Indiquez ici les outils de mesure d'audience utilisés et, s'ils déposent des cookies, comment les refuser.]</mark></p>
+    </div>
+  </section>
+</Base>
