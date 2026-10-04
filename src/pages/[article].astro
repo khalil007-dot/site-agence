@@ -1,5 +1,5 @@
 ---
-// Une page par article publié (a_paraitre: false) : src/content/articles/prix-site-vitrine.md → prix-site-vitrine.html
+// Une page par article publié (a_paraitre: false) : src/content/articles/prix-site-vitrine.md → /prix-site-vitrine
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props as { post: CollectionEntry<'articles'> };
 const { Content } = await render(post);
 const a = post.data;
-const fichier = `${post.id}.html`;
+const chemin = post.id;
 const desc = a.description || a.resume;
 const date = a.date?.toISOString().slice(0, 10);
 const dateLongue = a.date?.toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
@@ -20,15 +20,15 @@ const autres = (await getCollection('articles', p => p.id !== post.id)).sort((x,
 
 const ARTICLE_LD = {
   '@context': 'https://schema.org', '@type': 'BlogPosting', headline: a.titre, description: desc,
-  datePublished: date, dateModified: TODAY, inLanguage: 'fr-BE', mainEntityOfPage: SITE_URL + '/' + fichier, image: SITE_URL + '/og-image.png',
+  datePublished: date, dateModified: TODAY, inLanguage: 'fr-BE', mainEntityOfPage: SITE_URL + '/' + chemin, image: SITE_URL + '/og-image.png',
   author: { '@type': 'Organization', '@id': ORG_ID, name: BRAND }, publisher: { '@id': ORG_ID },
 };
 ---
-<Base fichier={fichier} title={a.titre_seo || `${a.titre} | ${BRAND}`} desc={desc} current="article" schema={[ARTICLE_LD]} crumbs={[['Conseils', 'conseils.html'], [a.fil_ariane || a.titre, fichier]]}>
+<Base chemin={chemin} title={a.titre_seo || `${a.titre} | ${BRAND}`} desc={desc} current="article" schema={[ARTICLE_LD]} crumbs={[['Conseils', 'conseils'], [a.fil_ariane || a.titre, chemin]]}>
   <article class="page-head" aria-labelledby="page-title">
     <div class="wrap">
       <div class="article">
-        <nav class="crumbs" aria-label="Fil d'Ariane"><a href="conseils.html">Conseils</a><span aria-hidden="true">/</span><span>{a.categorie}</span></nav>
+        <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/conseils">Conseils</a><span aria-hidden="true">/</span><span>{a.categorie}</span></nav>
         <h1 class="d-xl" id="page-title">{a.titre}</h1>
         <div class="meta-line"><span>Par l'équipe <span translate="no">{BRAND}</span>, agence web à Bruxelles</span>{date && <span>Publié le <time datetime={date}>{dateLongue}</time></span>}{a.lecture && <span>Lecture : {a.lecture} minutes</span>}</div>
         <div class="body">

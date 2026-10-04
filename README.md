@@ -26,7 +26,7 @@ npm run build     # génère le site final dans dist/
 | Les couleurs et le style | `public/styles.css` |
 | Les animations et formulaires | `public/main.js` |
 
-Les adresses des pages restent `services.html`, `realisations.html`, etc. Un nouvel article `src/content/articles/mon-article.md` devient la page `mon-article.html`.
+Les pages ont des adresses courtes : `/services`, `/realisations`, etc. Un nouvel article `src/content/articles/mon-article.md` devient la page `/mon-article`.
 
 ## Espace d'administration
 

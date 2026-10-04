@@ -12,7 +12,7 @@ const SERVICES_LD = {
     return {
       '@type': 'ListItem', position: i + 1,
       item: {
-        '@type': 'Service', name: s.nom, url: SITE_URL + '/services.html#' + s.id, description: s.pour_qui, provider: { '@id': ORG_ID },
+        '@type': 'Service', name: s.nom, url: SITE_URL + '/services#' + s.id, description: s.pour_qui, provider: { '@id': ORG_ID },
         areaServed: [{ '@type': 'City', name: 'Bruxelles' }, { '@type': 'Country', name: 'Belgique' }],
         offers: { '@type': 'Offer', priceCurrency: 'EUR', price, priceSpecification: { '@type': 'UnitPriceSpecification', price, priceCurrency: 'EUR', unitText: s.prix_mensuel ? 'MONTH' : 'projet', valueAddedTaxIncluded: false } },
       },
@@ -20,7 +20,7 @@ const SERVICES_LD = {
   }),
 };
 ---
-<Base fichier="services.html" title={`Création de sites, SEO et logos à Bruxelles | ${BRAND}`} desc="Création de site vitrine, boutique en ligne, application, logo, devanture, SEO, Google Ads et réseaux sociaux à Bruxelles : contenu, délais et prix." current="services" schema={[SERVICES_LD]} crumbs={[['Services', 'services.html']]}>
+<Base chemin="services" title={`Création de sites, SEO et logos à Bruxelles | ${BRAND}`} desc="Création de site vitrine, boutique en ligne, application, logo, devanture, SEO, Google Ads et réseaux sociaux à Bruxelles : contenu, délais et prix." current="services" schema={[SERVICES_LD]} crumbs={[['Services', 'services']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Nos services web à Bruxelles</h1>
@@ -38,7 +38,7 @@ const SERVICES_LD = {
           <h3 id={`${s.id}-t`}>{s.nom}</h3>
           <p class="for">{s.pour_qui}</p>
           <dl class="svc-facts"><div><dt>À partir de</dt><dd>{prixDepart(s)}</dd></div>{s.infos.map(x => <div><dt>{x.label}</dt><dd>{x.valeur}</dd></div>)}</dl>
-          <a class="btn btn-primary" href={`devis.html?service=${s.id}`}>Devis {devisLabel(s.nom_court)}</a>
+          <a class="btn btn-primary" href={`/devis?service=${s.id}`}>Devis {devisLabel(s.nom_court)}</a>
         </div>
         <ul class="included" style={`--c:var(--${f.couleur})`}>{s.inclus.map(x => <li>{x}</li>)}</ul>
       </article>

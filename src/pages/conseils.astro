@@ -7,9 +7,9 @@ import PostCard from '../components/PostCard.astro';
 import { BRAND, ORG_ID, SITE_URL } from '../lib/site';
 
 const posts = (await getCollection('articles')).sort((a, b) => a.data.ordre - b.data.ordre);
-const BLOG_LD = { '@context': 'https://schema.org', '@type': 'Blog', name: 'Conseils ' + BRAND, url: SITE_URL + '/conseils.html', inLanguage: 'fr-BE', publisher: { '@id': ORG_ID } };
+const BLOG_LD = { '@context': 'https://schema.org', '@type': 'Blog', name: 'Conseils ' + BRAND, url: SITE_URL + '/conseils', inLanguage: 'fr-BE', publisher: { '@id': ORG_ID } };
 ---
-<Base fichier="conseils.html" title={`Conseils site internet et SEO pour PME | ${BRAND}`} desc="Prix d'un site, choix de plateforme e-commerce, référencement local, logo et réseaux sociaux : nos conseils pour les indépendants et PME en Belgique." current="conseils" schema={[BLOG_LD]} crumbs={[['Conseils', 'conseils.html']]}>
+<Base chemin="conseils" title={`Conseils site internet et SEO pour PME | ${BRAND}`} desc="Prix d'un site, choix de plateforme e-commerce, référencement local, logo et réseaux sociaux : nos conseils pour les indépendants et PME en Belgique." current="conseils" schema={[BLOG_LD]} crumbs={[['Conseils', 'conseils']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Conseils pour votre site et votre visibilité</h1>

@@ -32,5 +32,6 @@ export const CATS: [string, string][] = [['site', 'Site vitrine'], ['ecom', 'E-c
 export const CAT_LABEL = Object.fromEntries(CATS);
 
 // Pages listées dans sitemap.xml, avec leur priorité (les articles sont ajoutés automatiquement)
-export const PAGES: [string, string][] = [['index.html', '1.0'], ['services.html', '0.9'], ['realisations.html', '0.7'], ['a-propos.html', '0.6'], ['conseils.html', '0.6'], ['devis.html', '0.8']];
-export const pageUrl = (fname: string) => SITE_URL + '/' + (fname === 'index.html' ? '' : fname);
+// Adresses sans « .html » : services.html est servi à l'adresse /services
+export const PAGES: [string, string][] = [['', '1.0'], ['services', '0.9'], ['realisations', '0.7'], ['a-propos', '0.6'], ['conseils', '0.6'], ['devis', '0.8']];
+export const pageUrl = (chemin: string) => SITE_URL + '/' + chemin;

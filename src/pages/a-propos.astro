@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Final from '../components/Final.astro';
 import { BRAND, NB, ORG_ID, SITE_URL } from '../lib/site';
 ---
-<Base fichier="a-propos.html" title={`Agence web bruxelloise : qui sommes-nous ? | ${BRAND}`} desc="Studio Ébauche, agence web à Bruxelles, aide commerçants et indépendants de toute la Belgique : site, logo, devanture et visibilité avec une seule équipe." current="a-propos" schema={[{ '@context': 'https://schema.org', '@type': 'AboutPage', url: SITE_URL + '/a-propos.html', about: { '@id': ORG_ID } }]} crumbs={[['À propos', 'a-propos.html']]}>
+<Base chemin="a-propos" title={`Agence web bruxelloise : qui sommes-nous ? | ${BRAND}`} desc="Studio Ébauche, agence web à Bruxelles, aide commerçants et indépendants de toute la Belgique : site, logo, devanture et visibilité avec une seule équipe." current="a-propos" schema={[{ '@context': 'https://schema.org', '@type': 'AboutPage', url: SITE_URL + '/a-propos', about: { '@id': ORG_ID } }]} crumbs={[['À propos', 'a-propos']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Une petite équipe bruxelloise qui fait tout de A à Z.</h1>
@@ -18,7 +18,7 @@ import { BRAND, NB, ORG_ID, SITE_URL } from '../lib/site';
         <p>[Votre histoire en 3 ou 4 phrases : votre parcours, le déclic qui vous a fait créer l'agence et le type de clients que vous aimez accompagner.]</p>
         <p>Une « ébauche », c'est le premier croquis d'un projet. C'est là que tout commence, et c'est pour ça qu'on vous montre une maquette avant d'écrire la moindre ligne de code.</p>
         <p>[Ce qui vous distingue concrètement : spécialité métier, zone géographique, méthode, outils.]</p>
-        <a class="btn btn-primary" href="devis.html" style="justify-self:start">Travailler ensemble</a>
+        <a class="btn btn-primary" href="/devis" style="justify-self:start">Travailler ensemble</a>
       </div>
     </div>
   </section>

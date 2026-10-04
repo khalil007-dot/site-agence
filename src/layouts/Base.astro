@@ -4,7 +4,7 @@ import Logo from '../components/Logo.astro';
 import { BRAND, EMAIL, SITE_URL, SV, pageUrl } from '../lib/site';
 
 interface Props {
-  fichier: string;
+  chemin: string; // adresse de la page sans « / » au début ('' pour l'accueil)
   title: string;
   desc: string;
   current?: string;
@@ -13,15 +13,15 @@ interface Props {
   crumbs?: [string, string][];
   noindex?: boolean;
 }
-const { fichier, title, desc, current = '', sticky = true, schema = [], crumbs, noindex = false } = Astro.props;
+const { chemin, title, desc, current = '', sticky = true, schema = [], crumbs, noindex = false } = Astro.props;
 
-const url = pageUrl(fichier);
+const url = pageUrl(chemin);
 const blocks = [...schema];
 if (crumbs) blocks.push({
   '@context': 'https://schema.org', '@type': 'BreadcrumbList',
   itemListElement: [['Accueil', ''], ...crumbs].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE_URL + '/' + u })),
 });
-const links = [['index.html', 'index', 'Accueil'], ['services.html', 'services', 'Services'], ['realisations.html', 'realisations', 'Réalisations'], ['a-propos.html', 'a-propos', 'À propos'], ['conseils.html', 'conseils', 'Conseils']];
+const links = [['/', 'index', 'Accueil'], ['/services', 'services', 'Services'], ['/realisations', 'realisations', 'Réalisations'], ['/a-propos', 'a-propos', 'À propos'], ['/conseils', 'conseils', 'Conseils']];
 const active = current === 'article' ? 'conseils' : current;
 const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='8' fill='%23090909'/%3E%3Cpath d='M19 8.5H9.5v11H19M9.5 14h7' fill='none' stroke='%23fff' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='21.5' cy='5.5' r='3' fill='%23D44DF0'/%3E%3C/svg%3E";
 ---
@@ -49,19 +49,19 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 <meta property="og:locale" content="fr_BE">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href={FAV}>
-<link rel="apple-touch-icon" href="logo.png">
-<link rel="preload" href="fonts/mona-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
-<script is:inline src="main.js" defer></script>
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="preload" href="/fonts/mona-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script is:inline src="/main.js" defer></script>
 {blocks.map(b => <script is:inline type="application/ld+json" set:html={JSON.stringify(b)} />)}
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="index.html" translate="no"><Logo />{BRAND}</a>
-    <nav class="nav-links" id="nav-links" aria-label="Navigation principale">{links.map(([h, k, t]) => <a href={h} aria-current={k === active ? 'page' : undefined}>{t}</a>)}<a class="mobile-cta" href="devis.html">Demander un devis</a></nav>
-    <div class="nav-cta"><a class="btn btn-primary" href="devis.html">Demander un devis</a></div>
+    <a class="brand" href="/" translate="no"><Logo />{BRAND}</a>
+    <nav class="nav-links" id="nav-links" aria-label="Navigation principale">{links.map(([h, k, t]) => <a href={h} aria-current={k === active ? 'page' : undefined}>{t}</a>)}<a class="mobile-cta" href="/devis">Demander un devis</a></nav>
+    <div class="nav-cta"><a class="btn btn-primary" href="/devis">Demander un devis</a></div>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Ouvrir le menu"><span></span></button>
   </div>
 </header>
@@ -74,16 +74,16 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="brand" href="index.html" translate="no"><Logo />{BRAND}</a>
+        <a class="brand" href="/" translate="no"><Logo />{BRAND}</a>
         <p class="about">Agence web à Bruxelles. Sites internet, boutiques en ligne, logos et visibilité pour les indépendants et PME de toute la Belgique.</p>
       </div>
-      <div><h2>Services</h2><ul>{SV.slice(0, 5).map(s => <li><a href={`services.html#${s.id}`}>{s.nom_court}</a></li>)}</ul></div>
-      <div><h2>Et aussi</h2><ul>{SV.slice(5).map(s => <li><a href={`services.html#${s.id}`}>{s.nom_court}</a></li>)}</ul></div>
-      <div><h2>Agence</h2><ul><li><a href="a-propos.html">À propos</a></li><li><a href="realisations.html">Réalisations</a></li><li><a href="conseils.html">Conseils</a></li><li><a href="devis.html">Demander un devis</a></li><li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li></ul></div>
+      <div><h2>Services</h2><ul>{SV.slice(0, 5).map(s => <li><a href={`/services#${s.id}`}>{s.nom_court}</a></li>)}</ul></div>
+      <div><h2>Et aussi</h2><ul>{SV.slice(5).map(s => <li><a href={`/services#${s.id}`}>{s.nom_court}</a></li>)}</ul></div>
+      <div><h2>Agence</h2><ul><li><a href="/a-propos">À propos</a></li><li><a href="/realisations">Réalisations</a></li><li><a href="/conseils">Conseils</a></li><li><a href="/devis">Demander un devis</a></li><li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li></ul></div>
     </div>
-    <div class="foot-bottom"><span><span translate="no">{BRAND}</span>, Bruxelles, Belgique.</span><a href="mentions-legales.html">Mentions légales et confidentialité</a></div>
+    <div class="foot-bottom"><span><span translate="no">{BRAND}</span>, Bruxelles, Belgique.</span><a href="/mentions-legales">Mentions légales et confidentialité</a></div>
   </div>
 </footer>
-{sticky && <div class="sticky-cta"><a class="btn btn-secondary" href="realisations.html">Réalisations</a><a class="btn btn-primary" href="devis.html">Devis gratuit</a></div>}
+{sticky && <div class="sticky-cta"><a class="btn btn-secondary" href="/realisations">Réalisations</a><a class="btn btn-primary" href="/devis">Devis gratuit</a></div>}
 </body>
 </html>

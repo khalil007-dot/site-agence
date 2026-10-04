@@ -28,7 +28,7 @@ const typographie = {
 
 export default defineConfig({
   site: reglages.url_site,
-  // Garde les adresses actuelles : services.html, realisations.html…
+  // Génère services.html, que Cloudflare sert à l'adresse /services
   build: { format: 'file' },
   // Garde les apostrophes et guillemets tels qu'ils sont écrits dans les articles
   markdown: { processor: satteri({ features: { smartPunctuation: false } }) },

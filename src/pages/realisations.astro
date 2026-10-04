@@ -8,7 +8,7 @@ import { BRAND, CATS, NB } from '../lib/site';
 
 const projets = (await getCollection('projets')).sort((a, b) => a.data.ordre - b.data.ordre);
 ---
-<Base fichier="realisations.html" title={`Nos réalisations web en Belgique | ${BRAND}`} desc="Sites vitrine, boutiques en ligne, logos, devantures et campagnes réalisés pour des indépendants et PME à Bruxelles et en Belgique." current="realisations" crumbs={[['Réalisations', 'realisations.html']]}>
+<Base chemin="realisations" title={`Nos réalisations web en Belgique | ${BRAND}`} desc="Sites vitrine, boutiques en ligne, logos, devantures et campagnes réalisés pour des indépendants et PME à Bruxelles et en Belgique." current="realisations" crumbs={[['Réalisations', 'realisations']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Nos réalisations</h1>

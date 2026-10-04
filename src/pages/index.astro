@@ -54,7 +54,7 @@ const posts = (await getCollection('articles')).sort((a, b) => a.data.ordre - b.
 const WEBSITE = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_URL + '/#site', url: SITE_URL + '/', name: BRAND, inLanguage: 'fr-BE', publisher: { '@id': ORG_ID } };
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base fichier="index.html" title={`Agence web à Bruxelles, création de sites | ${BRAND}`} desc="Agence web à Bruxelles : création de site internet, boutique en ligne, logo, SEO et Google Ads pour indépendants et PME en Belgique. Devis gratuit sous 48 h." current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
+<Base chemin="" title={`Agence web à Bruxelles, création de sites | ${BRAND}`} desc="Agence web à Bruxelles : création de site internet, boutique en ligne, logo, SEO et Google Ads pour indépendants et PME en Belgique. Devis gratuit sous 48 h." current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap reveal">
       <h1 class="poster" id="hero-title"><span class="h1-kicker">Agence web à Bruxelles et partout en Belgique</span>Des sites et des marques qui font venir des clients.</h1>
@@ -62,7 +62,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <p class="lead">Création de site internet, boutique en ligne, logo, devanture, référencement Google et IA, réseaux sociaux. Un chef de projet dédié s'occupe de tout, du premier croquis aux premières commandes.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#estimer">Estimer mon projet</a>
-          <a class="btn btn-secondary" href="devis.html?mode=appel">Réserver un appel</a>
+          <a class="btn btn-secondary" href="/devis?mode=appel">Réserver un appel</a>
         </div>
       </div>
       <div class="proof-row">
@@ -80,7 +80,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         {FAMS.map((f, i) => {
           const n = SV.filter(s => s.famille === f.id).length;
           const [kind, url] = spotMock[f.id];
-          return <a class={`spot ${f.couleur}`} href={`services.html#${f.id}`} style={`--i:${i}`}>
+          return <a class={`spot ${f.couleur}`} href={`/services#${f.id}`} style={`--i:${i}`}>
           <span class="kicker">{n} service{n > 1 ? 's' : ''}</span>
           <h2 class="spot-title">{f.nom}</h2>
           <p>{spotTxt[f.id]}</p>
@@ -109,7 +109,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         {METIERS.map(([k, n, pb, items, svcs], i) => <div class="mpanel" role="tabpanel" id={`mp-${k}`} aria-labelledby={`mt-${k}`} hidden={i !== 0}>
           <div><h3 class="d-md">{n}</h3><p class="lead" style="margin-top:14px">{pb}</p>
             <div class="rec"><span class="muted small">Services recommandés</span><div class="rec-tags">{svcs.map(s => <span class="tag">{SVNAME[s]}</span>)}</div></div>
-            <a class="btn btn-primary" href={`devis.html?service=${svcs.join(',')}`}>Devis pour mon activité</a></div>
+            <a class="btn btn-primary" href={`/devis?service=${svcs.join(',')}`}>Devis pour mon activité</a></div>
           <ul class="included" style="--c:var(--violet)">{items.map(x => <li>{x}</li>)}</ul>
         </div>)}
       </div>
@@ -123,7 +123,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <h2 class="d-lg" id="audit-title">Audit gratuit de votre visibilité</h2>
           <p class="lead" style="color:rgba(255,255,255,.85);margin-top:16px">On analyse votre site, votre fiche Google et votre présence dans les IA. Vous recevez un rapport clair avec trois actions prioritaires, sous 72{NB}h.</p>
         </div>
-        <form class="audit-form" action="devis.html" method="get">
+        <form class="audit-form" action="/devis" method="get">
           <input type="hidden" name="service" value="seo">
           <input type="hidden" name="audit" value="1">
           <label for="audit-url">Adresse de votre site</label>
@@ -151,7 +151,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <span class="big" id="est-once">0{NB}€</span>
           <span class="monthly" id="est-monthly">Aucun abonnement</span>
           <span class="count" id="est-count">Sélectionnez au moins un service</span>
-          <a class="btn btn-primary" id="est-cta" href="devis.html" aria-disabled="true">Recevoir le devis détaillé</a>
+          <a class="btn btn-primary" id="est-cta" href="/devis" aria-disabled="true">Recevoir le devis détaillé</a>
           <span class="note">Estimation indicative basée sur nos prix de départ, hors taxes.</span>
         </div>
       </div>
@@ -176,7 +176,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <p class="muted">Pour créer son entreprise avec une image pro dès le premier jour.</p>
           <p class="price" data-once={e(1190)} data-monthly={e(99)} data-once-l="une fois" data-monthly-l="par mois, 12 mois"><span class="pv">{e(1190)}</span> <small class="pl">une fois</small></p>
           <ul><li>Logo et mini charte graphique</li><li>Site vitrine jusqu'à 5 pages</li><li>Fiche Google Business optimisée</li><li>Cartes de visite prêtes à imprimer</li></ul>
-          <a class="btn btn-secondary" href="devis.html?service=logo,site-vitrine">Choisir Lancement</a>
+          <a class="btn btn-secondary" href="/devis?service=logo,site-vitrine">Choisir Lancement</a>
         </article>
         <article class="plan featured">
           <span class="flag">Recommandé pour vendre en ligne</span>
@@ -184,14 +184,14 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <p class="muted">Pour ouvrir une boutique en ligne et vendre dès le premier mois.</p>
           <p class="price" data-once={e(3290)} data-monthly={e(275)} data-once-l="une fois" data-monthly-l="par mois, 12 mois"><span class="pv">{e(3290)}</span> <small class="pl">une fois</small></p>
           <ul><li>Logo et identité visuelle</li><li>Boutique en ligne complète</li><li>Photos de vos 20 premiers produits</li><li>3 mois de référencement offerts</li></ul>
-          <a class="btn btn-primary" href="devis.html?service=logo,e-commerce,seo">Choisir Commerce</a>
+          <a class="btn btn-primary" href="/devis?service=logo,e-commerce,seo">Choisir Commerce</a>
         </article>
         <article class="plan">
           <h3>Visibilité</h3>
           <p class="muted">Pour faire venir plus de clients sur un site qui existe déjà.</p>
           <p class="price" data-once={e(790)} data-monthly={e(790)} data-once-l="par mois" data-monthly-l="par mois"><span class="pv">{e(790)}</span> <small class="pl">par mois</small></p>
           <ul><li>Référencement Google et visibilité dans les IA</li><li>Campagnes Google Ads</li><li>2 réseaux sociaux, 12 publications</li><li>Un rapport clair chaque mois</li></ul>
-          <a class="btn btn-secondary" href="devis.html?service=seo,google-ads,reseaux-sociaux">Choisir Visibilité</a>
+          <a class="btn btn-secondary" href="/devis?service=seo,google-ads,reseaux-sociaux">Choisir Visibilité</a>
         </article>
       </div>
       <p class="note" style="margin-top:16px">Paiement en 12 mois sans frais, par prélèvement. Prix hors taxes.</p>
@@ -217,7 +217,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="section-head split">
         <h2 class="d-xl" id="work-title">Des résultats, pas seulement des maquettes</h2>
-        <p class="subhead"><a class="link" href="realisations.html">Voir toutes les études de cas</a></p>
+        <p class="subhead"><a class="link" href="/realisations">Voir toutes les études de cas</a></p>
       </div>
       <div class="projects">
         {projets.map(p => <ProjectCard projet={p} />)}
@@ -245,7 +245,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="section-head split">
         <h2 class="d-xl" id="blog-title">Conseils</h2>
-        <p class="subhead"><a class="link" href="conseils.html">Tous les articles</a></p>
+        <p class="subhead"><a class="link" href="/conseils">Tous les articles</a></p>
       </div>
       <div class="posts">{posts.map(p => <PostCard post={p} />)}</div>
     </div>
@@ -266,8 +266,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <h2 class="d-xl" id="final-title">Les meilleurs projets commencent par une discussion</h2>
         <p class="lead" style="color:rgba(255,255,255,.85)">Recevez un devis écrit sous 48{NB}h, ou réservez directement un appel de 30 minutes avec votre futur chef de projet.</p>
         <div class="btn-row" style="justify-content:center">
-          <a class="btn btn-primary" href="devis.html">Recevoir mon devis gratuit</a>
-          <a class="btn btn-glass" href="devis.html?mode=appel">Réserver un appel</a>
+          <a class="btn btn-primary" href="/devis">Recevoir mon devis gratuit</a>
+          <a class="btn btn-glass" href="/devis?mode=appel">Réserver un appel</a>
         </div>
       </div>
     </div>

@@ -46,7 +46,7 @@ Listez les pages dont vous avez besoin, ce que vos visiteurs doivent pouvoir fai
 <div class="callout">
 <h2 style="margin:0;font-size:1.5rem">Estimez votre projet en 30 secondes</h2>
 <p>Notre simulateur donne un budget de départ selon les services choisis.</p>
-<a class="btn btn-primary" href="index.html#estimer">Utiliser le simulateur</a>
+<a class="btn btn-primary" href="/#estimer">Utiliser le simulateur</a>
 </div>
 
 <p class="note">Article d'exemple rédigé pour ce site de test. Les fourchettes de prix sont indicatives.</p>

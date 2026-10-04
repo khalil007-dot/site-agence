@@ -41,7 +41,7 @@ if (est) {
     count.textContent = on.length
       ? on.length + (on.length > 1 ? ' services sélectionnés' : ' service sélectionné')
       : 'Sélectionnez au moins un service';
-    cta.href = 'devis.html' + (on.length ? '?service=' + on.map(t => t.dataset.id).join(',') : '');
+    cta.href = '/devis' + (on.length ? '?service=' + on.map(t => t.dataset.id).join(',') : '');
     cta.setAttribute('aria-disabled', on.length ? 'false' : 'true');
   };
   toggles.forEach(t => t.addEventListener('click', () => {
@@ -77,7 +77,7 @@ if (form) {
   const marks = [...document.querySelectorAll('.progress li')];
   let current = 0;
 
-  // « devis.html?service=seo,logo » pré-coche les services
+  // « /devis?service=seo,logo » pré-coche les services
   (new URLSearchParams(location.search).get('service') || '').split(',').forEach(id => {
     const box = id && form.querySelector(`input[name="services"][value="${CSS.escape(id)}"]`);
     if (box) box.checked = true;

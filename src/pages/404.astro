@@ -2,12 +2,12 @@
 import Base from '../layouts/Base.astro';
 import { BRAND } from '../lib/site';
 ---
-<Base fichier="404.html" title={`Page introuvable | ${BRAND}`} desc="Cette page n'existe pas. Retrouvez nos services de création de sites internet à Bruxelles." noindex>
+<Base chemin="404" title={`Page introuvable | ${BRAND}`} desc="Cette page n'existe pas. Retrouvez nos services de création de sites internet à Bruxelles." noindex>
   <section class="page-head notfound" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Page introuvable</h1>
       <p class="lead">Cette page n'existe pas ou a été déplacée. Les liens ci-dessous mènent aux pages les plus consultées.</p>
-      <div class="btn-row"><a class="btn btn-primary" href="index.html">Retour à l'accueil</a><a class="btn btn-secondary" href="services.html">Voir les services</a><a class="btn btn-secondary" href="devis.html">Demander un devis</a></div>
+      <div class="btn-row"><a class="btn btn-primary" href="/">Retour à l'accueil</a><a class="btn btn-secondary" href="/services">Voir les services</a><a class="btn btn-secondary" href="/devis">Demander un devis</a></div>
     </div>
   </section>
 </Base>
