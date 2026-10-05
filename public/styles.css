@@ -528,3 +528,6 @@ button[disabled] { opacity: .6; cursor: progress; }
 /* Réalisations : vraie capture ou photo du projet (au lieu de la maquette dessinée) */
 .project .thumb.photo { padding: 0; }
 .project .thumb.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project h3 a { color: inherit; text-decoration: none; }
+.project h3 a::after { content: " ↗"; color: var(--muted); }
+.project h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }

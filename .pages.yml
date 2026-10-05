@@ -35,7 +35,7 @@ content:
           values:
             - { name: site, label: Site vitrine }
             - { name: ecom, label: E-commerce }
-            - { name: logo, label: Logo et devanture }
+            - { name: logo, label: Identité visuelle }
             - { name: visibilite, label: SEO et publicité }
             - { name: video, label: Drone et vidéo }
       - name: image
@@ -59,6 +59,10 @@ content:
       - name: etiquette
         label: Étiquette
         description: Laisser vide pour afficher le type de projet.
+        type: string
+      - name: lien
+        label: Lien vers le site du client
+        description: "Facultatif. Ex. : https://streetsapp.be/"
         type: string
       - name: accueil
         label: Afficher sur la page d'accueil

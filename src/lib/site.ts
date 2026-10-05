@@ -34,7 +34,7 @@ export const ORG = {
 };
 
 // Catégories de la page Réalisations (mêmes valeurs que dans content.config.ts et .pages.yml)
-export const CATS: [string, string][] = [['site', 'Site vitrine'], ['ecom', 'E-commerce'], ['logo', 'Logo et devanture'], ['visibilite', 'SEO et publicité'], ['video', 'Drone et vidéo']];
+export const CATS: [string, string][] = [['site', 'Site vitrine'], ['ecom', 'E-commerce'], ['logo', 'Identité visuelle'], ['visibilite', 'SEO et publicité'], ['video', 'Drone et vidéo']];
 export const CAT_LABEL = Object.fromEntries(CATS);
 
 // Pages listées dans sitemap.xml, avec leur priorité (les articles sont ajoutés automatiquement)

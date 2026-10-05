@@ -7,6 +7,8 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { BRAND, CATS, NB } from '../lib/site';
 
 const projets = (await getCollection('projets')).sort((a, b) => a.data.ordre - b.data.ordre);
+// Filtres : seulement les catégories qui ont au moins un projet
+const cats = CATS.filter(([c]) => projets.some(p => p.data.categorie === c));
 ---
 <Base chemin="realisations" title={`Nos réalisations web en Belgique | ${BRAND}`} desc="Sites vitrine, boutiques en ligne, logos, devantures et campagnes réalisés pour des indépendants et PME à Bruxelles et en Belgique." current="realisations" crumbs={[['Réalisations', 'realisations']]}>
   <section class="page-head" aria-labelledby="page-title">
@@ -19,11 +21,10 @@ const projets = (await getCollection('projets')).sort((a, b) => a.data.ordre - b
     <div class="wrap">
       <h2 class="d-md" id="projets-title" style="margin-bottom:20px">Projets récents</h2>
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px">
-        <div class="chips" role="group" aria-label="Filtrer par type de projet"><button class="chip" type="button" data-filter="tout" aria-pressed="true">Tout</button>{CATS.map(([c, l]) => <button class="chip" type="button" data-filter={c} aria-pressed="false">{l}</button>)}</div>
+        <div class="chips" role="group" aria-label="Filtrer par type de projet"><button class="chip" type="button" data-filter="tout" aria-pressed="true">Tout</button>{cats.map(([c, l]) => <button class="chip" type="button" data-filter={c} aria-pressed="false">{l}</button>)}</div>
         <span class="muted small" id="filter-count" aria-live="polite"></span>
       </div>
       <div class="projects">{projets.map(p => <ProjectCard projet={p} filtre />)}</div>
-      <p class="note" style="margin-top:20px">Emplacements à remplir avec de vrais projets : capture, nom du client et résultat mesurable.</p>
     </div>
   </section>
   <section class="section" aria-labelledby="avis-title">

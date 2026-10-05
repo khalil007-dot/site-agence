@@ -17,4 +17,4 @@ if (p.image && !img) throw new Error(`Image introuvable pour le projet « ${proj
 ---
 <article class="project" data-type={filtre ? p.categorie : undefined}><div class={img ? 'thumb photo' : 'thumb'} style={`background:var(--g-${p.couleur})`}>{img
   ? <Image src={img} alt={p.image_alt || p.client} widths={[400, 800, 1200]} sizes="(max-width: 760px) 100vw, 50vw" />
-  : <Mock kind={p.maquette} url="[client].be" />}</div>{(p.resultat_chiffre || p.resultat_texte) && <div class="result"><b>{p.resultat_chiffre}</b><span>{p.resultat_texte}</span></div>}<div class="meta"><h3>{p.client}</h3><span class="tag">{p.etiquette || CAT_LABEL[p.categorie]}</span></div></article>
+  : <Mock kind={p.maquette} url="[client].be" />}</div>{(p.resultat_chiffre || p.resultat_texte) && <div class="result"><b>{p.resultat_chiffre}</b><span>{p.resultat_texte}</span></div>}<div class="meta"><h3>{p.lien ? <a href={p.lien} target="_blank" rel="noopener">{p.client}</a> : p.client}</h3><span class="tag">{p.etiquette || CAT_LABEL[p.categorie]}</span></div></article>

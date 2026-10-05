@@ -22,6 +22,7 @@ const projets = defineCollection({
     resultat_chiffre: texte(),
     resultat_texte: texte(),
     etiquette: texte(),
+    lien: texte(), // adresse du site ou de la page du client
     accueil: z.preprocess(vide, z.boolean().default(false)),
     ordre: z.preprocess(vide, z.number().default(100)),
   }),
