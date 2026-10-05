@@ -46,4 +46,16 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { projets, articles };
+// Avis clients : uniquement de vrais avis, publiés avec l'accord du client
+const avis = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/avis' }),
+  schema: z.object({
+    nom: z.string(),
+    entreprise: texte(),
+    texte: z.string(),
+    note: z.preprocess(vide, z.number().min(1).max(5).optional()),
+    ordre: z.preprocess(vide, z.number().default(100)),
+  }),
+});
+
+export const collections = { projets, articles, avis };

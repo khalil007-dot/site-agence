@@ -70,6 +70,34 @@ if (filters.length) {
   apply([...filters].some(f => f.dataset.filter === start) ? start : 'tout');
 }
 
+// Envoi d'un formulaire par e-mail (service Web3Forms, clé dans src/data/reglages.json).
+// Renvoie true si la demande est partie ; sinon affiche une erreur avec l'e-mail de contact.
+async function envoyer(formEl, champs, errId) {
+  const err = document.getElementById(errId);
+  err.textContent = '';
+  if (formEl.botcheck && formEl.botcheck.checked) return true; // robot de spam : on ne l'envoie pas
+  const echec = () => {
+    err.append("L'envoi n'a pas fonctionné. Réessayez dans un instant, ou écrivez-nous à ");
+    const a = document.createElement('a');
+    a.href = 'mailto:' + formEl.dataset.email;
+    a.textContent = formEl.dataset.email;
+    err.append(a, '.');
+    return false;
+  };
+  if (!formEl.dataset.cle) return echec();
+  try {
+    const r = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ access_key: formEl.dataset.cle, from_name: 'Formulaire du site', ...champs }),
+    });
+    const res = await r.json();
+    return res.success ? true : echec();
+  } catch {
+    return echec();
+  }
+}
+
 // Devis en 3 étapes
 const form = document.getElementById('quote-form');
 if (form) {
@@ -131,22 +159,37 @@ if (form) {
     if (e.target.closest('[data-prev]')) show(current - 1);
   });
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     if (current !== 2 || !validators[2]()) return;
     const btn = form.querySelector('button[type="submit"]');
+    const texteBouton = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Envoi…';
-    setTimeout(() => {
-      const chosen = [...form.querySelectorAll('input[name="services"]:checked')].map(i => i.nextElementSibling.textContent);
-      document.getElementById('recap').textContent = chosen.join(', ');
-      document.getElementById('recap-mail').textContent = form.email.value.trim();
-      steps.forEach(s => { s.hidden = true; });
-      marks.forEach(m => { m.classList.add('done'); m.removeAttribute('aria-current'); });
-      const done = document.getElementById('step-done');
-      done.hidden = false;
-      done.querySelector('h2').focus();
-    }, 800);
+    const chosen = [...form.querySelectorAll('input[name="services"]:checked')].map(i => i.nextElementSibling.textContent);
+    const ok = await envoyer(form, {
+      subject: 'Demande de devis : ' + form.nom.value.trim(),
+      email: form.email.value.trim(),
+      'Nom': form.nom.value.trim(),
+      'Entreprise': form.entreprise.value.trim() || '-',
+      'Téléphone': form.tel.value.trim() || '-',
+      'Services': chosen.join(', '),
+      'Budget': form.budget.value,
+      'Délai': form.delai.value,
+      'Activité': form.msg.value.trim() || '-',
+      'Site actuel': form.site.value.trim() || '-',
+      'Audit gratuit demandé': q.get('audit') ? 'Oui' : 'Non',
+    }, 'err-envoi-devis');
+    btn.disabled = false;
+    btn.textContent = texteBouton;
+    if (!ok) return;
+    document.getElementById('recap').textContent = chosen.join(', ');
+    document.getElementById('recap-mail').textContent = form.email.value.trim();
+    steps.forEach(s => { s.hidden = true; });
+    marks.forEach(m => { m.classList.add('done'); m.removeAttribute('aria-current'); });
+    const done = document.getElementById('step-done');
+    done.hidden = false;
+    done.querySelector('h2').focus();
   });
 
   // Entrée dans un champ des étapes 1 et 2 : passe à l'étape suivante au lieu d'envoyer
@@ -228,9 +271,7 @@ if (modes) {
   };
   const renderSlots = () => {
     slotsBox.innerHTML = '';
-    // Démo : un créneau sur trois est déjà pris, de façon stable selon le jour
-    HOURS.forEach((h, i) => {
-      if ((chosenDay.getDate() + i) % 3 === 0) return;
+    HOURS.forEach(h => {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'slot'; b.setAttribute('role', 'radio');
       b.setAttribute('aria-checked', 'false'); b.textContent = h; b.tabIndex = -1;
@@ -257,7 +298,7 @@ if (modes) {
     document.getElementById('err-' + id).textContent = text;
     return !text;
   };
-  call.addEventListener('submit', e => {
+  call.addEventListener('submit', async e => {
     e.preventDefault();
     const slotOk = !!chosenHour;
     document.getElementById('err-slot').textContent = slotOk ? '' : 'Choisissez une heure pour le rendez-vous.';
@@ -266,6 +307,20 @@ if (modes) {
     if (!slotOk) { slotsBox.querySelector('.slot').focus(); return; }
     if (!nomOk) { call['c-nom'].focus(); return; }
     if (!telOk) { call['c-tel'].focus(); return; }
+    const btn = call.querySelector('button[type="submit"]');
+    const texteBouton = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Envoi…';
+    const ok = await envoyer(call, {
+      subject: 'Rendez-vous téléphonique : ' + call['c-nom'].value.trim(),
+      'Nom': call['c-nom'].value.trim(),
+      'Téléphone': call['c-tel'].value.trim(),
+      'Créneau demandé': 'le ' + longFmt.format(chosenDay) + ' à ' + chosenHour,
+      'Sujet': call['c-sujet'].value.trim() || '-',
+    }, 'err-envoi-appel');
+    btn.disabled = false;
+    btn.textContent = texteBouton;
+    if (!ok) return;
     document.getElementById('call-recap').textContent = 'le ' + longFmt.format(chosenDay) + ' à ' + chosenHour;
     document.getElementById('call-tel').textContent = call['c-tel'].value.trim();
     document.getElementById('call-step').hidden = true;

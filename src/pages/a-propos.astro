@@ -12,7 +12,7 @@ import { BRAND, FONDATEUR, NB, ORG_ID, SITE_URL, SV } from '../lib/site';
   </section>
   <section aria-label="Notre histoire">
     <div class="wrap about-grid">
-      <div class="portrait"><p class="ph">[Photo de Khalil au travail]</p></div>
+      <div class="portrait" aria-hidden="true"><p class="devise">Ne garder<br>que l'essentiel.</p></div>
       <div class="story">
         <h2 class="d-md">Pourquoi <span translate="no">{BRAND}</span> existe</h2>
         <p>Je m'appelle {FONDATEUR}. Développeur de formation, je conçois depuis plusieurs années des projets très variés : des sites internet, mais aussi des logiciels sur mesure, jusqu'à des outils de gestion financière.</p>
@@ -26,12 +26,11 @@ import { BRAND, FONDATEUR, NB, ORG_ID, SITE_URL, SV } from '../lib/site';
     <div class="wrap">
       <div class="section-head"><h2 class="d-xl" id="figures-title">En quelques chiffres</h2></div>
       <div class="figures">
-        <div class="figure"><b>[00]</b><span>projets livrés</span></div>
         <div class="figure"><b>48{NB}h</b><span>pour recevoir un devis</span></div>
         <div class="figure"><b>{SV.length}</b><span>services sous un même toit</span></div>
-        <div class="figure"><b>[0,0]</b><span>note moyenne Google</span></div>
+        <div class="figure"><b>1</b><span>seul interlocuteur, du devis à la mise en ligne</span></div>
+        <div class="figure"><b>100{NB}%</b><span>du site vous appartient</span></div>
       </div>
-      <p class="note" style="margin-top:16px">Les chiffres entre crochets sont à remplacer par vos données réelles.</p>
     </div>
   </section>
   <section class="section" aria-labelledby="values-title">

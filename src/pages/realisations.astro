@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Final from '../components/Final.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import Avis from '../components/Avis.astro';
 import { BRAND, CATS, NB } from '../lib/site';
 
 const projets = (await getCollection('projets')).sort((a, b) => a.data.ordre - b.data.ordre);
@@ -27,16 +28,6 @@ const cats = CATS.filter(([c]) => projets.some(p => p.data.categorie === c));
       <div class="projects">{projets.map(p => <ProjectCard projet={p} filtre />)}</div>
     </div>
   </section>
-  <section class="section" aria-labelledby="avis-title">
-    <div class="wrap">
-      <div class="section-head"><h2 class="d-xl" id="avis-title">Ce qu'en disent nos clients</h2></div>
-      <div class="values">
-        <figure class="value" style="margin:0"><blockquote style="margin:0"><p style="color:var(--ink);font-size:1.1875rem">[Avis client réel, idéalement avec un résultat concret.]</p></blockquote><figcaption class="muted small">[Prénom Nom], [métier, ville]</figcaption></figure>
-        <figure class="value" style="margin:0"><blockquote style="margin:0"><p style="color:var(--ink);font-size:1.1875rem">[Avis client réel.]</p></blockquote><figcaption class="muted small">[Prénom Nom], [métier, ville]</figcaption></figure>
-        <figure class="value" style="margin:0"><blockquote style="margin:0"><p style="color:var(--ink);font-size:1.1875rem">[Avis client réel.]</p></blockquote><figcaption class="muted small">[Prénom Nom], [métier, ville]</figcaption></figure>
-      </div>
-      <p class="note" style="margin-top:20px">Les avis doivent être authentiques. Vous pouvez aussi intégrer vos avis Google.</p>
-    </div>
-  </section>
+  <Avis />
 <Final title="Votre projet pourrait être le prochain" text={'Décrivez-le en deux minutes et recevez un devis sous 48' + NB + 'h.'} />
 </Base>

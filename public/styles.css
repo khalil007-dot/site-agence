@@ -557,3 +557,20 @@ button[disabled] { opacity: .6; cursor: progress; }
 /* Cartes de l'accueil : vraie capture ou vrais logos dans la fenêtre dessinée */
 .mock-shot { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
 .logos img { width: 62%; height: auto; max-height: 62%; object-fit: contain; }
+
+/* Avis clients */
+.avis { margin: 0; }
+.avis blockquote { margin: 0; }
+.avis blockquote p { color: var(--ink); font-size: 1.1875rem; }
+.avis .rating { margin: 0; }
+
+/* À propos : devise à la place de la photo, tant qu'il n'y en a pas */
+.portrait .devise { margin: 0; font-size: clamp(2.5rem, 5vw, 4rem); line-height: .95; letter-spacing: -0.05em; font-weight: 600; color: #fff; }
+
+/* Formulaires : message d'erreur d'envoi */
+.send-error { color: #FF8A8A; font-size: .9375rem; margin: 0; }
+.send-error:empty { display: none; }
+.send-error a { color: inherit; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.side-logos { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.side-logos img { height: 40px; width: auto; opacity: .8; }

@@ -5,7 +5,7 @@ import Base from '../layouts/Base.astro';
 import Mock from '../components/Mock.astro';
 import PostCard from '../components/PostCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import Stars from '../components/Stars.astro';
+import Avis from '../components/Avis.astro';
 import Vitrine from '../components/Vitrine.astro';
 import { Image } from 'astro:assets';
 import captureStreetSapp from '../assets/projets/streetsapp.jpg';
@@ -68,14 +68,13 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap reveal">
       <h1 class="poster" id="hero-title"><span class="h1-kicker">Agence web à Bruxelles et partout en Belgique</span>Des sites et des marques qui font venir des clients.</h1>
       <div class="hero-foot">
-        <p class="lead">Création de site internet, boutique en ligne, logo, référencement Google et IA, réseaux sociaux. Un chef de projet dédié s'occupe de tout, du premier croquis aux premières commandes.</p>
+        <p class="lead">Création de site internet, boutique en ligne, logo, référencement Google et IA, réseaux sociaux. Un seul interlocuteur s'occupe de tout, du premier croquis aux premières commandes.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#estimer">Estimer mon projet</a>
           <a class="btn btn-secondary" href="/devis?mode=appel">Réserver un appel</a>
         </div>
       </div>
       <div class="proof-row">
-        <p class="rating"><Stars /><span><b>[4,9]/5</b> sur Google · [00] avis</span></p>
         <ul class="badges" aria-label="Nos engagements">
           <li>Devis gratuit sous 48{NB}h</li><li>Maquette validée avant le code</li><li>Le site vous appartient</li>
         </ul>
@@ -237,20 +236,18 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       <div class="projects">
         {projets.map(p => <ProjectCard projet={p} />)}
       </div>
-      <div class="videos">
-        {['magenta', 'coral', 'violet'].map(c => <figure class="video" style={`background:var(--g-${c})`}><span class="play" aria-hidden="true"></span><figcaption><b>[Prénom Nom]</b><span>[Métier, ville]</span></figcaption></figure>)}
-      </div>
-      <p class="note" style="margin-top:16px">Emplacements pour vos études de cas et témoignages vidéo réels.</p>
     </div>
   </section>
+
+  <Avis max={3} />
 
   <section class="section" id="garanties" aria-labelledby="garanties-title">
     <div class="wrap">
       <div class="section-head"><h2 class="d-xl" id="garanties-title">Ce qu'on vous garantit</h2></div>
       <div class="guarantees">
-        <div class="g"><h3>Un chef de projet dédié</h3><p>Une seule personne suit votre projet du début à la fin et connaît votre activité.</p></div>
+        <div class="g"><h3>Un seul interlocuteur</h3><p>Une seule personne suit votre projet du début à la fin et connaît votre activité.</p></div>
         <div class="g"><h3>Maquette refaite si elle ne vous plaît pas</h3><p>Si la première proposition ne vous convient pas, on repart de zéro, sans frais.</p></div>
-        <div class="g"><h3>Support 5 jours sur 7</h3><p>Par téléphone, e-mail ou chat, avec une réponse sous 24{NB}h ouvrées.</p></div>
+        <div class="g"><h3>Support 5 jours sur 7</h3><p>Par téléphone ou par e-mail, avec une réponse sous 24{NB}h ouvrées.</p></div>
         <div class="g"><h3>Tout vous appartient</h3><p>Nom de domaine, contenus et fichiers du logo sont à votre nom. Vous partez quand vous voulez.</p></div>
       </div>
     </div>
@@ -279,7 +276,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="final">
         <h2 class="d-xl" id="final-title">Les meilleurs projets commencent par une discussion</h2>
-        <p class="lead" style="color:rgba(255,255,255,.85)">Recevez un devis écrit sous 48{NB}h, ou réservez directement un appel de 30 minutes avec votre futur chef de projet.</p>
+        <p class="lead" style="color:rgba(255,255,255,.85)">Recevez un devis écrit sous 48{NB}h, ou réservez directement un appel de 30 minutes.</p>
         <div class="btn-row" style="justify-content:center">
           <a class="btn btn-primary" href="/devis">Recevoir mon devis gratuit</a>
           <a class="btn btn-glass" href="/devis?mode=appel">Réserver un appel</a>

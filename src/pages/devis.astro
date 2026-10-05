@@ -3,7 +3,18 @@
 import Base from '../layouts/Base.astro';
 import Radios from '../components/Radios.astro';
 import Stars from '../components/Stars.astro';
-import { BRAND, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import logoStreetSapp from '../assets/clients/street-sapp.png';
+import logoOmi from '../assets/clients/omi.png';
+import logoObrunch from '../assets/clients/obrunch-house.png';
+import { BRAND, CLE_FORMULAIRES, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
+
+// Encart de confiance : le premier vrai avis s'il y en a un, sinon les logos des clients
+const [avis] = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.data.ordre);
+const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
+// Piège à robots : case invisible pour les humains, cochée par les robots de spam
+const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">';
 ---
 <Base chemin="devis" title={`Devis gratuit site internet à Bruxelles | ${BRAND}`} desc="Demandez un devis gratuit pour votre site internet, boutique en ligne, logo ou référencement à Bruxelles et en Belgique, ou réservez un appel de 30 minutes." current="devis" sticky={false} crumbs={[['Devis', 'devis']]}>
   <section class="page-head" aria-labelledby="page-title" style="padding-bottom:32px">
@@ -23,7 +34,8 @@ import { BRAND, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
     <div class="wrap quote-layout">
       <div>
       <div role="tabpanel" id="pane-devis" aria-labelledby="tab-devis">
-      <form class="form-card" id="quote-form" novalidate>
+      <form class="form-card" id="quote-form" novalidate data-cle={CLE_FORMULAIRES} data-email={EMAIL}>
+        <Fragment set:html={piege} />
         <ol class="progress" aria-label="Étapes du devis"><li aria-current="step">Vos besoins</li><li>Votre projet</li><li>Vos coordonnées</li></ol>
 
         <div class="step" id="step-1">
@@ -46,7 +58,7 @@ import { BRAND, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
 
         <div class="step" id="step-3" hidden>
           <h2>Où vous envoyer le devis ?</h2>
-          <p>Votre chef de projet vous écrit sous 48{NB}h ouvrées.</p>
+          <p>Vous recevez votre devis par e-mail sous 48{NB}h ouvrées.</p>
           <div class="row-2">
             <div class="field"><label for="nom">Nom</label><input type="text" id="nom" name="nom" autocomplete="name" required aria-describedby="err-nom"><p class="error" id="err-nom"></p></div>
             <div class="field"><label for="entreprise">Entreprise <span class="opt">(facultatif)</span></label><input type="text" id="entreprise" name="entreprise" autocomplete="organization"></div>
@@ -56,6 +68,7 @@ import { BRAND, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
             <div class="field"><label for="tel">Téléphone <span class="opt">(facultatif)</span></label><input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="0470 12 34 56…"></div>
           </div>
           <div class="step-actions"><button class="btn btn-secondary" type="button" data-prev>Retour</button><button class="btn btn-primary" type="submit">Recevoir mon devis gratuit</button></div>
+          <p class="send-error" id="err-envoi-devis" role="alert"></p>
           <p class="reassure">Vos coordonnées servent uniquement à préparer votre devis. <a class="link" href="/mentions-legales#donnees">Confidentialité</a></p>
         </div>
 
@@ -63,17 +76,17 @@ import { BRAND, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
           <span class="ok" aria-hidden="true"></span>
           <h2 tabindex="-1">Demande reçue</h2>
           <p class="muted">Votre devis pour <strong style="color:var(--ink)" id="recap"></strong> arrive à l'adresse <strong style="color:var(--ink)" id="recap-mail"></strong> sous 48{NB}h ouvrées.</p>
-          <p class="note">Démo : rien n'a été envoyé.</p>
           <a class="btn btn-secondary" href="/realisations">Voir nos réalisations en attendant</a>
         </div>
       </form>
       </div>
 
       <div role="tabpanel" id="pane-appel" aria-labelledby="tab-appel" hidden>
-      <form class="form-card" id="call-form" novalidate>
+      <form class="form-card" id="call-form" novalidate data-cle={CLE_FORMULAIRES} data-email={EMAIL}>
+        <Fragment set:html={piege} />
         <div id="call-step">
           <h2 class="d-md" style="margin-bottom:8px">Choisissez un créneau de 30 minutes</h2>
-          <p class="muted" style="margin-bottom:24px">Votre futur chef de projet vous appelle à l'heure choisie. Heure de Bruxelles.</p>
+          <p class="muted" style="margin-bottom:24px">On vous appelle à l'heure choisie, du lundi au vendredi. Heure de Bruxelles.</p>
           <div class="days" id="days" role="radiogroup" aria-label="Jour"></div>
           <div class="slots" id="slots" role="radiogroup" aria-label="Heure"></div>
           <p class="step-error" id="err-slot" role="alert"></p>
@@ -82,13 +95,13 @@ import { BRAND, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
             <div class="field"><label for="c-tel">Téléphone</label><input type="tel" id="c-tel" name="tel" autocomplete="tel" inputmode="tel" required placeholder="0470 12 34 56…" aria-describedby="err-c-tel"><p class="error" id="err-c-tel"></p></div>
           </div>
           <div class="field"><label for="c-sujet">Sujet de l'appel <span class="opt">(facultatif)</span></label><input type="text" id="c-sujet" name="sujet" placeholder="Ex. : refonte de mon site et fiche Google…"></div>
-          <div class="step-actions"><span class="muted small" id="slot-recap">Aucun créneau choisi</span><button class="btn btn-primary" type="submit">Confirmer le rendez-vous</button></div>
+          <div class="step-actions"><span class="muted small" id="slot-recap">Aucun créneau choisi</span><button class="btn btn-primary" type="submit">Demander ce rendez-vous</button></div>
+          <p class="send-error" id="err-envoi-appel" role="alert"></p>
         </div>
         <div class="done-box" id="call-done" hidden>
           <span class="ok" aria-hidden="true"></span>
-          <h2 class="d-md" tabindex="-1">Rendez-vous confirmé</h2>
-          <p class="muted">On vous appelle <strong style="color:var(--ink)" id="call-recap"></strong> au <strong style="color:var(--ink)" id="call-tel"></strong>.</p>
-          <p class="note">Démo : rien n'a été envoyé.</p>
+          <h2 class="d-md" tabindex="-1">Demande de rendez-vous envoyée</h2>
+          <p class="muted">On vous appelle <strong style="color:var(--ink)" id="call-recap"></strong> au <strong style="color:var(--ink)" id="call-tel"></strong>. Si ce créneau n'est plus libre, on vous contacte pour en fixer un autre.</p>
         </div>
       </form>
       </div>
@@ -97,13 +110,20 @@ import { BRAND, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
       <aside class="side" aria-label="Informations">
         <div class="side-card grad">
           <h2>Ce qui se passe ensuite</h2>
-          <ol><li>Sous 48{NB}h : votre devis détaillé, ou l'appel au créneau choisi</li><li>Un chef de projet dédié répond à toutes vos questions</li><li>Vous signez seulement si la proposition vous convient</li></ol>
+          <ol><li>Sous 48{NB}h : votre devis détaillé, ou l'appel au créneau choisi</li><li>Un seul interlocuteur répond à toutes vos questions</li><li>Vous signez seulement si la proposition vous convient</li></ol>
         </div>
-        <div class="side-card plain">
-          <p class="rating" style="margin:0"><Stars /><span><b>[4,9]/5</b> · [00] avis Google</span></p>
-          <blockquote style="margin:0"><p style="font-size:1.0625rem">[Courte citation d'un client réel sur la qualité du suivi.]</p></blockquote>
-          <p class="muted small">[Prénom Nom], [métier, ville]</p>
-        </div>
+        {avis ? (
+          <div class="side-card plain">
+            {avis.data.note === 5 && <p class="rating" style="margin:0"><Stars /></p>}
+            <blockquote style="margin:0"><p style="font-size:1.0625rem">{avis.data.texte}</p></blockquote>
+            <p class="muted small">{avis.data.nom}{avis.data.entreprise && <>, {avis.data.entreprise}</>}</p>
+          </div>
+        ) : (
+          <div class="side-card plain">
+            <h2>Ils nous ont fait confiance</h2>
+            <ul class="side-logos">{CLIENTS.map(([nom, src]) => <li><Image src={src} alt={nom} height={96} /></li>)}</ul>
+          </div>
+        )}
         <div class="side-card plain">
           <h2>Vous préférez écrire ou appeler ?</h2>
           <a class="big link" href={`mailto:${EMAIL}`}>{EMAIL}</a>

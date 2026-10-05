@@ -161,6 +161,40 @@ content:
         options:
           format: markdown
 
+  - name: avis
+    label: Avis clients
+    type: collection
+    path: src/content/avis
+    filename: "{primary}.md"
+    view:
+      primary: nom
+      fields: [nom, entreprise, note]
+      default:
+        sort: ordre
+        order: asc
+    fields:
+      - name: nom
+        label: Prénom et nom du client
+        type: string
+        required: true
+      - name: entreprise
+        label: Entreprise
+        description: "Ex. : OMI Restaurant, Bruxelles"
+        type: string
+      - name: texte
+        label: Avis
+        description: Recopie exactement l'avis du client, avec son accord.
+        type: text
+        required: true
+      - name: note
+        label: Note sur 5
+        type: number
+        options: { min: 1, max: 5 }
+      - name: ordre
+        label: Ordre d'affichage
+        type: number
+        default: 100
+
   - name: reglages
     label: Réglages du site
     type: file
@@ -193,6 +227,10 @@ content:
         label: Prénom et nom du fondateur
         type: string
         required: true
+      - name: cle_formulaires
+        label: Clé Web3Forms
+        description: Reçue par e-mail sur web3forms.com. Sans elle, les formulaires n'envoient rien.
+        type: string
       - name: date_maj
         label: Date de dernière mise à jour
         type: date

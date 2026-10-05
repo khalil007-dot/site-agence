@@ -49,4 +49,4 @@ Listez les pages dont vous avez besoin, ce que vos visiteurs doivent pouvoir fai
 <a class="btn btn-primary" href="/#estimer">Utiliser le simulateur</a>
 </div>
 
-<p class="note">Article d'exemple rédigé pour ce site de test. Les fourchettes de prix sont indicatives.</p>
+<p class="note">Les fourchettes de prix sont indicatives.</p>
