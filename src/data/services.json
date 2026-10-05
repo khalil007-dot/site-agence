@@ -19,7 +19,7 @@
       "couleur": "magenta",
       "nom_court": "Image de marque",
       "nom": "Soigner votre image de marque",
-      "accroche": "Ce que vos clients voient avant même de vous parler, en ligne comme dans la rue."
+      "accroche": "Ce que vos clients voient avant même de vous parler, en ligne comme sur papier."
     },
     {
       "id": "entretenir",
@@ -208,56 +208,6 @@
         "Fichiers pour l'impression et le web (SVG, PDF, PNG)",
         "Mini charte : couleurs, typographies et règles d'usage",
         "Cartes de visite prêtes à imprimer"
-      ]
-    },
-    {
-      "id": "devanture",
-      "famille": "image",
-      "nom": "Devanture et enseigne",
-      "nom_court": "Devanture",
-      "prix_unique": 690,
-      "prix_mensuel": 0,
-      "pour_qui": "Pour les commerces qui ouvrent ou se rénovent et veulent une façade cohérente avec leur logo et leur site.",
-      "infos": [
-        {
-          "label": "Délai moyen",
-          "valeur": "3 semaines"
-        },
-        {
-          "label": "Fabrication",
-          "valeur": "Sur devis"
-        }
-      ],
-      "inclus": [
-        "Relevé de votre façade et photo-montage avant / après",
-        "Design de l'enseigne, de la vitrine et des adhésifs",
-        "Fichiers techniques prêts pour le fabricant",
-        "Mise en relation avec un fabricant et un poseur"
-      ]
-    },
-    {
-      "id": "drone",
-      "famille": "image",
-      "nom": "Drone, photo et vidéo",
-      "nom_court": "Drone et vidéo",
-      "prix_unique": 350,
-      "prix_mensuel": 0,
-      "pour_qui": "Pour montrer votre lieu, vos produits ou votre chantier avec des images qui donnent envie.",
-      "infos": [
-        {
-          "label": "Tournage",
-          "valeur": "Une demi-journée"
-        },
-        {
-          "label": "Livraison",
-          "valeur": "1 semaine"
-        }
-      ],
-      "inclus": [
-        "Prises de vue aériennes par un pilote déclaré",
-        "Photos de vos produits et de votre équipe",
-        "Une vidéo de 60 secondes et trois formats courts pour les réseaux",
-        "Images optimisées pour le site"
       ]
     },
     {

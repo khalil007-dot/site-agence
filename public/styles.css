@@ -531,3 +531,29 @@ button[disabled] { opacity: .6; cursor: progress; }
 .project h3 a { color: inherit; text-decoration: none; }
 .project h3 a::after { content: " ↗"; color: var(--muted); }
 .project h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Accueil : bande de réalisations qui défile (la seule animation continue du site) */
+.vitrine { overflow: hidden; padding: 0 0 clamp(56px, 7vw, 96px); }
+.vitrine-piste { display: flex; gap: 15px; width: max-content; animation: defile 70s linear infinite; }
+.vitrine:hover .vitrine-piste, .vitrine:focus-within .vitrine-piste { animation-play-state: paused; }
+.vitrine-item { position: relative; flex: none; width: clamp(280px, 36vw, 560px); aspect-ratio: 16 / 10; border-radius: 20px; overflow: hidden; background: var(--s1); }
+.vitrine-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.vitrine-item:hover img { transform: scale(1.03); }
+.vitrine-item span { position: absolute; left: 14px; bottom: 14px; padding: 7px 12px; border-radius: 100px; background: rgba(9,9,9,.72); backdrop-filter: blur(8px); color: #fff; font-size: .8125rem; font-weight: 500; }
+.vitrine-item:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+@keyframes defile { to { transform: translateX(calc(-50% - 7.5px)); } }
+@media (prefers-reduced-motion: reduce) {
+  .vitrine { overflow-x: auto; scroll-snap-type: x mandatory; padding-left: var(--gutter); }
+  .vitrine-piste > [aria-hidden="true"] { display: none; }
+  .vitrine-item { scroll-snap-align: start; }
+}
+
+/* Logos clients (en blanc) */
+.logo-row.reels { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: clamp(32px, 7vw, 88px); }
+.logo-row.reels li { border: 0; height: auto; }
+.logo-row.reels img { height: clamp(44px, 5vw, 60px); width: auto; opacity: .78; transition: opacity .2s; }
+.logo-row.reels li:hover img { opacity: 1; }
+
+/* Cartes de l'accueil : vraie capture ou vrais logos dans la fenêtre dessinée */
+.mock-shot { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
+.logos img { width: 62%; height: auto; max-height: 62%; object-fit: contain; }

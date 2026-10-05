@@ -6,20 +6,27 @@ import Mock from '../components/Mock.astro';
 import PostCard from '../components/PostCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Stars from '../components/Stars.astro';
+import Vitrine from '../components/Vitrine.astro';
+import { Image } from 'astro:assets';
+import captureStreetSapp from '../assets/projets/streetsapp.jpg';
+import logoStreetSapp from '../assets/clients/street-sapp.png';
+import logoOmi from '../assets/clients/omi.png';
+import logoObrunch from '../assets/clients/obrunch-house.png';
 import { BRAND, FAMS, NB, ORG, ORG_ID, SITE_URL, SV, e } from '../lib/site';
 
 const spotTxt: Record<string, string> = {
   creer: 'Site vitrine, boutique en ligne ou application, conçus pour être faciles à utiliser sur téléphone.',
   visibilite: 'Référencement Google et IA, publicité et réseaux sociaux pour que les bons clients vous trouvent.',
-  image: 'Logo, devanture, photos et vidéo par drone pour une image cohérente partout.',
+  image: 'Logo, menus, flyers et cartes de visite pour une image cohérente partout.',
   entretenir: 'Hébergement, sauvegardes et petites modifications chaque mois, sans engagement.',
 };
-const spotMock: Record<string, [string, string?]> = { creer: ['shop', 'boutique-exemple.be'], visibilite: ['serp'], image: ['logos'], entretenir: ['uptime'] };
+// Maquette dessinée des cartes « Se faire connaître » et « Entretenir » (les deux autres montrent du vrai travail)
+const spotMock: Record<string, [string, string?]> = { creer: ['shop'], visibilite: ['serp'], image: ['logos'], entretenir: ['uptime'] };
 
 const METIERS: [string, string, string, string[], string[]][] = [
   ['restaurants', 'Restaurants et cafés', "Vos clients regardent la carte, les photos et les horaires sur Google avant de choisir où manger.",
-    ['Carte en ligne facile à mettre à jour', 'Réservation de table depuis Google et le site', 'Photos et vidéo du lieu par drone', 'Instagram alimenté chaque semaine'],
-    ['site-vitrine', 'drone', 'reseaux-sociaux']],
+    ['Carte en ligne facile à mettre à jour', 'Réservation de table depuis Google et le site', 'Menu et flyers à vos couleurs', 'Instagram alimenté chaque semaine'],
+    ['site-vitrine', 'logo', 'reseaux-sociaux']],
   ['artisans', 'Artisans et bâtiment', "Vos futurs clients cherchent « plombier » ou « menuisier » suivi du nom de leur ville, et appellent le premier qui inspire confiance.",
     ['Galerie de chantiers avant / après', 'Demande de devis en ligne avec photos', 'Fiche Google et avis clients mis en avant', "Pages par ville de votre zone d'intervention"],
     ['site-vitrine', 'seo', 'logo']],
@@ -27,8 +34,8 @@ const METIERS: [string, string, string, string[], string[]][] = [
     ['Pages claires pour chaque soin ou spécialité', 'Prise de rendez-vous en ligne intégrée', 'Plan d’accès, tarifs et informations pratiques', 'Respect des règles de communication de votre ordre'],
     ['site-vitrine', 'seo']],
   ['commerces', 'Commerces de proximité', "Vos clients passent devant votre vitrine, mais comparent aussi en ligne avant de se déplacer.",
-    ['Devanture et enseigne cohérentes avec votre logo', 'Click and collect ou boutique en ligne', 'Horaires, stocks et promotions à jour', 'Publicité locale autour de votre magasin'],
-    ['devanture', 'e-commerce', 'google-ads']],
+    ['Logo, flyers et cartes de visite assortis', 'Click and collect ou boutique en ligne', 'Horaires, stocks et promotions à jour', 'Publicité locale autour de votre magasin'],
+    ['logo', 'e-commerce', 'google-ads']],
   ['liberales', 'Professions libérales', "Avocats, consultants, architectes : on vous choisit sur votre crédibilité, avant même le premier rendez-vous.",
     ['Présentation de votre expertise et de vos domaines', 'Articles qui répondent aux questions de vos clients', 'Prise de rendez-vous ou formulaire qualifié', 'Identité visuelle sobre et professionnelle'],
     ['logo', 'site-vitrine', 'seo']],
@@ -37,6 +44,8 @@ const METIERS: [string, string, string, string[], string[]][] = [
     ['e-commerce', 'google-ads', 'reseaux-sociaux']],
 ];
 const SVNAME = Object.fromEntries(SV.map(s => [s.id, s.nom_court]));
+// Logos des clients, en blanc (src/assets/clients)
+const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
 
 const FAQ = [
   ['Combien de temps faut-il pour créer un site ?', 'Trois semaines en moyenne pour un site vitrine, six pour une boutique en ligne et environ dix pour une application. Le délai exact figure sur votre devis.'],
@@ -59,7 +68,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap reveal">
       <h1 class="poster" id="hero-title"><span class="h1-kicker">Agence web à Bruxelles et partout en Belgique</span>Des sites et des marques qui font venir des clients.</h1>
       <div class="hero-foot">
-        <p class="lead">Création de site internet, boutique en ligne, logo, devanture, référencement Google et IA, réseaux sociaux. Un chef de projet dédié s'occupe de tout, du premier croquis aux premières commandes.</p>
+        <p class="lead">Création de site internet, boutique en ligne, logo, référencement Google et IA, réseaux sociaux. Un chef de projet dédié s'occupe de tout, du premier croquis aux premières commandes.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#estimer">Estimer mon projet</a>
           <a class="btn btn-secondary" href="/devis?mode=appel">Réserver un appel</a>
@@ -74,6 +83,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
+  <Vitrine />
+
   <section aria-label="Nos quatre familles de services">
     <div class="wrap">
       <div class="spots">
@@ -84,7 +95,11 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <span class="kicker">{n} service{n > 1 ? 's' : ''}</span>
           <h2 class="spot-title">{f.nom}</h2>
           <p>{spotTxt[f.id]}</p>
-          <Mock kind={kind} url={url} />
+          {f.id === 'creer'
+            ? <div class="mock" aria-hidden="true"><div class="mock-bar"><i></i><i></i><i></i><span>streetsapp.be</span></div><Image class="mock-shot" src={captureStreetSapp} alt="" widths={[480, 900]} sizes="(max-width: 820px) 90vw, 45vw" /></div>
+            : f.id === 'image'
+              ? <div class="mock" aria-hidden="true"><div class="mock-bar"><i></i><i></i><i></i><span>logos-clients.pdf</span></div><div class="mock-body"><div class="logos">{CLIENTS.map(([, src]) => <div><Image src={src} alt="" height={120} /></div>)}</div></div></div>
+              : <Mock kind={kind} url={url} />}
         </a>;
         })}
       </div>
@@ -94,7 +109,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   <section class="logos-band" aria-labelledby="logos-title">
     <div class="wrap">
       <h2 class="small muted" id="logos-title">Ils nous ont confié leur site, leur logo ou leur visibilité</h2>
-      <ul class="logo-row">{Array.from({ length: 6 }, () => <li>[Logo client]</li>)}</ul>
+      <ul class="logo-row reels">{CLIENTS.map(([nom, src]) => <li><Image src={src} alt={nom} height={120} /></li>)}</ul>
     </div>
   </section>
 

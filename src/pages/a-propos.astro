@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Final from '../components/Final.astro';
-import { BRAND, FONDATEUR, NB, ORG_ID, SITE_URL } from '../lib/site';
+import { BRAND, FONDATEUR, NB, ORG_ID, SITE_URL, SV } from '../lib/site';
 ---
 <Base chemin="a-propos" title={`Agence web bruxelloise : qui sommes-nous ? | ${BRAND}`} desc={`${BRAND}, agence web à Bruxelles fondée par ${FONDATEUR}, développeur : sites internet, logiciels, logo et visibilité pour les indépendants et PME de toute la Belgique.`} current="a-propos" schema={[{ '@context': 'https://schema.org', '@type': 'AboutPage', url: SITE_URL + '/a-propos', about: { '@id': ORG_ID } }]} crumbs={[['À propos', 'a-propos']]}>
   <section class="page-head" aria-labelledby="page-title">
@@ -28,7 +28,7 @@ import { BRAND, FONDATEUR, NB, ORG_ID, SITE_URL } from '../lib/site';
       <div class="figures">
         <div class="figure"><b>[00]</b><span>projets livrés</span></div>
         <div class="figure"><b>48{NB}h</b><span>pour recevoir un devis</span></div>
-        <div class="figure"><b>10</b><span>services sous un même toit</span></div>
+        <div class="figure"><b>{SV.length}</b><span>services sous un même toit</span></div>
         <div class="figure"><b>[0,0]</b><span>note moyenne Google</span></div>
       </div>
       <p class="note" style="margin-top:16px">Les chiffres entre crochets sont à remplacer par vos données réelles.</p>
@@ -38,7 +38,7 @@ import { BRAND, FONDATEUR, NB, ORG_ID, SITE_URL } from '../lib/site';
     <div class="wrap">
       <div class="section-head"><h2 class="d-xl" id="values-title">Nos engagements</h2></div>
       <div class="values">
-        <div class="value"><h3>Tout au même endroit</h3><p>Site, logo, devanture et publicité sont pensés ensemble. Vous n'avez pas à coordonner trois prestataires.</p></div>
+        <div class="value"><h3>Tout au même endroit</h3><p>Site, logo et publicité sont pensés ensemble. Vous n'avez pas à coordonner plusieurs prestataires.</p></div>
         <div class="value"><h3>Vous validez avant qu'on construise</h3><p>Chaque page passe par une maquette. Le développement commence après votre accord écrit.</p></div>
         <div class="value"><h3>On reste après la mise en ligne</h3><p>Un mois de corrections offert, puis une maintenance sans engagement de durée si vous le souhaitez.</p></div>
       </div>

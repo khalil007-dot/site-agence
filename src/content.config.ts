@@ -13,7 +13,7 @@ const projets = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projets' }),
   schema: z.object({
     client: z.string(),
-    categorie: z.enum(['site', 'ecom', 'logo', 'visibilite', 'video']),
+    categorie: z.enum(['site', 'ecom', 'logo', 'visibilite']),
     couleur: z.preprocess(vide, couleur.default('violet')),
     // Sans image, la carte affiche une maquette dessinée de ce type
     maquette: z.preprocess(vide, z.enum(['site', 'shop', 'logos', 'serp']).default('site')),

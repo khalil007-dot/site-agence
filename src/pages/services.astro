@@ -20,11 +20,11 @@ const SERVICES_LD = {
   }),
 };
 ---
-<Base chemin="services" title={`Création de sites, SEO et logos à Bruxelles | ${BRAND}`} desc="Création de site vitrine, boutique en ligne, application, logo, devanture, SEO, Google Ads et réseaux sociaux à Bruxelles : contenu, délais et prix." current="services" schema={[SERVICES_LD]} crumbs={[['Services', 'services']]}>
+<Base chemin="services" title={`Création de sites, SEO et logos à Bruxelles | ${BRAND}`} desc="Création de site vitrine, boutique en ligne, application, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : contenu, délais et prix." current="services" schema={[SERVICES_LD]} crumbs={[['Services', 'services']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Nos services web à Bruxelles</h1>
-      <p class="lead">Dix services pour créer votre site, soigner votre image et faire venir des clients. Chaque offre indique ce qui est inclus, le délai et le prix de départ.</p>
+      <p class="lead">{SV.length} services pour créer votre site, soigner votre image et faire venir des clients. Chaque offre indique ce qui est inclus, le délai et le prix de départ.</p>
     </div>
   </section>
   <nav class="jump" aria-label="Familles de services"><div class="wrap">{FAMS.map(f => <a href={`#${f.id}`} style={`--c:var(--${f.couleur})`}>{f.nom_court}</a>)}</div></nav>

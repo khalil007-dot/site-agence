@@ -25,7 +25,7 @@ export const ORG = {
   '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': ORG_ID,
   name: BRAND, url: SITE_URL + '/', email: EMAIL, telephone: TEL_INTL, image: SITE_URL + '/og-image.png',
   logo: SITE_URL + '/logo.png', priceRange: '€€',
-  description: 'Agence web à Bruxelles : création de sites internet, boutiques en ligne, logos, devantures, référencement, Google Ads et réseaux sociaux pour les indépendants et PME.',
+  description: 'Agence web à Bruxelles : création de sites internet, boutiques en ligne, logos, référencement, Google Ads et réseaux sociaux pour les indépendants et PME.',
   address: { '@type': 'PostalAddress', addressLocality: 'Bruxelles', addressRegion: 'Région de Bruxelles-Capitale', addressCountry: 'BE' },
   areaServed: [{ '@type': 'City', name: 'Bruxelles' }, { '@type': 'Country', name: 'Belgique' }],
   openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
@@ -34,7 +34,7 @@ export const ORG = {
 };
 
 // Catégories de la page Réalisations (mêmes valeurs que dans content.config.ts et .pages.yml)
-export const CATS: [string, string][] = [['site', 'Site vitrine'], ['ecom', 'E-commerce'], ['logo', 'Identité visuelle'], ['visibilite', 'SEO et publicité'], ['video', 'Drone et vidéo']];
+export const CATS: [string, string][] = [['site', 'Site vitrine'], ['ecom', 'E-commerce'], ['logo', 'Identité visuelle'], ['visibilite', 'SEO et publicité']];
 export const CAT_LABEL = Object.fromEntries(CATS);
 
 // Pages listées dans sitemap.xml, avec leur priorité (les articles sont ajoutés automatiquement)

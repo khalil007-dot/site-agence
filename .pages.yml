@@ -37,7 +37,6 @@ content:
             - { name: ecom, label: E-commerce }
             - { name: logo, label: Identité visuelle }
             - { name: visibilite, label: SEO et publicité }
-            - { name: video, label: Drone et vidéo }
       - name: image
         label: Capture ou photo du projet
         description: Format paysage conseillé (16/10). Elle est réduite et compressée automatiquement.

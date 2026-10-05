@@ -10,7 +10,7 @@ const projets = (await getCollection('projets')).sort((a, b) => a.data.ordre - b
 // Filtres : seulement les catégories qui ont au moins un projet
 const cats = CATS.filter(([c]) => projets.some(p => p.data.categorie === c));
 ---
-<Base chemin="realisations" title={`Nos réalisations web en Belgique | ${BRAND}`} desc="Sites vitrine, boutiques en ligne, logos, devantures et campagnes réalisés pour des indépendants et PME à Bruxelles et en Belgique." current="realisations" crumbs={[['Réalisations', 'realisations']]}>
+<Base chemin="realisations" title={`Nos réalisations web en Belgique | ${BRAND}`} desc="Sites vitrine, boutiques en ligne, logos, menus et flyers réalisés pour des indépendants et PME à Bruxelles et en Belgique." current="realisations" crumbs={[['Réalisations', 'realisations']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Nos réalisations</h1>
