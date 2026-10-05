@@ -177,6 +177,19 @@ content:
         label: E-mail de contact
         type: string
         required: true
+      - name: telephone
+        label: Téléphone
+        description: "Ex. : 0467 66 26 29"
+        type: string
+        required: true
+      - name: ville
+        label: Ville
+        type: string
+        required: true
+      - name: fondateur
+        label: Prénom et nom du fondateur
+        type: string
+        required: true
       - name: date_maj
         label: Date de dernière mise à jour
         type: date

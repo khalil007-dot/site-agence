@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- Image de partage (réseaux sociaux, WhatsApp…). Régénérer avec : bash outils/og-image.sh -->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Mona Sans"; font-weight: 200 900; src: url("../public/fonts/mona-sans-latin.woff2") format("woff2"); }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #090909; color: #fff; font-family: "Mona Sans", sans-serif; position: relative; }
+  .blob { position: absolute; left: 540px; top: -150px; width: 760px; height: 760px; border-radius: 50%;
+    background: radial-gradient(circle at 42% 30%, #F7A8FF 0%, #D44DF0 30%, #6A4CF5 62%, rgba(106,76,245,0) 74%); filter: blur(8px); }
+  .wrap { position: absolute; inset: 70px 80px; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 16px; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
+  .brand svg { width: 52px; height: 52px; }
+  h1 { margin: 92px 0 0; font-size: 92px; line-height: 1.02; font-weight: 600; letter-spacing: -0.045em; max-width: 900px; }
+  p { margin: auto 0 0; font-size: 28px; color: rgba(255,255,255,.78); letter-spacing: -0.01em; }
+</style>
+</head>
+<body>
+  <div class="blob"></div>
+  <div class="wrap">
+    <div class="brand"><svg viewBox="0 0 28 28"><rect width="28" height="28" rx="8" fill="#fff"/><path d="M19 8.5H9.5v11H19M9.5 14h7" fill="none" stroke="#000" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21.5" cy="5.5" r="3" fill="#D44DF0"/></svg>Épure Studio</div>
+    <h1>Des sites et des marques qui font venir des clients.</h1>
+    <p>Agence web à Bruxelles · Sites, boutiques, logos, SEO</p>
+  </div>
+</body>
+</html>

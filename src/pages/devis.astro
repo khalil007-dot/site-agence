@@ -3,7 +3,7 @@
 import Base from '../layouts/Base.astro';
 import Radios from '../components/Radios.astro';
 import Stars from '../components/Stars.astro';
-import { BRAND, EMAIL, FAMS, NB, SV } from '../lib/site';
+import { BRAND, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
 ---
 <Base chemin="devis" title={`Devis gratuit site internet à Bruxelles | ${BRAND}`} desc="Demandez un devis gratuit pour votre site internet, boutique en ligne, logo ou référencement à Bruxelles et en Belgique, ou réservez un appel de 30 minutes." current="devis" sticky={false} crumbs={[['Devis', 'devis']]}>
   <section class="page-head" aria-labelledby="page-title" style="padding-bottom:32px">
@@ -105,8 +105,9 @@ import { BRAND, EMAIL, FAMS, NB, SV } from '../lib/site';
           <p class="muted small">[Prénom Nom], [métier, ville]</p>
         </div>
         <div class="side-card plain">
-          <h2>Vous préférez écrire ?</h2>
+          <h2>Vous préférez écrire ou appeler ?</h2>
           <a class="big link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <a class="big link" href={`tel:${TEL_INTL}`}>{TEL}</a>
           <p class="muted small">Lundi au vendredi, 9{NB}h à 18{NB}h</p>
         </div>
       </aside>

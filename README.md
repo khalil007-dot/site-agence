@@ -35,5 +35,6 @@ Les pages ont des adresses courtes : `/services`, `/realisations`, etc. Un nouve
 ## Dossiers
 
 - `public/` : fichiers copiés tels quels (CSS, JS, polices, logo).
+- `outils/og-image.html` : image de partage sur les réseaux. Après modification, lancer `bash outils/og-image.sh`.
 - `ressources/` : références de design, pas publiées.
 - `ancien/` : l'ancienne version (script Python), à supprimer une fois le nouveau site validé.
