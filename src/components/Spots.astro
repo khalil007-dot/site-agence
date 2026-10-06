@@ -1,0 +1,85 @@
+---
+// Accueil : les quatre familles de services, chacune avec ses services, son prix de départ et un visuel.
+// « Créer » et « Image de marque » montrent de vrais projets ; « Se faire connaître » et « Entretenir »
+// montrent une interface dessinée (résultat Google et réponse IA, tableau de suivi).
+import { Image } from 'astro:assets';
+import captureStreetSapp from '../assets/projets/streetsapp.jpg';
+import captureOmi from '../assets/projets/omi-restaurant.jpg';
+import menuOmi from '../assets/projets/omi-menu.jpg';
+import flyerOmi from '../assets/projets/omi-flyer.jpg';
+import logoObrunch from '../assets/projets/obrunch-house-logo.jpg';
+import { FAMS, NB, SV, e, prixDepart } from '../lib/site';
+
+const TXT: Record<string, [string, string]> = {
+  creer: ['Un site qui donne envie de vous appeler', 'Clair, rapide et pensé pour le téléphone, avec vos horaires, vos avis et un bouton pour vous joindre partout.'],
+  visibilite: ['Des clients qui vous trouvent avant vos concurrents', 'Sur Google, dans les réponses de ChatGPT et sur les réseaux, quand on cherche votre métier près de chez vous.'],
+  image: ['Une image qui inspire confiance au premier regard', 'Logo, menus, flyers et cartes de visite assortis, pour être reconnu en ligne comme dans la rue.'],
+  entretenir: ["Un site qui reste rapide et sûr, sans vous en occuper", 'Hébergement, sauvegardes, mises à jour et petites modifications chaque mois. Sans engagement.'],
+};
+// Prix d'entrée de la famille : le moins cher en une fois, sinon le moins cher par mois
+const depuis = (id: string) => {
+  const svs = SV.filter(s => s.famille === id);
+  const once = svs.filter(s => s.prix_unique).map(s => s.prix_unique);
+  return once.length ? e(Math.min(...once)) : e(Math.min(...svs.map(s => s.prix_mensuel))) + '/mois';
+};
+const UPTIME = Array.from({ length: 30 }, (_, i) => (i % 7 === 3 ? 82 : i % 5 === 1 ? 92 : 100));
+---
+<section class="section" aria-labelledby="spots-title">
+  <div class="wrap">
+    <div class="section-head split">
+      <h2 class="d-xl" id="spots-title">Tout pour trouver des clients en ligne</h2>
+      <p class="subhead">Prenez un seul service ou combinez-les. Tout est pensé ensemble, par la même personne, avec des prix affichés.</p>
+    </div>
+    <div class="spots">
+      {FAMS.map((f, i) => {
+        const svs = SV.filter(s => s.famille === f.id);
+        const [titre, texte] = TXT[f.id];
+        return <a class={`spot ${f.couleur}`} href={`/services#${f.id}`} style={`--i:${i}`}>
+          <div class="spot-top">
+            <span class="kicker">{f.nom_court} · dès {depuis(f.id)}</span>
+            <h3 class="spot-title">{titre}</h3>
+            <p>{texte}</p>
+            <ul class="spot-svcs">{svs.map(s => <li>{s.nom_court} <span>{prixDepart(s)}</span></li>)}</ul>
+            <span class="spot-more">Voir {svs.length > 1 ? `les ${svs.length} services` : 'le détail'}<span aria-hidden="true">→</span></span>
+          </div>
+
+          {f.id === 'creer' && <div class="sv sv-sites" aria-hidden="true">
+            <div class="win back"><div class="mock-bar"><i></i><i></i><i></i><span>omi-restaurant.com</span></div><Image src={captureOmi} alt="" widths={[480, 900]} sizes="(max-width: 820px) 80vw, 36vw" /></div>
+            <div class="win front"><div class="mock-bar"><i></i><i></i><i></i><span>streetsapp.be</span></div><Image src={captureStreetSapp} alt="" widths={[480, 900]} sizes="(max-width: 820px) 80vw, 36vw" /></div>
+          </div>}
+
+          {f.id === 'visibilite' && <div class="sv sv-google" aria-hidden="true">
+            <div class="gpanel">
+              <div class="gsearch"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>restaurant ixelles</div>
+              <div class="gmap"><i style="left:22%;top:38%"></i><i style="left:64%;top:58%"></i><i class="you" style="left:44%;top:30%"><b>1</b></i></div>
+              <div class="gres">
+                <div class="gname"><b>Votre entreprise</b><span class="gstars">★★★★★</span></div>
+                <span class="gmeta">Restaurant · Ouvert{NB}· Ferme à 22{NB}h</span>
+                <div class="gacts"><span>Appeler</span><span>Itinéraire</span><span>Site web</span></div>
+              </div>
+            </div>
+            <div class="aibubble"><span class="aitag">Réponse IA</span>Pour un restaurant à Ixelles, je vous recommande <b>Votre entreprise</b>, très bien noté pour…</div>
+          </div>}
+
+          {f.id === 'image' && <div class="sv sv-print" aria-hidden="true">
+            <div class="card c1"><Image src={logoObrunch} alt="" width={420} /></div>
+            <div class="card c3"><Image src={flyerOmi} alt="" width={420} /></div>
+            <div class="card c2"><Image src={menuOmi} alt="" width={480} /></div>
+          </div>}
+
+          {f.id === 'entretenir' && <div class="sv sv-care" aria-hidden="true">
+            <div class="dash">
+              <div class="dash-head"><span class="live"></span>votre-site.be<em>En ligne</em></div>
+              <div class="uptime">{UPTIME.map(h => <i style={`height:${h}%`}></i>)}</div>
+              <ul class="dash-rows"><li>Certificat de sécurité<b>Valide</b></li><li>Sauvegarde<b>Cette nuit</b></li><li>Mises à jour<b>À jour</b></li></ul>
+            </div>
+            <div class="chat">
+              <p class="them">Vous pouvez changer nos horaires d'été{NB}?</p>
+              <p class="us">C'est en ligne ✓</p>
+            </div>
+          </div>}
+        </a>;
+      })}
+    </div>
+  </div>
+</section>
