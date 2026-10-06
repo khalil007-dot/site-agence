@@ -1,4 +1,26 @@
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.documentElement.classList.add('js');
+
+// Apparition au défilement (.rv) et chiffres qui défilent ([data-count])
+const countUp = el => {
+  const fin = +el.dataset.count, t0 = performance.now(), dur = 1100;
+  const step = t => {
+    const k = Math.min(1, (t - t0) / dur);
+    el.textContent = Math.round(fin * (1 - Math.pow(1 - k, 3)));
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+};
+const rvs = document.querySelectorAll('.rv');
+if (rvs.length && 'IntersectionObserver' in window && !reduceMotion) {
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    en.target.classList.add('in');
+    en.target.querySelectorAll('[data-count]').forEach(countUp);
+    io.unobserve(en.target);
+  }), { rootMargin: '0px 0px -8% 0px' });
+  rvs.forEach(el => io.observe(el));
+} else rvs.forEach(el => el.classList.add('in'));
 const eur = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
 
 // Barre de navigation : bordure au défilement + menu mobile
@@ -130,6 +152,50 @@ if (calc) {
   }));
   $('calc-val').addEventListener('input', update);
   update();
+}
+
+// À propos : portrait qui s'incline en suivant la souris
+document.querySelectorAll('.tilt').forEach(el => {
+  if (reduceMotion || !matchMedia('(hover: hover)').matches) return;
+  el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    el.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+    el.style.setProperty('--gx', (x + .5) * 100 + '%'); el.style.setProperty('--gy', (y + .5) * 100 + '%');
+  });
+  el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+});
+
+// À propos : engagements qui se retournent
+document.querySelectorAll('.flip').forEach(b => b.addEventListener('click', () => {
+  b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true');
+}));
+
+// À propos : quiz « Le bon partenaire pour vous ? »
+const quiz = document.getElementById('quiz');
+if (quiz) {
+  const qs = [...quiz.querySelectorAll('.quiz-q')];
+  const $q = id => document.getElementById(id);
+  const RES = {
+    oui: ['On est faits pour travailler ensemble', "Vous cherchez exactement ce que je fais le mieux. Réservez 30 minutes : on regarde votre activité et ce qui vous ferait gagner des clients.", 'Réserver un appel', '/devis?mode=appel'],
+    peut: ['Ça peut coller, parlons-en', "Sur certains points, on n'a pas la même idée du projet. Un appel de 30 minutes suffit pour voir si je peux vous aider, sans engagement.", 'Poser mes questions sur WhatsApp', null],
+    non: ['Je ne suis probablement pas la bonne personne', "Et c'est très bien de le savoir maintenant. Si vous voulez quand même un avis sur votre projet, je vous réponds volontiers.", 'Me demander conseil', '/devis'],
+  };
+  const wa = document.querySelector('.wa-float')?.href || '/devis?mode=appel';
+  qs.forEach(q => q.querySelectorAll('.quiz-opt').forEach(b => b.addEventListener('click', () => {
+    q.querySelectorAll('.quiz-opt').forEach(x => x.setAttribute('aria-pressed', x === b));
+    q.classList.add('done');
+    const rep = qs.map(x => x.querySelector('[aria-pressed="true"]')).filter(Boolean);
+    const fit = rep.filter(x => x.dataset.fit === '1').length;
+    $q('quiz-bar').style.width = rep.length / qs.length * 100 + '%';
+    $q('quiz-count').textContent = `${rep.length} réponse${rep.length > 1 ? 's' : ''} sur ${qs.length}`;
+    if (rep.length < qs.length) return;
+    const [titre, txt, cta, href] = RES[fit === qs.length ? 'oui' : fit >= 2 ? 'peut' : 'non'];
+    quiz.dataset.res = fit === qs.length ? 'oui' : fit >= 2 ? 'peut' : 'non';
+    $q('quiz-title').textContent = titre; $q('quiz-txt').textContent = txt;
+    const c = $q('quiz-cta'); c.textContent = cta; c.href = href || wa; c.hidden = false;
+    if (!href) { c.target = '_blank'; c.rel = 'noopener'; } else c.removeAttribute('target');
+  })));
 }
 
 // Réalisations : filtre par catégorie, gardé dans l'adresse (?type=logo)

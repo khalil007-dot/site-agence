@@ -14,24 +14,22 @@ const photo = Object.values(photos)[0]?.default;
 const prenom = FONDATEUR.split(' ')[0];
 const initiales = FONDATEUR.split(' ').slice(0, 2).map(m => m[0]).join('');
 const delaiVitrine = SV.find(s => s.id === 'site-vitrine')?.infos.find(x => x.label === 'Délai moyen')?.valeur ?? '3 semaines';
-const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
+const CLIENTS = [['Street Sapp', logoStreetSapp, 'Boutique en ligne'], ['OMI Restaurant', logoOmi, 'Site, menu et flyer'], ["O'Brunch House", logoObrunch, 'Logo et flyer']] as const;
 
-const METHODE: [string, string][] = [
-  ['Vous parlez au développeur', "Pas de commercial ni de chef de projet entre nous. La personne qui vous répond est celle qui construit votre site."],
-  ['Vous validez avant que je construise', "Chaque page passe par une maquette. Si la première ne vous plaît pas, je repars de zéro, sans frais."],
-  ['Des prix clairs, un devis ferme', "Mes prix de départ sont affichés sur le site. Le devis détaille tout ce qui est inclus, sans surprise ensuite."],
-  ['Je reste après la mise en ligne', "Un mois de corrections offert, puis une maintenance sans engagement si vous le souhaitez. Et vous gardez mon numéro."],
+const prixMaintenance = SV.find(s => s.id === 'maintenance')?.prix_mensuel ?? 39;
+// [titre, promesse, concrètement (verso de la carte)]
+const METHODE: [string, string, string][] = [
+  ['Vous parlez au développeur', "Pas de commercial ni de chef de projet entre nous. La personne qui vous répond est celle qui construit votre site.", "Mon numéro direct et WhatsApp, une réponse sous 24 h ouvrées, et c'est moi qui fais les modifications."],
+  ['Vous validez avant que je construise', "Chaque page passe par une maquette. Si la première ne vous plaît pas, je repars de zéro, sans frais.", "Une maquette sur un lien privé, des allers-retours jusqu'à votre accord écrit, puis seulement le développement."],
+  ['Des prix clairs, un devis ferme', "Mes prix de départ sont affichés sur le site. Le devis détaille tout ce qui est inclus, sans surprise ensuite.", "40 % à la signature et 60 % à la mise en ligne, ou 12 mensualités sans frais. Aucun coût caché."],
+  ['Je reste après la mise en ligne', "Un mois de corrections offert, puis une maintenance sans engagement si vous le souhaitez. Et vous gardez mon numéro.", `30 jours de corrections inclus, puis maintenance à ${prixMaintenance} € par mois si vous le voulez, résiliable quand vous voulez.`],
 ];
-const OUI = [
-  'Vous êtes commerçant, indépendant ou dirigeant de PME, et vous voulez plus de clients, pas juste « un site ».',
-  'Vous préférez un seul interlocuteur qui connaît votre activité.',
-  'Vous voulez comprendre ce que vous payez et pourquoi.',
-  'Vous pouvez valider une maquette dans la semaine qui suit.',
-];
-const NON = [
-  'Vous cherchez le prix le plus bas possible, quel que soit le résultat.',
-  'Vous voulez un site en ligne en 48 heures, sans maquette.',
-  "Votre projet demande une équipe de dix personnes : je vous orienterai vers une agence adaptée.",
+// Quiz « Le bon partenaire pour vous ? » : [question, réponse qui me correspond, réponse qui ne me correspond pas]
+const QUIZ: [string, string, string][] = [
+  ['Ce que vous attendez de votre site', 'Plus de clients et de demandes', 'Être en ligne, au moins cher possible'],
+  ['Votre interlocuteur idéal', 'Une seule personne qui connaît mon activité', 'Une grande équipe avec plusieurs services'],
+  ['Votre calendrier', 'Je peux valider une maquette dans la semaine', 'Il me faut le site en 48 heures'],
+  ['Votre façon de choisir', 'Comprendre ce que je paie, pour un résultat durable', 'Le prix le plus bas, quel que soit le résultat'],
 ];
 const PERSON = {
   '@context': 'https://schema.org', '@type': 'Person', name: FONDATEUR, jobTitle: 'Développeur web, fondateur', worksFor: { '@id': ORG_ID },
@@ -52,13 +50,13 @@ const PERSON = {
 
   <section aria-label="Mon histoire">
     <div class="wrap about-grid">
-      <div class={photo ? 'portrait has-photo' : 'portrait'}>
+      <div class={photo ? 'portrait has-photo tilt' : 'portrait tilt'}>
         {photo
           ? <Image src={photo} alt={`Portrait de ${FONDATEUR}`} widths={[480, 900]} sizes="(max-width: 860px) 100vw, 50vw" />
           : <div class="portrait-mono" aria-hidden="true">{initiales}</div>}
         <div class="portrait-id"><b>{FONDATEUR}</b><span>Fondateur et développeur · Bruxelles</span></div>
       </div>
-      <div class="story">
+      <div class="story rv">
         <h2 class="d-md">Pourquoi <span translate="no">{BRAND}</span> existe</h2>
         <p>Beaucoup de commerçants se retrouvent coincés entre deux options : faire leur site eux-mêmes un dimanche soir, ou payer une agence où ils ne parlent jamais à la personne qui fait le travail. Entre les deux, il manquait quelqu'un de joignable, qui explique simplement et qui rend des comptes sur les résultats.</p>
         <p>Développeur de formation, j'ai conçu des projets très variés : des sites internet, mais aussi des logiciels sur mesure, jusqu'à des outils de gestion financière. Avoir construit des logiciels où chaque chiffre compte change la façon de faire un site : il est solide, sécurisé et pensé pour durer.</p>
@@ -72,8 +70,8 @@ const PERSON = {
     <div class="wrap">
       <div class="trust">
         <h2 class="small muted" id="clients-title">Ils m'ont confié leur site, leur logo ou leur visibilité</h2>
-        <ul class="logo-row reels">{CLIENTS.map(([nom, src]) => <li><Image src={src} alt={nom} height={120} /></li>)}</ul>
-        <a class="link" href="/realisations">Voir leurs projets</a>
+        <ul class="client-cards">{CLIENTS.map(([nom, src, quoi], i) => <li class="rv" style={`--d:${i}`}><a href="/realisations"><Image src={src} alt={nom} height={120} /><span class="cc-info"><b>{nom}</b>{quoi}</span></a></li>)}</ul>
+        <p class="muted small">Survolez ou touchez un logo pour voir le projet.</p>
       </div>
     </div>
   </section>
@@ -82,9 +80,14 @@ const PERSON = {
     <div class="wrap">
       <div class="section-head split">
         <h2 class="d-xl" id="methode-title">Comment je travaille</h2>
-        <p class="subhead">Quatre engagements, valables pour chaque projet, petit ou grand.</p>
+        <p class="subhead">Quatre engagements, valables pour chaque projet. Cliquez sur une carte pour voir ce que ça veut dire concrètement.</p>
       </div>
-      <div class="guarantees">{METHODE.map(([t, p]) => <div class="g"><h3>{t}</h3><p>{p}</p></div>)}</div>
+      <ul class="flips">{METHODE.map(([t, p, c], i) => <li class="rv" style={`--d:${i}`}>
+        <button class="flip" type="button" aria-expanded="false">
+          <span class="flip-front"><span class="flip-dot" aria-hidden="true"></span><b>{t}</b><span>{p}</span><em>Concrètement <span aria-hidden="true">↻</span></em></span>
+          <span class="flip-back"><small>Concrètement</small><span>{c}</span><em>Retour <span aria-hidden="true">↺</span></em></span>
+        </button>
+      </li>)}</ul>
     </div>
   </section>
 
@@ -92,10 +95,10 @@ const PERSON = {
     <div class="wrap">
       <div class="section-head"><h2 class="d-xl" id="figures-title">En pratique</h2></div>
       <div class="figures">
-        <div class="figure"><b>48{NB}h</b><span>pour recevoir un devis détaillé</span></div>
-        <div class="figure"><b>{delaiVitrine}</b><span>en moyenne pour un site vitrine</span></div>
-        <div class="figure"><b>24{NB}h</b><span>de délai de réponse, jours ouvrés</span></div>
-        <div class="figure"><b>100{NB}%</b><span>du site, du domaine et des fichiers à votre nom</span></div>
+        <div class="figure rv"><b><em class="cnt" data-count="48">48</em>{NB}h</b><span>pour recevoir un devis détaillé</span></div>
+        <div class="figure rv" style="--d:1"><b>{delaiVitrine}</b><span>en moyenne pour un site vitrine</span></div>
+        <div class="figure rv" style="--d:2"><b><em class="cnt" data-count="24">24</em>{NB}h</b><span>de délai de réponse, jours ouvrés</span></div>
+        <div class="figure rv" style="--d:3"><b><em class="cnt" data-count="100">100</em>{NB}%</b><span>du site, du domaine et des fichiers à votre nom</span></div>
       </div>
     </div>
   </section>
@@ -104,11 +107,23 @@ const PERSON = {
     <div class="wrap">
       <div class="section-head split">
         <h2 class="d-xl" id="fit-title">Le bon partenaire pour vous{NB}?</h2>
-        <p class="subhead">Mieux vaut le savoir avant de commencer. Voici, honnêtement, quand je suis la bonne personne, et quand je ne le suis pas.</p>
+        <p class="subhead">Mieux vaut le savoir avant de commencer. Quatre questions, et je vous dis honnêtement si je suis la bonne personne.</p>
       </div>
-      <div class="fit">
-        <div class="fit-col yes"><h3>Je suis la bonne personne si…</h3><ul>{OUI.map(x => <li>{x}</li>)}</ul></div>
-        <div class="fit-col no"><h3>Je ne suis pas la bonne personne si…</h3><ul>{NON.map(x => <li>{x}</li>)}</ul></div>
+      <div class="quiz" id="quiz">
+        <ol class="quiz-qs">{QUIZ.map(([q, oui, non], i) => <li class="quiz-q rv" style={`--d:${i}`}>
+          <p class="quiz-label"><span>{i + 1}</span>{q}</p>
+          <div class="quiz-opts" role="group" aria-label={q}>
+            <button class="quiz-opt" type="button" data-fit="1" aria-pressed="false">{oui}</button>
+            <button class="quiz-opt" type="button" data-fit="0" aria-pressed="false">{non}</button>
+          </div>
+        </li>)}</ol>
+        <div class="quiz-result" aria-live="polite">
+          <div class="quiz-progress"><i id="quiz-bar"></i></div>
+          <p class="quiz-count" id="quiz-count">0 réponse sur {QUIZ.length}</p>
+          <p class="quiz-title" id="quiz-title">Répondez aux {QUIZ.length} questions</p>
+          <p class="quiz-txt" id="quiz-txt">Quatre clics, et vous saurez si on est faits pour travailler ensemble.</p>
+          <a class="btn btn-primary" id="quiz-cta" href="/devis?mode=appel" hidden>Réserver un appel</a>
+        </div>
       </div>
     </div>
   </section>

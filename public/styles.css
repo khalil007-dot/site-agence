@@ -812,3 +812,70 @@ a.m-proof:hover { border-color: var(--hair); }
 .fit-col.yes li::before { background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 1.9 4-4.2' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
 .fit-col.no li::before { background: rgba(255,85,119,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4.5 4.5l5 5M9.5 4.5l-5 5' fill='none' stroke='%23FF5577' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center / 70% no-repeat; }
 @media (max-width: 760px) { .fit { grid-template-columns: 1fr; } }
+
+/* Apparition au défilement (activée par main.js) */
+.js .rv { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--d, 0) * 90ms); }
+.js .rv.in { opacity: 1; transform: none; }
+
+/* À propos : portrait inclinable, avec reflet qui suit la souris */
+.tilt { transition: transform .25s ease-out; transform-style: preserve-3d; will-change: transform; }
+.tilt::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgba(255,255,255,.22), transparent 55%); opacity: 0; transition: opacity .3s; }
+.tilt:hover::after { opacity: 1; }
+
+/* À propos : logos clients qui révèlent le projet */
+.client-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 220px)); gap: 12px; justify-content: center; }
+.client-cards a { position: relative; display: grid; place-items: center; height: 140px; border-radius: 20px; background: var(--s1); border: 1px solid var(--hair-soft); overflow: hidden; text-decoration: none; }
+.client-cards img { height: 64px; width: auto; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s; }
+.cc-info { position: absolute; inset: 0; display: grid; place-content: center; gap: 4px; text-align: center; padding: 12px; background: var(--g-violet); font-size: .875rem; color: rgba(255,255,255,.88); opacity: 0; transform: translateY(14px); transition: opacity .3s, transform .35s cubic-bezier(.2,.8,.2,1); }
+.cc-info b { color: #fff; font-size: 1.0625rem; letter-spacing: -0.02em; }
+.client-cards a:hover .cc-info, .client-cards a:focus-visible .cc-info { opacity: 1; transform: none; }
+.client-cards a:hover img, .client-cards a:focus-visible img { transform: scale(.85); opacity: 0; }
+@media (max-width: 560px) { .client-cards { grid-template-columns: repeat(3, 1fr); } .client-cards a { height: 110px; } .client-cards img { height: 44px; } .cc-info { font-size: .75rem; } .cc-info b { font-size: .875rem; } }
+
+/* À propos : engagements qui se retournent */
+.flips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+.flip { position: relative; width: 100%; min-height: 260px; padding: 0; border: 0; background: none; font: inherit; color: var(--ink); text-align: left; cursor: pointer; perspective: 1000px; display: grid; }
+.flip-front, .flip-back { grid-area: 1 / 1; border-radius: 20px; padding: 26px; display: grid; gap: 12px; align-content: start; backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.flip-front { background: var(--s1); border: 1px solid var(--hair-soft); }
+.flip-back { background: var(--g-violet); transform: rotateY(180deg); }
+.flip[aria-expanded="true"] .flip-front { transform: rotateY(-180deg); }
+.flip[aria-expanded="true"] .flip-back { transform: rotateY(0); }
+.flip:hover .flip-front { border-color: var(--hair); }
+.flip-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--g-violet); }
+.flips li:nth-child(2) .flip-dot, .flips li:nth-child(2) .flip-back { background: var(--g-orange); }
+.flips li:nth-child(3) .flip-dot, .flips li:nth-child(3) .flip-back { background: var(--g-magenta); }
+.flips li:nth-child(4) .flip-dot, .flips li:nth-child(4) .flip-back { background: var(--g-coral); }
+.flip-front b { font-size: 1.1875rem; letter-spacing: -0.025em; line-height: 1.2; }
+.flip-front > span:not(.flip-dot) { color: var(--muted); font-size: .9375rem; line-height: 1.45; }
+.flip-back small { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: rgba(255,255,255,.8); }
+.flip-back > span { font-size: 1.0625rem; font-weight: 500; line-height: 1.45; color: #fff; }
+.flip em { align-self: end; margin-top: auto; font-style: normal; font-size: .8125rem; font-weight: 600; color: var(--ink); }
+@media (max-width: 960px) { .flips { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .flips { grid-template-columns: 1fr; } .flip { min-height: 220px; } }
+@media (prefers-reduced-motion: reduce) { .flip-front, .flip-back { transition: none; } }
+
+/* À propos : quiz « Le bon partenaire pour vous ? » */
+.quiz { display: grid; grid-template-columns: 1fr 360px; gap: 15px; align-items: start; }
+.quiz-qs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.quiz-q { background: var(--s1); border: 1px solid var(--hair-soft); border-radius: 20px; padding: 20px 22px; display: grid; gap: 14px; transition: border-color .2s; }
+.quiz-q.done { border-color: var(--hair); }
+.quiz-label { margin: 0; display: flex; gap: 10px; align-items: center; font-weight: 600; font-size: 1.0625rem; letter-spacing: -0.015em; }
+.quiz-label span { flex: none; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--s2); font-size: .8125rem; transition: background-color .2s; }
+.quiz-q.done .quiz-label span { background: var(--green); color: #000; }
+.quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.quiz-opt { font: 500 .9375rem/1.35 var(--font); color: var(--ink); text-align: left; background: var(--s2); border: 1px solid transparent; border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: background-color .15s, border-color .15s, color .15s, transform .1s; }
+.quiz-opt:hover { border-color: #3A3A3A; }
+.quiz-opt:active { transform: scale(.98); }
+.quiz-opt[aria-pressed="true"] { background: var(--ink); color: var(--canvas); }
+.quiz-result { position: sticky; top: 90px; border-radius: 20px; padding: 26px; display: grid; gap: 12px; justify-items: start; background: var(--s1); border: 1px solid var(--hair-soft); transition: background .4s; }
+.quiz[data-res="oui"] .quiz-result { background: linear-gradient(160deg, #0F5132 0%, #1F7A44 55%, #22C55E 100%); border-color: transparent; }
+.quiz[data-res="peut"] .quiz-result { background: linear-gradient(160deg, #4B32C9 0%, #6A4CF5 45%, #A63FD0 100%); border-color: transparent; }
+.quiz[data-res="non"] .quiz-result { background: var(--s2); }
+.quiz-progress { width: 100%; height: 6px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden; }
+.quiz-progress i { display: block; width: 0; height: 100%; background: #fff; border-radius: 3px; transition: width .4s cubic-bezier(.2,.8,.2,1); }
+.quiz-count { margin: 0; font-size: .8125rem; color: rgba(255,255,255,.7); }
+.quiz-title { margin: 0; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.035em; line-height: 1.15; }
+.quiz-txt { margin: 0; color: rgba(255,255,255,.85); line-height: 1.45; }
+@media (max-width: 960px) { .quiz { grid-template-columns: 1fr; } .quiz-result { position: static; } }
+@media (max-width: 520px) { .quiz-opts { grid-template-columns: 1fr; } }
+.figure .cnt { font-style: normal; }
