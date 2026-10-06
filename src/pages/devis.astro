@@ -8,7 +8,7 @@ import { Image } from 'astro:assets';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
-import { BRAND, CLE_FORMULAIRES, EMAIL, FAMS, NB, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
+import { BRAND, CLE_FORMULAIRES, EMAIL, FAMS, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
 
 // Encart de confiance : le premier vrai avis s'il y en a un, sinon les logos des clients
 const [avis] = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.data.ordre);
@@ -16,7 +16,7 @@ const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], [
 // Piège à robots : case invisible pour les humains, cochée par les robots de spam
 const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">';
 ---
-<Base chemin="devis" title={`Devis gratuit site internet à Bruxelles | ${BRAND}`} desc="Demandez un devis gratuit pour votre site internet, boutique en ligne, logo ou référencement à Bruxelles et en Belgique, ou réservez un appel de 30 minutes." current="devis" sticky={false} crumbs={[['Devis', 'devis']]}>
+<Base chemin="devis" title={`Devis gratuit site internet à Bruxelles | ${BRAND}`} desc="Demandez un devis gratuit pour votre site internet, boutique en ligne, logo ou référencement à Bruxelles et en Belgique, ou réservez un appel de 30 minutes." current="devis" sticky={false} schema={[{ '@context': 'https://schema.org', '@type': 'ContactPage', url: SITE_URL + '/devis', about: { '@id': ORG_ID } }]} crumbs={[['Devis', 'devis']]}>
   <section class="page-head" aria-labelledby="page-title" style="padding-bottom:32px">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Parlons de votre projet</h1>

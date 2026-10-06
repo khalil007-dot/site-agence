@@ -246,11 +246,19 @@ content:
         description: Prénom et nom. Aussi responsable de la publication dans les mentions légales.
         type: string
         required: true
+      - name: profil_fondateur
+        label: Profil LinkedIn du fondateur
+        description: "Facultatif. Adresse complète. Montre à Google qui écrit les articles."
+        type: string
       - name: cofondateur
         label: Cofondateur (commercial, marketing et relation client)
         description: Prénom, ou prénom et nom.
         type: string
         required: true
+      - name: profil_cofondateur
+        label: Profil LinkedIn du cofondateur
+        description: Facultatif. Adresse complète.
+        type: string
       - name: reseaux
         label: Profils de l'agence
         description: "Adresses complètes de la fiche Google Business, LinkedIn, Instagram… Elles aident Google et les IA à reconnaître l'agence."

@@ -18,10 +18,13 @@ export const RESEAUX: string[] = reglages.reseaux.filter(Boolean);
 export const FONDATEUR = reglages.fondateur;
 export const COFONDATEUR = reglages.cofondateur;
 // Les deux fondateurs : photo dans src/assets/fondateurs/<id>.jpg
+// pid : identifiant unique de la personne pour Google, le même sur toutes les pages
 export const FONDATEURS = [
-  { id: 'wassim', nom: COFONDATEUR, role: 'Commercial, marketing et relation client', mission: "Votre contact du premier appel au suivi : comprendre votre activité, construire l'offre avec vous, suivre vos résultats." },
-  { id: 'khalil', nom: FONDATEUR, role: 'Stratégie et développement', mission: 'La stratégie, puis la construction de votre site, ou de votre boutique : solide, rapide, pensée pour vendre.' },
-];
+  { id: 'wassim', nom: COFONDATEUR, profil: reglages.profil_cofondateur, role: 'Commercial, marketing et relation client', mission: "Votre contact du premier appel au suivi : comprendre votre activité, construire l'offre avec vous, suivre vos résultats." },
+  { id: 'khalil', nom: FONDATEUR, profil: reglages.profil_fondateur, role: 'Stratégie et développement', mission: 'La stratégie, puis la construction de votre site, ou de votre boutique : solide, rapide, pensée pour vendre.' },
+].map(f => ({ ...f, pid: reglages.url_site + '/a-propos#' + f.id }));
+// Référence courte à une personne, pour l'auteur d'un article ou les fondateurs de l'agence
+export const personRef = (f: (typeof FONDATEURS)[number]) => ({ '@type': 'Person', '@id': f.pid, name: f.nom, url: reglages.url_site + '/a-propos' });
 // Clé Web3Forms : les formulaires envoient les demandes par e-mail (vide = envoi désactivé)
 export const CLE_FORMULAIRES = reglages.cle_formulaires;
 // WhatsApp sur le même numéro, avec un premier message déjà écrit (désactivable dans les réglages)
@@ -56,7 +59,7 @@ export const ORG = {
   areaServed: [{ '@type': 'City', name: 'Bruxelles' }, { '@type': 'Country', name: 'Belgique' }],
   openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
   knowsLanguage: ['fr'],
-  founder: FONDATEURS.map(f => ({ '@type': 'Person', name: f.nom, jobTitle: f.role })),
+  founder: FONDATEURS.map(personRef),
 };
 
 // Catégories de la page Réalisations (mêmes valeurs que dans content.config.ts et .pages.yml)

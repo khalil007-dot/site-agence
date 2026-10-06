@@ -16,7 +16,7 @@ const projets = (await getCollection('projets'))
     <div class="vitrine-piste">
       {[0, 1].map(copie => projets.map((p, i) => (
         <a class="vitrine-item" href="/realisations" aria-hidden={copie ? 'true' : undefined} tabindex={copie ? -1 : undefined}>
-          <Image src={images[p.data.image!].default} alt={copie ? '' : (p.data.image_alt || p.data.client)} widths={[480, 960]} sizes="(max-width: 760px) 75vw, 36vw" loading={copie ? 'lazy' : 'eager'} fetchpriority={!copie && i < 2 ? 'high' : undefined} />
+          <Image src={images[p.data.image!].default} alt={copie ? '' : (p.data.image_alt || p.data.client)} widths={[320, 560, 800, 1120]} sizes="(max-width: 777px) 280px, (max-width: 1555px) 36vw, 560px" loading={!copie && i < 2 ? 'eager' : 'lazy'} fetchpriority={!copie && i < 2 ? 'high' : undefined} />
           <span>{p.data.client}</span>
         </a>
       )))}

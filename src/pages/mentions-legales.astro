@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { ADRESSE, BRAND, CLE_ANALYTICS, CLE_FORMULAIRES, CODE_POSTAL, EMAIL, FONDATEUR, NUMERO_ENTREPRISE, TEL, TEL_INTL, VILLE, WHATSAPP } from '../lib/site';
+import { ADRESSE, BRAND, CLE_FORMULAIRES, CODE_POSTAL, EMAIL, FONDATEUR, NUMERO_ENTREPRISE, TEL, TEL_INTL, VILLE, WHATSAPP } from '../lib/site';
 
 // Adresse complète si elle est renseignée dans les réglages, sinon la ville seule
 const lieu = ADRESSE ? `${ADRESSE}, ${[CODE_POSTAL, VILLE].filter(Boolean).join(' ')}` : VILLE;
@@ -29,9 +29,8 @@ const envoi = CLE_FORMULAIRES
       <p>Pour nous parvenir, elles passent par {envoi}.{WHATSAPP && ' Si vous nous écrivez sur WhatsApp, vos messages sont aussi traités par WhatsApp (Meta).'} Ces services peuvent stocker les données hors de l'Union européenne, avec les garanties prévues par le RGPD.</p>
       <p>Vous pouvez demander l'accès, la correction ou la suppression de vos données en écrivant à <a class="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>. Vous pouvez aussi adresser une réclamation à l'Autorité de protection des données (APD).</p>
       <h2>Cookies</h2>
-      <p>{CLE_ANALYTICS
-        ? "Ce site n'utilise aucun cookie. Les visites sont comptées de façon anonyme avec Cloudflare Web Analytics, sans cookie ni suivi d'un site à l'autre."
-        : "Ce site n'utilise ni cookies publicitaires ni outil de mesure d'audience."}</p>
+      {/* Cloudflare ajoute lui-même Web Analytics quand il est activé sur le domaine, même sans jeton dans les réglages */}
+      <p>Ce site n'utilise aucun cookie. Les visites sont comptées de façon anonyme avec Cloudflare Web Analytics, sans cookie ni suivi d'un site à l'autre.</p>
     </div>
   </section>
 </Base>
