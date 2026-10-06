@@ -12,8 +12,8 @@ import { BRAND, FAMS, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '
 
 const BYID = Object.fromEntries(SV.map(s => [s.id, s]));
 const devisLabel = (court: string) => (['SEO', 'Google Ads'].includes(court) ? court : court.toLowerCase());
-// Paiement en 12 mensualités sans frais pour les services payés en une fois
-const mensualite = (p: number) => e(Math.round(p / 12));
+// Paiement en 3 mensualités sans frais pour les services payés en une fois
+const mensualite = (p: number) => e(Math.round(p / 3));
 
 // Vraies réalisations à montrer à côté d'un service
 const PREUVES: Record<string, { img: ImageMetadata; client: string; quoi: string; lien?: string }> = {
@@ -45,7 +45,7 @@ const FORMULES: [string, string, number, string, number, string][] = [
 
 const FAQ: [string, string][] = [
   ['Les prix affichés sont-ils les vrais prix ?', "Ce sont des prix de départ, hors taxes. Le devis, gratuit et ferme, précise le prix exact selon votre projet (nombre de pages, de produits, fonctions en plus). Pas de coût caché ensuite."],
-  ['Puis-je payer en plusieurs fois ?', "Oui. En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 12 mensualités sans frais pour les services payés en une fois."],
+  ['Puis-je payer en plusieurs fois ?', "Oui. En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 3 mensualités sans frais pour les services payés en une fois."],
   ['Les services mensuels m’engagent-ils longtemps ?', "La maintenance est sans engagement. Le référencement demande 3 mois au départ, le temps que Google prenne en compte le travail. Ensuite, vous arrêtez avec un mois de préavis."],
   ['Le budget Google Ads est-il compris ?', "Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond."],
   ['À qui appartient le site ?', "À vous : nom de domaine, contenus, fichiers du logo. Si vous partez, vous gardez tout."],
@@ -68,7 +68,7 @@ const SERVICES_LD = {
 };
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base chemin="services" title={`Création de sites, SEO et logos à Bruxelles : services et prix | ${BRAND}`} desc="Site vitrine dès 890 €, boutique en ligne, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : ce qui est inclus, délais, prix affichés et paiement en 12 fois." current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
+<Base chemin="services" title={`Création de sites, SEO et logos à Bruxelles : services et prix | ${BRAND}`} desc="Site vitrine dès 890 €, boutique en ligne, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : ce qui est inclus, délais, prix affichés et paiement en 3 fois." current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Tout pour trouver des clients en ligne. Prix affichés.</h1>
@@ -77,7 +77,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <a class="btn btn-primary" href="#guide">Trouver le bon service</a>
         <a class="btn btn-secondary" href="/devis">Demander un devis gratuit</a>
       </div>
-      <ul class="badges" style="margin-top:24px" aria-label="Nos engagements"><li>Prix affichés, devis ferme</li><li>Maquette refaite sans frais si elle ne vous plaît pas</li><li>Paiement en 12 fois sans frais</li><li>Le site vous appartient</li></ul>
+      <ul class="badges" style="margin-top:24px" aria-label="Nos engagements"><li>Prix affichés, devis ferme</li><li>Maquette refaite sans frais si elle ne vous plaît pas</li><li>Paiement en 3 fois sans frais</li><li>Le site vous appartient</li></ul>
     </div>
   </section>
 
@@ -117,7 +117,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <div class="svc-price">
             <span class="svc-from">À partir de</span>
             <b>{prixDepart(s)}</b>
-            {s.prix_unique > 0 && <span class="svc-12">ou {mensualite(s.prix_unique)}/mois pendant 12 mois, sans frais</span>}
+            {s.prix_unique > 0 && <span class="svc-12">ou {mensualite(s.prix_unique)}/mois pendant 3 mois, sans frais</span>}
           </div>
           <dl class="svc-facts">{s.infos.map(x => <div><dt>{x.label}</dt><dd>{x.valeur}</dd></div>)}</dl>
           <div class="btn-row svc-ctas">
@@ -153,7 +153,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <p class="was">au lieu de <s>{e(separe)}{unite}</s>, soit <b class="save">{e(separe - prix)}{unite} d'économie</b></p>
         <a class={i === 1 ? 'btn btn-primary' : 'btn btn-secondary'} href={`/devis?service=${ids}`}>Choisir {nom}</a>
       </article>)}</div>
-      <p class="note" style="margin-top:16px">Prix hors taxes. Paiement en 12 mois sans frais possible pour les formules payées en une fois. <a class="link" href="/#formules">Voir le détail des formules</a></p>
+      <p class="note" style="margin-top:16px">Prix hors taxes. Paiement en 3 fois sans frais possible pour les formules payées en une fois. <a class="link" href="/#formules">Voir le détail des formules</a></p>
     </div>
   </section>
 

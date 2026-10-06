@@ -26,7 +26,7 @@ const FAQ = [
   ["Qu'est-ce que la visibilité dans les IA ?", 'De plus en plus de clients posent leurs questions à ChatGPT, Perplexity ou aux réponses IA de Google. On structure votre site et vos informations pour que ces outils vous citent quand on cherche votre métier dans votre ville.'],
   ["Je n'ai pas encore de logo. Par quoi commencer ?", 'Par le logo. Les couleurs et la typographie du site en découlent, ce qui évite de refaire le design ensuite. La formule Lancement regroupe les deux.'],
   ['Le budget publicitaire Google Ads est-il compris ?', 'Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond.'],
-  ['Comment se passe le paiement ?', "En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 12 mensualités sans frais. Les services mensuels s'arrêtent avec un mois de préavis."],
+  ['Comment se passe le paiement ?', "En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 3 mensualités sans frais. Les services mensuels s'arrêtent avec un mois de préavis."],
   ['Pourquoi ne pas faire mon site moi-même sur Wix ?', "C'est possible, mais comptez plusieurs soirées pour un résultat qui ressemble à des milliers d'autres sites, sans référencement local ni personne à appeler en cas de souci. On s'en occupe, et vous restez libre de modifier vos textes ensuite."],
   ['Et si le résultat ne me plaît pas ?', "Vous validez la maquette avant le moindre développement. Si la première proposition ne vous convient pas, on repart de zéro sans frais. Après la mise en ligne, un mois de corrections est offert."],
   ['Y a-t-il des frais cachés ?', "Non. Le prix du devis est ferme et détaille tout ce qui est inclus. Les seuls coûts réguliers possibles sont la maintenance (sans engagement) et, pour Google Ads, le budget publicitaire que vous fixez vous-même."],
@@ -83,7 +83,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       </div>
       <div class="proof-row">
         <ul class="badges" aria-label="Nos engagements">
-          <li>Devis gratuit sous 48{NB}h</li><li>Maquette refaite sans frais si elle ne vous plaît pas</li><li>Paiement en 12 fois sans frais</li><li>Le site vous appartient</li>
+          <li>Devis gratuit sous 48{NB}h</li><li>Maquette refaite sans frais si elle ne vous plaît pas</li><li>Paiement en 3 fois sans frais</li><li>Le site vous appartient</li>
         </ul>
       </div>
     </div>
@@ -207,7 +207,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <p class="subhead">Les combinaisons les plus demandées, moins chères que les services séparés.</p>
           <div class="billing" role="group" aria-label="Mode de paiement">
             <button type="button" class="bill" data-bill="once" aria-pressed="true">En une fois</button>
-            <button type="button" class="bill" data-bill="monthly" aria-pressed="false">En 12 mois</button>
+            <button type="button" class="bill" data-bill="monthly" aria-pressed="false">En 3 fois</button>
           </div>
         </div>
       </div>
@@ -215,7 +215,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <article class="plan">
           <h3>Lancement</h3>
           <p class="muted">Pour créer son entreprise avec une image pro dès le premier jour.</p>
-          <p class="price" data-once={e(1190)} data-monthly={e(99)} data-once-l="une fois" data-monthly-l="par mois, 12 mois"><span class="pv">{e(1190)}</span> <small class="pl">une fois</small></p>
+          <p class="price" data-once={e(1190)} data-monthly={e(Math.round(1190 / 3))} data-once-l="une fois" data-monthly-l="par mois, pendant 3 mois"><span class="pv">{e(1190)}</span> <small class="pl">une fois</small></p>
           <p class="was" data-once>au lieu de <s>{e(SEPARE.lancement)}</s> en services séparés</p>
           <ul><li>Logo et mini charte graphique</li><li>Site vitrine jusqu'à 5 pages</li><li>Fiche Google Business optimisée</li><li>Cartes de visite prêtes à imprimer</li></ul>
           <a class="btn btn-secondary" href="/devis?service=logo,site-vitrine">Choisir Lancement</a>
@@ -224,7 +224,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <span class="flag">Recommandé pour vendre en ligne</span>
           <h3>Commerce</h3>
           <p class="muted">Pour ouvrir une boutique en ligne et vendre dès le premier mois.</p>
-          <p class="price" data-once={e(3290)} data-monthly={e(275)} data-once-l="une fois" data-monthly-l="par mois, 12 mois"><span class="pv">{e(3290)}</span> <small class="pl">une fois</small></p>
+          <p class="price" data-once={e(3290)} data-monthly={e(Math.round(3290 / 3))} data-once-l="une fois" data-monthly-l="par mois, pendant 3 mois"><span class="pv">{e(3290)}</span> <small class="pl">une fois</small></p>
           <p class="was" data-once>au lieu de <s>{e(SEPARE.commerce)}</s> en services séparés</p>
           <ul><li>Logo et identité visuelle</li><li>Boutique en ligne complète</li><li>Photos de vos 20 premiers produits</li><li>3 mois de référencement offerts</li></ul>
           <a class="btn btn-primary" href="/devis?service=logo,e-commerce,seo">Choisir Commerce</a>
@@ -238,7 +238,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <a class="btn btn-secondary" href="/devis?service=seo,google-ads,reseaux-sociaux">Choisir Visibilité</a>
         </article>
       </div>
-      <p class="note" style="margin-top:16px">Paiement en 12 mois sans frais, par prélèvement. Prix hors taxes.</p>
+      <p class="note" style="margin-top:16px">Paiement en 3 fois sans frais, par prélèvement. Prix hors taxes.</p>
     </div>
   </section>
 

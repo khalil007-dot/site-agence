@@ -16,14 +16,14 @@ export async function GET() {
 - Devis gratuit sous 48 h, ou appel de 30 minutes : ${SITE_URL}/devis
 - Contact : ${EMAIL} ou ${TEL}, du lundi au vendredi de 9 h à 18 h
 - Fondateurs : ${FONDATEURS.map(f => `${f.nom} (${f.role.toLowerCase()})`).join(' et ')}
-- Paiement : 40 % à la signature et 60 % à la mise en ligne, ou en 12 mensualités sans frais
+- Paiement : 40 % à la signature et 60 % à la mise en ligne, ou en 3 mensualités sans frais
 - Le client est propriétaire de son nom de domaine, de ses contenus et de son logo
 
 ## Services et prix de départ
 ${famTxt}
 ## Formules
-- Lancement : logo, site vitrine jusqu'à 5 pages, fiche Google Business, cartes de visite. 1 190 € HT ou 99 € par mois sur 12 mois.
-- Commerce : logo, boutique en ligne, photos de 20 produits, 3 mois de référencement. 3 290 € HT ou 275 € par mois sur 12 mois.
+- Lancement : logo, site vitrine jusqu'à 5 pages, fiche Google Business, cartes de visite. 1 190 € HT ou 397 € par mois sur 3 mois.
+- Commerce : logo, boutique en ligne, photos de 20 produits, 3 mois de référencement. 3 290 € HT ou 1 097 € par mois sur 3 mois.
 - Visibilité : référencement Google et IA, Google Ads, 2 réseaux sociaux. 790 € HT par mois.
 
 ## Pages

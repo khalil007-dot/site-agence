@@ -380,7 +380,7 @@ if (mtabs) tabs(mtabs);
 const gtabs = document.querySelector('.gtabs');
 if (gtabs) tabs(gtabs);
 
-// Formules : paiement en une fois ou en 12 mois
+// Formules : paiement en une fois ou en 3 fois
 const bills = document.querySelectorAll('.bill');
 bills.forEach(b => b.addEventListener('click', () => {
   bills.forEach(x => x.setAttribute('aria-pressed', x === b));
