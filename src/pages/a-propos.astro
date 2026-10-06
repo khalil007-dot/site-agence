@@ -1,47 +1,129 @@
 ---
+// Page À propos : la personne derrière Épure Studio, sa méthode, des preuves, pour qui elle est faite
 import Base from '../layouts/Base.astro';
-import Final from '../components/Final.astro';
-import { BRAND, FONDATEUR, NB, ORG_ID, SITE_URL, SV } from '../lib/site';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import logoStreetSapp from '../assets/clients/street-sapp.png';
+import logoOmi from '../assets/clients/omi.png';
+import logoObrunch from '../assets/clients/obrunch-house.png';
+import { BRAND, EMAIL, FONDATEUR, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
+
+// Photo du fondateur : déposer src/assets/fondateur.jpg (ou .png / .webp) et elle remplace les initiales
+const photos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/fondateur.{jpg,jpeg,png,webp}', { eager: true });
+const photo = Object.values(photos)[0]?.default;
+const prenom = FONDATEUR.split(' ')[0];
+const initiales = FONDATEUR.split(' ').slice(0, 2).map(m => m[0]).join('');
+const delaiVitrine = SV.find(s => s.id === 'site-vitrine')?.infos.find(x => x.label === 'Délai moyen')?.valeur ?? '3 semaines';
+const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
+
+const METHODE: [string, string][] = [
+  ['Vous parlez au développeur', "Pas de commercial ni de chef de projet entre nous. La personne qui vous répond est celle qui construit votre site."],
+  ['Vous validez avant que je construise', "Chaque page passe par une maquette. Si la première ne vous plaît pas, je repars de zéro, sans frais."],
+  ['Des prix clairs, un devis ferme', "Mes prix de départ sont affichés sur le site. Le devis détaille tout ce qui est inclus, sans surprise ensuite."],
+  ['Je reste après la mise en ligne', "Un mois de corrections offert, puis une maintenance sans engagement si vous le souhaitez. Et vous gardez mon numéro."],
+];
+const OUI = [
+  'Vous êtes commerçant, indépendant ou dirigeant de PME, et vous voulez plus de clients, pas juste « un site ».',
+  'Vous préférez un seul interlocuteur qui connaît votre activité.',
+  'Vous voulez comprendre ce que vous payez et pourquoi.',
+  'Vous pouvez valider une maquette dans la semaine qui suit.',
+];
+const NON = [
+  'Vous cherchez le prix le plus bas possible, quel que soit le résultat.',
+  'Vous voulez un site en ligne en 48 heures, sans maquette.',
+  "Votre projet demande une équipe de dix personnes : je vous orienterai vers une agence adaptée.",
+];
+const PERSON = {
+  '@context': 'https://schema.org', '@type': 'Person', name: FONDATEUR, jobTitle: 'Développeur web, fondateur', worksFor: { '@id': ORG_ID },
+  address: { '@type': 'PostalAddress', addressLocality: 'Bruxelles', addressCountry: 'BE' },
+};
 ---
-<Base chemin="a-propos" title={`Agence web bruxelloise : qui sommes-nous ? | ${BRAND}`} desc={`${BRAND}, agence web à Bruxelles fondée par ${FONDATEUR}, développeur : sites internet, logiciels, logo et visibilité pour les indépendants et PME de toute la Belgique.`} current="a-propos" schema={[{ '@context': 'https://schema.org', '@type': 'AboutPage', url: SITE_URL + '/a-propos', about: { '@id': ORG_ID } }]} crumbs={[['À propos', 'a-propos']]}>
+<Base chemin="a-propos" title={`${FONDATEUR}, développeur web à Bruxelles | ${BRAND}`} desc={`${FONDATEUR}, fondateur d'${BRAND} : développeur web à Bruxelles qui crée des sites, logos et campagnes qui font venir des clients aux commerçants et indépendants de toute la Belgique.`} current="a-propos" schema={[{ '@context': 'https://schema.org', '@type': 'AboutPage', url: SITE_URL + '/a-propos', about: { '@id': ORG_ID } }, PERSON]} crumbs={[['À propos', 'a-propos']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
-      <h1 class="poster" id="page-title">Un développeur bruxellois qui s'occupe de tout, de A à Z.</h1>
-      <p class="lead"><span translate="no">{BRAND}</span> aide les commerçants et les indépendants à exister en ligne, sans jargon et sans multiplier les prestataires.</p>
+      <h1 class="poster" id="page-title">Un seul interlocuteur, du premier croquis aux premiers clients.</h1>
+      <p class="lead">Je m'appelle {prenom}. Je suis développeur à Bruxelles et je crée, pour les commerçants et les indépendants, des sites qui font venir des clients. Et je reste joignable une fois le site en ligne.</p>
+      <div class="btn-row" style="margin-top:28px">
+        <a class="btn btn-primary" href="/devis?mode=appel">Réserver un appel avec moi</a>
+        <a class="btn btn-secondary" href="/realisations">Voir mes réalisations</a>
+      </div>
     </div>
   </section>
-  <section aria-label="Notre histoire">
+
+  <section aria-label="Mon histoire">
     <div class="wrap about-grid">
-      <div class="portrait" aria-hidden="true"><p class="devise">Ne garder<br>que l'essentiel.</p></div>
+      <div class={photo ? 'portrait has-photo' : 'portrait'}>
+        {photo
+          ? <Image src={photo} alt={`Portrait de ${FONDATEUR}`} widths={[480, 900]} sizes="(max-width: 860px) 100vw, 50vw" />
+          : <div class="portrait-mono" aria-hidden="true">{initiales}</div>}
+        <div class="portrait-id"><b>{FONDATEUR}</b><span>Fondateur et développeur · Bruxelles</span></div>
+      </div>
       <div class="story">
         <h2 class="d-md">Pourquoi <span translate="no">{BRAND}</span> existe</h2>
-        <p>Je m'appelle {FONDATEUR}. Développeur de formation, je conçois depuis plusieurs années des projets très variés : des sites internet, mais aussi des logiciels sur mesure, jusqu'à des outils de gestion financière.</p>
-        <p>Une « épure », c'est le dessin qui ne garde que l'essentiel. C'est ma façon de travailler : des sites clairs, rapides et faciles à utiliser, sans rien de superflu. Et comme pour un dessin, vous validez la maquette avant que j'écrive la moindre ligne de code.</p>
-        <p>Avoir construit des logiciels où chaque chiffre compte change la façon de faire un site : il est solide, sécurisé et pensé pour durer. Et vous parlez directement à la personne qui le construit.</p>
-        <a class="btn btn-primary" href="/devis" style="justify-self:start">Travailler ensemble</a>
+        <p>Beaucoup de commerçants se retrouvent coincés entre deux options : faire leur site eux-mêmes un dimanche soir, ou payer une agence où ils ne parlent jamais à la personne qui fait le travail. Entre les deux, il manquait quelqu'un de joignable, qui explique simplement et qui rend des comptes sur les résultats.</p>
+        <p>Développeur de formation, j'ai conçu des projets très variés : des sites internet, mais aussi des logiciels sur mesure, jusqu'à des outils de gestion financière. Avoir construit des logiciels où chaque chiffre compte change la façon de faire un site : il est solide, sécurisé et pensé pour durer.</p>
+        <p>Une « épure », c'est le dessin qui ne garde que l'essentiel. C'est ma façon de travailler : un site clair, rapide sur téléphone, avec ce qui pousse vos visiteurs à vous appeler, et rien de superflu.</p>
+        <blockquote class="story-quote"><p>« Mon travail est réussi quand votre téléphone sonne plus souvent, pas quand le site est joli. »</p></blockquote>
       </div>
     </div>
   </section>
+
+  <section class="section" aria-labelledby="clients-title">
+    <div class="wrap">
+      <div class="trust">
+        <h2 class="small muted" id="clients-title">Ils m'ont confié leur site, leur logo ou leur visibilité</h2>
+        <ul class="logo-row reels">{CLIENTS.map(([nom, src]) => <li><Image src={src} alt={nom} height={120} /></li>)}</ul>
+        <a class="link" href="/realisations">Voir leurs projets</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="methode-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="methode-title">Comment je travaille</h2>
+        <p class="subhead">Quatre engagements, valables pour chaque projet, petit ou grand.</p>
+      </div>
+      <div class="guarantees">{METHODE.map(([t, p]) => <div class="g"><h3>{t}</h3><p>{p}</p></div>)}</div>
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="figures-title">
     <div class="wrap">
-      <div class="section-head"><h2 class="d-xl" id="figures-title">En quelques chiffres</h2></div>
+      <div class="section-head"><h2 class="d-xl" id="figures-title">En pratique</h2></div>
       <div class="figures">
-        <div class="figure"><b>48{NB}h</b><span>pour recevoir un devis</span></div>
-        <div class="figure"><b>{SV.length}</b><span>services sous un même toit</span></div>
-        <div class="figure"><b>1</b><span>seul interlocuteur, du devis à la mise en ligne</span></div>
-        <div class="figure"><b>100{NB}%</b><span>du site vous appartient</span></div>
+        <div class="figure"><b>48{NB}h</b><span>pour recevoir un devis détaillé</span></div>
+        <div class="figure"><b>{delaiVitrine}</b><span>en moyenne pour un site vitrine</span></div>
+        <div class="figure"><b>24{NB}h</b><span>de délai de réponse, jours ouvrés</span></div>
+        <div class="figure"><b>100{NB}%</b><span>du site, du domaine et des fichiers à votre nom</span></div>
       </div>
     </div>
   </section>
-  <section class="section" aria-labelledby="values-title">
+
+  <section class="section" aria-labelledby="fit-title">
     <div class="wrap">
-      <div class="section-head"><h2 class="d-xl" id="values-title">Nos engagements</h2></div>
-      <div class="values">
-        <div class="value"><h3>Tout au même endroit</h3><p>Site, logo et publicité sont pensés ensemble. Vous n'avez pas à coordonner plusieurs prestataires.</p></div>
-        <div class="value"><h3>Vous validez avant qu'on construise</h3><p>Chaque page passe par une maquette. Le développement commence après votre accord écrit.</p></div>
-        <div class="value"><h3>On reste après la mise en ligne</h3><p>Un mois de corrections offert, puis une maintenance sans engagement de durée si vous le souhaitez.</p></div>
+      <div class="section-head split">
+        <h2 class="d-xl" id="fit-title">Le bon partenaire pour vous{NB}?</h2>
+        <p class="subhead">Mieux vaut le savoir avant de commencer. Voici, honnêtement, quand je suis la bonne personne, et quand je ne le suis pas.</p>
+      </div>
+      <div class="fit">
+        <div class="fit-col yes"><h3>Je suis la bonne personne si…</h3><ul>{OUI.map(x => <li>{x}</li>)}</ul></div>
+        <div class="fit-col no"><h3>Je ne suis pas la bonne personne si…</h3><ul>{NON.map(x => <li>{x}</li>)}</ul></div>
       </div>
     </div>
   </section>
-<Final title="Envie de travailler ensemble ?" text={'Racontez-nous votre projet. On vous répond sous 48' + NB + 'h avec un devis clair.'} />
+
+  <section class="section" aria-labelledby="final-title">
+    <div class="wrap">
+      <div class="final">
+        <h2 class="d-xl" id="final-title">Parlons de votre projet, 30 minutes{NB}?</h2>
+        <p class="lead" style="color:rgba(255,255,255,.85)">Gratuit et sans engagement. Vous repartez avec un avis clair sur ce qui vous ferait gagner des clients, que vous travailliez avec moi ou non.</p>
+        <div class="btn-row" style="justify-content:center">
+          <a class="btn btn-primary" href="/devis?mode=appel">Réserver un appel</a>
+          {WHATSAPP && <a class="btn btn-glass" href={WHATSAPP} target="_blank" rel="noopener">Écrire sur WhatsApp</a>}
+        </div>
+        <p class="small" style="color:rgba(255,255,255,.8)"><a href={`tel:${TEL_INTL}`} style="color:inherit">{TEL}</a> · <a href={`mailto:${EMAIL}`} style="color:inherit">{EMAIL}</a> · Lundi au vendredi, 9{NB}h à 18{NB}h</p>
+      </div>
+    </div>
+  </section>
 </Base>
