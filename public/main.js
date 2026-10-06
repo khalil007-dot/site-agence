@@ -73,6 +73,65 @@ if (diag) {
   }));
 }
 
+// Accueil : comparateur bien référencé / mal référencé, avec une conclusion qui oriente le prospect
+const calc = document.getElementById('seo-calc');
+if (calc) {
+  const $ = id => document.getElementById(id);
+  const TOP = +calc.dataset.top, TAUX = +calc.dataset.taux / 100, PRIX = +calc.dataset.prix;
+  const nb = (n, d = 0) => n.toLocaleString('fr-BE', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const pct = n => nb(n, n < 1 ? 2 : 1) + ' %';
+  const cli = n => nb(n, n < 10 ? 1 : 0);
+  const pick = q => calc.querySelector(`[data-q="${q}"][aria-pressed="true"]`);
+  const update = () => {
+    const rech = +pick('rech').dataset.v;
+    const posBtn = pick('pos'), ctr = +posBtn.dataset.v;
+    const val = Math.max(0, +$('calc-val').value || 0);
+    const visYou = rech * ctr / 100, visTop = rech * TOP / 100;
+    const cliYou = visYou * TAUX, cliTop = visTop * TAUX;
+    const gapM = Math.max(0, (cliTop - cliYou) * val);
+    $('c-pos').textContent = posBtn.dataset.l === 'Je ne sais pas' ? 'Position inconnue' : posBtn.dataset.l;
+    $('c-ctr-you').textContent = pct(ctr); $('c-ctr-top').textContent = pct(TOP);
+    $('c-vis-you').textContent = nb(Math.round(visYou)); $('c-vis-top').textContent = nb(Math.round(visTop));
+    $('c-cli-you').textContent = cli(cliYou); $('c-cli-top').textContent = cli(cliTop);
+    $('c-bar-you').style.width = Math.max(1.5, ctr / 27.6 * 100) + '%';
+    $('c-bar-top').style.width = TOP / 27.6 * 100 + '%';
+    $('c-gap-m').textContent = eur.format(Math.round(gapM)) + ' par mois';
+    $('c-gap-y').textContent = gapM ? `soit environ ${eur.format(Math.round(gapM * 12 / 100) * 100)} par an` : 'Vous captez déjà votre part des clics.';
+    // Nombre de clients en plus par mois pour rembourser le référencement
+    const k = val ? Math.ceil(PRIX / val) : 0;
+    const rent = k ? ` Notre référencement (${eur.format(PRIX)}/mois) est rentabilisé dès ${k} client${k > 1 ? 's' : ''} de plus par mois.` : '';
+    const inconnu = posBtn.dataset.l === 'Je ne sais pas' ? " Quand on ne sait pas où l'on apparaît, c'est souvent qu'on n'est pas en première page." : '';
+    let level, tag, txt, cta, ctaHref, cta2, cta2Href;
+    if (ctr >= TOP) {
+      level = 'ok'; tag = 'Vous êtes déjà bien placé';
+      txt = "Votre marge de progrès est surtout après le clic : un site qui donne envie d'appeler, des avis visibles, un bouton WhatsApp. C'est là qu'on vous ferait gagner des clients.";
+      cta = 'Améliorer mon site'; ctaHref = '/devis?service=site-vitrine'; cta2 = 'Audit gratuit'; cta2Href = '#audit';
+    } else if (gapM >= PRIX * 3) {
+      level = 'haut'; tag = 'Priorité haute';
+      txt = `Vous laissez environ ${cli(cliTop - cliYou)} clients par mois à vos concurrents.${rent}${inconnu} Le mieux est d'en parler 30 minutes : on regarde vos mots-clés et qui vous passe devant.`;
+      cta = 'Réserver un appel de 30 minutes'; ctaHref = '/devis?mode=appel'; cta2 = 'Audit gratuit'; cta2Href = '#audit';
+    } else if (gapM >= PRIX) {
+      level = 'moyen'; tag = 'Potentiel réel';
+      txt = `Le gain couvre le coût du référencement, avec une marge.${rent}${inconnu} Commencez par l'audit gratuit pour le confirmer sur vos vrais mots-clés.`;
+      cta = 'Recevoir mon audit gratuit'; ctaHref = '#audit'; cta2 = 'Devis référencement'; cta2Href = '/devis?service=seo';
+    } else {
+      level = 'faible'; tag = 'Gain limité pour le moment';
+      txt = `Avec ce volume de recherches, un abonnement de référencement ne serait pas encore rentable.${inconnu} Une fiche Google soignée et un site clair suffisent souvent : c'est inclus dans notre site vitrine.`;
+      cta = 'Devis site vitrine'; ctaHref = '/devis?service=site-vitrine'; cta2 = 'Audit gratuit'; cta2Href = '#audit';
+    }
+    $('c-verdict').dataset.level = level;
+    $('c-tag').textContent = tag; $('c-txt').textContent = txt;
+    $('c-cta').textContent = cta; $('c-cta').href = ctaHref;
+    $('c-cta2').textContent = cta2; $('c-cta2').href = cta2Href;
+  };
+  calc.querySelectorAll('[data-q]').forEach(b => b.addEventListener('click', () => {
+    calc.querySelectorAll(`[data-q="${b.dataset.q}"]`).forEach(x => x.setAttribute('aria-pressed', x === b));
+    update();
+  }));
+  $('calc-val').addEventListener('input', update);
+  update();
+}
+
 // Réalisations : filtre par catégorie, gardé dans l'adresse (?type=logo)
 const filters = document.querySelectorAll('[data-filter]');
 if (filters.length) {

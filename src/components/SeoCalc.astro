@@ -1,0 +1,86 @@
+---
+// Accueil : comparateur « site bien référencé / site mal référencé ».
+// Taux de clic par position : étude Backlinko / Semrush sur 4 millions de résultats Google
+// (1re place 27,6 %, 2e 10,9 %, 3e 7,8 %, 4e à 10e de 5,3 % à 1,9 %, page 2 : 0,63 %).
+// Le calcul est fait dans public/main.js ; ici, seulement les choix et les zones de résultat.
+import { NB, SV, e } from '../lib/site';
+
+const prixSeo = SV.find(s => s.id === 'seo')?.prix_mensuel ?? 290;
+// Taux de clic du site « bien référencé » : moyenne des 3 premières places
+const CTR_TOP3 = (27.6 + 10.9 + 7.8) / 3;
+const RECHERCHES: [number, string][] = [[100, '100'], [300, '300'], [1000, '1 000'], [3000, '3 000']];
+// [libellé, taux de clic en %]
+const POSITIONS: [string, number][] = [
+  ['1re place', 27.6], ['2e ou 3e', 9.4], ['Bas de la 1re page', 3.1], ['Page 2 ou plus loin', 0.63], ['Je ne sais pas', 0.63],
+];
+const TAUX_CLIENT = 3; // % des visiteurs qui deviennent clients (hypothèse affichée)
+---
+<section class="section" id="comparateur" aria-labelledby="calc-title">
+  <div class="wrap">
+    <div class="section-head split">
+      <h2 class="d-xl" id="calc-title">Combien vaut la 1re page de Google{NB}?</h2>
+      <p class="subhead">Le 1er résultat reçoit 27,6{NB}% des clics. La 2e page, 0,63{NB}%. Trois réponses suffisent pour chiffrer ce que vous laissez à vos concurrents.</p>
+    </div>
+
+    <div class="calc" id="seo-calc" data-top={CTR_TOP3} data-taux={TAUX_CLIENT} data-prix={prixSeo}>
+      <div class="calc-in">
+        <fieldset class="calc-q">
+          <legend><span>1</span>Combien de personnes cherchent votre métier dans votre zone, par mois{NB}?</legend>
+          <div class="toggles">{RECHERCHES.map(([v, l], i) => <button class="toggle" type="button" data-q="rech" data-v={v} aria-pressed={i === 2 ? 'true' : 'false'}>{l}</button>)}</div>
+          <p class="note">Par exemple « plombier Uccle » ou « restaurant Ixelles ». Dans le doute, gardez 1{NB}000.</p>
+        </fieldset>
+        <fieldset class="calc-q">
+          <legend><span>2</span>Où apparaît votre site aujourd'hui{NB}?</legend>
+          <div class="toggles">{POSITIONS.map(([l, v], i) => <button class="toggle" type="button" data-q="pos" data-v={v} data-l={l} aria-pressed={i === 3 ? 'true' : 'false'}>{l}</button>)}</div>
+          <p class="note">Tapez votre métier et votre ville sur Google, en navigation privée.</p>
+        </fieldset>
+        <div class="calc-q">
+          <label for="calc-val" class="legend"><span>3</span>Combien vous rapporte un nouveau client, en moyenne{NB}?</label>
+          <div class="calc-val"><input id="calc-val" type="number" inputmode="numeric" min="10" max="100000" step="10" value="150"><span>€</span></div>
+          <p class="note">Ce qu'il dépense chez vous la première année.</p>
+        </div>
+      </div>
+
+      <div class="calc-out" aria-live="polite">
+        <div class="vs">
+          <div class="vs-col bad">
+            <h3>Votre site</h3>
+            <p class="vs-pos" id="c-pos">Page 2 ou plus loin</p>
+            <div class="meter"><i id="c-bar-you"></i></div>
+            <dl>
+              <div><dt>Part des clics</dt><dd id="c-ctr-you">—</dd></div>
+              <div><dt>Visiteurs par mois</dt><dd id="c-vis-you">—</dd></div>
+              <div><dt>Nouveaux clients par mois</dt><dd id="c-cli-you">—</dd></div>
+            </dl>
+          </div>
+          <div class="vs-col good">
+            <h3>Bien référencé</h3>
+            <p class="vs-pos">Dans le top 3</p>
+            <div class="meter"><i id="c-bar-top"></i></div>
+            <dl>
+              <div><dt>Part des clics</dt><dd id="c-ctr-top">—</dd></div>
+              <div><dt>Visiteurs par mois</dt><dd id="c-vis-top">—</dd></div>
+              <div><dt>Nouveaux clients par mois</dt><dd id="c-cli-top">—</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="gap">
+          <span>Ce que vous laissez à vos concurrents</span>
+          <b id="c-gap-m">—</b>
+          <small id="c-gap-y">—</small>
+        </div>
+
+        <div class="verdict" id="c-verdict" data-level="haut">
+          <p class="verdict-tag" id="c-tag">—</p>
+          <p class="verdict-txt" id="c-txt">—</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" id="c-cta" href="/devis?mode=appel">Réserver un appel de 30 minutes</a>
+            <a class="btn btn-glass" id="c-cta2" href="#audit">Audit gratuit</a>
+          </div>
+        </div>
+        <p class="note calc-src">Estimation indicative. Taux de clic : étude Backlinko / Semrush sur 4 millions de résultats Google. On suppose que {TAUX_CLIENT}{NB}% des visiteurs deviennent clients. Notre référencement coûte {e(prixSeo)}/mois.</p>
+      </div>
+    </div>
+  </div>
+</section>

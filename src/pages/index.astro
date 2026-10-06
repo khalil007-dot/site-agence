@@ -7,6 +7,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import Avis from '../components/Avis.astro';
 import Vitrine from '../components/Vitrine.astro';
 import Spots from '../components/Spots.astro';
+import SeoCalc from '../components/SeoCalc.astro';
 import { Image } from 'astro:assets';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
@@ -173,6 +174,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       </div>
     </div>
   </section>
+
+  <SeoCalc />
 
   <section class="section" id="audit" aria-labelledby="audit-title">
     <div class="wrap">
