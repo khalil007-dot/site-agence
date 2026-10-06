@@ -1,21 +1,21 @@
 ---
-// Les deux fondateurs côte à côte : photo, nom, rôle et mission (données dans src/lib/site.ts)
+// Les deux fondateurs : photo en bulle, nom, rôle et mission (données dans src/lib/site.ts)
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { FONDATEURS } from '../lib/site';
 
-interface Props { mission?: boolean; tilt?: boolean }
-const { mission = true, tilt = false } = Astro.props;
+interface Props { mission?: boolean }
+const { mission = true } = Astro.props;
 const photos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/fondateurs/*.{jpg,jpeg,png,webp}', { eager: true });
 const photo = (id: string) => Object.entries(photos).find(([p]) => p.includes(`/${id}.`))?.[1].default;
 ---
 <div class="duo">
   {FONDATEURS.map((f, i) => {
     const img = photo(f.id);
-    return <figure class={`duo-card rv${tilt ? ' tilt' : ''}`} style={`--d:${i}`}>
-      {img
-        ? <Image src={img} alt={`Portrait de ${f.nom}`} widths={[400, 800]} sizes="(max-width: 700px) 90vw, 40vw" />
-        : <div class="duo-mono" aria-hidden="true">{f.nom.split(' ').slice(0, 2).map(m => m[0]).join('')}</div>}
+    return <figure class="duo-card rv" style={`--d:${i}`}>
+      <span class="duo-bubble">{img
+        ? <Image src={img} alt={`Portrait de ${f.nom}`} widths={[96, 192]} sizes="96px" />
+        : <span aria-hidden="true">{f.nom.split(' ').slice(0, 2).map(m => m[0]).join('')}</span>}</span>
       <figcaption>
         <b>{f.nom}</b>
         <span class="duo-role">{f.role}</span>
