@@ -440,6 +440,21 @@ footer { padding: 72px 0 40px; margin-top: var(--section); border-top: 1px solid
 .article .body tr:last-child td { border-bottom: 0; }
 .article .body ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
 .callout { background: var(--g-violet); border-radius: 20px; padding: 26px; display: grid; gap: 14px; justify-items: start; color: var(--ink); }
+
+/* Pages de lecture en clair (articles) : on redéfinit les couleurs, le reste du style suit */
+.light {
+  --canvas: #FAFAF7; --s1: #F0EFEA; --s2: #E6E4DE; --hair: #DAD8D1; --hair-soft: #E8E6E0;
+  --ink: #111111; --muted: #5A5A5A; --blue: #0060C7;
+  color-scheme: light; background: var(--canvas); color: var(--ink); padding-bottom: var(--section);
+}
+main:has(> .light:last-child) + footer { margin-top: 0; }
+.light .article .body { color: #2B2B2B; }
+.light .btn-primary:hover { background: #333; }
+.light .btn-secondary:hover { background: var(--hair); }
+.light ::selection { background: rgba(0,96,199,.18); }
+.light .callout { --ink: #fff; color: #fff; }
+.light .callout .btn-primary { background: #fff; color: #111; }
+.light .callout .btn-primary:hover { background: #E6E6E6; }
 .table-wrap { overflow-x: auto; border-radius: 15px; }
 
 /* Devis */

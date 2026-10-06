@@ -25,6 +25,7 @@ const ARTICLE_LD = {
 };
 ---
 <Base chemin={chemin} title={a.titre_seo || `${a.titre} | ${BRAND}`} desc={desc} current="article" schema={[ARTICLE_LD]} crumbs={[['Conseils', 'conseils'], [a.fil_ariane || a.titre, chemin]]}>
+  <div class="light">
   <article class="page-head" aria-labelledby="page-title">
     <div class="wrap">
       <div class="article">
@@ -43,4 +44,5 @@ const ARTICLE_LD = {
       <div class="posts">{autres.map(p => <PostCard post={p} />)}</div>
     </div>
   </section>
+  </div>
 </Base>
