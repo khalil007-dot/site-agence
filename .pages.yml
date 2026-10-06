@@ -244,7 +244,7 @@ content:
         type: string
       - name: cle_formulaires
         label: Clé Web3Forms
-        description: Reçue par e-mail sur web3forms.com. Sans elle, les formulaires n'envoient rien.
+        description: Facultatif. Reçue par e-mail sur web3forms.com. Sans elle, les formulaires passent par FormSubmit (à activer une fois via l'e-mail reçu).
         type: string
       - name: date_maj
         label: Date de dernière mise à jour

@@ -225,7 +225,7 @@ if (filters.length) {
   apply([...filters].some(f => f.dataset.filter === start) ? start : 'tout');
 }
 
-// Envoi d'un formulaire par e-mail (service Web3Forms, clé dans src/data/reglages.json).
+// Envoi d'un formulaire par e-mail (Web3Forms si une clé est dans src/data/reglages.json, sinon FormSubmit).
 // Renvoie true si la demande est partie ; sinon affiche une erreur avec l'e-mail de contact.
 async function envoyer(formEl, champs, errId) {
   const err = document.getElementById(errId);
@@ -252,15 +252,21 @@ async function envoyer(formEl, champs, errId) {
     err.append('.');
     return false;
   };
-  if (!formEl.dataset.cle) return echec();
+  // Avec une clé Web3Forms (réglages) on passe par Web3Forms, sinon par FormSubmit,
+  // qui envoie directement à l'adresse e-mail du site (à activer une fois via l'e-mail reçu).
+  const cle = formEl.dataset.cle;
+  const url = cle ? 'https://api.web3forms.com/submit' : 'https://formsubmit.co/ajax/' + formEl.dataset.email;
+  const corps = cle
+    ? { access_key: cle, from_name: 'Formulaire du site', ...champs }
+    : { _subject: champs.subject, _template: 'table', _captcha: 'false', ...champs };
   try {
-    const r = await fetch('https://api.web3forms.com/submit', {
+    const r = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ access_key: formEl.dataset.cle, from_name: 'Formulaire du site', ...champs }),
+      body: JSON.stringify(corps),
     });
     const res = await r.json();
-    return res.success ? true : echec();
+    return res.success === true || res.success === 'true' ? true : echec();
   } catch {
     return echec();
   }
