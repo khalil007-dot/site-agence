@@ -26,6 +26,8 @@ export const WHATSAPP = reglages.whatsapp
 // Jeton Cloudflare Web Analytics : statistiques de visite sans cookies (vide = désactivé)
 export const CLE_ANALYTICS = reglages.cle_analytics;
 export const TODAY = reglages.date_maj;
+// Numéro de la mise en ligne, ajouté à styles.css et main.js pour que le cache ne serve jamais une ancienne version
+export const BUILD = Date.now().toString(36);
 export const FAMS = services.familles;
 export const SV = services.services;
 export type Service = (typeof SV)[number];
