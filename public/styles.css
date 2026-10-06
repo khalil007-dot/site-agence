@@ -677,16 +677,32 @@ button[disabled] { opacity: .6; cursor: progress; }
 
 /* ---------- Sections de conversion ---------- */
 
-/* Problèmes du visiteur (accueil) */
-.pains { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-.pains li { background: var(--s1); border-radius: 20px; padding: 26px; display: grid; gap: 12px; align-content: start; }
-.pains li::before { content: ""; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,85,119,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4.5 4.5l5 5M9.5 4.5l-5 5' fill='none' stroke='%23FF5577' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center / 60% no-repeat; }
-.pains h3 { font-size: 1.1875rem; letter-spacing: -0.025em; line-height: 1.2; }
-.pains p { color: var(--muted); font-size: .9375rem; }
-.pains-fix { margin-top: 15px; border-radius: 20px; background: linear-gradient(100deg, #4B32C9 0%, #6A4CF5 45%, #A63FD0 100%); padding: clamp(22px, 3vw, 32px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px; }
-.pains-fix p { font-size: 1.1875rem; font-weight: 500; letter-spacing: -0.015em; max-width: 56ch; }
-@media (max-width: 960px) { .pains { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .pains { grid-template-columns: 1fr; } }
+/* Problèmes du visiteur (accueil) : auto-diagnostic cliquable */
+.diag { display: grid; grid-template-columns: 1fr 340px; gap: 15px; align-items: start; }
+.pains { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.pain { position: relative; width: 100%; height: 100%; text-align: left; font: inherit; color: var(--ink); background: var(--s1); border: 1px solid transparent; border-radius: 20px; padding: 24px; display: grid; gap: 14px; align-content: start; cursor: pointer; transition: background-color .2s, border-color .2s, transform .15s; }
+.pain:hover { border-color: var(--hair); }
+.pain:active { transform: scale(.99); }
+.pain-n { font-size: .8125rem; font-weight: 600; color: var(--muted); }
+.pain-t { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; padding-right: 36px; }
+.pain-cost, .pain-fix { display: grid; gap: 4px; font-size: .9375rem; line-height: 1.45; color: var(--muted); }
+.pain-cost b, .pain-fix b { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.pain-cost b { color: var(--coral); }
+.pain-fix b { color: var(--green); }
+.pain-cost small { font-size: .75rem; opacity: .8; }
+.pain-fix { padding-top: 14px; border-top: 1px solid var(--hair); }
+.pain-check { position: absolute; top: 22px; right: 22px; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #4A4A4A; transition: background-color .2s, border-color .2s; }
+.pain[aria-pressed="true"] { background: #1D1416; border-color: rgba(255,85,119,.55); }
+.pain[aria-pressed="true"] .pain-check { border-color: var(--coral); background: var(--coral) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 1.9 4-4.2' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 70% no-repeat; }
+.diag-result { position: sticky; top: 90px; border-radius: 20px; background: linear-gradient(160deg, #4B32C9 0%, #6A4CF5 45%, #A63FD0 100%); padding: 28px; display: grid; gap: 16px; justify-items: start; }
+.diag-score { margin: 0; display: flex; align-items: baseline; gap: 4px; line-height: 1; }
+.diag-score b { font-size: 4rem; font-weight: 600; letter-spacing: -0.06em; }
+.diag-score span { font-size: 1.5rem; color: rgba(255,255,255,.7); }
+.diag-msg { margin: 0; font-size: 1.125rem; font-weight: 500; line-height: 1.35; letter-spacing: -0.015em; min-height: 3.1em; }
+.diag-note { margin: 0; font-size: .8125rem; color: rgba(255,255,255,.8); }
+.diag.has-score .diag-result .btn { box-shadow: 0 0 0 6px rgba(255,255,255,.18); }
+@media (max-width: 1020px) { .diag { grid-template-columns: 1fr; } .diag-result { position: static; } }
+@media (max-width: 640px) { .pains { grid-template-columns: 1fr; } .pain-t { font-size: 1.125rem; } }
 
 /* Tableau comparatif */
 .compare { width: 100%; min-width: 760px; border-collapse: separate; border-spacing: 0; background: var(--s1); border-radius: 20px; font-size: .9375rem; }

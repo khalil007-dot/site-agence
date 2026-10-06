@@ -51,6 +51,28 @@ if (est) {
   update();
 }
 
+// Accueil : auto-diagnostic de la section « problème »
+const diag = document.getElementById('diag');
+if (diag) {
+  const pains = [...diag.querySelectorAll('.pain')];
+  const n = document.getElementById('diag-n');
+  const msg = document.getElementById('diag-msg');
+  const MSG = [
+    'Cochez les situations qui vous ressemblent.',
+    "Un point à corriger. C'est souvent rapide, et ça se voit vite sur vos demandes.",
+    'Deux points à corriger : votre site vous fait probablement perdre des clients chaque semaine.',
+    'Trois points à corriger : vos concurrents récupèrent une partie de vos clients.',
+    'Les quatre : votre site travaille contre vous. Bonne nouvelle, tout se corrige en même temps.',
+  ];
+  pains.forEach(b => b.addEventListener('click', () => {
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true');
+    const k = pains.filter(x => x.getAttribute('aria-pressed') === 'true').length;
+    n.textContent = k;
+    msg.textContent = MSG[k];
+    diag.classList.toggle('has-score', k > 0);
+  }));
+}
+
 // Réalisations : filtre par catégorie, gardé dans l'adresse (?type=logo)
 const filters = document.querySelectorAll('[data-filter]');
 if (filters.length) {

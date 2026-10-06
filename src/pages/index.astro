@@ -50,12 +50,20 @@ const FAQ = [
   ['Y a-t-il des frais cachés ?', "Non. Le prix du devis est ferme et détaille tout ce qui est inclus. Les seuls coûts réguliers possibles sont la maintenance (sans engagement) et, pour Google Ads, le budget publicitaire que vous fixez vous-même."],
   ['Travaillez-vous en dehors de Bruxelles ?', "Oui, avec des clients de toute la Belgique. Les échanges se font par téléphone, WhatsApp ou visio, et vous suivez l'avancement sur un lien privé."],
 ];
-// Section « problème » : les situations dans lesquelles le visiteur doit se reconnaître
-const PAINS = [
-  ['On vous cherche sur Google, on trouve un concurrent', "Sans fiche Google soignée ni site bien référencé, les clients appellent celui qui apparaît en premier, même s'il travaille moins bien que vous."],
-  ["Votre site s'affiche mal sur téléphone", "La plupart des visiteurs arrivent depuis leur téléphone. Un texte trop petit ou un bouton introuvable, et ils repartent en quelques secondes."],
-  ['Les visiteurs regardent, puis repartent', "Pas de prix, pas d'avis, pas de bouton clair pour appeler : rien ne les pousse à vous contacter."],
-  ["Personne ne s'en occupe vraiment", "Le prestataire ne répond plus, le proche qui l'avait fait a d'autres projets, et vous n'avez pas le temps d'apprendre."],
+// Section « problème » : auto-diagnostic. [ce que vit le client, ce que ça lui coûte, source éventuelle, ce qu'on fait]
+const PAINS: [string, string, string, string][] = [
+  ['On me cherche sur Google… et on tombe sur mon concurrent',
+    "76 % des personnes qui cherchent un commerce proche sur leur téléphone s'y rendent dans la journée. Si ce n'est pas chez vous, c'est chez lui.", 'Étude Google',
+    'Fiche Google optimisée et référencement local sur votre ville et votre métier.'],
+  ['Mon site est lent ou mal affiché sur téléphone',
+    '53 % des visiteurs sur mobile quittent une page qui met plus de 3 secondes à charger. Ils ne reviennent pas.', 'Étude Google',
+    "Un site léger, conçu d'abord pour le téléphone et testé avant la mise en ligne."],
+  ["Des gens visitent mon site, mais personne ne m'appelle",
+    "Sans prix, sans avis et sans bouton visible, le visiteur hésite, puis va comparer ailleurs. Vous payez pour être vu, pas pour être choisi.", '',
+    'Boutons Appeler et WhatsApp visibles partout, avis et prix mis en avant.'],
+  ["Plus personne ne s'occupe de mon site",
+    'Horaires faux, photos datées, site qui tombe en panne : vos clients pensent que vous avez fermé, ou que vous ne faites pas attention aux détails.', '',
+    'Un interlocuteur joignable, des modifications chaque mois, sans engagement.'],
 ];
 // Comparatif avec les alternatives qu'un client envisage : [critère, soi-même, petit prix, grande agence, nous]
 const COMPARE: [string, string, string, string, string][] = [
@@ -111,13 +119,25 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   <section class="section" id="probleme" aria-labelledby="pb-title">
     <div class="wrap">
       <div class="section-head split">
-        <h2 class="d-xl" id="pb-title">Votre site devrait vous amener des clients. C'est le cas{NB}?</h2>
-        <p class="subhead">Si vous vous reconnaissez dans l'une de ces situations, vous perdez des demandes chaque semaine sans le savoir.</p>
+        <h2 class="d-xl" id="pb-title">Votre site vous fait-il perdre des clients{NB}?</h2>
+        <p class="subhead">Chaque semaine, des clients vous cherchent en ligne. Cochez ce qui vous ressemble : dix secondes suffisent pour savoir combien vous en perdez.</p>
       </div>
-      <ul class="pains">{PAINS.map(([t, p]) => <li><h3>{t}</h3><p>{p}</p></li>)}</ul>
-      <div class="pains-fix">
-        <p>On règle ces quatre points en même temps : un site clair, trouvé sur Google, pensé pour qu'on vous appelle, et suivi après la mise en ligne.</p>
-        <a class="btn btn-primary" href="#audit">Faire analyser mon site gratuitement</a>
+      <div class="diag" id="diag">
+        <ul class="pains">{PAINS.map(([t, cout, src, fix], i) => <li>
+          <button class="pain" type="button" aria-pressed="false">
+            <span class="pain-n" aria-hidden="true">0{i + 1}</span>
+            <span class="pain-t">« {t} »</span>
+            <span class="pain-cost"><b>Ce que ça vous coûte</b>{cout}{src && <small> ({src})</small>}</span>
+            <span class="pain-fix"><b>Ce qu'on fait</b>{fix}</span>
+            <span class="pain-check" aria-hidden="true"></span>
+          </button>
+        </li>)}</ul>
+        <div class="diag-result" aria-live="polite">
+          <p class="diag-score"><b id="diag-n">0</b><span>/{PAINS.length}</span></p>
+          <p class="diag-msg" id="diag-msg">Cochez les situations qui vous ressemblent.</p>
+          <a class="btn btn-primary" href="#audit">Recevoir mon audit gratuit</a>
+          <p class="diag-note">Gratuit, sans engagement. Trois actions prioritaires sous 72{NB}h.</p>
+        </div>
       </div>
     </div>
   </section>
