@@ -50,7 +50,7 @@ const METIERS: { k: string; court: string; nom: string; objectif: string; pb: st
   },
   {
     k: 'marques', court: 'E-commerce', nom: 'Marques et e-commerçants', objectif: 'Plus de ventes en ligne', cta: 'Devis pour ma boutique', preuve: STREET,
-    pb: 'Vous vendez déjà, ou vous voulez vendre partout en Belgique et en Europe. Il vous faut une boutique qui rassure, se paie en deux clics et des visiteurs qualifiés.',
+    pb: 'Vous vendez déjà, ou vous voulez vendre partout en Belgique et en Europe. Il vous faut une boutique qui rassure et se paie en deux clics, puis des visiteurs qui viennent pour acheter.',
     parcours: ['Découvre votre marque sur Instagram ou Google', 'Compare les prix, la livraison et les avis', "Achète sur téléphone, si c'est simple"],
     items: ['Boutique rapide, paiement en quelques clics sur téléphone', 'Fiches produit qui répondent aux objections', 'Campagnes Google Shopping et réseaux sociaux', 'Suivi des ventes et du coût par commande'],
     svcs: ['e-commerce', 'google-ads', 'reseaux-sociaux'],
@@ -69,7 +69,7 @@ const prix = (id: string) => (BYID[id].prix_unique ? e(BYID[id].prix_unique) : e
   <div class="wrap">
     <div class="section-head split">
       <h2 class="d-xl" id="metiers-title">Pensé pour votre métier</h2>
-      <p class="subhead">Pas un modèle générique. Choisissez votre activité : voici comment vos clients vous choisissent, et ce qu'on met en place pour qu'ils vous choisissent vous.</p>
+      <p class="subhead">Chaque métier a ses clients et ses habitudes. Choisissez votre activité : voici comment vos clients vous choisissent, et ce qu'on met en place pour qu'ils vous choisissent vous.</p>
     </div>
     <div class="metiers">
       <div class="mtabs" role="tablist" aria-label="Votre activité">{METIERS.map((m, i) => <button class="mtab" type="button" role="tab" id={`mt-${m.k}`} aria-controls={`mp-${m.k}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{m.court}</button>)}</div>

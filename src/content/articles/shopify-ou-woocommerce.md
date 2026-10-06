@@ -8,6 +8,7 @@ resume: "Frais mensuels, facilité de prise en main et limites de chaque solutio
 categorie: "E-commerce"
 couleur: orange
 date: 2026-10-06
+mise_a_jour: 2026-10-07
 lecture: 5
 ordre: 2
 ---
@@ -26,13 +27,13 @@ Pour une petite boutique qui démarre et veut se concentrer sur la vente, Shopif
 <tbody>
 <tr><td>Logiciel</td><td>Formule Basic : 32 € par mois, ou 24 € par mois en paiement annuel</td><td>Gratuit</td></tr>
 <tr><td>Hébergement</td><td>Inclus</td><td>5 à 30 € par mois selon la taille de la boutique</td></tr>
-<tr><td>Paiement par carte</td><td>2 % + 0,25 € par vente avec Shopify Payments (formule Basic)</td><td>Selon le prestataire choisi, par exemple Mollie ou Stripe</td></tr>
+<tr><td>Paiement par carte</td><td>2 % + 0,25 € par vente avec Shopify Payments (formule Basic) ; Bancontact : 0,39 € par paiement</td><td>Selon le prestataire choisi, par exemple Mollie ou Stripe</td></tr>
 <tr><td>Extensions</td><td>Applications souvent payantes au mois</td><td>Extensions souvent payantes à l'année</td></tr>
 <tr><td>Mises à jour et sécurité</td><td>Gérées par Shopify</td><td>À faire vous-même ou par un prestataire</td></tr>
 </tbody>
 </table></div>
 
-Attention à un détail : si vous utilisez un autre prestataire de paiement que Shopify Payments, Shopify ajoute une commission de 2 % sur chaque vente avec la formule Basic. Pour une boutique belge qui veut proposer Bancontact, c'est un point à vérifier avant de choisir.
+Tarifs Shopify relevés sur shopify.com le 7 octobre 2026. Attention à un détail : si vous utilisez un autre prestataire de paiement que Shopify Payments, Shopify ajoute une commission de 2 % sur chaque vente avec la formule Basic. Bonne nouvelle pour une boutique belge : Shopify Payments propose Bancontact, sans passer par un autre prestataire.
 
 ## Quand choisir Shopify
 

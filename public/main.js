@@ -225,6 +225,19 @@ if (filters.length) {
   apply([...filters].some(f => f.dataset.filter === start) ? start : 'tout');
 }
 
+// D'où vient le prospect, ajouté à chaque demande : page du site d'où il arrive (ou site extérieur)
+// et campagne (?utm_source=…). Sans cookie ni stockage : lu au moment de l'envoi.
+function provenance() {
+  const q = new URLSearchParams(location.search);
+  const campagne = ['utm_source', 'utm_medium', 'utm_campaign'].map(k => q.get(k)).filter(Boolean).join(' / ');
+  let venu = 'Accès direct';
+  try {
+    const r = document.referrer && new URL(document.referrer);
+    if (r) venu = r.origin === location.origin ? 'Page ' + (r.pathname === '/' ? "d'accueil" : r.pathname) : 'Site extérieur : ' + r.hostname;
+  } catch {}
+  return { 'Venu de': venu, 'Campagne': campagne || '-' };
+}
+
 // Envoi d'un formulaire par e-mail (Web3Forms si une clé est dans src/data/reglages.json, sinon FormSubmit).
 // Renvoie true si la demande est partie ; sinon affiche une erreur avec l'e-mail de contact.
 async function envoyer(formEl, champs, errId) {
@@ -356,6 +369,7 @@ if (form) {
       'Activité': form.msg.value.trim() || '-',
       'Site actuel': form.site.value.trim() || '-',
       'Audit gratuit demandé': q.get('audit') ? 'Oui' : 'Non',
+      ...provenance(),
     }, 'err-envoi-devis');
     btn.disabled = false;
     btn.textContent = texteBouton;
@@ -498,6 +512,7 @@ if (modes) {
       'Téléphone': call['c-tel'].value.trim(),
       'Créneau demandé': 'le ' + longFmt.format(chosenDay) + ' à ' + chosenHour,
       'Sujet': call['c-sujet'].value.trim() || '-',
+      ...provenance(),
     }, 'err-envoi-appel');
     btn.disabled = false;
     btn.textContent = texteBouton;

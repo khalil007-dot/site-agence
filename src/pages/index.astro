@@ -41,7 +41,7 @@ const PAINS: [string, string, string, string][] = [
     '53 % des visiteurs sur mobile quittent une page qui met plus de 3 secondes à charger. Ils ne reviennent pas.', 'Étude Google',
     "Un site léger, conçu d'abord pour le téléphone et testé avant la mise en ligne."],
   ["Des gens visitent mon site, mais personne ne m'appelle",
-    "Sans prix, sans avis et sans bouton visible, le visiteur hésite, puis va comparer ailleurs. Vous payez pour être vu, pas pour être choisi.", '',
+    "Sans prix, sans avis et sans bouton visible, le visiteur hésite, puis va comparer ailleurs. Vous attirez des visiteurs qui repartent sans vous contacter.", '',
     'Boutons Appeler et WhatsApp visibles partout, avis et prix mis en avant.'],
   ["Plus personne ne s'occupe de mon site",
     'Horaires faux, photos datées, site qui tombe en panne : vos clients pensent que vous avez fermé, ou que vous ne faites pas attention aux détails.', '',
@@ -54,7 +54,7 @@ const COMPARE: [string, string, string, string, string][] = [
   ['Référencement Google local', 'À faire vous-même', 'Rarement inclus', 'En option', 'Fiche Google et SEO local inclus'],
   ['Votre interlocuteur', 'Personne', 'Parfois difficile à joindre', 'Un chef de projet', 'Les fondateurs, en direct'],
   ['Après la mise en ligne', 'Seul face aux problèmes', 'Variable', 'Contrat de maintenance', 'Un mois de corrections offert, puis suivi sans engagement'],
-  ['Le site est à votre nom', 'Non, il reste sur la plateforme', 'Pas toujours', 'Oui', 'Oui, entièrement'],
+  ['Le site est à votre nom', 'En partie : impossible de le déplacer ailleurs', 'Pas toujours', 'Oui', 'Oui, entièrement'],
 ];
 // Prix des formules si on prenait les services séparément (le SEO de la formule Commerce : 3 mois)
 const P = Object.fromEntries(SV.map(s => [s.id, s.prix_unique || s.prix_mensuel]));
