@@ -12,7 +12,7 @@ import captureStreetSapp from '../assets/projets/streetsapp.jpg';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
-import { BRAND, FAMS, NB, ORG, ORG_ID, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
+import { BRAND, FAMS, FONDATEUR, NB, ORG, ORG_ID, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
 
 const spotTxt: Record<string, string> = {
   creer: 'Site vitrine, boutique en ligne ou application, conçus pour être faciles à utiliser sur téléphone.',
@@ -55,7 +55,30 @@ const FAQ = [
   ["Je n'ai pas encore de logo. Par quoi commencer ?", 'Par le logo. Les couleurs et la typographie du site en découlent, ce qui évite de refaire le design ensuite. La formule Lancement regroupe les deux.'],
   ['Le budget publicitaire Google Ads est-il compris ?', 'Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond.'],
   ['Comment se passe le paiement ?', "En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 12 mensualités sans frais. Les services mensuels s'arrêtent avec un mois de préavis."],
+  ['Pourquoi ne pas faire mon site moi-même sur Wix ?', "C'est possible, mais comptez plusieurs soirées pour un résultat qui ressemble à des milliers d'autres sites, sans référencement local ni personne à appeler en cas de souci. On s'en occupe, et vous restez libre de modifier vos textes ensuite."],
+  ['Et si le résultat ne me plaît pas ?', "Vous validez la maquette avant le moindre développement. Si la première proposition ne vous convient pas, on repart de zéro sans frais. Après la mise en ligne, un mois de corrections est offert."],
+  ['Y a-t-il des frais cachés ?', "Non. Le prix du devis est ferme et détaille tout ce qui est inclus. Les seuls coûts réguliers possibles sont la maintenance (sans engagement) et, pour Google Ads, le budget publicitaire que vous fixez vous-même."],
+  ['Travaillez-vous en dehors de Bruxelles ?', "Oui, avec des clients de toute la Belgique. Les échanges se font par téléphone, WhatsApp ou visio, et vous suivez l'avancement sur un lien privé."],
 ];
+// Section « problème » : les situations dans lesquelles le visiteur doit se reconnaître
+const PAINS = [
+  ['On vous cherche sur Google, on trouve un concurrent', "Sans fiche Google soignée ni site bien référencé, les clients appellent celui qui apparaît en premier, même s'il travaille moins bien que vous."],
+  ["Votre site s'affiche mal sur téléphone", "La plupart des visiteurs arrivent depuis leur téléphone. Un texte trop petit ou un bouton introuvable, et ils repartent en quelques secondes."],
+  ['Les visiteurs regardent, puis repartent', "Pas de prix, pas d'avis, pas de bouton clair pour appeler : rien ne les pousse à vous contacter."],
+  ["Personne ne s'en occupe vraiment", "Le prestataire ne répond plus, le proche qui l'avait fait a d'autres projets, et vous n'avez pas le temps d'apprendre."],
+];
+// Comparatif avec les alternatives qu'un client envisage : [critère, soi-même, petit prix, grande agence, nous]
+const COMPARE: [string, string, string, string, string][] = [
+  ['Prix', 'Abonnement mensuel, plus vos soirées', 'Bas, mais souvent revu en cours de route', `Souvent plus de ${e(5000)}`, `Site vitrine dès ${e(prixVitrine ?? 890)}, prix affichés`],
+  ['Design', 'Modèle partagé par des milliers de sites', 'Thème acheté puis adapté', 'Sur mesure', 'Sur mesure, maquette validée avant le code'],
+  ['Référencement Google local', 'À faire vous-même', 'Rarement inclus', 'En option', 'Fiche Google et SEO local inclus'],
+  ['Votre interlocuteur', 'Personne', 'Parfois difficile à joindre', 'Un chef de projet', 'Le développeur qui construit votre site'],
+  ['Après la mise en ligne', 'Seul face aux problèmes', 'Variable', 'Contrat de maintenance', 'Un mois de corrections offert, puis suivi sans engagement'],
+  ['Le site est à votre nom', 'Non, il reste sur la plateforme', 'Pas toujours', 'Oui', 'Oui, entièrement'],
+];
+// Prix des formules si on prenait les services séparément (le SEO de la formule Commerce : 3 mois)
+const P = Object.fromEntries(SV.map(s => [s.id, s.prix_unique || s.prix_mensuel]));
+const SEPARE = { lancement: P['logo'] + P['site-vitrine'], commerce: P['logo'] + P['e-commerce'] + 3 * P['seo'], visibilite: P['seo'] + P['google-ads'] + P['reseaux-sociaux'] };
 
 
 const projets = (await getCollection('projets', p => p.data.accueil)).sort((a, b) => a.data.ordre - b.data.ordre).slice(0, 2);
@@ -80,7 +103,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       </div>
       <div class="proof-row">
         <ul class="badges" aria-label="Nos engagements">
-          <li>Devis gratuit sous 48{NB}h</li><li>Maquette validée avant le code</li><li>Le site vous appartient</li>
+          <li>Devis gratuit sous 48{NB}h</li><li>Maquette refaite sans frais si elle ne vous plaît pas</li><li>Paiement en 12 fois sans frais</li><li>Le site vous appartient</li>
         </ul>
       </div>
     </div>
@@ -95,7 +118,21 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
-  <section aria-label="Nos quatre familles de services">
+  <section class="section" id="probleme" aria-labelledby="pb-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="pb-title">Votre site devrait vous amener des clients. C'est le cas{NB}?</h2>
+        <p class="subhead">Si vous vous reconnaissez dans l'une de ces situations, vous perdez des demandes chaque semaine sans le savoir.</p>
+      </div>
+      <ul class="pains">{PAINS.map(([t, p]) => <li><h3>{t}</h3><p>{p}</p></li>)}</ul>
+      <div class="pains-fix">
+        <p>On règle ces quatre points en même temps : un site clair, trouvé sur Google, pensé pour qu'on vous appelle, et suivi après la mise en ligne.</p>
+        <a class="btn btn-primary" href="#audit">Faire analyser mon site gratuitement</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Nos quatre familles de services">
     <div class="wrap">
       <div class="spots">
         {FAMS.map((f, i) => {
@@ -134,6 +171,18 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
+  <section class="section" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="work-title">Des projets en ligne, à visiter</h2>
+        <p class="subhead">De vrais clients, dont vous pouvez ouvrir le site. <a class="link" href="/realisations">Toutes les réalisations</a></p>
+      </div>
+      <div class="projects">
+        {projets.map(p => <ProjectCard projet={p} />)}
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="audit" aria-labelledby="audit-title">
     <div class="wrap">
       <div class="audit">
@@ -147,7 +196,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <label for="audit-url">Adresse de votre site</label>
           <div class="audit-row">
             <input id="audit-url" name="site" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="www.votre-site.be…" required>
-            <button class="btn btn-primary" type="submit">Recevoir mon audit</button>
+            <button class="btn btn-primary" type="submit">Recevoir mon audit gratuit</button>
           </div>
           <p class="small" style="color:rgba(255,255,255,.75)">Pas encore de site ? Indiquez le nom de votre entreprise.</p>
         </form>
@@ -176,6 +225,21 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
+  <section class="section" id="comparatif" aria-labelledby="cmp-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="cmp-title">Pourquoi nous plutôt qu'une autre solution</h2>
+        <p class="subhead">Ce que vous obtenez vraiment selon la voie choisie.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead><tr><td></td><th scope="col">Le faire soi-même</th><th scope="col">Freelance à petit prix</th><th scope="col">Grande agence</th><th scope="col" class="us" translate="no">{BRAND}</th></tr></thead>
+          <tbody>{COMPARE.map(([c, ...v]) => <tr><th scope="row">{c}</th>{v.map((x, i) => <td class={i === 3 ? 'us' : undefined}>{x}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="formules" aria-labelledby="plans-title">
     <div class="wrap">
       <div class="section-head split">
@@ -193,6 +257,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <h3>Lancement</h3>
           <p class="muted">Pour créer son entreprise avec une image pro dès le premier jour.</p>
           <p class="price" data-once={e(1190)} data-monthly={e(99)} data-once-l="une fois" data-monthly-l="par mois, 12 mois"><span class="pv">{e(1190)}</span> <small class="pl">une fois</small></p>
+          <p class="was" data-once>au lieu de <s>{e(SEPARE.lancement)}</s> en services séparés</p>
           <ul><li>Logo et mini charte graphique</li><li>Site vitrine jusqu'à 5 pages</li><li>Fiche Google Business optimisée</li><li>Cartes de visite prêtes à imprimer</li></ul>
           <a class="btn btn-secondary" href="/devis?service=logo,site-vitrine">Choisir Lancement</a>
         </article>
@@ -201,6 +266,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <h3>Commerce</h3>
           <p class="muted">Pour ouvrir une boutique en ligne et vendre dès le premier mois.</p>
           <p class="price" data-once={e(3290)} data-monthly={e(275)} data-once-l="une fois" data-monthly-l="par mois, 12 mois"><span class="pv">{e(3290)}</span> <small class="pl">une fois</small></p>
+          <p class="was" data-once>au lieu de <s>{e(SEPARE.commerce)}</s> en services séparés</p>
           <ul><li>Logo et identité visuelle</li><li>Boutique en ligne complète</li><li>Photos de vos 20 premiers produits</li><li>3 mois de référencement offerts</li></ul>
           <a class="btn btn-primary" href="/devis?service=logo,e-commerce,seo">Choisir Commerce</a>
         </article>
@@ -208,6 +274,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <h3>Visibilité</h3>
           <p class="muted">Pour faire venir plus de clients sur un site qui existe déjà.</p>
           <p class="price" data-once={e(790)} data-monthly={e(790)} data-once-l="par mois" data-monthly-l="par mois"><span class="pv">{e(790)}</span> <small class="pl">par mois</small></p>
+          <p class="was">au lieu de <s>{e(SEPARE.visibilite)}/mois</s> en services séparés</p>
           <ul><li>Référencement Google et visibilité dans les IA</li><li>Campagnes Google Ads</li><li>2 réseaux sociaux, 12 publications</li><li>Un rapport clair chaque mois</li></ul>
           <a class="btn btn-secondary" href="/devis?service=seo,google-ads,reseaux-sociaux">Choisir Visibilité</a>
         </article>
@@ -220,30 +287,36 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="section-head split">
         <h2 class="d-xl" id="methode-title">Comment se passe un projet</h2>
-        <p class="subhead">Vous savez à chaque étape ce qui est fait et ce que vous devez valider.</p>
+        <p class="subhead">Quelques heures de votre temps au total. Le reste, on s'en occupe.</p>
       </div>
       <ol class="steps">
-        <li><h3>Découverte</h3><p>Un appel de 30 minutes pour comprendre votre activité, vos clients et vos objectifs.</p><span class="when">Jour 1</span></li>
-        <li><h3>Stratégie et maquette</h3><p>Structure, design et plan de visibilité. Vous validez avant qu'on construise.</p><span class="when">Semaine 1</span></li>
-        <li><h3>Création</h3><p>Développement, textes, photos et tests sur téléphone, à suivre sur un lien privé.</p><span class="when">Semaines 2 à 5</span></li>
-        <li><h3>Lancement et suivi</h3><p>Mise en ligne, une heure de formation, puis un rapport de résultats chaque mois.</p><span class="when">Dernière semaine</span></li>
+        <li><h3>Découverte</h3><p>Un appel de 30 minutes pour comprendre votre activité, vos clients et vos objectifs.</p><span class="part">Votre part : 30 minutes au téléphone</span><span class="when">Jour 1</span></li>
+        <li><h3>Stratégie et maquette</h3><p>Structure, design et plan de visibilité. Vous validez avant qu'on construise.</p><span class="part">Votre part : valider la maquette</span><span class="when">Semaine 1</span></li>
+        <li><h3>Création</h3><p>Développement, textes, photos et tests sur téléphone, à suivre sur un lien privé.</p><span class="part">Votre part : relire, on écrit les textes avec vous</span><span class="when">Semaines 2 à 5</span></li>
+        <li><h3>Lancement et suivi</h3><p>Mise en ligne, une heure de formation, puis un rapport de résultats chaque mois.</p><span class="part">Votre part : une heure de formation</span><span class="when">Dernière semaine</span></li>
       </ol>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="work-title">
+
+  <Avis max={3} />
+
+  <section class="section" aria-labelledby="founder-title">
     <div class="wrap">
-      <div class="section-head split">
-        <h2 class="d-xl" id="work-title">Des résultats, pas seulement des maquettes</h2>
-        <p class="subhead"><a class="link" href="/realisations">Voir toutes les études de cas</a></p>
-      </div>
-      <div class="projects">
-        {projets.map(p => <ProjectCard projet={p} />)}
+      <div class="founder">
+        <div class="founder-mono" aria-hidden="true">{FONDATEUR.split(' ').slice(0, 2).map(m => m[0]).join('')}</div>
+        <div class="founder-txt">
+          <h2 class="d-lg" id="founder-title">Vous parlez directement à celui qui construit votre site</h2>
+          <blockquote><p>« Pas de commercial entre nous, pas de ticket de support. Vous m'expliquez votre métier, je vous propose une maquette, et vous gardez mon numéro bien après la mise en ligne. »</p></blockquote>
+          <p class="muted small">{FONDATEUR}, fondateur et développeur</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/devis?mode=appel">Réserver un appel avec moi</a>
+            <a class="btn btn-secondary" href="/a-propos">Mon parcours</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-
-  <Avis max={3} />
 
   <section class="section" id="garanties" aria-labelledby="garanties-title">
     <div class="wrap">
@@ -279,8 +352,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   <section class="section" aria-labelledby="final-title">
     <div class="wrap">
       <div class="final">
-        <h2 class="d-xl" id="final-title">Les meilleurs projets commencent par une discussion</h2>
-        <p class="lead" style="color:rgba(255,255,255,.85)">Recevez un devis écrit sous 48{NB}h, ou réservez directement un appel de 30 minutes.</p>
+        <h2 class="d-xl" id="final-title">Prêt à recevoir plus de demandes de clients{NB}?</h2>
+        <p class="lead" style="color:rgba(255,255,255,.85)">Recevez un devis écrit sous 48{NB}h, ou réservez un appel de 30 minutes. C'est gratuit, et vous ne signez que si la proposition vous convient.</p>
         <div class="btn-row" style="justify-content:center">
           <a class="btn btn-primary" href="/devis">Recevoir mon devis gratuit</a>
           <a class="btn btn-glass" href="/devis?mode=appel">Réserver un appel</a>

@@ -25,6 +25,7 @@ const SERVICES_LD = {
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Nos services web à Bruxelles</h1>
       <p class="lead">{SV.length} services pour créer votre site, soigner votre image et faire venir des clients. Chaque offre indique ce qui est inclus, le délai et le prix de départ.</p>
+      <ul class="badges" style="margin-top:24px" aria-label="Nos engagements"><li>Prix affichés, devis ferme</li><li>Maquette refaite sans frais si elle ne vous plaît pas</li><li>Paiement en 12 fois sans frais</li><li>Le site vous appartient</li></ul>
     </div>
   </section>
   <nav class="jump" aria-label="Familles de services"><div class="wrap">{FAMS.map(f => <a href={`#${f.id}`} style={`--c:var(--${f.couleur})`}>{f.nom_court}</a>)}</div></nav>

@@ -21,6 +21,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Parlons de votre projet</h1>
       <p class="lead">Recevez un devis détaillé sous 48{NB}h, ou réservez un appel de 30 minutes. Dans les deux cas, c'est gratuit et sans engagement.</p>
+      <ul class="badges" style="margin-top:24px" aria-label="Nos engagements"><li>Gratuit et sans engagement</li><li>Réponse sous 48{NB}h ouvrées</li><li>Vous signez seulement si la proposition vous convient</li></ul>
     </div>
   </section>
   <section>
@@ -40,7 +41,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
 
         <div class="step" id="step-1">
           <h2>De quoi avez-vous besoin ?</h2>
-          <p>Cochez un ou plusieurs services.</p>
+          <p>Cochez un ou plusieurs services. Vous hésitez ? Cochez ce qui s'en rapproche, on vous conseillera.</p>
           {FAMS.map(f => <div class="pick-group"><h3 style={`--c:var(--${f.couleur})`}>{f.nom_court}</h3><div class="pick">{SV.filter(s => s.famille === f.id).map(s => <Fragment><input type="checkbox" id={`s-${s.id}`} name="services" value={s.id}><label for={`s-${s.id}`}>{s.nom.split(' (')[0]}</label></Fragment>)}</div></div>)}
           <p class="step-error" id="err-step-1" role="alert"></p>
           <div class="step-actions"><span></span><button class="btn btn-primary" type="button" data-next>Continuer</button></div>
@@ -69,7 +70,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
           </div>
           <div class="step-actions"><button class="btn btn-secondary" type="button" data-prev>Retour</button><button class="btn btn-primary" type="submit">Recevoir mon devis gratuit</button></div>
           <p class="send-error" id="err-envoi-devis" role="alert"></p>
-          <p class="reassure">Vos coordonnées servent uniquement à préparer votre devis. <a class="link" href="/mentions-legales#donnees">Confidentialité</a></p>
+          <p class="reassure">Gratuit et sans engagement. Vos coordonnées servent uniquement à préparer votre devis. <a class="link" href="/mentions-legales#donnees">Confidentialité</a></p>
         </div>
 
         <div class="step done-box" id="step-done" hidden>

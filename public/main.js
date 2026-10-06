@@ -237,6 +237,8 @@ bills.forEach(b => b.addEventListener('click', () => {
     p.querySelector('.pv').textContent = p.dataset[mode];
     p.querySelector('.pl').textContent = p.dataset[mode + 'L'];
   });
+  // « au lieu de … » compare des prix payés en une fois : masqué en mode mensuel
+  document.querySelectorAll('.plan .was[data-once]').forEach(w => { w.hidden = mode === 'monthly'; });
 }));
 
 // Page devis : devis écrit ou rendez-vous téléphonique (?mode=appel)
