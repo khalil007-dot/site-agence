@@ -934,3 +934,71 @@ a.m-proof:hover { border-color: var(--hair); }
 .founder-duo .duo-card b { font-size: 1.0625rem; }
 .founder-duo .duo-role { font-size: .8125rem; }
 @media (max-width: 860px) { .founder-duo { grid-template-columns: 1fr; } }
+
+/* Articles : illustrations d'exemple (figures en HTML dans le Markdown) */
+.fig { margin: 8px 0; display: grid; gap: 12px; }
+.fig-box { background: var(--s1); border: 1px solid var(--hair); border-radius: 18px; padding: clamp(16px, 3vw, 24px); display: grid; gap: 14px; overflow: hidden; }
+.fig figcaption { font-size: .875rem; color: var(--muted); line-height: 1.45; }
+.fig img { display: block; max-width: 100%; height: auto; }
+.fig-tag { justify-self: start; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+
+/* Fourchettes de prix */
+.ranges { display: grid; gap: 14px; font-size: .9375rem; }
+.range { display: grid; grid-template-columns: 150px 1fr; gap: 12px; align-items: center; }
+.range-track { position: relative; height: 30px; border-radius: 8px; background: var(--s2); }
+.range-bar { position: absolute; top: 0; bottom: 0; border-radius: 8px; display: flex; align-items: center; padding: 0 10px; font-size: .8125rem; font-weight: 600; color: #fff; white-space: nowrap; }
+.range-axis { display: flex; justify-content: space-between; margin-left: 162px; font-size: .75rem; color: var(--muted); }
+@media (max-width: 560px) { .range { grid-template-columns: 1fr; gap: 6px; } .range-axis { margin-left: 0; } }
+
+/* Résultats locaux Google */
+.lp { background: #fff; color: #202124; border-radius: 14px; border: 1px solid #DADCE0; overflow: hidden; font-family: Arial, sans-serif; }
+.lp-search { display: flex; align-items: center; gap: 8px; margin: 12px; padding: 9px 14px; border: 1px solid #DFE1E5; border-radius: 100px; font-size: .875rem; }
+.lp-map { height: 110px; position: relative; background: linear-gradient(120deg, transparent 45%, #fff 45%, #fff 48%, transparent 48%), linear-gradient(25deg, transparent 62%, #fff 62%, #fff 64%, transparent 64%), #E3ECDD; }
+.lp-map i { position: absolute; width: 20px; height: 20px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #EA4335; display: grid; place-items: center; }
+.lp-map i b { transform: rotate(45deg); color: #fff; font-size: .6875rem; font-style: normal; }
+.lp-item { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 12px 14px; border-top: 1px solid #EEE; font-size: .8125rem; color: #5F6368; }
+.lp-item b { color: #1A0DAB; font-size: .9375rem; font-weight: 600; }
+.lp-item .st { color: #E7711B; }
+.lp-item .ph { grid-row: span 3; width: 64px; height: 64px; border-radius: 8px; background: linear-gradient(135deg, #F3E1C7, #D9A066); }
+.lp-item.you { background: #F8F9FF; box-shadow: inset 3px 0 0 #1A73E8; }
+.lp-n { display: inline-grid; place-items: center; width: 18px; height: 18px; margin-left: 6px; border-radius: 50%; background: #1A73E8; color: #fff; font-size: .6875rem; font-weight: 700; vertical-align: 1px; }
+.fig-legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .875rem; }
+.fig-legend li { display: flex; gap: 8px; align-items: baseline; }
+
+/* Test de lisibilité d'un logo */
+.logo-test { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: end; }
+.logo-test div { display: grid; gap: 8px; justify-items: center; text-align: center; font-size: .75rem; color: var(--muted); }
+.logo-test span.lt { display: grid; place-items: center; background: #fff; border-radius: 12px; border: 1px solid var(--hair); width: 100%; aspect-ratio: 1; overflow: hidden; }
+.logo-test img { object-fit: cover; }
+.logo-test .bw img { filter: grayscale(1) contrast(1.6); }
+.logo-test .ko span.lt { background: #fff; }
+@media (max-width: 560px) { .logo-test { grid-template-columns: 1fr 1fr; } }
+
+/* Instagram et TikTok côte à côte */
+.phones { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; justify-items: center; }
+.phone { width: 100%; max-width: 230px; aspect-ratio: 9 / 16; border-radius: 30px; background: #000; padding: 8px; box-shadow: 0 12px 30px rgba(0,0,0,.18); display: grid; }
+.phone-screen { border-radius: 23px; overflow: hidden; background: #fff; display: grid; grid-template-rows: auto 1fr; }
+.ig-head { display: flex; align-items: center; gap: 8px; padding: 10px; font: 600 .75rem Arial, sans-serif; color: #111; }
+.ig-head i { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(45deg, #FEDA75, #D62976, #4F5BD5); }
+.ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; align-content: start; }
+.ig-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.tt { position: relative; background: #000; grid-template-rows: 1fr; }
+.tt img { width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+.tt-side { position: absolute; right: 8px; bottom: 60px; display: grid; gap: 12px; justify-items: center; font: 600 .6875rem Arial, sans-serif; color: #fff; }
+.tt-side i { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,.25); }
+.tt-cap { position: absolute; left: 10px; right: 46px; bottom: 14px; font: .6875rem/1.35 Arial, sans-serif; color: #fff; }
+.tt-cap b { display: block; margin-bottom: 3px; }
+.phone-label { text-align: center; font-size: .875rem; font-weight: 600; margin-top: 8px; }
+
+/* Entonnoir Google Ads */
+.funnel { display: grid; gap: 8px; }
+.funnel div { margin: 0 auto; border-radius: 12px; padding: 12px 16px; display: flex; justify-content: space-between; gap: 12px; font-size: .9375rem; color: #fff; font-weight: 500; }
+.funnel b { font-size: 1.125rem; }
+
+/* Boutique annotée */
+.annot { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; align-items: center; }
+.annot-shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--hair); box-shadow: 0 10px 26px rgba(0,0,0,.12); }
+.annot ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; counter-reset: a; font-size: .9375rem; line-height: 1.4; }
+.annot li { counter-increment: a; display: grid; grid-template-columns: 24px 1fr; gap: 10px; }
+.annot li::before { content: counter(a); display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--orange); color: #fff; font-size: .75rem; font-weight: 700; }
+@media (max-width: 640px) { .annot { grid-template-columns: 1fr; } }

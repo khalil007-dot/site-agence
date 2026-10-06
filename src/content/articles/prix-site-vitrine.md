@@ -27,6 +27,16 @@ Un site vitrine coûte entre 0 et 6 000 € en Belgique selon que vous le faites
 
 Ces fourchettes sont des ordres de grandeur pour un site vitrine de 3 à 8 pages. Le coût annuel couvre l'hébergement, le nom de domaine et, selon les cas, la maintenance.
 
+<figure class="fig"><div class="fig-box">
+<span class="fig-tag">Coût de départ d'un site vitrine</span>
+<div class="ranges">
+<div class="range"><span>Le faire soi-même</span><div class="range-track"><div class="range-bar" style="left:0;width:10%;background:#8A8A8A">0 €</div></div></div>
+<div class="range"><span>Un freelance</span><div class="range-track"><div class="range-bar" style="left:13.3%;width:28.4%;background:#FF7A3D">800 à 2 500 €</div></div></div>
+<div class="range"><span>Une agence</span><div class="range-track"><div class="range-bar" style="left:25%;width:75%;background:#6A4CF5">1 500 à 6 000 €</div></div></div>
+</div>
+<div class="range-axis"><span>0 €</span><span>2 000 €</span><span>4 000 €</span><span>6 000 €</span></div>
+</div><figcaption>Ordres de grandeur pour un site de 3 à 8 pages, hors frais annuels. À titre de repère, notre site vitrine démarre à 890 €.</figcaption></figure>
+
 ## Ce qui fait varier le prix
 
 - **Le nombre de pages** : chaque page demande du design, du texte et des tests.

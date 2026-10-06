@@ -52,6 +52,14 @@ Attention à un détail : si vous utilisez un autre prestataire de paiement que 
 
 Une boutique qui vend bien a les mêmes qualités sur Shopify et sur WooCommerce : des photos nettes, des fiches produit qui répondent aux questions (taille, matière, délai de livraison), un paiement en quelques clics sur téléphone et des frais de livraison annoncés dès le départ. Les clients qui abandonnent leur panier le font rarement à cause de la plateforme, presque toujours à cause d'une surprise au moment de payer.
 
+<figure class="fig"><div class="fig-box">
+<span class="fig-tag">Exemple réel : la boutique Street Sapp</span>
+<div class="annot">
+<div class="annot-shot"><img src="/articles/streetsapp-large.jpg" alt="Page d'accueil de la boutique en ligne Street Sapp" width="1200" height="750" loading="lazy"></div>
+<ol><li>Une accroche claire : on comprend en une seconde ce que vend la boutique.</li><li>De vraies photos, en situation, plutôt que des images génériques.</li><li>Deux boutons simples : voir la collection, ou trouver le magasin.</li><li>Un menu court, par type de produit, pensé pour le téléphone.</li></ol>
+</div>
+</div><figcaption>Une boutique que nous avons réalisée. Ce qui la rend efficace ne dépend pas de la plateforme, mais de ces choix de présentation.</figcaption></figure>
+
 ## Notre conseil
 
 Pour une première boutique avec moins de quelques centaines de produits, nous conseillons le plus souvent Shopify : vous êtes autonome dès le premier jour et vous n'avez rien à entretenir. Nous proposons WooCommerce quand le projet a des besoins particuliers ou quand un site WordPress existe déjà.

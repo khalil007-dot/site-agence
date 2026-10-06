@@ -18,6 +18,14 @@ Le bon réseau n'est pas celui qui a le plus d'utilisateurs, mais celui où vos 
 
 Début 2025, Instagram comptait 4,9 millions d'utilisateurs en Belgique, et TikTok 3,7 millions d'utilisateurs de 18 ans et plus. Facebook reste devant avec 6,4 millions d'utilisateurs, et touche davantage une clientèle plus âgée. Les trois réseaux sont donc massivement utilisés : la différence se fait sur le type de contenu et sur votre clientèle.
 
+<figure class="fig"><div class="fig-box">
+<span class="fig-tag">Le même commerce, deux façons de se montrer</span>
+<div class="phones">
+<div><div class="phone"><div class="phone-screen"><div class="ig-head"><i></i>votre.commerce</div><div class="ig-grid"><img src="/articles/omi-restaurant.jpg" alt="" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" loading="lazy"><img src="/articles/obrunch-house-flyer.jpg" alt="" loading="lazy"><img src="/articles/omi-flyer.jpg" alt="" loading="lazy"><img src="/articles/streetsapp.jpg" alt="" loading="lazy"><img src="/articles/obrunch-house-logo.jpg" alt="" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" loading="lazy"><img src="/articles/omi-restaurant.jpg" alt="" loading="lazy"><img src="/articles/omi-flyer.jpg" alt="" loading="lazy"><img src="/articles/obrunch-house-flyer.jpg" alt="" loading="lazy"><img src="/articles/streetsapp.jpg" alt="" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" loading="lazy"></div></div></div><p class="phone-label">Instagram : une vitrine soignée</p></div>
+<div><div class="phone"><div class="phone-screen tt"><img src="/articles/omi-restaurant.jpg" alt="" loading="lazy"><div class="tt-side"><i></i>2,4 k<i></i>86<i></i>Partager</div><div class="tt-cap"><b>@votre.commerce</b>Un samedi soir en cuisine, en 30 secondes 🔥</div></div></div><p class="phone-label">TikTok : une vidéo prise sur le vif</p></div>
+</div>
+</div><figcaption>Illustration avec des visuels de nos réalisations (OMI Restaurant, O'Brunch House, Street Sapp). Instagram met en valeur une galerie, TikTok une vidéo à la fois.</figcaption></figure>
+
 ## Instagram : la vitrine
 
 Instagram sert de deuxième site internet. Avant de venir chez vous, beaucoup de clients regardent votre compte pour voir vos produits, l'ambiance, vos horaires.

@@ -36,6 +36,16 @@ Prenons un artisan qui investit 300 € par mois. Les chiffres ci-dessous sont d
 </tbody>
 </table></div>
 
+<figure class="fig"><div class="fig-box">
+<span class="fig-tag">Ce que deviennent 300 € dans l'exemple</span>
+<div class="funnel">
+<div style="width:100%;background:#4B32C9"><span>Budget</span><b>300 €</b></div>
+<div style="width:84%;background:#6A4CF5"><span>Visiteurs</span><b>120</b></div>
+<div style="width:62%;background:#A63FD0"><span>Demandes</span><b>8</b></div>
+<div style="width:42%;background:#1F7A44"><span>Clients</span><b>2 à 3</b></div>
+</div>
+</div><figcaption>Chaque étape réduit le nombre de personnes : c'est pourquoi un site qui convertit bien compte autant que le budget publicitaire.</figcaption></figure>
+
 Si un client vous rapporte 600 € en moyenne, chaque client acquis à 110 € est très rentable. S'il vous rapporte 80 €, la campagne vous fait perdre de l'argent. Tout se joue sur cette comparaison.
 
 ## Les chiffres de référence

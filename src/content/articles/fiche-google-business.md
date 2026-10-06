@@ -14,6 +14,17 @@ ordre: 3
 
 Quand quelqu'un cherche « boulangerie Ixelles » ou « plombier Uccle », Google affiche d'abord une carte avec trois entreprises. Ces trois places viennent des fiches Google Business, pas des sites internet. Selon Google, elles dépendent de trois choses : la **pertinence** de votre fiche, la **distance** avec la personne qui cherche, et votre **notoriété**. Vous ne pouvez pas changer la distance, mais vous pouvez travailler les deux autres. Voici les huit réglages qui comptent le plus.
 
+<figure class="fig"><div class="fig-box">
+<span class="fig-tag">Exemple : ce que voit votre client sur Google</span>
+<div class="lp">
+<div class="lp-search">🔍 boulangerie ixelles</div>
+<div class="lp-map"><i style="left:30%;top:40%"><b>1</b></i><i style="left:58%;top:22%;background:#9AA0A6"><b>2</b></i><i style="left:70%;top:60%;background:#9AA0A6"><b>3</b></i></div>
+<div class="lp-item you"><span><b>Votre boulangerie</b><span class="lp-n">1</span></span><span class="ph"></span><span><span class="st">4,8 ★★★★★</span> (126 avis)<span class="lp-n">6</span></span><span>Boulangerie · Rue du Bailli<span class="lp-n">3</span></span><span>Ouvert · Ferme à 19 h<span class="lp-n">4</span></span></div>
+<div class="lp-item"><span><b>Boulangerie concurrente</b></span><span class="ph" style="background:#E6E6E6"></span><span><span class="st">4,1 ★★★★</span> (14 avis)</span><span>Boulangerie</span><span>Horaires non renseignés</span></div>
+</div>
+<ul class="fig-legend"><li><span class="lp-n">1</span>Le nom exact et la bonne catégorie</li><li><span class="lp-n">3</span>Une adresse précise</li><li><span class="lp-n">4</span>Des horaires toujours justes</li><li><span class="lp-n">6</span>Beaucoup d'avis, et une réponse à chacun</li></ul>
+</div><figcaption>Illustration : les deux fiches proposent le même service, mais la première est complète, photographiée et bien notée. C'est elle qu'on appelle.</figcaption></figure>
+
 ## 1. La bonne catégorie principale
 
 C'est le réglage le plus important. Choisissez la catégorie qui décrit précisément votre activité principale (« Restaurant italien » plutôt que « Restaurant »), puis ajoutez quelques catégories secondaires si elles correspondent vraiment à ce que vous faites.
