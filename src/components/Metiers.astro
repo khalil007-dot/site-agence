@@ -1,0 +1,104 @@
+---
+// Accueil : une mini page par secteur (onglets). Pour chaque métier : l'objectif du client,
+// comment ses propres clients le choisissent, ce qu'on met en place, le budget de départ,
+// une vraie réalisation du secteur quand il y en a une, et un devis pré-rempli avec le secteur.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import captureOmi from '../assets/projets/omi-restaurant.jpg';
+import captureStreetSapp from '../assets/projets/streetsapp.jpg';
+import { SV, e } from '../lib/site';
+
+type Preuve = { img: ImageMetadata; client: string; quoi: string; lien: string };
+const OMI: Preuve = { img: captureOmi, client: 'OMI Restaurant', quoi: 'Site, menu et flyer', lien: 'https://omi-restaurant.com/' };
+const STREET: Preuve = { img: captureStreetSapp, client: 'Street Sapp', quoi: 'Boutique en ligne', lien: 'https://streetsapp.be/' };
+
+const METIERS: { k: string; court: string; nom: string; objectif: string; pb: string; parcours: string[]; items: string[]; svcs: string[]; cta: string; preuve?: Preuve }[] = [
+  {
+    k: 'restaurants', court: 'Restaurants', nom: 'Restaurants et cafés', objectif: 'Plus de tables réservées', cta: 'Devis pour mon restaurant', preuve: OMI,
+    pb: 'Vos clients regardent la carte, les photos et les avis sur Google avant de choisir où manger. Une fiche vide ou une carte en PDF, et ils réservent à côté.',
+    parcours: ['Cherche «\u00a0restaurant\u00a0» et son quartier sur Google', 'Regarde les photos, la carte et les avis', "Réserve ou appelle, souvent dans l'heure"],
+    items: ['Carte en ligne que vous modifiez en deux minutes', 'Réservation de table depuis Google et le site', 'Fiche Google avec photos, horaires et avis à jour', 'Menu, flyers et Instagram à vos couleurs'],
+    svcs: ['site-vitrine', 'logo', 'reseaux-sociaux'],
+  },
+  {
+    k: 'artisans', court: 'Artisans', nom: 'Artisans et bâtiment', objectif: 'Plus de demandes de devis', cta: 'Devis pour mon entreprise',
+    pb: 'Vos futurs clients tapent « plombier » ou « menuisier » suivi de leur commune, comparent deux ou trois entreprises et appellent celle qui inspire confiance.',
+    parcours: ['Tape votre métier et sa commune sur Google', 'Compare les avis et les photos de chantiers', 'Appelle celui qui inspire le plus confiance'],
+    items: ['Galerie de chantiers avant / après', 'Demande de devis en ligne, avec photos du problème', 'Bouton Appeler visible partout sur téléphone', "Une page par commune de votre zone d'intervention"],
+    svcs: ['site-vitrine', 'seo', 'logo'],
+  },
+  {
+    k: 'sante', court: 'Santé', nom: 'Santé et bien-être', objectif: 'Un agenda rempli, moins d’appels', cta: 'Devis pour mon cabinet',
+    pb: 'Vos patients veulent comprendre vos soins et prendre rendez-vous sans téléphoner, souvent le soir. Chaque appel manqué est un rendez-vous pris ailleurs.',
+    parcours: ['Cherche un praticien près de chez lui', 'Lit vos soins, vos tarifs et l’accès', 'Prend rendez-vous en ligne, à toute heure'],
+    items: ['Une page claire par soin ou spécialité', 'Prise de rendez-vous en ligne intégrée', 'Tarifs, accès et parking expliqués simplement', 'Textes conformes aux règles de votre ordre'],
+    svcs: ['site-vitrine', 'seo'],
+  },
+  {
+    k: 'commerces', court: 'Commerces', nom: 'Commerces de proximité', objectif: 'Plus de passage en magasin', cta: 'Devis pour mon commerce', preuve: STREET,
+    pb: 'Vos clients passent devant votre vitrine, mais vérifient d’abord en ligne : horaires, stock, itinéraire. Si l’info est fausse ou absente, ils vont ailleurs.',
+    parcours: ['Cherche un magasin ouvert près de lui', 'Vérifie les horaires, le stock et l’itinéraire', 'Se déplace, ou commande en ligne'],
+    items: ['Horaires et itinéraire toujours justes sur Google', 'Click and collect ou boutique en ligne', 'Logo, flyers et cartes de visite assortis', 'Publicité locale autour de votre magasin'],
+    svcs: ['logo', 'e-commerce', 'google-ads'],
+  },
+  {
+    k: 'liberales', court: 'Professions libérales', nom: 'Professions libérales', objectif: 'Des rendez-vous mieux qualifiés', cta: 'Devis pour mon cabinet',
+    pb: 'Avocats, consultants, architectes : on vous choisit sur votre crédibilité, souvent après plusieurs visites sur votre site et avant même le premier rendez-vous.',
+    parcours: ['Cherche un expert pour un problème précis', 'Juge votre crédibilité : parcours, domaines, articles', 'Prend contact après plusieurs visites'],
+    items: ['Présentation claire de vos domaines d’expertise', 'Articles qui répondent aux questions de vos clients', 'Formulaire qui trie les demandes avant le rendez-vous', 'Identité visuelle sobre et professionnelle'],
+    svcs: ['logo', 'site-vitrine', 'seo'],
+  },
+  {
+    k: 'marques', court: 'E-commerce', nom: 'Marques et e-commerçants', objectif: 'Plus de ventes en ligne', cta: 'Devis pour ma boutique', preuve: STREET,
+    pb: 'Vous vendez déjà, ou vous voulez vendre partout en Belgique et en Europe. Il vous faut une boutique qui rassure, se paie en deux clics et des visiteurs qualifiés.',
+    parcours: ['Découvre votre marque sur Instagram ou Google', 'Compare les prix, la livraison et les avis', "Achète sur téléphone, si c'est simple"],
+    items: ['Boutique rapide, paiement en quelques clics sur téléphone', 'Fiches produit qui répondent aux objections', 'Campagnes Google Shopping et réseaux sociaux', 'Suivi des ventes et du coût par commande'],
+    svcs: ['e-commerce', 'google-ads', 'reseaux-sociaux'],
+  },
+];
+const BYID = Object.fromEntries(SV.map(s => [s.id, s]));
+// Budget de départ du secteur : services en une fois + services mensuels
+const budget = (ids: string[]) => {
+  const svs = ids.map(id => BYID[id]);
+  const once = svs.reduce((t, s) => t + s.prix_unique, 0), mois = svs.reduce((t, s) => t + s.prix_mensuel, 0);
+  return [once && e(once), mois && e(mois) + '/mois'].filter(Boolean).join(' + ');
+};
+const prix = (id: string) => (BYID[id].prix_unique ? e(BYID[id].prix_unique) : e(BYID[id].prix_mensuel) + '/mois');
+---
+<section class="section" id="metiers" aria-labelledby="metiers-title">
+  <div class="wrap">
+    <div class="section-head split">
+      <h2 class="d-xl" id="metiers-title">Pensé pour votre métier</h2>
+      <p class="subhead">Pas un modèle générique. Choisissez votre activité : voici comment vos clients vous choisissent, et ce qu'on met en place pour qu'ils vous choisissent vous.</p>
+    </div>
+    <div class="metiers">
+      <div class="mtabs" role="tablist" aria-label="Votre activité">{METIERS.map((m, i) => <button class="mtab" type="button" role="tab" id={`mt-${m.k}`} aria-controls={`mp-${m.k}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{m.court}</button>)}</div>
+      {METIERS.map((m, i) => <div class="mpanel" role="tabpanel" id={`mp-${m.k}`} aria-labelledby={`mt-${m.k}`} hidden={i !== 0}>
+        <div class="m-main">
+          <span class="m-goal">Objectif : {m.objectif}</span>
+          <h3 class="d-md">{m.nom}</h3>
+          <p class="m-pb">{m.pb}</p>
+          <div class="m-journey">
+            <span class="m-label">Comment vos clients vous choisissent</span>
+            <ol>{m.parcours.map(x => <li>{x}</li>)}</ol>
+          </div>
+          <div class="m-cta">
+            <a class="btn btn-primary" href={`/devis?service=${m.svcs.join(',')}&activite=${encodeURIComponent(m.nom)}`}>{m.cta}</a>
+            <span class="m-budget">Budget de départ : <b>{budget(m.svcs)}</b></span>
+          </div>
+        </div>
+        <div class="m-side">
+          <span class="m-label">Ce qu'on met en place</span>
+          <ul class="included" style="--c:var(--violet)">{m.items.map(x => <li>{x}</li>)}</ul>
+          <div class="m-svcs">{m.svcs.map(id => <span class="tag">{BYID[id].nom_court} <small>{prix(id)}</small></span>)}</div>
+          {m.preuve
+            ? <a class="m-proof" href={m.preuve.lien} target="_blank" rel="noopener">
+                <Image src={m.preuve.img} alt={`Site de ${m.preuve.client}`} widths={[240, 480]} sizes="160px" />
+                <span><small>Déjà réalisé dans votre secteur</small><b>{m.preuve.client} <span aria-hidden="true">↗</span></b>{m.preuve.quoi}</span>
+              </a>
+            : <div class="m-proof m-guarantee"><span><small>Sans risque</small><b>Maquette refaite sans frais</b>Si la première proposition ne vous plaît pas, on repart de zéro, sans frais.</span></div>}
+        </div>
+      </div>)}
+    </div>
+  </div>
+</section>

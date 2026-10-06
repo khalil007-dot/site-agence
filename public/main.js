@@ -194,6 +194,8 @@ if (form) {
 
   // Venu du bloc « Audit gratuit » : on reprend l'adresse du site et on le signale
   const q = new URLSearchParams(location.search);
+  // Venu d'un onglet métier de l'accueil : le secteur commence la description du projet
+  if (q.get('activite') && !form.msg.value) form.msg.value = q.get('activite') + ' : ';
   if (q.get('audit') && q.get('site')) {
     form.site.value = q.get('site');
     const note = document.getElementById('audit-note');
@@ -255,6 +257,7 @@ if (form) {
       'Entreprise': form.entreprise.value.trim() || '-',
       'Téléphone': form.tel.value.trim() || '-',
       'Services': chosen.join(', '),
+      'Secteur': q.get('activite') || '-',
       'Budget': form.budget.value,
       'Délai': form.delai.value,
       'Activité': form.msg.value.trim() || '-',

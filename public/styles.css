@@ -536,18 +536,39 @@ button[disabled] { opacity: .6; cursor: progress; }
 
 /* Métiers */
 .metiers { background: var(--s1); border-radius: 30px; padding: clamp(18px, 3vw, 28px); }
-.mtabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; margin-bottom: clamp(20px, 3vw, 32px); }
-.mtab { flex: none; font: 500 .9375rem/1 var(--font); color: var(--muted); background: transparent; border: 0; padding: .85em 1.15em; border-radius: 100px; cursor: pointer; transition: color .15s, background-color .15s; }
+.mtabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: clamp(20px, 3vw, 32px); }
+.mtab { font: 500 .9375rem/1 var(--font); color: var(--muted); background: var(--s2); border: 0; padding: .85em 1.15em; border-radius: 100px; cursor: pointer; transition: color .15s, background-color .15s; }
 .mtab:hover { color: var(--ink); }
 .mtab[aria-selected="true"] { background: var(--ink); color: var(--canvas); }
-.mpanel { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 4vw, 56px); padding: 0 clamp(4px, 1.5vw, 16px) clamp(8px, 1.5vw, 16px); }
+.mpanel { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(24px, 4vw, 56px); padding: 0 clamp(4px, 1.5vw, 16px) clamp(8px, 1.5vw, 16px); }
 .mpanel[hidden] { display: none; }
 .mpanel.is-in { animation: rise .45s cubic-bezier(.2,.8,.2,1); }
 .mpanel .included li { background: var(--s2); }
-.rec { margin: 26px 0; display: grid; gap: 10px; }
-.rec-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.rec-tags .tag { color: var(--ink); }
+.m-main, .m-side { display: grid; gap: 18px; align-content: start; }
+.m-goal { justify-self: start; font-size: .8125rem; font-weight: 600; padding: 6px 12px; border-radius: 100px; background: var(--g-violet); }
+.m-pb { margin: 0; font-size: 1.125rem; line-height: 1.45; color: #D4D4D4; max-width: 52ch; }
+.m-label { font-size: .8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.m-journey { display: grid; gap: 12px; }
+.m-journey ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; counter-reset: j; }
+.m-journey li { counter-increment: j; background: var(--canvas); border: 1px solid var(--hair-soft); border-radius: 14px; padding: 14px; font-size: .875rem; line-height: 1.35; display: grid; gap: 8px; align-content: start; }
+.m-journey li::before { content: counter(j); display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--s2); font-size: .75rem; font-weight: 600; }
+.m-journey li:last-child { border-color: rgba(34,197,94,.45); }
+.m-journey li:last-child::before { background: var(--green); color: #000; }
+.m-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 4px; }
+.m-budget { font-size: .9375rem; color: var(--muted); }
+.m-budget b { color: var(--ink); font-weight: 600; }
+.m-svcs { display: flex; flex-wrap: wrap; gap: 6px; }
+.m-svcs .tag { color: var(--ink); }
+.m-svcs small { color: var(--muted); margin-left: 4px; }
+.m-proof { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center; background: var(--canvas); border: 1px solid var(--hair-soft); border-radius: 16px; padding: 12px; text-decoration: none; transition: border-color .15s; }
+a.m-proof:hover { border-color: var(--hair); }
+.m-proof img { width: 100%; height: auto; border-radius: 10px; display: block; }
+.m-proof > span { display: grid; gap: 3px; font-size: .875rem; color: var(--muted); }
+.m-proof small { font-size: .75rem; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: .04em; }
+.m-proof b { color: var(--ink); font-size: 1.0625rem; letter-spacing: -0.02em; }
+.m-guarantee { grid-template-columns: 1fr; padding: 16px 18px; }
 @media (max-width: 860px) { .mpanel { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .m-journey ol { grid-template-columns: 1fr; } .m-proof { grid-template-columns: 110px 1fr; } }
 
 /* Audit gratuit */
 .audit { border-radius: 30px; background: var(--g-orange); padding: clamp(28px, 5vw, 56px); display: grid; grid-template-columns: 1fr 1fr; gap: 28px 56px; align-items: end; }

@@ -8,33 +8,13 @@ import Avis from '../components/Avis.astro';
 import Vitrine from '../components/Vitrine.astro';
 import Spots from '../components/Spots.astro';
 import SeoCalc from '../components/SeoCalc.astro';
+import Metiers from '../components/Metiers.astro';
 import { Image } from 'astro:assets';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
 import { BRAND, FAMS, FONDATEUR, NB, ORG, ORG_ID, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
 
-const METIERS: [string, string, string, string[], string[]][] = [
-  ['restaurants', 'Restaurants et cafés', "Vos clients regardent la carte, les photos et les horaires sur Google avant de choisir où manger.",
-    ['Carte en ligne facile à mettre à jour', 'Réservation de table depuis Google et le site', 'Menu et flyers à vos couleurs', 'Instagram alimenté chaque semaine'],
-    ['site-vitrine', 'logo', 'reseaux-sociaux']],
-  ['artisans', 'Artisans et bâtiment', "Vos futurs clients cherchent « plombier » ou « menuisier » suivi du nom de leur ville, et appellent le premier qui inspire confiance.",
-    ['Galerie de chantiers avant / après', 'Demande de devis en ligne avec photos', 'Fiche Google et avis clients mis en avant', "Pages par ville de votre zone d'intervention"],
-    ['site-vitrine', 'seo', 'logo']],
-  ['sante', 'Santé et bien-être', "Vos patients veulent comprendre vos soins et prendre rendez-vous en deux clics, à toute heure.",
-    ['Pages claires pour chaque soin ou spécialité', 'Prise de rendez-vous en ligne intégrée', 'Plan d’accès, tarifs et informations pratiques', 'Respect des règles de communication de votre ordre'],
-    ['site-vitrine', 'seo']],
-  ['commerces', 'Commerces de proximité', "Vos clients passent devant votre vitrine, mais comparent aussi en ligne avant de se déplacer.",
-    ['Logo, flyers et cartes de visite assortis', 'Click and collect ou boutique en ligne', 'Horaires, stocks et promotions à jour', 'Publicité locale autour de votre magasin'],
-    ['logo', 'e-commerce', 'google-ads']],
-  ['liberales', 'Professions libérales', "Avocats, consultants, architectes : on vous choisit sur votre crédibilité, avant même le premier rendez-vous.",
-    ['Présentation de votre expertise et de vos domaines', 'Articles qui répondent aux questions de vos clients', 'Prise de rendez-vous ou formulaire qualifié', 'Identité visuelle sobre et professionnelle'],
-    ['logo', 'site-vitrine', 'seo']],
-  ['marques', 'Marques et e-commerçants', "Vous vendez déjà, ou vous voulez vendre partout en Belgique et en Europe. Il vous faut une boutique qui convertit et des visiteurs qualifiés.",
-    ['Boutique rapide, pensée pour le paiement sur téléphone', 'Fiches produit qui répondent aux objections', 'Campagnes Google Shopping et réseaux sociaux', 'Suivi des ventes et du coût par commande'],
-    ['e-commerce', 'google-ads', 'reseaux-sociaux']],
-];
-const SVNAME = Object.fromEntries(SV.map(s => [s.id, s.nom_court]));
 const prixVitrine = SV.find(s => s.id === 'site-vitrine')?.prix_unique;
 // Logos des clients, en blanc (src/assets/clients)
 const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
@@ -145,23 +125,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
 
   <Spots />
 
-  <section class="section" id="metiers" aria-labelledby="metiers-title">
-    <div class="wrap">
-      <div class="section-head split">
-        <h2 class="d-xl" id="metiers-title">On connaît votre métier</h2>
-        <p class="subhead">Choisissez votre activité pour voir ce qu'on met en place et les services qui comptent le plus pour vous.</p>
-      </div>
-      <div class="metiers">
-        <div class="mtabs" role="tablist" aria-label="Votre activité">{METIERS.map(([k, n], i) => <button class="mtab" type="button" role="tab" id={`mt-${k}`} aria-controls={`mp-${k}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{n}</button>)}</div>
-        {METIERS.map(([k, n, pb, items, svcs], i) => <div class="mpanel" role="tabpanel" id={`mp-${k}`} aria-labelledby={`mt-${k}`} hidden={i !== 0}>
-          <div><h3 class="d-md">{n}</h3><p class="lead" style="margin-top:14px">{pb}</p>
-            <div class="rec"><span class="muted small">Services recommandés</span><div class="rec-tags">{svcs.map(s => <span class="tag">{SVNAME[s]}</span>)}</div></div>
-            <a class="btn btn-primary" href={`/devis?service=${svcs.join(',')}`}>Devis pour mon activité</a></div>
-          <ul class="included" style="--c:var(--violet)">{items.map(x => <li>{x}</li>)}</ul>
-        </div>)}
-      </div>
-    </div>
-  </section>
+  <Metiers />
 
   <section class="section" aria-labelledby="work-title">
     <div class="wrap">
