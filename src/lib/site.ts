@@ -15,7 +15,7 @@ export const COFONDATEUR = reglages.cofondateur;
 // Les deux fondateurs : photo dans src/assets/fondateurs/<id>.jpg
 export const FONDATEURS = [
   { id: 'wassim', nom: COFONDATEUR, role: 'Commercial, marketing et relation client', mission: "Votre contact du premier appel au suivi : comprendre votre activité, construire l'offre avec vous, suivre vos résultats." },
-  { id: 'khalil', nom: FONDATEUR, role: 'Stratégie et développement', mission: 'La stratégie, puis la construction de votre site, de votre boutique ou de votre application : solide, rapide, pensée pour vendre.' },
+  { id: 'khalil', nom: FONDATEUR, role: 'Stratégie et développement', mission: 'La stratégie, puis la construction de votre site, ou de votre boutique : solide, rapide, pensée pour vendre.' },
 ];
 // Clé Web3Forms : les formulaires envoient les demandes par e-mail (vide = envoi désactivé)
 export const CLE_FORMULAIRES = reglages.cle_formulaires;

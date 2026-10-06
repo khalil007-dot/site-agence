@@ -5,7 +5,7 @@
       "couleur": "violet",
       "nom_court": "Créer",
       "nom": "Créer votre présence en ligne",
-      "accroche": "Le site ou l'application qui présente votre activité, ou qui vend à votre place."
+      "accroche": "Le site qui présente votre activité, ou la boutique qui vend à votre place."
     },
     {
       "id": "visibilite",
@@ -82,33 +82,6 @@
         "Fiches produit, panier et commande pensés pour le téléphone",
         "Livraison, retours, CGV et mentions légales configurés",
         "Import de vos 50 premiers produits"
-      ]
-    },
-    {
-      "id": "application",
-      "famille": "creer",
-      "nom": "Application mobile",
-      "nom_court": "Application",
-      "promesse": "Garder vos clients dans leur poche : réservation, fidélité et commande à emporter.",
-      "prix_unique": 6900,
-      "prix_mensuel": 0,
-      "pour_qui": "Pour les commerces et services qui veulent fidéliser leurs clients : réservation, carte de fidélité, commande à emporter.",
-      "infos": [
-        {
-          "label": "Délai moyen",
-          "valeur": "10 semaines"
-        },
-        {
-          "label": "Plateformes",
-          "valeur": "iPhone et Android"
-        }
-      ],
-      "inclus": [
-        "Ateliers pour définir les écrans et le parcours",
-        "Maquettes cliquables testées avant le développement",
-        "Publication sur l'App Store et Google Play",
-        "Notifications pour prévenir vos clients",
-        "Tableau de bord pour suivre l'utilisation"
       ]
     },
     {

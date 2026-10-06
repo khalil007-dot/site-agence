@@ -26,16 +26,6 @@ const GRILLE = [captureOmi, menuOmi, flyerObrunch, flyerOmi, captureStreetSapp, 
     <div class="toast t-right"><b>Commande reçue ✓</b>Payée par Bancontact, depuis un téléphone</div>
   </div>}
 
-  {id === 'application' && <div class="sv sv-app">
-    <div class="app-phone"><div class="app-screen">
-      <div class="app-top"><b>Votre restaurant</b><span>Bonjour Sarah</span></div>
-      <div class="app-card"><span>Carte de fidélité</span><div class="stamps">{Array.from({ length: 10 }, (_, i) => <i class={i < 7 ? 'on' : ''}></i>)}</div><small>Encore 3 visites pour un dessert offert</small></div>
-      <div class="app-btn">Réserver une table</div>
-      <div class="app-btn ghost">Commander à emporter</div>
-    </div></div>
-    <div class="toast t-right"><b>Notification</b>Votre commande est prête{NB}!</div>
-  </div>}
-
   {id === 'seo' && <div class="sv sv-google">
     <div class="gpanel">
       <div class="gsearch"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>plombier uccle</div>

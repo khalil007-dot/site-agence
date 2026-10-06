@@ -9,7 +9,7 @@ export async function GET() {
   const artTxt = articles.map(a => `- [${a.data.titre}](${SITE_URL}/${a.id})\n`).join('');
   return new Response(`# ${BRAND}
 
-> Agence web à Bruxelles qui travaille pour les indépendants, commerçants et PME de toute la Belgique : création de sites internet (vitrine, e-commerce), applications mobiles, logos et identité visuelle (menus, flyers, cartes de visite), référencement Google et IA, Google Ads, réseaux sociaux et maintenance.
+> Agence web à Bruxelles qui travaille pour les indépendants, commerçants et PME de toute la Belgique : création de sites internet (vitrine, e-commerce), logos et identité visuelle (menus, flyers, cartes de visite), référencement Google et IA, Google Ads, réseaux sociaux et maintenance.
 
 - Zone : Bruxelles et toute la Belgique, à distance ou sur place
 - Langue : français

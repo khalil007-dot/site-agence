@@ -1014,18 +1014,6 @@ a.m-proof:hover { border-color: var(--hair); }
 .toast b { color: #111; font-size: .8125rem; }
 .toast.t-right { right: 0; top: 0; }
 .toast.t-top { top: -2px; }
-/* Application */
-.sv-app .app-phone { position: absolute; left: 6%; top: 10px; bottom: -40px; width: 52%; max-width: 230px; border-radius: 30px 30px 0 0; background: #000; padding: 8px 8px 0; box-shadow: 0 -10px 40px rgba(0,0,0,.4); }
-.app-screen { height: 100%; border-radius: 23px 23px 0 0; background: #F6F4F0; padding: 14px 12px; display: grid; gap: 10px; align-content: start; color: #111; font-family: Arial, sans-serif; }
-.app-top { display: grid; gap: 2px; font-size: .75rem; color: #666; }
-.app-top b { font-size: .9375rem; color: #111; }
-.app-card { background: #1F3D2B; color: #fff; border-radius: 14px; padding: 12px; display: grid; gap: 8px; font-size: .75rem; }
-.stamps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
-.stamps i { aspect-ratio: 1; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.5); }
-.stamps i.on { background: #F5C451; border-color: #F5C451; }
-.app-card small { font-size: .6875rem; opacity: .8; }
-.app-btn { background: #111; color: #fff; text-align: center; border-radius: 100px; padding: 9px; font-size: .75rem; font-weight: 600; }
-.app-btn.ghost { background: transparent; color: #111; border: 1.5px solid #111; }
 /* SEO et Google Ads */
 .serp-list { display: grid; gap: 8px; align-content: start; }
 .serp-r { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: #F4F4F4; }
