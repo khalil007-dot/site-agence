@@ -1,7 +1,7 @@
 ---
 titre: "Shopify ou WooCommerce : lequel choisir pour une petite boutique ?"
 titre_carte: "Shopify ou WooCommerce : lequel choisir ?"
-titre_seo: "Shopify ou WooCommerce : comparatif pour petite boutique | Épure Studio"
+titre_seo: "Shopify ou WooCommerce : comparatif petite boutique"
 fil_ariane: "Shopify ou WooCommerce"
 description: "Shopify ou WooCommerce pour une petite boutique en Belgique ? Coûts mensuels, frais de paiement, facilité d'utilisation et limites de chaque solution."
 resume: "Frais mensuels, facilité de prise en main et limites de chaque solution."

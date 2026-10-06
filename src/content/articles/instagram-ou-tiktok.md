@@ -1,7 +1,7 @@
 ---
 titre: "Instagram ou TikTok : où publier quand on est commerçant ?"
 titre_carte: "Instagram ou TikTok : où publier ?"
-titre_seo: "Instagram ou TikTok pour un commerce en Belgique ? | Épure Studio"
+titre_seo: "Instagram ou TikTok pour un commerce en Belgique ?"
 fil_ariane: "Instagram ou TikTok"
 description: "Instagram ou TikTok pour un commerce ou un indépendant en Belgique ? Audience, type de contenu, temps à y consacrer : comment choisir le bon réseau."
 resume: "Selon votre clientèle, le bon réseau n'est pas forcément le plus populaire."
@@ -21,8 +21,8 @@ Début 2025, Instagram comptait 4,9 millions d'utilisateurs en Belgique, et TikT
 <figure class="fig"><div class="fig-box">
 <span class="fig-tag">Le même commerce, deux façons de se montrer</span>
 <div class="phones">
-<div><div class="phone"><div class="phone-screen"><div class="ig-head"><i></i>votre.commerce</div><div class="ig-grid"><img src="/articles/omi-restaurant.jpg" alt="" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" loading="lazy"><img src="/articles/obrunch-house-flyer.jpg" alt="" loading="lazy"><img src="/articles/omi-flyer.jpg" alt="" loading="lazy"><img src="/articles/streetsapp.jpg" alt="" loading="lazy"><img src="/articles/obrunch-house-logo.jpg" alt="" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" loading="lazy"><img src="/articles/omi-restaurant.jpg" alt="" loading="lazy"><img src="/articles/omi-flyer.jpg" alt="" loading="lazy"><img src="/articles/obrunch-house-flyer.jpg" alt="" loading="lazy"><img src="/articles/streetsapp.jpg" alt="" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" loading="lazy"></div></div></div><p class="phone-label">Instagram : une vitrine soignée</p></div>
-<div><div class="phone"><div class="phone-screen tt"><img src="/articles/omi-restaurant.jpg" alt="" loading="lazy"><div class="tt-side"><i></i>2,4 k<i></i>86<i></i>Partager</div><div class="tt-cap"><b>@votre.commerce</b>Un samedi soir en cuisine, en 30 secondes 🔥</div></div></div><p class="phone-label">TikTok : une vidéo prise sur le vif</p></div>
+<div><div class="phone"><div class="phone-screen"><div class="ig-head"><i></i>votre.commerce</div><div class="ig-grid"><img src="/articles/omi-restaurant.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/obrunch-house-flyer.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/omi-flyer.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/streetsapp.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/obrunch-house-logo.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/omi-restaurant.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/omi-flyer.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/obrunch-house-flyer.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/streetsapp.jpg" alt="" width="160" height="160" loading="lazy"><img src="/articles/omi-menu.jpg" alt="" width="160" height="160" loading="lazy"></div></div></div><p class="phone-label">Instagram : une vitrine soignée</p></div>
+<div><div class="phone"><div class="phone-screen tt"><img src="/articles/omi-restaurant.jpg" alt="" width="160" height="160" loading="lazy"><div class="tt-side"><i></i>2,4 k<i></i>86<i></i>Partager</div><div class="tt-cap"><b>@votre.commerce</b>Un samedi soir en cuisine, en 30 secondes 🔥</div></div></div><p class="phone-label">TikTok : une vidéo prise sur le vif</p></div>
 </div>
 </div><figcaption>Illustration avec des visuels de nos réalisations (OMI Restaurant, O'Brunch House, Street Sapp). Instagram met en valeur une galerie, TikTok une vidéo à la fois.</figcaption></figure>
 

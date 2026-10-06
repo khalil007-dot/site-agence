@@ -1,7 +1,7 @@
 ---
 titre: "Google Ads avec 300 € par mois : est-ce que ça vaut le coup ?"
 titre_carte: "Google Ads avec 300 € par mois : ça vaut le coup ?"
-titre_seo: "Google Ads avec un petit budget : ça vaut le coup ? | Épure Studio"
+titre_seo: "Google Ads avec 300 € par mois : ça vaut le coup ?"
 fil_ariane: "Google Ads petit budget"
 description: "Google Ads avec 300 € par mois pour un commerce ou un indépendant : comment estimer le coût d'un client avant de lancer une campagne, avec un exemple chiffré."
 resume: "Comment estimer le coût d'un client avant de lancer une campagne."

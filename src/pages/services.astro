@@ -68,7 +68,7 @@ const SERVICES_LD = {
 };
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base chemin="services" title={`Création de sites, SEO et logos à Bruxelles : services et prix | ${BRAND}`} desc="Site vitrine dès 890 €, boutique en ligne, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : ce qui est inclus, délais, prix affichés et paiement en 3 fois." current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
+<Base chemin="services" title={`Services et prix : sites et SEO à Bruxelles | ${BRAND}`} desc="Site vitrine dès 890 €, boutique en ligne, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : ce qui est inclus, délais, prix et paiement en 3 fois." current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Tout pour trouver des clients en ligne. Prix affichés.</h1>

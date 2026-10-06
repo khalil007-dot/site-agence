@@ -198,6 +198,14 @@ if (quiz) {
   })));
 }
 
+// Accueil : bouton pause de la bande de réalisations qui défile
+document.querySelectorAll('.vitrine-pause').forEach(b => b.addEventListener('click', () => {
+  const on = b.getAttribute('aria-pressed') !== 'true';
+  b.setAttribute('aria-pressed', on);
+  b.setAttribute('aria-label', on ? 'Reprendre le défilement' : 'Mettre en pause le défilement');
+  b.closest('.vitrine').classList.toggle('paused', on);
+}));
+
 // Réalisations : filtre par catégorie, gardé dans l'adresse (?type=logo)
 const filters = document.querySelectorAll('[data-filter]');
 if (filters.length) {
@@ -223,12 +231,25 @@ async function envoyer(formEl, champs, errId) {
   const err = document.getElementById(errId);
   err.textContent = '';
   if (formEl.botcheck && formEl.botcheck.checked) return true; // robot de spam : on ne l'envoie pas
+  // Si l'envoi échoue (ou si la clé n'est pas encore configurée), on propose d'envoyer
+  // la même demande, déjà rédigée, par WhatsApp ou par e-mail : aucun prospect n'est perdu.
   const echec = () => {
-    err.append("L'envoi n'a pas fonctionné. Réessayez dans un instant, ou écrivez-nous à ");
-    const a = document.createElement('a');
-    a.href = 'mailto:' + formEl.dataset.email;
-    a.textContent = formEl.dataset.email;
-    err.append(a, '.');
+    const texte = Object.entries(champs).filter(([k]) => k !== 'subject').map(([k, v]) => `${k} : ${v}`).join('\n');
+    err.append("L'envoi automatique n'a pas fonctionné. Envoyez-nous la même demande, déjà rédigée, en un clic : ");
+    const wa = document.querySelector('.wa-float');
+    const liens = [];
+    if (wa) {
+      const l = document.createElement('a');
+      l.href = wa.href.split('?')[0] + '?text=' + encodeURIComponent(champs.subject + '\n' + texte);
+      l.target = '_blank'; l.rel = 'noopener'; l.textContent = 'par WhatsApp';
+      liens.push(l);
+    }
+    const m = document.createElement('a');
+    m.href = 'mailto:' + formEl.dataset.email + '?subject=' + encodeURIComponent(champs.subject) + '&body=' + encodeURIComponent(texte);
+    m.textContent = 'par e-mail';
+    liens.push(m);
+    liens.forEach((l, i) => { l.className = 'link'; err.append(i ? ' ou ' : '', l); });
+    err.append('.');
     return false;
   };
   if (!formEl.dataset.cle) return echec();

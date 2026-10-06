@@ -12,6 +12,7 @@ const projets = (await getCollection('projets'))
 ---
 {projets.length > 0 && (
   <section class="vitrine" aria-label="Quelques réalisations">
+    <button class="vitrine-pause" type="button" aria-pressed="false" aria-label="Mettre en pause le défilement"><span aria-hidden="true"></span></button>
     <div class="vitrine-piste">
       {[0, 1].map(copie => projets.map(p => (
         <a class="vitrine-item" href="/realisations" aria-hidden={copie ? 'true' : undefined} tabindex={copie ? -1 : undefined}>

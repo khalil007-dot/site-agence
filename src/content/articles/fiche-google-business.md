@@ -1,9 +1,9 @@
 ---
 titre: "Fiche Google Business : 8 réglages pour apparaître dans votre ville"
 titre_carte: "Fiche Google : 8 réglages pour apparaître dans votre ville"
-titre_seo: "Fiche Google Business : 8 réglages pour le SEO local | Épure Studio"
+titre_seo: "Fiche Google Business : 8 réglages pour le SEO local"
 fil_ariane: "Fiche Google Business"
-description: "Comment optimiser votre fiche Google Business pour apparaître dans votre ville : catégorie, horaires, photos, avis, description. 8 réglages expliqués simplement."
+description: "Comment optimiser votre fiche Google Business pour apparaître dans votre ville : catégorie, horaires, photos, avis et description. 8 réglages expliqués."
 resume: "Les informations que Google regarde en premier pour le référencement local."
 categorie: "Référencement"
 couleur: magenta

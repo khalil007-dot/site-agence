@@ -32,7 +32,7 @@ const PERSONS = FONDATEURS.map(f => ({
   address: { '@type': 'PostalAddress', addressLocality: 'Bruxelles', addressCountry: 'BE' },
 }));
 ---
-<Base chemin="a-propos" title={`Qui sommes-nous : {COFONDATEUR} et {prenom}, agence web à Bruxelles | ${BRAND}`} desc={`${BRAND}, agence web à Bruxelles fondée par ${COFONDATEUR} (commercial et relation client) et ${FONDATEUR} (stratégie et développement) : des sites, logos et campagnes qui font venir des clients aux commerçants et indépendants.`} current="a-propos" schema={[{ '@context': 'https://schema.org', '@type': 'AboutPage', url: SITE_URL + '/a-propos', about: { '@id': ORG_ID } }, ...PERSONS]} crumbs={[['À propos', 'a-propos']]}>
+<Base chemin="a-propos" title={`${COFONDATEUR} et ${prenom}, agence web à Bruxelles | ${BRAND}`} desc={`${BRAND}, agence web à Bruxelles fondée par ${COFONDATEUR} et ${prenom} : sites, logos et campagnes qui font venir des clients aux commerçants et indépendants.`} current="a-propos" schema={[{ '@context': 'https://schema.org', '@type': 'AboutPage', url: SITE_URL + '/a-propos', about: { '@id': ORG_ID } }, ...PERSONS]} crumbs={[['À propos', 'a-propos']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Deux fondateurs, zéro intermédiaire.</h1>
