@@ -14,9 +14,9 @@ const projets = (await getCollection('projets'))
   <section class="vitrine" aria-label="Quelques réalisations">
     <button class="vitrine-pause" type="button" aria-pressed="false" aria-label="Mettre en pause le défilement"><span aria-hidden="true"></span></button>
     <div class="vitrine-piste">
-      {[0, 1].map(copie => projets.map(p => (
+      {[0, 1].map(copie => projets.map((p, i) => (
         <a class="vitrine-item" href="/realisations" aria-hidden={copie ? 'true' : undefined} tabindex={copie ? -1 : undefined}>
-          <Image src={images[p.data.image!].default} alt={copie ? '' : (p.data.image_alt || p.data.client)} widths={[480, 960]} sizes="(max-width: 760px) 75vw, 36vw" loading={copie ? 'lazy' : 'eager'} />
+          <Image src={images[p.data.image!].default} alt={copie ? '' : (p.data.image_alt || p.data.client)} widths={[480, 960]} sizes="(max-width: 760px) 75vw, 36vw" loading={copie ? 'lazy' : 'eager'} fetchpriority={!copie && i < 2 ? 'high' : undefined} />
           <span>{p.data.client}</span>
         </a>
       )))}
