@@ -13,6 +13,12 @@ export const VILLE = reglages.ville;
 export const FONDATEUR = reglages.fondateur;
 // Clé Web3Forms : les formulaires envoient les demandes par e-mail (vide = envoi désactivé)
 export const CLE_FORMULAIRES = reglages.cle_formulaires;
+// WhatsApp sur le même numéro, avec un premier message déjà écrit (désactivable dans les réglages)
+export const WHATSAPP = reglages.whatsapp
+  ? `https://wa.me/${TEL_INTL.slice(1)}?text=${encodeURIComponent('Bonjour, je voudrais un devis pour mon projet.')}`
+  : '';
+// Jeton Cloudflare Web Analytics : statistiques de visite sans cookies (vide = désactivé)
+export const CLE_ANALYTICS = reglages.cle_analytics;
 export const TODAY = reglages.date_maj;
 export const FAMS = services.familles;
 export const SV = services.services;

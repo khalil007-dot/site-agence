@@ -12,7 +12,7 @@ import captureStreetSapp from '../assets/projets/streetsapp.jpg';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
-import { BRAND, FAMS, NB, ORG, ORG_ID, SITE_URL, SV, e } from '../lib/site';
+import { BRAND, FAMS, NB, ORG, ORG_ID, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
 
 const spotTxt: Record<string, string> = {
   creer: 'Site vitrine, boutique en ligne ou application, conçus pour être faciles à utiliser sur téléphone.',
@@ -44,6 +44,7 @@ const METIERS: [string, string, string, string[], string[]][] = [
     ['e-commerce', 'google-ads', 'reseaux-sociaux']],
 ];
 const SVNAME = Object.fromEntries(SV.map(s => [s.id, s.nom_court]));
+const prixVitrine = SV.find(s => s.id === 'site-vitrine')?.prix_unique;
 // Logos des clients, en blanc (src/assets/clients)
 const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
 
@@ -68,10 +69,13 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap reveal">
       <h1 class="poster" id="hero-title"><span class="h1-kicker">Agence web à Bruxelles et partout en Belgique</span>Des sites et des marques qui font venir des clients.</h1>
       <div class="hero-foot">
-        <p class="lead">Création de site internet, boutique en ligne, logo, référencement Google et IA, réseaux sociaux. Un seul interlocuteur s'occupe de tout, du premier croquis aux premières commandes.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="#estimer">Estimer mon projet</a>
-          <a class="btn btn-secondary" href="/devis?mode=appel">Réserver un appel</a>
+        <p class="lead">Sites vitrine{prixVitrine ? ` dès ${e(prixVitrine)}` : ''}, boutiques en ligne, logos et référencement Google pour les commerces, restaurants et indépendants de Bruxelles et de toute la Belgique. Un seul interlocuteur, du premier croquis aux premières commandes.</p>
+        <div class="hero-cta">
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/devis">Recevoir mon devis gratuit</a>
+            <a class="btn btn-secondary" href="/devis?mode=appel">Réserver un appel</a>
+          </div>
+          <a class="link small" href="#estimer">ou estimer mon budget en 30 secondes</a>
         </div>
       </div>
       <div class="proof-row">
@@ -83,6 +87,13 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   </section>
 
   <Vitrine />
+
+  <section class="logos-band" aria-labelledby="logos-title">
+    <div class="wrap">
+      <h2 class="small muted" id="logos-title">Ils nous ont confié leur site, leur logo ou leur visibilité</h2>
+      <ul class="logo-row reels">{CLIENTS.map(([nom, src]) => <li><Image src={src} alt={nom} height={120} /></li>)}</ul>
+    </div>
+  </section>
 
   <section aria-label="Nos quatre familles de services">
     <div class="wrap">
@@ -102,13 +113,6 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         </a>;
         })}
       </div>
-    </div>
-  </section>
-
-  <section class="logos-band" aria-labelledby="logos-title">
-    <div class="wrap">
-      <h2 class="small muted" id="logos-title">Ils nous ont confié leur site, leur logo ou leur visibilité</h2>
-      <ul class="logo-row reels">{CLIENTS.map(([nom, src]) => <li><Image src={src} alt={nom} height={120} /></li>)}</ul>
     </div>
   </section>
 
@@ -280,6 +284,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <div class="btn-row" style="justify-content:center">
           <a class="btn btn-primary" href="/devis">Recevoir mon devis gratuit</a>
           <a class="btn btn-glass" href="/devis?mode=appel">Réserver un appel</a>
+          {WHATSAPP && <a class="btn btn-glass" href={WHATSAPP} target="_blank" rel="noopener">Écrire sur WhatsApp</a>}
         </div>
       </div>
     </div>

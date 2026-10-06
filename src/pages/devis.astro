@@ -8,7 +8,7 @@ import { Image } from 'astro:assets';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
-import { BRAND, CLE_FORMULAIRES, EMAIL, FAMS, NB, SV, TEL, TEL_INTL } from '../lib/site';
+import { BRAND, CLE_FORMULAIRES, EMAIL, FAMS, NB, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
 
 // Encart de confiance : le premier vrai avis s'il y en a un, sinon les logos des clients
 const [avis] = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.data.ordre);
@@ -128,6 +128,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
           <h2>Vous préférez écrire ou appeler ?</h2>
           <a class="big link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
           <a class="big link" href={`tel:${TEL_INTL}`}>{TEL}</a>
+          {WHATSAPP && <a class="btn btn-secondary" href={WHATSAPP} target="_blank" rel="noopener" style="justify-self:start">Écrire sur WhatsApp</a>}
           <p class="muted small">Lundi au vendredi, 9{NB}h à 18{NB}h</p>
         </div>
       </aside>

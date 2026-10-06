@@ -574,3 +574,17 @@ button[disabled] { opacity: .6; cursor: progress; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .side-logos { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
 .side-logos img { height: 40px; width: auto; opacity: .8; }
+
+/* Bouton WhatsApp flottant (masqué sur mobile quand la barre du bas est là) */
+.wa-float { position: fixed; z-index: 41; right: 20px; bottom: calc(20px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 8px; padding: 12px 18px 12px 14px; border-radius: 100px; background: #25D366; color: #06331A; font-weight: 600; font-size: .9375rem; text-decoration: none; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+.wa-float svg { width: 24px; height: 24px; }
+.wa-float:hover { background: #2EE372; }
+.wa-float:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+@media (max-width: 720px) {
+  .wa-float { padding: 14px; }
+  .wa-float span { display: none; }
+  body.has-sticky .wa-float { display: none; }
+}
+.hero-cta { display: grid; gap: 14px; justify-items: start; }
+.logos-band + section { padding-top: clamp(48px, 6vw, 72px); }
+.vitrine + .logos-band { padding-top: 0; }

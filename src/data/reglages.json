@@ -6,5 +6,7 @@
   "ville": "Bruxelles",
   "fondateur": "Khalil Al Keaber",
   "date_maj": "2026-10-05",
-  "cle_formulaires": ""
+  "cle_formulaires": "",
+  "whatsapp": true,
+  "cle_analytics": ""
 }

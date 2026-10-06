@@ -227,6 +227,15 @@ content:
         label: Prénom et nom du fondateur
         type: string
         required: true
+      - name: whatsapp
+        label: Proposer WhatsApp
+        description: Affiche un bouton WhatsApp vers le numéro de téléphone ci-dessus.
+        type: boolean
+        default: true
+      - name: cle_analytics
+        label: Jeton Cloudflare Web Analytics
+        description: Facultatif. Pour compter les visites, sans cookies.
+        type: string
       - name: cle_formulaires
         label: Clé Web3Forms
         description: Reçue par e-mail sur web3forms.com. Sans elle, les formulaires n'envoient rien.

@@ -1,7 +1,7 @@
 ---
 // Squelette commun à toutes les pages : <head>, en-tête, pied de page
 import Logo from '../components/Logo.astro';
-import { BRAND, EMAIL, SITE_URL, SV, TEL, TEL_INTL, pageUrl } from '../lib/site';
+import { BRAND, CLE_ANALYTICS, EMAIL, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, pageUrl } from '../lib/site';
 
 interface Props {
   chemin: string; // adresse de la page sans « / » au début ('' pour l'accueil)
@@ -54,8 +54,9 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 <link rel="stylesheet" href="/styles.css">
 <script is:inline src="/main.js" defer></script>
 {blocks.map(b => <script is:inline type="application/ld+json" set:html={JSON.stringify(b)} />)}
+{CLE_ANALYTICS && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: CLE_ANALYTICS })}></script>}
 </head>
-<body>
+<body class={sticky ? 'has-sticky' : undefined}>
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="nav">
   <div class="wrap">
@@ -84,6 +85,9 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     <div class="foot-bottom"><span><span translate="no">{BRAND}</span>, Bruxelles, Belgique.</span><a href="/mentions-legales">Mentions légales et confidentialité</a></div>
   </div>
 </footer>
-{sticky && <div class="sticky-cta"><a class="btn btn-secondary" href="/realisations">Réalisations</a><a class="btn btn-primary" href="/devis">Devis gratuit</a></div>}
+{sticky && <div class="sticky-cta">{WHATSAPP
+  ? <a class="btn btn-secondary" href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>
+  : <a class="btn btn-secondary" href={`tel:${TEL_INTL}`}>Appeler</a>}<a class="btn btn-primary" href="/devis">Devis gratuit</a></div>}
+{WHATSAPP && <a class="wa-float" href={WHATSAPP} target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c.4.9 1.2 1.7 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .5-.4.7-.5.3-1.2.5-2 .3-2.2-.6-4-2.4-4.6-4.6-.2-.8 0-1.5.3-1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>}
 </body>
 </html>
