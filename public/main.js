@@ -377,6 +377,8 @@ function tabs(list, onChange) {
 }
 const mtabs = document.querySelector('.mtabs');
 if (mtabs) tabs(mtabs);
+const gtabs = document.querySelector('.gtabs');
+if (gtabs) tabs(gtabs);
 
 // Formules : paiement en une fois ou en 12 mois
 const bills = document.querySelectorAll('.bill');

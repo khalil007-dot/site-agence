@@ -277,6 +277,7 @@ content:
           - { name: famille, label: Famille, type: select, options: { values: [creer, visibilite, image, entretenir] } }
           - { name: nom, label: Nom, type: string, required: true }
           - { name: nom_court, label: Nom court, type: string }
+          - { name: promesse, label: Promesse (le résultat pour le client), type: text }
           - { name: prix_unique, label: Prix de départ (une fois), description: 0 si le service est mensuel., type: number }
           - { name: prix_mensuel, label: Prix de départ (par mois), description: 0 si le service est payé une fois., type: number }
           - { name: pour_qui, label: Pour qui, type: text }

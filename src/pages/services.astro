@@ -1,10 +1,56 @@
 ---
 // Page Services : générée à partir de src/data/services.json
+// Guide « par où commencer », une fiche par service (promesse, prix, mensualités, réalisation), formules, FAQ
 import Base from '../layouts/Base.astro';
-import Final from '../components/Final.astro';
-import { BRAND, FAMS, ORG_ID, SITE_URL, SV, prixDepart } from '../lib/site';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import captureOmi from '../assets/projets/omi-restaurant.jpg';
+import captureStreetSapp from '../assets/projets/streetsapp.jpg';
+import logoObrunch from '../assets/projets/obrunch-house-logo.jpg';
+import { BRAND, FAMS, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '../lib/site';
 
+const BYID = Object.fromEntries(SV.map(s => [s.id, s]));
 const devisLabel = (court: string) => (['SEO', 'Google Ads'].includes(court) ? court : court.toLowerCase());
+// Paiement en 12 mensualités sans frais pour les services payés en une fois
+const mensualite = (p: number) => e(Math.round(p / 12));
+
+// Vraies réalisations à montrer à côté d'un service
+const PREUVES: Record<string, { img: ImageMetadata; client: string; quoi: string; lien?: string }> = {
+  'site-vitrine': { img: captureOmi, client: 'OMI Restaurant', quoi: 'Site vitrine avec réservation', lien: 'https://omi-restaurant.com/' },
+  'e-commerce': { img: captureStreetSapp, client: 'Street Sapp', quoi: 'Boutique en ligne de sportswear', lien: 'https://streetsapp.be/' },
+  logo: { img: logoObrunch, client: "O'Brunch House", quoi: 'Logo, puis flyer assorti' },
+};
+
+// Guide « Par où commencer ? » : [situation, conseil, services recommandés]
+const GUIDE: [string, string, string[]][] = [
+  ['Je lance mon activité', "Commencez par le logo : les couleurs du site en découlent. Puis un site vitrine pour être trouvé dès l'ouverture.", ['logo', 'site-vitrine']],
+  ["J'ai un site, mais peu de demandes", "Le problème n'est pas le site mais les visiteurs. Le référencement les amène durablement, Google Ads tout de suite.", ['seo', 'google-ads']],
+  ['Je veux vendre en ligne', "Une boutique pensée pour le téléphone, une image soignée, puis du référencement pour attirer les acheteurs.", ['e-commerce', 'logo', 'seo']],
+  ['Je veux fidéliser mes clients', "Une application pour la réservation et la fidélité, et des réseaux sociaux pour rester présent chaque semaine.", ['application', 'reseaux-sociaux']],
+  ["Je veux qu'on s'occupe de mon site", "Hébergement, sauvegardes, mises à jour et petites modifications chaque mois, sans engagement.", ['maintenance']],
+];
+const budget = (ids: string[]) => {
+  const once = ids.reduce((t, id) => t + BYID[id].prix_unique, 0), mois = ids.reduce((t, id) => t + BYID[id].prix_mensuel, 0);
+  return [once && e(once), mois && e(mois) + '/mois'].filter(Boolean).join(' + ');
+};
+
+// Formules (mêmes prix que sur l'accueil) et ce qu'elles coûteraient en services séparés
+const P = Object.fromEntries(SV.map(s => [s.id, s.prix_unique || s.prix_mensuel]));
+const FORMULES: [string, string, number, string, number, string][] = [
+  ['Lancement', 'Logo et site vitrine', 1190, '', P['logo'] + P['site-vitrine'], 'logo,site-vitrine'],
+  ['Commerce', 'Logo, boutique et 3 mois de SEO', 3290, '', P['logo'] + P['e-commerce'] + 3 * P['seo'], 'logo,e-commerce,seo'],
+  ['Visibilité', 'SEO, Google Ads et réseaux sociaux', 790, '/mois', P['seo'] + P['google-ads'] + P['reseaux-sociaux'], 'seo,google-ads,reseaux-sociaux'],
+];
+
+const FAQ: [string, string][] = [
+  ['Les prix affichés sont-ils les vrais prix ?', "Ce sont des prix de départ, hors taxes. Le devis, gratuit et ferme, précise le prix exact selon votre projet (nombre de pages, de produits, fonctions en plus). Pas de coût caché ensuite."],
+  ['Puis-je payer en plusieurs fois ?', "Oui. En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 12 mensualités sans frais pour les services payés en une fois."],
+  ['Les services mensuels m’engagent-ils longtemps ?', "La maintenance est sans engagement. Le référencement demande 3 mois au départ, le temps que Google prenne en compte le travail. Ensuite, vous arrêtez avec un mois de préavis."],
+  ['Le budget Google Ads est-il compris ?', "Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond."],
+  ['À qui appartient le site ?', "À vous : nom de domaine, contenus, fichiers du logo. Si vous partez, vous gardez tout."],
+  ['Combien de temps avant d’avoir des résultats ?', "Google Ads : dès la première semaine. Référencement : premiers effets en 2 à 4 mois. Un nouveau site bien construit commence à recevoir des demandes dès sa mise en ligne, si on lui amène des visiteurs."],
+];
+
 const SERVICES_LD = {
   '@context': 'https://schema.org', '@type': 'ItemList', name: 'Services de ' + BRAND,
   itemListElement: SV.map((s, i) => {
@@ -12,40 +58,120 @@ const SERVICES_LD = {
     return {
       '@type': 'ListItem', position: i + 1,
       item: {
-        '@type': 'Service', name: s.nom, url: SITE_URL + '/services#' + s.id, description: s.pour_qui, provider: { '@id': ORG_ID },
+        '@type': 'Service', name: s.nom, url: SITE_URL + '/services#' + s.id, description: s.promesse + ' ' + s.pour_qui, provider: { '@id': ORG_ID },
         areaServed: [{ '@type': 'City', name: 'Bruxelles' }, { '@type': 'Country', name: 'Belgique' }],
         offers: { '@type': 'Offer', priceCurrency: 'EUR', price, priceSpecification: { '@type': 'UnitPriceSpecification', price, priceCurrency: 'EUR', unitText: s.prix_mensuel ? 'MONTH' : 'projet', valueAddedTaxIncluded: false } },
       },
     };
   }),
 };
+const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base chemin="services" title={`Création de sites, SEO et logos à Bruxelles | ${BRAND}`} desc="Création de site vitrine, boutique en ligne, application, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : contenu, délais et prix." current="services" schema={[SERVICES_LD]} crumbs={[['Services', 'services']]}>
+<Base chemin="services" title={`Création de sites, SEO et logos à Bruxelles : services et prix | ${BRAND}`} desc="Site vitrine dès 890 €, boutique en ligne, application, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : ce qui est inclus, délais, prix affichés et paiement en 12 fois." current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
-      <h1 class="poster" id="page-title">Nos services web à Bruxelles</h1>
-      <p class="lead">{SV.length} services pour créer votre site, soigner votre image et faire venir des clients. Chaque offre indique ce qui est inclus, le délai et le prix de départ.</p>
+      <h1 class="poster" id="page-title">Tout pour trouver des clients en ligne. Prix affichés.</h1>
+      <p class="lead">{SV.length} services pour créer votre site, soigner votre image et faire venir des clients. Pour chacun : le résultat attendu, ce qui est inclus, le délai et le prix. Sans jargon et sans surprise.</p>
+      <div class="btn-row" style="margin-top:28px">
+        <a class="btn btn-primary" href="#guide">Trouver le bon service</a>
+        <a class="btn btn-secondary" href="/devis">Demander un devis gratuit</a>
+      </div>
       <ul class="badges" style="margin-top:24px" aria-label="Nos engagements"><li>Prix affichés, devis ferme</li><li>Maquette refaite sans frais si elle ne vous plaît pas</li><li>Paiement en 12 fois sans frais</li><li>Le site vous appartient</li></ul>
     </div>
   </section>
-  <nav class="jump" aria-label="Familles de services"><div class="wrap">{FAMS.map(f => <a href={`#${f.id}`} style={`--c:var(--${f.couleur})`}>{f.nom_court}</a>)}</div></nav>
+
+  <section class="section" id="guide" aria-labelledby="guide-title" style="padding-top:clamp(32px,4vw,56px)">
+    <div class="wrap">
+      <div class="guide">
+        <div class="guide-head">
+          <h2 class="d-lg" id="guide-title">Par où commencer{NB}?</h2>
+          <p class="muted">Choisissez votre situation : je vous dis ce qui vous fera gagner des clients en premier.</p>
+        </div>
+        <div class="gtabs" role="tablist" aria-label="Votre situation">{GUIDE.map(([sit], i) => <button class="gtab" type="button" role="tab" id={`gt-${i}`} aria-controls={`gp-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{sit}</button>)}</div>
+        {GUIDE.map(([sit, conseil, ids], i) => <div class="gpanel" role="tabpanel" id={`gp-${i}`} aria-labelledby={`gt-${i}`} hidden={i !== 0}>
+          <p class="gconseil">{conseil}</p>
+          <div class="grecos">{ids.map(id => <a class="greco" href={`#${id}`}><span>{BYID[id].nom_court}</span><b>{prixDepart(BYID[id])}</b><small>Voir le détail ↓</small></a>)}</div>
+          <div class="gfoot">
+            <span class="m-budget">Budget de départ : <b>{budget(ids)}</b></span>
+            <a class="btn btn-primary" href={`/devis?service=${ids.join(',')}`}>Devis pour ces services</a>
+          </div>
+        </div>)}
+      </div>
+    </div>
+  </section>
+
+  <nav class="jump" aria-label="Familles de services"><div class="wrap">{FAMS.map(f => <a href={`#${f.id}`} style={`--c:var(--${f.couleur})`}>{f.nom_court}</a>)}<a href="#formules" style="--c:var(--green)">Formules</a><a href="#faq" style="--c:#888">Questions</a></div></nav>
+
 {FAMS.map(f => (
   <section class="section" id={f.id} aria-labelledby={`${f.id}-title`} style="padding-top:clamp(48px,6vw,80px)">
     <div class="wrap">
       <div class="fam-banner" style={`background:var(--g-${f.couleur})`}><h2 class="d-lg" id={`${f.id}-title`}>{f.nom}</h2><p>{f.accroche}</p></div>
-      {SV.filter(s => s.famille === f.id).map(s => (
-      <article class="svc" id={s.id} aria-labelledby={`${s.id}-t`}>
-        <div>
+      {SV.filter(s => s.famille === f.id).map(s => {
+        const pr = PREUVES[s.id];
+        return <article class="svc" id={s.id} aria-labelledby={`${s.id}-t`}>
+        <div class="svc-main">
           <h3 id={`${s.id}-t`}>{s.nom}</h3>
+          <p class="svc-promise">{s.promesse}</p>
           <p class="for">{s.pour_qui}</p>
-          <dl class="svc-facts"><div><dt>À partir de</dt><dd>{prixDepart(s)}</dd></div>{s.infos.map(x => <div><dt>{x.label}</dt><dd>{x.valeur}</dd></div>)}</dl>
-          <a class="btn btn-primary" href={`/devis?service=${s.id}`}>Devis {devisLabel(s.nom_court)}</a>
+          <div class="svc-price">
+            <span class="svc-from">À partir de</span>
+            <b>{prixDepart(s)}</b>
+            {s.prix_unique > 0 && <span class="svc-12">ou {mensualite(s.prix_unique)}/mois pendant 12 mois, sans frais</span>}
+          </div>
+          <dl class="svc-facts">{s.infos.map(x => <div><dt>{x.label}</dt><dd>{x.valeur}</dd></div>)}</dl>
+          <div class="btn-row svc-ctas">
+            <a class="btn btn-primary" href={`/devis?service=${s.id}`}>Devis {devisLabel(s.nom_court)}</a>
+            {WHATSAPP && <a class="btn btn-secondary" href={WHATSAPP.split('?')[0] + '?text=' + encodeURIComponent(`Bonjour, j'ai une question sur le service ${s.nom_court}.`)} target="_blank" rel="noopener">Une question ?</a>}
+          </div>
         </div>
-        <ul class="included" style={`--c:var(--${f.couleur})`}>{s.inclus.map(x => <li>{x}</li>)}</ul>
-      </article>
-      ))}
+        <div class="svc-side">
+          <span class="m-label">Ce qui est inclus</span>
+          <ul class="included" style={`--c:var(--${f.couleur})`}>{s.inclus.map(x => <li>{x}</li>)}</ul>
+          {pr && (pr.lien
+            ? <a class="m-proof" href={pr.lien} target="_blank" rel="noopener"><Image src={pr.img} alt={`Réalisation pour ${pr.client}`} widths={[240, 480]} sizes="140px" /><span><small>Exemple réel</small><b>{pr.client} <span aria-hidden="true">↗</span></b>{pr.quoi}</span></a>
+            : <a class="m-proof" href="/realisations"><Image src={pr.img} alt={`Réalisation pour ${pr.client}`} widths={[240, 480]} sizes="140px" /><span><small>Exemple réel</small><b>{pr.client}</b>{pr.quoi}</span></a>)}
+        </div>
+      </article>;
+      })}
     </div>
   </section>
 ))}
-<Final title="Plusieurs services vous intéressent ?" text="Estimez le total sur la page d'accueil, ou cochez-les directement dans le formulaire de devis." btn="Composer mon devis" />
+
+  <section class="section" id="formules" aria-labelledby="formules-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <h2 class="d-xl" id="formules-title">Plusieurs services{NB}? Prenez une formule</h2>
+        <p class="subhead">Les combinaisons les plus demandées, moins chères que les services pris séparément.</p>
+      </div>
+      <div class="plans">{FORMULES.map(([nom, quoi, prix, unite, separe, ids], i) => <article class={i === 1 ? 'plan featured' : 'plan'}>
+        {i === 1 && <span class="flag">Recommandé pour vendre en ligne</span>}
+        <h3>{nom}</h3>
+        <p class="muted">{quoi}</p>
+        <p class="price">{e(prix)} <small>{unite ? 'par mois' : 'une fois'}</small></p>
+        <p class="was">au lieu de <s>{e(separe)}{unite}</s>, soit <b class="save">{e(separe - prix)}{unite} d'économie</b></p>
+        <a class={i === 1 ? 'btn btn-primary' : 'btn btn-secondary'} href={`/devis?service=${ids}`}>Choisir {nom}</a>
+      </article>)}</div>
+      <p class="note" style="margin-top:16px">Prix hors taxes. Paiement en 12 mois sans frais possible pour les formules payées en une fois. <a class="link" href="/#formules">Voir le détail des formules</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <div><h2 class="d-xl" id="faq-title">Prix, paiement, engagement</h2><p class="subhead" style="margin-top:18px">Les questions qu'on me pose avant de signer.</p></div>
+      <div class="faq-list">{FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="final-title">
+    <div class="wrap">
+      <div class="final">
+        <h2 class="d-xl" id="final-title">Pas sûr de ce qu'il vous faut{NB}?</h2>
+        <p class="lead" style="color:rgba(255,255,255,.85)">Décrivez votre activité en deux minutes. Vous recevez sous 48{NB}h un devis clair avec les services qui vous rapporteront le plus, et seulement ceux-là.</p>
+        <div class="btn-row" style="justify-content:center">
+          <a class="btn btn-primary" href="/devis">Recevoir mon devis gratuit</a>
+          <a class="btn btn-glass" href="/devis?mode=appel">Réserver un appel</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Base>
