@@ -177,9 +177,9 @@ if (quiz) {
   const qs = [...quiz.querySelectorAll('.quiz-q')];
   const $q = id => document.getElementById(id);
   const RES = {
-    oui: ['On est faits pour travailler ensemble', "Vous cherchez exactement ce que je fais le mieux. Réservez 30 minutes : on regarde votre activité et ce qui vous ferait gagner des clients.", 'Réserver un appel', '/devis?mode=appel'],
-    peut: ['Ça peut coller, parlons-en', "Sur certains points, on n'a pas la même idée du projet. Un appel de 30 minutes suffit pour voir si je peux vous aider, sans engagement.", 'Poser mes questions sur WhatsApp', null],
-    non: ['Je ne suis probablement pas la bonne personne', "Et c'est très bien de le savoir maintenant. Si vous voulez quand même un avis sur votre projet, je vous réponds volontiers.", 'Me demander conseil', '/devis'],
+    oui: ['On est faits pour travailler ensemble', "Vous cherchez exactement ce qu'on fait le mieux. Réservez 30 minutes : on regarde votre activité et ce qui vous ferait gagner des clients.", 'Réserver un appel', '/devis?mode=appel'],
+    peut: ['Ça peut coller, parlons-en', "Sur certains points, on n'a pas la même idée du projet. Un appel de 30 minutes suffit pour voir si on peut vous aider, sans engagement.", 'Poser mes questions sur WhatsApp', null],
+    non: ['Nous ne sommes probablement pas les bonnes personnes', "Et c'est très bien de le savoir maintenant. Si vous voulez quand même un avis sur votre projet, on vous répond volontiers.", 'Nous demander conseil', '/devis'],
   };
   const wa = document.querySelector('.wa-float')?.href || '/devis?mode=appel';
   qs.forEach(q => q.querySelectorAll('.quiz-opt').forEach(b => b.addEventListener('click', () => {

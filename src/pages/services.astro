@@ -85,7 +85,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       <div class="guide">
         <div class="guide-head">
           <h2 class="d-lg" id="guide-title">Par où commencer{NB}?</h2>
-          <p class="muted">Choisissez votre situation : je vous dis ce qui vous fera gagner des clients en premier.</p>
+          <p class="muted">Choisissez votre situation : on vous dit ce qui vous fera gagner des clients en premier.</p>
         </div>
         <div class="gtabs" role="tablist" aria-label="Votre situation">{GUIDE.map(([sit], i) => <button class="gtab" type="button" role="tab" id={`gt-${i}`} aria-controls={`gp-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{sit}</button>)}</div>
         {GUIDE.map(([sit, conseil, ids], i) => <div class="gpanel" role="tabpanel" id={`gp-${i}`} aria-labelledby={`gt-${i}`} hidden={i !== 0}>
@@ -157,7 +157,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
 
   <section class="section" id="faq" aria-labelledby="faq-title">
     <div class="wrap faq">
-      <div><h2 class="d-xl" id="faq-title">Prix, paiement, engagement</h2><p class="subhead" style="margin-top:18px">Les questions qu'on me pose avant de signer.</p></div>
+      <div><h2 class="d-xl" id="faq-title">Prix, paiement, engagement</h2><p class="subhead" style="margin-top:18px">Les questions qu'on nous pose avant de signer.</p></div>
       <div class="faq-list">{FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</div>
     </div>
   </section>

@@ -911,3 +911,25 @@ a.m-proof:hover { border-color: var(--hair); }
 .svc .svc-ctas { margin-top: 10px; }
 .svc .svc-ctas .btn { margin-top: 0; }
 .plan .save { color: var(--green); font-weight: 600; }
+
+/* Les deux fondateurs */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.duo-card { position: relative; margin: 0; border-radius: 30px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--g-orange); isolation: isolate; }
+.duo-card:nth-child(2) { background: var(--g-violet); }
+.duo-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; z-index: -1; }
+.duo-mono { position: absolute; inset: 0; display: grid; place-items: center; font-size: clamp(5rem, 12vw, 9rem); font-weight: 600; letter-spacing: -0.06em; z-index: -1; }
+.duo-card figcaption { position: absolute; left: 16px; right: 16px; bottom: 16px; display: grid; gap: 4px; padding: 16px 18px; border-radius: 18px; background: rgba(0,0,0,.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.duo-card b { font-size: 1.25rem; letter-spacing: -0.025em; }
+.duo-role { font-size: .875rem; font-weight: 600; color: var(--orange); }
+.duo-card:nth-child(2) .duo-role { color: #B9A8FF; }
+.duo-mission { font-size: .9375rem; color: rgba(255,255,255,.85); line-height: 1.4; }
+@media (max-width: 700px) { .duo { grid-template-columns: 1fr; } }
+.story-wide { max-width: 860px; margin: 0 auto; }
+/* Bloc fondateurs de l'accueil : texte à gauche, les deux portraits à droite */
+.founder-duo { grid-template-columns: 1fr 1fr; align-items: center; }
+.founder-duo .duo { gap: 10px; }
+.founder-duo .duo-card { border-radius: 20px; }
+.founder-duo .duo-card figcaption { left: 10px; right: 10px; bottom: 10px; padding: 10px 12px; border-radius: 12px; }
+.founder-duo .duo-card b { font-size: 1rem; }
+.founder-duo .duo-role { font-size: .75rem; }
+@media (max-width: 860px) { .founder-duo { grid-template-columns: 1fr; } }

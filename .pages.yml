@@ -224,7 +224,13 @@ content:
         type: string
         required: true
       - name: fondateur
-        label: Prénom et nom du fondateur
+        label: Fondateur (stratégie et développement)
+        description: Prénom et nom. Aussi responsable de la publication dans les mentions légales.
+        type: string
+        required: true
+      - name: cofondateur
+        label: Cofondateur (commercial, marketing et relation client)
+        description: Prénom, ou prénom et nom.
         type: string
         required: true
       - name: whatsapp

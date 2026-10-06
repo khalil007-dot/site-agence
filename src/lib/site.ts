@@ -11,6 +11,12 @@ export const TEL = reglages.telephone;
 export const TEL_INTL = '+32' + TEL.replace(/\D/g, '').replace(/^0/, '');
 export const VILLE = reglages.ville;
 export const FONDATEUR = reglages.fondateur;
+export const COFONDATEUR = reglages.cofondateur;
+// Les deux fondateurs : photo dans src/assets/fondateurs/<id>.jpg
+export const FONDATEURS = [
+  { id: 'wassim', nom: COFONDATEUR, role: 'Commercial, marketing et relation client', mission: "Votre contact du premier appel au suivi : comprendre votre activité, construire l'offre avec vous, suivre vos résultats." },
+  { id: 'khalil', nom: FONDATEUR, role: 'Stratégie et développement', mission: 'La stratégie, puis la construction de votre site, de votre boutique ou de votre application : solide, rapide, pensée pour vendre.' },
+];
 // Clé Web3Forms : les formulaires envoient les demandes par e-mail (vide = envoi désactivé)
 export const CLE_FORMULAIRES = reglages.cle_formulaires;
 // WhatsApp sur le même numéro, avec un premier message déjà écrit (désactivable dans les réglages)
@@ -38,7 +44,7 @@ export const ORG = {
   areaServed: [{ '@type': 'City', name: 'Bruxelles' }, { '@type': 'Country', name: 'Belgique' }],
   openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
   knowsLanguage: ['fr'],
-  founder: { '@type': 'Person', name: FONDATEUR, jobTitle: 'Développeur web' },
+  founder: FONDATEURS.map(f => ({ '@type': 'Person', name: f.nom, jobTitle: f.role })),
 };
 
 // Catégories de la page Réalisations (mêmes valeurs que dans content.config.ts et .pages.yml)
