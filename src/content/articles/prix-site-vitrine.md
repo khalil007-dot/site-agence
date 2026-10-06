@@ -1,6 +1,6 @@
 ---
-titre: "Combien coûte un site vitrine en Belgique en 2026 ?"
-titre_carte: "Combien coûte un site vitrine en 2026 ?"
+titre: "Combien coûte un site vitrine en Belgique en 2026 ?"
+titre_carte: "Combien coûte un site vitrine en 2026 ?"
 titre_seo: "Prix d'un site vitrine en Belgique (2026) | Épure Studio"
 fil_ariane: "Prix d'un site vitrine"
 description: "Combien coûte un site vitrine en Belgique en 2026 ? Fourchettes de prix, ce qui fait varier le coût et frais annuels à prévoir, expliqués simplement."
