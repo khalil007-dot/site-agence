@@ -126,6 +126,12 @@ content:
         type: date
         options:
           format: yyyy-MM-dd
+      - name: mise_a_jour
+        label: Date de dernière modification
+        description: Facultatif. À changer quand le contenu de l'article change vraiment.
+        type: date
+        options:
+          format: yyyy-MM-dd
       - name: lecture
         label: Temps de lecture (minutes)
         type: number
@@ -223,6 +229,18 @@ content:
         label: Ville
         type: string
         required: true
+      - name: adresse
+        label: Rue et numéro
+        description: "Facultatif. Ex. : Rue de la Loi 16. Affichée dans les mentions légales et transmise à Google."
+        type: string
+      - name: code_postal
+        label: Code postal
+        description: "Ex. : 1000"
+        type: string
+      - name: numero_entreprise
+        label: Numéro d'entreprise (BCE)
+        description: "Obligatoire sur le site d'une entreprise belge. Ex. : BE 0123.456.789"
+        type: string
       - name: fondateur
         label: Fondateur (stratégie et développement)
         description: Prénom et nom. Aussi responsable de la publication dans les mentions légales.
@@ -233,6 +251,11 @@ content:
         description: Prénom, ou prénom et nom.
         type: string
         required: true
+      - name: reseaux
+        label: Profils de l'agence
+        description: "Adresses complètes de la fiche Google Business, LinkedIn, Instagram… Elles aident Google et les IA à reconnaître l'agence."
+        type: string
+        list: true
       - name: whatsapp
         label: Proposer WhatsApp
         description: Affiche un bouton WhatsApp vers le numéro de téléphone ci-dessus.

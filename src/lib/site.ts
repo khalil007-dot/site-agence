@@ -10,6 +10,11 @@ export const TEL = reglages.telephone;
 // 0467 66 26 29 → +32467662629 (format international pour les liens « appeler »)
 export const TEL_INTL = '+32' + TEL.replace(/\D/g, '').replace(/^0/, '');
 export const VILLE = reglages.ville;
+export const ADRESSE = reglages.adresse;
+export const CODE_POSTAL = reglages.code_postal;
+export const NUMERO_ENTREPRISE = reglages.numero_entreprise;
+// Profils de l'agence (Google Business, LinkedIn…) : relient le site à l'agence pour Google et les IA
+export const RESEAUX: string[] = reglages.reseaux.filter(Boolean);
 export const FONDATEUR = reglages.fondateur;
 export const COFONDATEUR = reglages.cofondateur;
 // Les deux fondateurs : photo dans src/assets/fondateurs/<id>.jpg
@@ -42,7 +47,12 @@ export const ORG = {
   name: BRAND, url: SITE_URL + '/', email: EMAIL, telephone: TEL_INTL, image: SITE_URL + '/og-image.png',
   logo: SITE_URL + '/logo.png', priceRange: '€€',
   description: 'Agence web à Bruxelles : création de sites internet, boutiques en ligne, logos, référencement, Google Ads et réseaux sociaux pour les indépendants et PME.',
-  address: { '@type': 'PostalAddress', addressLocality: 'Bruxelles', addressRegion: 'Région de Bruxelles-Capitale', addressCountry: 'BE' },
+  address: {
+    '@type': 'PostalAddress', ...(ADRESSE && { streetAddress: ADRESSE }), ...(CODE_POSTAL && { postalCode: CODE_POSTAL }),
+    addressLocality: 'Bruxelles', addressRegion: 'Région de Bruxelles-Capitale', addressCountry: 'BE',
+  },
+  ...(NUMERO_ENTREPRISE && { vatID: NUMERO_ENTREPRISE }),
+  ...(RESEAUX.length && { sameAs: RESEAUX }),
   areaServed: [{ '@type': 'City', name: 'Bruxelles' }, { '@type': 'Country', name: 'Belgique' }],
   openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
   knowsLanguage: ['fr'],

@@ -21,10 +21,10 @@ Votre logo apparaîtra en tout petit : icône de réseau social, onglet de navig
 <figure class="fig"><div class="fig-box">
 <span class="fig-tag">Test de lisibilité : le logo O'Brunch House, réalisé par nos soins</span>
 <div class="logo-test">
-<div><span class="lt"><img src="/articles/obrunch-house-logo.jpg" alt="Logo O'Brunch House en grand" width="200" height="176" style="width:90%"></span>En grand</div>
-<div><span class="lt"><img src="/articles/obrunch-house-logo.jpg" alt="" width="200" height="176" style="width:50%"></span>Carte de visite</div>
-<div><span class="lt"><img src="/articles/obrunch-house-logo.jpg" alt="" width="200" height="176" style="width:22%"></span>Icône de réseau social</div>
-<div class="bw"><span class="lt"><img src="/articles/obrunch-house-logo.jpg" alt="Le même logo en noir et blanc" width="200" height="176" style="width:90%"></span>En noir et blanc</div>
+<div><span class="lt"><img src="/articles/obrunch-house-logo.webp" alt="Logo O'Brunch House en grand" width="200" height="176" style="width:90%"></span>En grand</div>
+<div><span class="lt"><img src="/articles/obrunch-house-logo.webp" alt="" width="200" height="176" style="width:50%"></span>Carte de visite</div>
+<div><span class="lt"><img src="/articles/obrunch-house-logo.webp" alt="" width="200" height="176" style="width:22%"></span>Icône de réseau social</div>
+<div class="bw"><span class="lt"><img src="/articles/obrunch-house-logo.webp" alt="Le même logo en noir et blanc" width="200" height="176" style="width:90%"></span>En noir et blanc</div>
 </div>
 </div><figcaption>En noir et blanc, le logo reste fort. En très petit, le nom devient illisible mais la tasse reste reconnaissable : c'est pour ça qu'un logo a besoin d'une icône simplifiée.</figcaption></figure>
 

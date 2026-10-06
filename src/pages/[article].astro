@@ -15,12 +15,15 @@ const a = post.data;
 const chemin = post.id;
 const desc = a.description || a.resume;
 const date = a.date?.toISOString().slice(0, 10);
-const dateLongue = a.date?.toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const longue = (d?: Date) => d?.toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const dateLongue = longue(a.date);
+// Dernière modification réelle de l'article (sinon sa date de publication)
+const maj = a.mise_a_jour?.toISOString().slice(0, 10);
 const autres = (await getCollection('articles', p => p.id !== post.id)).sort((x, y) => x.data.ordre - y.data.ordre).slice(0, 3);
 
 const ARTICLE_LD = {
   '@context': 'https://schema.org', '@type': 'BlogPosting', headline: a.titre, description: desc,
-  datePublished: date, dateModified: TODAY, inLanguage: 'fr-BE', mainEntityOfPage: SITE_URL + '/' + chemin, image: SITE_URL + '/og-image.png',
+  datePublished: date, dateModified: maj || date || TODAY, inLanguage: 'fr-BE', mainEntityOfPage: SITE_URL + '/' + chemin, image: SITE_URL + '/og-image.png',
   author: { '@type': 'Person', name: FONDATEUR, worksFor: { '@id': ORG_ID } }, publisher: { '@id': ORG_ID },
 };
 ---
@@ -31,7 +34,7 @@ const ARTICLE_LD = {
       <div class="article">
         <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/conseils">Conseils</a><span aria-hidden="true">/</span><span>{a.categorie}</span></nav>
         <h1 class="d-xl" id="page-title">{a.titre}</h1>
-        <div class="meta-line"><span>Par {FONDATEUR}, fondateur de <span translate="no">{BRAND}</span></span>{date && <span>Publié le <time datetime={date}>{dateLongue}</time></span>}{a.lecture && <span>Lecture : {a.lecture} minutes</span>}</div>
+        <div class="meta-line"><span>Par {FONDATEUR}, fondateur de <span translate="no">{BRAND}</span></span>{date && <span>Publié le <time datetime={date}>{dateLongue}</time></span>}{maj && maj !== date && <span>Mis à jour le <time datetime={maj}>{longue(a.mise_a_jour)}</time></span>}{a.lecture && <span>Lecture : {a.lecture} minutes</span>}</div>
         <div class="body">
           <Content />
         </div>

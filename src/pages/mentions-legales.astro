@@ -1,6 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
-import { BRAND, EMAIL, FONDATEUR, TEL, TEL_INTL, VILLE } from '../lib/site';
+import { ADRESSE, BRAND, CLE_ANALYTICS, CLE_FORMULAIRES, CODE_POSTAL, EMAIL, FONDATEUR, NUMERO_ENTREPRISE, TEL, TEL_INTL, VILLE, WHATSAPP } from '../lib/site';
+
+// Adresse complète si elle est renseignée dans les réglages, sinon la ville seule
+const lieu = ADRESSE ? `${ADRESSE}, ${[CODE_POSTAL, VILLE].filter(Boolean).join(' ')}` : VILLE;
+// Service qui transmet les formulaires par e-mail (voir envoyer() dans public/main.js)
+const envoi = CLE_FORMULAIRES
+  ? 'Web3Forms, qui nous les transmet par e-mail'
+  : 'FormSubmit (formsubmit.co), qui nous les transmet par e-mail';
 ---
 <Base chemin="mentions-legales" title={`Mentions légales | ${BRAND}`} desc={`Mentions légales et politique de confidentialité de ${BRAND}, agence web à ${VILLE} : éditeur du site, hébergement, données personnelles et cookies.`} noindex>
   <section class="page-head" aria-labelledby="page-title">
@@ -11,17 +18,20 @@ import { BRAND, EMAIL, FONDATEUR, TEL, TEL_INTL, VILLE } from '../lib/site';
   <section>
     <div class="wrap legal">
       <h2>Éditeur du site</h2>
-      <p><span translate="no">{BRAND}</span>, activité de {FONDATEUR}, basée à {VILLE}, Belgique.</p>
+      <p><span translate="no">{BRAND}</span>, activité de {FONDATEUR}, {ADRESSE ? 'établie' : 'basée'} à {lieu}, Belgique.{NUMERO_ENTREPRISE && <Fragment> Numéro d'entreprise (BCE) : {NUMERO_ENTREPRISE}.</Fragment>}</p>
       <p>Responsable de la publication : {FONDATEUR}. Contact : <a class="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>, <a class="link" href={`tel:${TEL_INTL}`}>{TEL}</a>.</p>
       <h2>Hébergement</h2>
       <p>Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis.</p>
       <h2>Propriété intellectuelle</h2>
       <p>Les textes, visuels et logos de ce site appartiennent à <span translate="no">{BRAND}</span> ou à leurs auteurs. Toute reproduction sans autorisation est interdite.</p>
       <h2 id="donnees">Données personnelles</h2>
-      <p>Les informations envoyées via le formulaire de devis servent uniquement à répondre à votre demande. Elles sont conservées au maximum 3 ans puis supprimées, et ne sont jamais revendues.</p>
+      <p>Les informations envoyées via les formulaires de devis et de rendez-vous servent uniquement à répondre à votre demande. Elles sont conservées au maximum 3 ans puis supprimées, et ne sont jamais revendues.</p>
+      <p>Pour nous parvenir, elles passent par {envoi}.{WHATSAPP && ' Si vous nous écrivez sur WhatsApp, vos messages sont aussi traités par WhatsApp (Meta).'} Ces services peuvent stocker les données hors de l'Union européenne, avec les garanties prévues par le RGPD.</p>
       <p>Vous pouvez demander l'accès, la correction ou la suppression de vos données en écrivant à <a class="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>. Vous pouvez aussi adresser une réclamation à l'Autorité de protection des données (APD).</p>
       <h2>Cookies</h2>
-      <p>Ce site n'utilise ni cookies publicitaires ni outil de mesure d'audience.</p>
+      <p>{CLE_ANALYTICS
+        ? "Ce site n'utilise aucun cookie. Les visites sont comptées de façon anonyme avec Cloudflare Web Analytics, sans cookie ni suivi d'un site à l'autre."
+        : "Ce site n'utilise ni cookies publicitaires ni outil de mesure d'audience."}</p>
     </div>
   </section>
 </Base>

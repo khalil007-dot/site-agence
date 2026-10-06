@@ -40,6 +40,7 @@ const articles = defineCollection({
     categorie: z.string(),
     couleur: z.preprocess(vide, couleur.default('violet')),
     date: z.preprocess(vide, z.coerce.date().optional()),
+    mise_a_jour: z.preprocess(vide, z.coerce.date().optional()),
     lecture: z.preprocess(vide, z.number().optional()),
     a_paraitre: z.preprocess(vide, z.boolean().default(false)),
     ordre: z.preprocess(vide, z.number().default(100)),

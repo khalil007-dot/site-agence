@@ -33,7 +33,7 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 <title>{title}</title>
 <meta name="description" content={desc}>
 {noindex ? <meta name="robots" content="noindex, follow"> : <meta name="robots" content="index, follow, max-image-preview:large">}
-<link rel="canonical" href={url}>
+{!noindex && <link rel="canonical" href={url}>}
 <meta name="theme-color" content="#090909">
 <meta name="geo.region" content="BE-BRU">
 <meta name="geo.placename" content="Bruxelles">
