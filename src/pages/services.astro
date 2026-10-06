@@ -2,6 +2,7 @@
 // Page Services : générée à partir de src/data/services.json
 // Guide « par où commencer », une fiche par service (promesse, prix, mensualités, réalisation), formules, FAQ
 import Base from '../layouts/Base.astro';
+import ServiceVisual from '../components/ServiceVisual.astro';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import captureOmi from '../assets/projets/omi-restaurant.jpg';
@@ -125,6 +126,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           </div>
         </div>
         <div class="svc-side">
+          <ServiceVisual id={s.id} couleur={f.couleur} />
           <span class="m-label">Ce qui est inclus</span>
           <ul class="included" style={`--c:var(--${f.couleur})`}>{s.inclus.map(x => <li>{x}</li>)}</ul>
           {pr && (pr.lien

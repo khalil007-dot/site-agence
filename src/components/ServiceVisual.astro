@@ -1,0 +1,83 @@
+---
+// Page Services : l'illustration d'un service (vrais projets quand il y en a, sinon une interface dessinée).
+// Reprend les styles des cartes de l'accueil (.sv-*), dans un cadre aux couleurs de la famille.
+import { Image } from 'astro:assets';
+import captureOmi from '../assets/projets/omi-restaurant.jpg';
+import captureStreetSapp from '../assets/projets/streetsapp.jpg';
+import menuOmi from '../assets/projets/omi-menu.jpg';
+import flyerOmi from '../assets/projets/omi-flyer.jpg';
+import flyerObrunch from '../assets/projets/obrunch-house-flyer.jpg';
+import logoObrunch from '../assets/projets/obrunch-house-logo.jpg';
+import { NB } from '../lib/site';
+
+interface Props { id: string; couleur: string }
+const { id, couleur } = Astro.props;
+const UPTIME = Array.from({ length: 30 }, (_, i) => (i % 7 === 3 ? 82 : i % 5 === 1 ? 92 : 100));
+const GRILLE = [captureOmi, menuOmi, flyerObrunch, flyerOmi, captureStreetSapp, logoObrunch, menuOmi, captureOmi, flyerOmi];
+---
+<div class="svv" style={`background:var(--g-${couleur})`} aria-hidden="true">
+  {id === 'site-vitrine' && <div class="sv sv-one">
+    <div class="win"><div class="mock-bar"><i></i><i></i><i></i><span>omi-restaurant.com</span></div><Image src={captureOmi} alt="" widths={[480, 900]} sizes="(max-width: 860px) 90vw, 40vw" /></div>
+    <div class="toast t-right"><b>Nouvelle demande</b>Réservation pour 4 personnes, samedi 20{NB}h</div>
+  </div>}
+
+  {id === 'e-commerce' && <div class="sv sv-one">
+    <div class="win"><div class="mock-bar"><i></i><i></i><i></i><span>streetsapp.be</span></div><Image src={captureStreetSapp} alt="" widths={[480, 900]} sizes="(max-width: 860px) 90vw, 40vw" /></div>
+    <div class="toast t-right"><b>Commande reçue ✓</b>Payée par Bancontact, depuis un téléphone</div>
+  </div>}
+
+  {id === 'application' && <div class="sv sv-app">
+    <div class="app-phone"><div class="app-screen">
+      <div class="app-top"><b>Votre restaurant</b><span>Bonjour Sarah</span></div>
+      <div class="app-card"><span>Carte de fidélité</span><div class="stamps">{Array.from({ length: 10 }, (_, i) => <i class={i < 7 ? 'on' : ''}></i>)}</div><small>Encore 3 visites pour un dessert offert</small></div>
+      <div class="app-btn">Réserver une table</div>
+      <div class="app-btn ghost">Commander à emporter</div>
+    </div></div>
+    <div class="toast t-right"><b>Notification</b>Votre commande est prête{NB}!</div>
+  </div>}
+
+  {id === 'seo' && <div class="sv sv-google">
+    <div class="gpanel">
+      <div class="gsearch"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>plombier uccle</div>
+      <div class="serp-list">
+        <div class="serp-r top"><span class="pos">1</span><span><b>Votre entreprise · Plombier à Uccle</b><small>votre-site.be · Intervention rapide, devis gratuit</small></span></div>
+        <div class="serp-r"><span class="pos">2</span><span><i style="width:70%"></i><i style="width:50%"></i></span></div>
+        <div class="serp-r"><span class="pos">3</span><span><i style="width:62%"></i><i style="width:44%"></i></span></div>
+      </div>
+    </div>
+    <div class="chart-bubble"><span class="aitag">Visites depuis Google</span><svg viewBox="0 0 120 44"><path d="M2 40 L22 36 L42 37 L62 28 L82 22 L102 12 L118 6" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>}
+
+  {id === 'google-ads' && <div class="sv sv-google">
+    <div class="gpanel">
+      <div class="gsearch"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>plombier urgence ixelles</div>
+      <div class="ad">
+        <small><b>Sponsorisé</b> · votre-site.be</small>
+        <b class="ad-t">Plombier à Ixelles · Intervention en 1 h</b>
+        <span>Devis gratuit, 7 jours sur 7. Appelez maintenant.</span>
+        <div class="gacts"><span>Appeler</span><span>Demander un devis</span></div>
+      </div>
+    </div>
+    <div class="toast t-right t-top"><b>Nouvel appel</b>Depuis votre annonce Google</div>
+  </div>}
+
+  {id === 'reseaux-sociaux' && <div class="sv sv-social">
+    <div class="phone"><div class="phone-screen"><div class="ig-head"><i></i>votre.commerce</div><div class="ig-grid">{GRILLE.map(img => <Image src={img} alt="" width={160} />)}</div></div></div>
+    <div class="toast t-right"><b>12 publications</b>préparées pour ce mois-ci</div>
+  </div>}
+
+  {id === 'logo' && <div class="sv sv-print">
+    <div class="card c1"><Image src={logoObrunch} alt="" width={420} /></div>
+    <div class="card c3"><Image src={flyerOmi} alt="" width={420} /></div>
+    <div class="card c2"><Image src={menuOmi} alt="" width={480} /></div>
+  </div>}
+
+  {id === 'maintenance' && <div class="sv sv-care">
+    <div class="dash">
+      <div class="dash-head"><span class="live"></span>votre-site.be<em>En ligne</em></div>
+      <div class="uptime">{UPTIME.map(h => <i style={`height:${h}%`}></i>)}</div>
+      <ul class="dash-rows"><li>Certificat de sécurité<b>Valide</b></li><li>Sauvegarde<b>Cette nuit</b></li><li>Mises à jour<b>À jour</b></li></ul>
+    </div>
+    <div class="chat"><p class="them">Vous pouvez changer nos horaires d'été{NB}?</p><p class="us">C'est en ligne ✓</p></div>
+  </div>}
+</div>
