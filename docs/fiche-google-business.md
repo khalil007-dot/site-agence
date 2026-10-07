@@ -24,6 +24,8 @@ Google propose en général une **vidéo** d'une minute, à filmer d'un seul pla
 2. un élément de l'entreprise : ordinateur ouvert sur epurestudio.be, cartes de visite, ou facture au nom d'Épure Studio ;
 3. une preuve de gestion : l'accès à la fiche ou à un outil professionnel ouvert à votre nom.
 
+Pas encore de numéro d'entreprise ? Google ne le demande pas pour créer la fiche. Il faut alors montrer d'autres preuves dans la vidéo : site en ligne, cartes de visite, facture ou devis à l'en-tête d'Épure Studio. Si Google réclame un document officiel, attendre l'inscription à la BCE avant de relancer la validation.
+
 La fiche n'apparaît qu'après validation. Ne pas modifier le nom ni l'adresse pendant l'examen.
 
 ## 3. Compléter la fiche (après validation, menu « Modifier le profil »)
