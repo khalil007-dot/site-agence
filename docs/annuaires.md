@@ -72,7 +72,7 @@ Si l'adresse est un domicile, choisir « zone desservie » sur Google et ne pas 
 **Courte (60 caractères)**
 - Agence web à Bruxelles pour indépendants, commerces et PME.
 
-**Fiche Google / Bing / Apple (axée sur le service local, 750 caractères maximum)**
+**Fiche Google / Bing / Apple (axée sur le service local, 750 caractères maximum)** : pour Google, prendre la version sans prix de `docs/fiche-google-business.md`
 > Épure Studio crée des sites internet, des boutiques en ligne et des logos pour les commerces, restaurants et indépendants de Bruxelles et de toute la Belgique. Sites vitrine dès 890 € HT, prix affichés et devis ferme sous 48 h. Nous rendons aussi votre entreprise visible sur Google, dans les réponses des IA comme ChatGPT, avec Google Ads et sur les réseaux sociaux. Vous parlez directement aux deux fondateurs, Wassim et Khalil. Maquette validée avant le développement et refaite sans frais si elle ne vous plaît pas. Paiement en 3 fois sans frais. Le site, le domaine et le logo sont à votre nom.
 
 **Plateformes d'agences (Sortlist, Clutch, DesignRush, GoodFirms) : axée sur les projets et les résultats**
