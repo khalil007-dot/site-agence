@@ -49,29 +49,29 @@ La fiche n'apparaît qu'après validation. Ne pas modifier le nom ni l'adresse p
 
 ## 4. Services (onglet « Services », avec prix)
 
-Les prix vont ici, pas dans la description. Indiquer « À partir de ».
+Les prix vont ici, pas dans la description. Les 3 offres de site ont un prix fixe ; pour les autres services, indiquer « À partir de ».
 
 | Service | Prix | Description (300 caractères max.) |
 |---|---|---|
-| Site vitrine | dès 890 € HT | Site de 5 pages pensé pour le téléphone, boutons Appeler et WhatsApp, formulaire de devis, référencement de base. En ligne en 3 semaines en moyenne. |
-| Boutique en ligne | dès 2 400 € HT | Boutique rapide sur mobile, fiches produits, paiement Bancontact et carte, gestion des commandes simple. En ligne en 6 semaines en moyenne. |
-| Logo et identité visuelle | dès 450 € HT | Logo, couleurs et polices, déclinés pour l'enseigne, les réseaux et les imprimés. Fichiers à votre nom. |
+| Site vitrine | 590 € HT, prix fixe | Site de 5 pages sur mesure pensé pour le téléphone, textes écrits avec vous, boutons Appeler et WhatsApp, fiche Google réglée. En ligne en 5 jours ouvrables. Payé une fois ou en 3 fois sans frais. |
+| Boutique en ligne | 1 490 € HT, prix fixe | Boutique rapide sur mobile, produits illimités, paiement Bancontact et carte, 50 premiers produits importés. En ligne en 3 semaines. |
+| Logo et identité visuelle | dès 290 € HT | Logo, couleurs et polices, déclinés pour l'enseigne, les réseaux et les imprimés. Fichiers à votre nom. |
 | Supports imprimés | sur devis | Menus, flyers, cartes de visite assortis à votre marque. |
-| Référencement Google et IA (SEO) | dès 290 €/mois | Être trouvé sur Google et cité par ChatGPT ou Perplexity quand on cherche votre métier dans votre commune. Sans engagement. |
-| Google Ads | dès 250 €/mois (hors budget publicitaire) | Campagnes locales réglées pour faire appeler, avec un rapport clair de ce qu'elles rapportent. Sans engagement. |
-| Réseaux sociaux | dès 390 €/mois | Publications régulières sur deux réseaux, visuels compris. Sans engagement. |
-| Maintenance et hébergement | dès 39 €/mois | Mises à jour, sauvegardes, sécurité et petites modifications. Sans engagement. |
-| Création de fiche Google Business | comprise dans la formule Lancement | Fiche complète, photos, horaires et catégories, prête à recevoir des avis. |
+| Référencement Google et IA (SEO) | dès 190 €/mois | Être trouvé sur Google et cité par ChatGPT ou Perplexity quand on cherche votre métier dans votre commune. Sans engagement. |
+| Google Ads | dès 190 €/mois (hors budget publicitaire) | Campagnes locales réglées pour faire appeler, avec un rapport clair de ce qu'elles rapportent. Sans engagement. |
+| Réseaux sociaux | dès 290 €/mois | Publications régulières sur deux réseaux, visuels compris. Sans engagement. |
+| Maintenance et hébergement | 29 €/mois | Hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 h de modifications par mois. Sans engagement. |
+| Création de fiche Google Business | comprise dans chaque site | Fiche complète, photos, horaires et catégories, prête à recevoir des avis. |
 
-## 5. Produits (onglet « Produits »), les trois formules
+## 5. Produits (onglet « Produits »), les trois offres à prix fixe
 
 | Produit | Prix | Description |
 |---|---|---|
-| Formule Lancement | 1 190 € HT | Logo, site de 5 pages, fiche Google et cartes de visite. |
-| Formule Commerce | 3 290 € HT | Logo, boutique en ligne, photos de 20 produits et 3 mois de référencement. |
-| Formule Visibilité | 790 € HT / mois | Référencement Google et IA, Google Ads et deux réseaux sociaux. |
+| Site vitrine | 590 € HT | Jusqu'à 5 pages sur mesure, textes écrits avec vous, fiche Google réglée. En ligne en 5 jours ouvrables. |
+| Site + logo | 790 € HT | Le site vitrine, votre logo en 3 propositions et des cartes de visite assorties. En ligne en 2 semaines. |
+| Boutique en ligne | 1 490 € HT | Boutique complète, paiement Bancontact et carte, 50 premiers produits importés. En ligne en 3 semaines. |
 
-Bouton de chaque produit : « En savoir plus » vers `https://epurestudio.be/services?utm_source=google&utm_medium=fiche&utm_campaign=gbp-produits`.
+Bouton de chaque produit : « En savoir plus » vers `https://epurestudio.be/?utm_source=google&utm_medium=fiche&utm_campaign=gbp-produits#formules`.
 
 ## 6. Photos
 

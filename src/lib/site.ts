@@ -48,8 +48,8 @@ export const ORG_ID = SITE_URL + '/#agence';
 export const ORG = {
   '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': ORG_ID,
   name: BRAND, url: SITE_URL + '/', email: EMAIL, telephone: TEL_INTL, image: SITE_URL + '/og-image.png',
-  logo: SITE_URL + '/logo.png', priceRange: '€€',
-  description: 'Agence web à Bruxelles : création de sites internet, boutiques en ligne, logos, référencement, Google Ads et réseaux sociaux pour les indépendants et PME.',
+  logo: SITE_URL + '/logo.png', priceRange: `${services.formules[0].prix} € - ${services.formules[2].prix} €`,
+  description: `Agence web à Bruxelles : sites internet à prix fixe pour indépendants, commerces et PME. Site vitrine ${services.formules[0].prix} €, site + logo ${services.formules[1].prix} €, boutique en ligne ${services.formules[2].prix} € HTVA, payés une fois. Référencement, Google Ads et réseaux sociaux.`,
   address: {
     '@type': 'PostalAddress', ...(ADRESSE && { streetAddress: ADRESSE }), ...(CODE_POSTAL && { postalCode: CODE_POSTAL }),
     addressLocality: 'Bruxelles', addressRegion: 'Région de Bruxelles-Capitale', addressCountry: 'BE',
@@ -60,6 +60,15 @@ export const ORG = {
   openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
   knowsLanguage: ['fr'],
   founder: FONDATEURS.map(personRef),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog', name: 'Sites internet à prix fixe',
+    itemListElement: services.formules.map(f => ({
+      '@type': 'Offer', name: f.nom, description: `${f.pour} En ligne en ${f.delai}. ${f.inclus.join(', ')}.`, url: SITE_URL + '/#formules',
+      price: String(f.prix), priceCurrency: 'EUR', availability: 'https://schema.org/InStock',
+      priceSpecification: { '@type': 'PriceSpecification', price: String(f.prix), priceCurrency: 'EUR', valueAddedTaxIncluded: false },
+      itemOffered: { '@type': 'Service', name: f.nom, provider: { '@id': SITE_URL + '/#agence' }, areaServed: { '@type': 'Country', name: 'Belgique' } },
+    })),
+  },
 };
 
 // Catégories de la page Réalisations (mêmes valeurs que dans content.config.ts et .pages.yml)

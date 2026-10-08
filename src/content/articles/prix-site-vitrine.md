@@ -8,6 +8,7 @@ resume: "Les vraies fourchettes de prix, ce qui les fait varier et les frais à 
 categorie: Budget
 couleur: violet
 date: 2026-10-04
+mise_a_jour: 2026-10-08
 lecture: 3
 ordre: 1
 ---

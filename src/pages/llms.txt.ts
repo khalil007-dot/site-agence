@@ -8,6 +8,8 @@ export async function GET() {
   const articles = (await getCollection('articles', p => !p.data.a_paraitre)).sort((a, b) => a.data.ordre - b.data.ordre);
   const forTxt = FORMULES.map(f => `- ${f.nom} : ${f.prix} € HTVA, payé une fois ou en 3 fois sans frais, en ligne en ${f.delai}. ${f.inclus.join(', ')}.
 `).join('');
+  const avis = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.data.ordre);
+  const avisTxt = avis.map(a => `- « ${a.data.texte} » ${a.data.nom}${a.data.entreprise ? ', ' + a.data.entreprise : ''}\n`).join('');
   const artTxt = articles.map(a => `- [${a.data.titre}](${SITE_URL}/${a.id})\n`).join('');
   return new Response(`# ${BRAND}
 
@@ -21,6 +23,8 @@ export async function GET() {
 - Paiement : 40 % à la signature et 60 % à la mise en ligne, ou en 3 mensualités sans frais
 - Le client est propriétaire de son nom de domaine, de ses contenus et de son logo
 
+## Avis clients (publiés avec leur accord)
+${avisTxt}
 ## Tous les services et prix de départ
 ${famTxt}
 ## Les 3 offres à prix fixe

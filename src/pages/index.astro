@@ -91,7 +91,7 @@ const posts = (await getCollection('articles')).sort((a, b) => a.data.ordre - b.
 const WEBSITE = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_URL + '/#site', url: SITE_URL + '/', name: BRAND, inLanguage: 'fr-BE', publisher: { '@id': ORG['@id'] } };
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base chemin="" title={`Site internet pour indépendants à Bruxelles dès ${e(vitrine)} | ${BRAND}`} desc={`Un site qui fait sonner votre téléphone : site vitrine à ${e(vitrine)} HTVA, payé une fois, en ligne en ${delaiVitrine}. Textes écrits avec vous, fiche Google incluse, le site est à vous. Devis gratuit en 48 h.`} current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
+<Base chemin="" title={`Création de site internet à Bruxelles dès ${e(vitrine)} | ${BRAND}`} desc={`Site vitrine à ${e(vitrine)} HTVA, payé une fois et en ligne en ${delaiVitrine}. Textes écrits avec vous, fiche Google incluse, le site est à vous. Devis gratuit en 48 h.`} current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
 
   <section class="fx-hero" aria-labelledby="hero-title">
     <div class="wrap fx-hero-grid">
