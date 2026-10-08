@@ -33,8 +33,8 @@ La fiche n'apparaît qu'après validation. Ne pas modifier le nom ni l'adresse p
 **Catégories secondaires**
 `Service de marketing Internet`, `Graphiste`, `Agence de marketing`, `Agence de publicité`
 
-**Description** (724 caractères sur 750, sans prix ni lien : Google les refuse dans ce champ)
-> Épure Studio crée des sites internet, des boutiques en ligne et des logos pour les commerces, restaurants et indépendants de Bruxelles et de toute la Belgique. Nous rendons aussi votre entreprise visible sur Google, dans les réponses des IA comme ChatGPT, avec Google Ads et sur les réseaux sociaux. Vous parlez directement aux deux fondateurs, Wassim et Khalil, du premier appel jusqu'au suivi après la mise en ligne. Prix de départ affichés sur notre site et devis ferme sous 48 h. La maquette est validée avant le développement et refaite sans frais si elle ne vous plaît pas. Le site, le domaine et le logo restent à votre nom. Sites pensés d'abord pour le téléphone, rapides et faciles à mettre à jour.
+**Description** (717 caractères sur 750, sans prix ni lien : Google les refuse dans ce champ)
+> Épure Studio crée des sites internet qui font appeler vos clients, pour les restaurants, commerces et indépendants de Bruxelles et de toute la Belgique. Votre site est pensé d'abord pour le téléphone, avec des boutons Appeler et WhatsApp bien visibles, et il est relié à votre fiche Google. Nous créons aussi des boutiques en ligne, des logos, des menus et des flyers, et nous aidons votre entreprise à être trouvée sur Google et citée par les IA comme ChatGPT. Vous parlez directement aux deux fondateurs, Wassim et Khalil, du premier appel au suivi après la mise en ligne. Vous recevez un devis ferme sous 48 h, vous validez la maquette avant le développement, et le site, le domaine et le logo restent à votre nom.
 
 **Date d'ouverture** : octobre 2026 (à corriger si l'entreprise a été enregistrée plus tôt)
 
