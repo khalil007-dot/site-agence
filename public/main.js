@@ -302,6 +302,15 @@ if (form) {
   const q = new URLSearchParams(location.search);
   // Venu d'un onglet métier de l'accueil : le secteur commence la description du projet
   if (q.get('activite') && !form.msg.value) form.msg.value = q.get('activite') + ' : ';
+  // Venu d'une formule de l'accueil (?formule=business) : site vitrine coché, formule rappelée
+  const formule = JSON.parse(form.dataset.formules || '{}')[q.get('formule')];
+  if (formule) {
+    form.querySelector('input[value="site-vitrine"]').checked = true;
+    if (!form.msg.value) form.msg.value = formule.split(' :')[0] + ' : ';
+    const note = document.getElementById('audit-note');
+    note.textContent = formule;
+    note.hidden = false;
+  }
   if (q.get('audit') && q.get('site')) {
     form.site.value = q.get('site');
     const note = document.getElementById('audit-note');
@@ -524,4 +533,17 @@ if (modes) {
     done.hidden = false;
     done.querySelector('h2').focus();
   });
+}
+
+// Accueil : date de mise en ligne si on commence aujourd'hui (jours ouvrables, du lundi au vendredi)
+const cal = document.querySelector('.cal[data-jours]');
+if (cal) {
+  const d = new Date();
+  for (let n = +cal.dataset.jours; n > 0;) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) n--; }
+  const f = o => new Intl.DateTimeFormat('fr-BE', o).format(d);
+  cal.querySelector('.cal-m').textContent = f({ month: 'long' });
+  cal.querySelector('.cal-d').textContent = f({ weekday: 'long' });
+  cal.querySelector('.cal-n').textContent = d.getDate();
+  const t = document.getElementById('final-date');
+  if (t) t.textContent = f({ weekday: 'long', day: 'numeric', month: 'long' });
 }

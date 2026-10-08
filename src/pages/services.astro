@@ -8,7 +8,7 @@ import type { ImageMetadata } from 'astro';
 import captureOmi from '../assets/projets/omi-restaurant.jpg';
 import captureStreetSapp from '../assets/projets/streetsapp.jpg';
 import logoObrunch from '../assets/projets/obrunch-house-logo.jpg';
-import { BRAND, FAMS, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '../lib/site';
+import { ABO, BRAND, FAMS, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '../lib/site';
 
 const BYID = Object.fromEntries(SV.map(s => [s.id, s]));
 const devisLabel = (court: string) => (['SEO', 'Google Ads'].includes(court) ? court : court.toLowerCase());
@@ -153,7 +153,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <p class="was">au lieu de <s>{e(separe)}{unite}</s>, soit <b class="save">{e(separe - prix)}{unite} d'économie</b></p>
         <a class={i === 1 ? 'btn btn-primary' : 'btn btn-secondary'} href={`/devis?service=${ids}`}>Choisir {nom}</a>
       </article>)}</div>
-      <p class="note" style="margin-top:16px">Prix hors taxes. Paiement en 3 fois sans frais possible pour les formules payées en une fois. <a class="link" href="/#formules">Voir le détail des formules</a></p>
+      <p class="note" style="margin-top:16px">Prix hors taxes. Paiement en 3 fois sans frais possible pour les formules payées en une fois. Vous préférez un site tout compris au mois{NB}? <a class="link" href="/#formules">Sites par abonnement, dès {e(ABO.formules[0].prix)}/mois</a></p>
     </div>
   </section>
 

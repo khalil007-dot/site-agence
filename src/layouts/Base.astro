@@ -1,7 +1,7 @@
 ---
 // Squelette commun à toutes les pages : <head>, en-tête, pied de page
 import Logo from '../components/Logo.astro';
-import { BRAND, BUILD, CLE_ANALYTICS, EMAIL, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, pageUrl } from '../lib/site';
+import { ABO, BRAND, BUILD, CLE_ANALYTICS, EMAIL, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e, pageUrl } from '../lib/site';
 
 interface Props {
   chemin: string; // adresse de la page sans « / » au début ('' pour l'accueil)
@@ -21,7 +21,7 @@ if (crumbs) blocks.push({
   '@context': 'https://schema.org', '@type': 'BreadcrumbList',
   itemListElement: [['Accueil', ''], ...crumbs].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE_URL + '/' + u })),
 });
-const links = [['/', 'index', 'Accueil'], ['/services', 'services', 'Services'], ['/realisations', 'realisations', 'Réalisations'], ['/a-propos', 'a-propos', 'À propos'], ['/conseils', 'conseils', 'Conseils']];
+const links = [['/#formules', 'formules', 'Offres et prix'], ['/realisations', 'realisations', 'Réalisations'], ['/#methode', 'methode', 'Comment ça marche'], ['/services', 'services', 'Services'], ['/a-propos', 'a-propos', 'À propos']];
 const active = current === 'article' ? 'conseils' : current;
 const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='8' fill='%23090909'/%3E%3Cpath d='M19 8.5H9.5v11H19M9.5 14h7' fill='none' stroke='%23fff' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='21.5' cy='5.5' r='3' fill='%23D44DF0'/%3E%3C/svg%3E";
 ---
@@ -34,7 +34,7 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 <meta name="description" content={desc}>
 {noindex ? <meta name="robots" content="noindex, follow"> : <meta name="robots" content="index, follow, max-image-preview:large">}
 {!noindex && <link rel="canonical" href={url}>}
-<meta name="theme-color" content="#090909">
+<meta name="theme-color" content="#F8F4EC">
 <meta name="geo.region" content="BE-BRU">
 <meta name="geo.placename" content="Bruxelles">
 <meta property="og:type" content={current === 'article' ? 'article' : 'website'}>
@@ -61,8 +61,8 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="/" translate="no"><Logo />{BRAND}</a>
-    <nav class="nav-links" id="nav-links" aria-label="Navigation principale">{links.map(([h, k, t]) => <a href={h} aria-current={k === active ? 'page' : undefined}>{t}</a>)}<a class="mobile-cta" href="/devis">Demander un devis</a></nav>
-    <div class="nav-cta"><a class="btn btn-primary" href="/devis">Demander un devis</a></div>
+    <nav class="nav-links" id="nav-links" aria-label="Navigation principale">{links.map(([h, k, t]) => <a href={h} aria-current={k === active ? 'page' : undefined}>{t}</a>)}<a class="mobile-cta" href="/devis">Je veux mon site</a></nav>
+    <div class="nav-cta"><span class="nav-hint">tout compris, dès {e(ABO.formules[0].prix)}/mois</span><a class="btn btn-primary" href="/devis">Je veux mon site <span aria-hidden="true">→</span></a></div>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Ouvrir le menu"><span></span></button>
   </div>
 </header>
@@ -71,23 +71,24 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 <slot />
 </main>
 
-<footer>
+<footer class="on-dark">
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <a class="brand" href="/" translate="no"><Logo />{BRAND}</a>
-        <p class="about">Agence web à Bruxelles. Sites internet, boutiques en ligne, logos et visibilité pour les indépendants et PME de toute la Belgique.</p>
+        <p class="about">Agence web à Bruxelles. Des sites pros en ligne en 5 jours, tout compris, pour les indépendants, commerces et PME de toute la Belgique.</p>
+        <a class="btn btn-accent" href="/devis" style="margin-top:22px">Je veux mon site</a>
       </div>
       <div><h2>Services</h2><ul>{SV.slice(0, 5).map(s => <li><a href={`/services#${s.id}`}>{s.nom_court}</a></li>)}</ul></div>
       <div><h2>Et aussi</h2><ul>{SV.slice(5).map(s => <li><a href={`/services#${s.id}`}>{s.nom_court}</a></li>)}</ul></div>
-      <div><h2>Agence</h2><ul><li><a href="/a-propos">À propos</a></li><li><a href="/realisations">Réalisations</a></li><li><a href="/conseils">Conseils</a></li><li><a href="/devis">Demander un devis</a></li><li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li><li><a href={`tel:${TEL_INTL}`}>{TEL}</a></li></ul></div>
+      <div><h2>Agence</h2><ul><li><a href="/#formules">Offres et prix</a></li><li><a href="/a-propos">À propos</a></li><li><a href="/realisations">Réalisations</a></li><li><a href="/conseils">Conseils</a></li><li><a href="/devis">Demander un devis</a></li><li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li><li><a href={`tel:${TEL_INTL}`}>{TEL}</a></li></ul></div>
     </div>
     <div class="foot-bottom"><span><span translate="no">{BRAND}</span>, Bruxelles, Belgique.</span><a href="/mentions-legales">Mentions légales et confidentialité</a></div>
   </div>
 </footer>
 {sticky && <div class="sticky-cta">{WHATSAPP
   ? <a class="btn btn-secondary" href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>
-  : <a class="btn btn-secondary" href={`tel:${TEL_INTL}`}>Appeler</a>}<a class="btn btn-primary" href="/devis">Devis gratuit</a></div>}
+  : <a class="btn btn-secondary" href={`tel:${TEL_INTL}`}>Appeler</a>}<a class="btn btn-primary" href="/devis">Je veux mon site</a></div>}
 {WHATSAPP && <a class="wa-float" href={WHATSAPP} target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c.4.9 1.2 1.7 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .5-.4.7-.5.3-1.2.5-2 .3-2.2-.6-4-2.4-4.6-4.6-.2-.8 0-1.5.3-1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>}
 </body>
 </html>

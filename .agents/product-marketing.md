@@ -10,7 +10,8 @@
 **What it does:** Épure Studio conçoit des sites vitrine et des boutiques en ligne, des logos et supports imprimés (menus, flyers, cartes de visite), puis fait venir des clients grâce au référencement Google et IA, à Google Ads et aux réseaux sociaux. Deux fondateurs en direct, du premier appel jusqu'au suivi après la mise en ligne.
 **Product category:** Agence web / création de site internet / agence de communication locale. Recherches typiques : « agence web Bruxelles », « création site internet Bruxelles », « prix site vitrine Belgique », « référencement local Bruxelles ».
 **Product type:** Service (prestations uniques + abonnements mensuels).
-**Business model:** Prix de départ affichés, devis ferme.
+**Business model:** Offre principale depuis le 2026-10-08 : site par abonnement, tout compris (inspiré de Fast On Web). Prix de départ affichés et devis ferme pour le reste.
+- Site par abonnement (HTVA/mois) : Essentiel 49 € (3 pages, 1 h de modifs), Business 89 € (8 pages, 2 h, recommandé), Premium 169 € (15 pages, 3 h, bilingue). 149 € de mise en route. Engagement 12 mois puis résiliable avec 1 mois de préavis. En ligne en 5 jours ouvrables (Premium : 10). Domaine, hébergement, e-mail, fiche Google et modifications compris, demandes traitées sous 2 jours ouvrables. Options de 5 à 39 €/mois. Chiffres modifiables dans src/data/services.json (clé « abonnement »).
 - Uniques : site vitrine dès 890 € HT, boutique en ligne dès 2 400 € HT, logo et identité dès 450 € HT.
 - Mensuels sans engagement (1 mois de préavis) : SEO dès 290 €/mois, Google Ads dès 250 €/mois (hors budget pub), réseaux sociaux dès 390 €/mois, maintenance dès 39 €/mois.
 - Formules : Lancement 1 190 € HT (logo, site 5 pages, fiche Google, cartes de visite), Commerce 3 290 € HT (logo, boutique, photos de 20 produits, 3 mois de SEO), Visibilité 790 € HT/mois (SEO + IA, Google Ads, 2 réseaux).
@@ -52,7 +53,7 @@
 **Emotional tension:** Peur de payer cher pour un site « joli » qui ne rapporte rien ; peur des frais cachés ; sentiment d'être dépassé par le numérique ; crainte de ne plus avoir personne après la mise en ligne.
 
 ## Competitive Landscape
-**Direct:** Agences web bruxelloises et belges pour PME (À compléter : noms précis) — souvent prix non affichés, interlocuteurs multiples.
+**Direct:** Fast On Web (fastonweb.com) : sites par abonnement pour indépendants belges, 55 à 199 € HTVA/mois + 150 € de mise en route, en ligne en 3 jours, sans visages ni avis affichés. Agences web bruxelloises et belges pour PME (À compléter : noms précis) — souvent prix non affichés, interlocuteurs multiples.
 **Secondary:** Freelances (Malt, Sortlist, bouche-à-oreille) — un seul métier, peu de suivi.
 **Indirect:** Constructeurs de sites (Wix, Squarespace, Shopify seul), neveu ou ami qui « fait des sites », ne rien faire et compter sur Facebook/Instagram.
 
@@ -126,4 +127,5 @@
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v2 (2026-10-08) — Ajout du site par abonnement comme offre principale de l'accueil, sur le modèle de Fast On Web (concurrent direct belge : 55/99/199 €/mois + 150 €, en ligne en 3 jours).
 - v1 (2026-10-07) — Initial context, rédigé automatiquement à partir du site.

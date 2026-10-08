@@ -70,3 +70,6 @@ export const CAT_LABEL = Object.fromEntries(CATS);
 // Adresses sans « .html » : services.html est servi à l'adresse /services
 export const PAGES: [string, string][] = [['', '1.0'], ['services', '0.9'], ['realisations', '0.7'], ['a-propos', '0.6'], ['conseils', '0.6'], ['devis', '0.8']];
 export const pageUrl = (chemin: string) => SITE_URL + '/' + chemin;
+
+// Site par abonnement (accueil) : formules, mise en route, options (src/data/services.json)
+export const ABO = services.abonnement;
