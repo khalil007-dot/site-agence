@@ -2,7 +2,7 @@
 
 La fiche se crée sur **business.google.com**, connecté au compte Google qui gérera l'agence (de préférence celui de contact@epurestudio.be ; ajouter l'autre fondateur ensuite comme administrateur). Compter 20 minutes, puis la validation de Google (vidéo, quelques jours).
 
-Images prêtes dans `ressources/google-business/` : `logo.png`, `couverture.png` (1024 × 576), et 8 photos dans `photos/`.
+Images prêtes dans `ressources/google-business/` : `logo.png`, `couverture.png` (1024 × 576), et 8 photos dans `photos/`. La couverture se régénère avec `bash outils/og-image.sh` (même visuel que l'image de partage du site).
 
 ## 1. Création (dans l'ordre des écrans)
 
@@ -54,6 +54,7 @@ Les prix vont ici, pas dans la description. Les 3 offres de site ont un prix fix
 | Service | Prix | Description (300 caractères max.) |
 |---|---|---|
 | Site vitrine | 590 € HT, prix fixe | Site de 5 pages sur mesure pensé pour le téléphone, textes écrits avec vous, boutons Appeler et WhatsApp, fiche Google réglée. En ligne en 5 jours ouvrables. Payé une fois ou en 3 fois sans frais. |
+| Site + logo | 790 € HT, prix fixe | Le site vitrine, votre logo en 3 propositions et des cartes de visite assorties. En ligne en 2 semaines. |
 | Boutique en ligne | 1 490 € HT, prix fixe | Boutique rapide sur mobile, produits illimités, paiement Bancontact et carte, 50 premiers produits importés. En ligne en 3 semaines. |
 | Logo et identité visuelle | dès 290 € HT | Logo, couleurs et polices, déclinés pour l'enseigne, les réseaux et les imprimés. Fichiers à votre nom. |
 | Supports imprimés | sur devis | Menus, flyers, cartes de visite assortis à votre marque. |

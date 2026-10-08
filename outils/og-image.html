@@ -1,27 +1,37 @@
 <!doctype html>
-<!-- Image de partage (réseaux sociaux, WhatsApp…). Régénérer avec : bash outils/og-image.sh -->
+<!-- Image de partage (1200 × 630) et couverture de la fiche Google Business (1024 × 576). Régénérer avec : bash outils/og-image.sh -->
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <style>
   @font-face { font-family: "Mona Sans"; font-weight: 200 900; src: url("../public/fonts/mona-sans-latin.woff2") format("woff2"); }
-  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
-  body { background: #090909; color: #fff; font-family: "Mona Sans", sans-serif; position: relative; }
-  .blob { position: absolute; left: 540px; top: -150px; width: 760px; height: 760px; border-radius: 50%;
-    background: radial-gradient(circle at 42% 30%, #F7A8FF 0%, #D44DF0 30%, #6A4CF5 62%, rgba(106,76,245,0) 74%); filter: blur(8px); }
-  .wrap { position: absolute; inset: 70px 80px; display: flex; flex-direction: column; }
-  .brand { display: flex; align-items: center; gap: 16px; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
-  .brand svg { width: 52px; height: 52px; }
-  h1 { margin: 92px 0 0; font-size: 92px; line-height: 1.02; font-weight: 600; letter-spacing: -0.045em; max-width: 900px; }
-  p { margin: auto 0 0; font-size: 28px; color: rgba(255,255,255,.78); letter-spacing: -0.01em; }
+  /* Tailles exprimées en vw : la même mise en page sert aux deux formats */
+  html, body { margin: 0; width: 100vw; height: 100vh; overflow: hidden; }
+  body { background: #F6F5F1; color: #17150F; font-family: "Mona Sans", sans-serif; position: relative; }
+  .halo { position: absolute; border-radius: 50%; filter: blur(5vw); }
+  .halo.a { left: 55vw; top: -12vw; width: 40vw; height: 40vw; background: rgba(91,63,224,.32); }
+  .halo.b { left: 72vw; top: 12vw; width: 38vw; height: 38vw; background: rgba(201,59,230,.26); }
+  .wrap { position: absolute; inset: 5.8vw 6.7vw; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 1.3vw; font-size: 2.5vw; font-weight: 650; letter-spacing: -0.02em; }
+  .brand svg { width: 4.3vw; height: 4.3vw; }
+  h1 { margin: auto 0 0; font-size: 7.4vw; line-height: 1.02; font-weight: 700; letter-spacing: -0.045em; }
+  h1 span { background: linear-gradient(transparent 58%, #D4C8FF 58%, #D4C8FF 92%, transparent 92%); }
+  .tags { display: flex; gap: 1.2vw; margin-top: 2.4vw; }
+  .tag { padding: 1.1vw 1.9vw; border-radius: 99vw; font-size: 2vw; font-weight: 650; letter-spacing: -0.01em; background: #fff; border: 1px solid #DCD8CF; }
+  .tag.prix { color: #fff; border: 0; background: linear-gradient(120deg, #5B3FE0 0%, #9A3DE8 55%, #C93BE6 100%); }
 </style>
 </head>
 <body>
-  <div class="blob"></div>
+  <div class="halo a"></div>
+  <div class="halo b"></div>
   <div class="wrap">
-    <div class="brand"><svg viewBox="0 0 28 28"><rect width="28" height="28" rx="8" fill="#fff"/><path d="M19 8.5H9.5v11H19M9.5 14h7" fill="none" stroke="#000" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21.5" cy="5.5" r="3" fill="#D44DF0"/></svg>Épure Studio</div>
-    <h1>Des sites et des marques qui font venir des clients.</h1>
-    <p>Agence web à Bruxelles · Sites, boutiques, logos, SEO</p>
+    <div class="brand"><svg viewBox="0 0 28 28"><rect width="28" height="28" rx="8" fill="#17150F"/><path d="M19 8.5H9.5v11H19M9.5 14h7" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21.5" cy="5.5" r="3" fill="#C93BE6"/></svg>Épure Studio</div>
+    <h1>Un site qui fait sonner<br><span>votre téléphone.</span></h1>
+    <div class="tags">
+      <div class="tag prix">Site vitrine 590 €, payé une fois</div>
+      <div class="tag">En ligne en 5 jours</div>
+      <div class="tag">Bruxelles</div>
+    </div>
   </div>
 </body>
 </html>
