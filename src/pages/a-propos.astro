@@ -19,7 +19,7 @@ const prixMaintenance = SV.find(s => s.id === 'maintenance')?.prix_mensuel ?? 39
 const METHODE: [string, string, string][] = [
   ['Zéro intermédiaire', `Pas de chef de projet ni de sous-traitant qui change à chaque appel. ${COFONDATEUR} est votre contact, ${prenom} construit votre site.`, "Un numéro direct et WhatsApp, une réponse sous 24 h ouvrées, et les modifications faites par ceux qui ont construit le site."],
   ['Vous validez avant qu’on construise', "Chaque page passe par une maquette. Si la première ne vous plaît pas, on repart de zéro, sans frais.", "Une maquette sur un lien privé, des allers-retours jusqu'à votre accord écrit, puis seulement le développement."],
-  ['Des prix clairs, un devis ferme', "Nos prix de départ sont affichés sur le site. Le devis détaille tout ce qui est inclus, sans surprise ensuite.", "40 % à la signature et 60 % à la mise en ligne, ou 3 mensualités sans frais. Aucun coût caché."],
+  ['Des prix clairs, un devis ferme', "Nos prix sont affichés sur le site. Le devis détaille tout ce qui est inclus, et le montant ne bouge plus.", "40 % à la signature et 60 % à la mise en ligne, ou 3 mensualités sans frais. Aucun coût caché."],
   ['On reste après la mise en ligne', "Un mois de corrections offert, puis une maintenance sans engagement si vous le souhaitez. Et vous gardez nos numéros.", `30 jours de corrections inclus, puis maintenance à ${prixMaintenance} € par mois si vous le voulez, résiliable quand vous voulez.`],
 ];
 // Quiz « Les bons partenaires pour vous ? » : [question, réponse qui nous correspond, réponse qui ne nous correspond pas]
@@ -66,7 +66,7 @@ const PERSONS = await Promise.all(FONDATEURS.map(async f => {
         <p>Beaucoup de commerçants se retrouvent coincés entre deux options : faire leur site eux-mêmes un dimanche soir, ou payer une agence où ils ne parlent jamais à la personne qui fait le travail. Entre les deux, il manquait une équipe joignable, qui explique simplement et qui rend des comptes sur les résultats.</p>
         <p>On s'est associés pour ça, avec deux métiers complémentaires. {COFONDATEUR} s'occupe du commercial, du marketing et de la relation client : comprendre votre activité, construire l'offre qui vous convient, suivre vos résultats. {prenom}, développeur de formation, s'occupe de la stratégie et de la technique, après avoir conçu des sites, des logiciels sur mesure et des outils de gestion financière.</p>
         <p>Une « épure », c'est le dessin qui ne garde que l'essentiel. C'est notre façon de travailler : un site clair, rapide sur téléphone, avec ce qui pousse vos visiteurs à vous appeler, et rien de superflu.</p>
-        <blockquote class="story-quote"><p>« Notre travail est réussi quand votre téléphone sonne plus souvent, pas quand le site est joli. »</p></blockquote>
+        <blockquote class="story-quote"><p>« On juge notre travail au nombre d'appels que vous recevez. »</p></blockquote>
       </div>
     </div>
   </section>

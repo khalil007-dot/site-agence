@@ -126,6 +126,7 @@
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v5 (2026-10-08) — Textes du site réécrits pour convertir (skills copywriting, cro, marketing-psychology) : accroche « Un site qui fait sonner votre téléphone. 590 €, payé une fois. », CTA « Recevoir mon devis en 48 h ».
 - v4 (2026-10-08) — Grille simplifiée à 3 offres après un audit CRO (plus de 40 montants sur l'accueil, client perdu).
 - v3 (2026-10-08) — Retour aux prix payés une fois (baissés : vitrine 590 €, Lancement 790 €…), accueil mélangeant l'ancienne base et le style Fast On Web.
 - v2 (2026-10-08) — Ajout du site par abonnement comme offre principale de l'accueil, sur le modèle de Fast On Web (concurrent direct belge : 55/99/199 €/mois + 150 €, en ligne en 3 jours).

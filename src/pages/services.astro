@@ -26,7 +26,7 @@ const PREUVES: Record<string, { img: ImageMetadata; client: string; quoi: string
 // Guide « Par où commencer ? » : [situation, conseil, services recommandés]
 const GUIDE: [string, string, string[]][] = [
   ['Je lance mon activité', "Commencez par le logo : les couleurs du site en découlent. Puis un site vitrine pour être trouvé dès l'ouverture.", ['logo', 'site-vitrine']],
-  ["J'ai un site, mais peu de demandes", "Le problème n'est pas le site mais les visiteurs. Le référencement les amène durablement, Google Ads tout de suite.", ['seo', 'google-ads']],
+  ["J'ai un site, mais peu de demandes", "Il vous manque des visiteurs. Le référencement en amène durablement, Google Ads dès la première semaine.", ['seo', 'google-ads']],
   ['Je veux vendre en ligne', "Une boutique pensée pour le téléphone, une image soignée, puis du référencement pour attirer les acheteurs.", ['e-commerce', 'logo', 'seo']],
   ['Je veux être présent sur les réseaux', "Une image soignée d'abord, puis des publications régulières à vos couleurs, sans y passer vos soirées.", ['reseaux-sociaux', 'logo']],
   ["Je veux qu'on s'occupe de mon site", "Hébergement, sauvegardes, mises à jour et petites modifications chaque mois, sans engagement.", ['maintenance']],
@@ -37,7 +37,7 @@ const budget = (ids: string[]) => {
 };
 
 const FAQ: [string, string][] = [
-  ['Les prix affichés sont-ils les vrais prix ?', "Ce sont des prix de départ, hors taxes. Le devis, gratuit et ferme, précise le prix exact selon votre projet (nombre de pages, de produits, fonctions en plus). Pas de coût caché ensuite."],
+  ['Les prix affichés sont-ils les vrais prix ?', "Oui. Les 3 offres de site ont un prix fixe, hors TVA. Pour les autres services, c'est un prix de départ : le devis gratuit donne le montant exact selon votre projet, et il ne bouge plus ensuite."],
   ['Puis-je payer en plusieurs fois ?', "Oui. En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 3 mensualités sans frais pour les services payés en une fois."],
   ['Les services mensuels m’engagent-ils longtemps ?', "La maintenance est sans engagement. Le référencement demande 3 mois au départ, le temps que Google prenne en compte le travail. Ensuite, vous arrêtez avec un mois de préavis."],
   ['Le budget Google Ads est-il compris ?', "Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond."],
@@ -64,8 +64,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
 <Base chemin="services" title={`Services et prix : sites et SEO à Bruxelles | ${BRAND}`} desc={`Site vitrine dès ${e(SV.find(s => s.id === "site-vitrine")!.prix_unique)}, boutique en ligne, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : ce qui est inclus, délais, prix et paiement en 3 fois.`} current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
-      <h1 class="poster" id="page-title">Tout pour trouver des clients en ligne. Prix affichés.</h1>
-      <p class="lead">{SV.length} services pour créer votre site, soigner votre image et faire venir des clients. Pour chacun : le résultat attendu, ce qui est inclus, le délai et le prix. Sans jargon et sans surprise.</p>
+      <h1 class="poster" id="page-title">Nos services, avec leur prix.</h1>
+      <p class="lead">{SV.length} services pour créer votre site, soigner votre image et faire venir des clients. Pour chacun, vous voyez ce qu'il vous rapporte, ce qui est inclus, le délai et le prix. Vous hésitez{NB}? Le guide juste en dessous vous dit par où commencer.</p>
       <div class="btn-row" style="margin-top:28px">
         <a class="btn btn-primary" href="#guide">Trouver le bon service</a>
         <a class="btn btn-secondary" href="/devis">Demander un devis gratuit</a>

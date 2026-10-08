@@ -1,6 +1,6 @@
 ---
-// Page d'accueil : la base du site (diagnostic, services, simulateur, formules, audit, garanties)
-// dans le style « panneaux colorés » inspiré de Fast On Web, avec des prix payés une fois.
+// Page d'accueil : diagnostic, comparatif, services, 3 offres à prix fixe, audit gratuit, garanties.
+// Textes écrits pour convertir (skills copywriting, cro, marketing-psychology).
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
@@ -23,7 +23,7 @@ const maintenance = MAINTENANCE;
 const delaiVitrine = prix('site-vitrine').infos[0].valeur;
 const offreSite = FORMULES.find(f => f.id === 'site')!;
 
-// Bandeau jaune qui défile sous le titre
+// Bandeau qui défile sous le titre
 const INCLUS = ['Maquette validée avant le code', 'Textes écrits avec vous', 'Parfait sur téléphone', 'Fiche Google', 'Boutons Appeler et WhatsApp', 'Le site vous appartient', 'Paiement en 3 fois sans frais', 'Deux fondateurs en direct'];
 
 // Section « problème » : auto-diagnostic. [ce que vit le client, ce que ça lui coûte, source éventuelle, ce qu'on fait]
@@ -39,7 +39,7 @@ const PAINS: [string, string, string, string][] = [
     'Boutons Appeler et WhatsApp visibles partout, avis et prix mis en avant.'],
   ["Plus personne ne s'occupe de mon site",
     'Horaires faux, photos datées, site qui tombe en panne : vos clients pensent que vous avez fermé, ou que vous ne faites pas attention aux détails.', '',
-    'Un interlocuteur joignable, des modifications chaque mois, sans engagement.'],
+    'Quelqu’un qui répond, et vos modifications faites chaque mois, sans engagement.'],
 ];
 
 // Comparatif avec ce que le client connaît. Fourchettes de prix observées en Belgique en 2026
@@ -66,17 +66,17 @@ const HEURE: [string, string][] = [
 ];
 
 const ETAPES: [string, string, string][] = [
-  ['Jour 0', 'Un appel de 30 minutes', 'Votre activité, vos clients, votre zone. Vous recevez un devis ferme sous 48 h. Rien à préparer.'],
-  ['Jours 1 et 2', 'Votre maquette', "Structure, design et textes. Vous validez avant qu'on construise. Si elle ne vous plaît pas, on repart de zéro, sans frais."],
-  ['Jours 3 à 5', 'On construit, vous suivez', 'Développement, photos, version mobile, formulaire, fiche Google. Vous suivez tout sur un lien privé.'],
-  ['Ensuite', 'Mise en ligne et suivi', "Une heure de formation, un mois de corrections offert, puis la maintenance si vous le souhaitez, sans engagement."],
+  ['Jour 0', 'Un appel de 30 minutes', 'Vous nous parlez de vos clients et de ce qui vous rend différent. Vous recevez un devis ferme sous 48 h.'],
+  ['Jours 1 et 2', 'Votre maquette', 'Le design et les textes de votre page d’accueil. Si elle ne vous plaît pas, on recommence, sans frais.'],
+  ['Jours 3 à 5', 'On construit, vous suivez', 'Pages, photos, version mobile, formulaire et fiche Google. Tout est visible sur votre lien privé.'],
+  ['Ensuite', 'En ligne, et on reste là', 'Une heure de formation et un mois de corrections offerts. Ensuite, la maintenance si vous la voulez.'],
 ];
 
 const ACTIVITES = ['Artisan / bâtiment', 'Restaurant / horeca', 'Commerce', 'Santé / bien-être', 'Profession libérale', 'Autre activité'];
 
 const FAQ: [string, string][] = [
-  ['Combien coûte un site ?', `Trois prix fixes, hors TVA : ${FORMULES.map(f => `${f.nom.toLowerCase()} ${e(f.prix)}`).join(', ')}. Vous payez une fois, ou en 3 fois sans frais. Ensuite, la maintenance à ${e(MAINTENANCE)} par mois est facultatif.`],
-  ['Pourquoi êtes-vous moins chers qu’une agence ?', "Pas de locaux de prestige, pas de commerciaux, pas de chef de projet : vous parlez directement aux deux personnes qui font le travail. Et nos outils règlent en quelques heures les tâches répétitives qui faisaient grimper les factures. Le design, les textes et le contrôle restent faits à la main."],
+  ['Combien coûte un site ?', `Trois prix fixes, hors TVA : ${FORMULES.map(f => `${f.nom.toLowerCase()} ${e(f.prix)}`).join(', ')}. Vous payez une fois, ou en 3 fois sans frais. Ensuite, la maintenance à ${e(MAINTENANCE)} par mois est facultative.`],
+  ['Pourquoi êtes-vous moins chers qu’une agence ?', "Vous parlez directement aux deux personnes qui font le travail, sans commercial ni chef de projet à rémunérer. Nos outils règlent en quelques heures les tâches répétitives qui gonflaient les factures. Le design, les textes et le contrôle restent faits à la main."],
   ['Combien de temps faut-il pour créer un site ?', `${FORMULES.map(f => `${f.nom} : ${f.delai}`).join(', ')}, après validation de la maquette.`],
   ['Est-ce que je pourrai modifier mon site moi-même ?', 'Oui. Textes, photos, produits et prix se modifient depuis une interface simple. Une heure de formation est incluse à la livraison.'],
   ['Et si je préfère que vous fassiez les modifications ?', `C'est le rôle de la maintenance, à ${e(maintenance)} par mois sans engagement : hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 h de modifications par mois, traitées sous 2 jours ouvrables.`],
@@ -91,22 +91,22 @@ const posts = (await getCollection('articles')).sort((a, b) => a.data.ordre - b.
 const WEBSITE = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_URL + '/#site', url: SITE_URL + '/', name: BRAND, inLanguage: 'fr-BE', publisher: { '@id': ORG['@id'] } };
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base chemin="" title={`Agence web à Bruxelles, site vitrine dès ${e(vitrine)} | ${BRAND}`} desc={`Agence web à Bruxelles : site vitrine dès ${e(vitrine)} en ligne en ${delaiVitrine}, boutique en ligne, logo, SEO et Google Ads pour indépendants et PME en Belgique. Payé une fois, le site vous appartient. Devis gratuit sous 48 h.`} current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
+<Base chemin="" title={`Site internet pour indépendants à Bruxelles dès ${e(vitrine)} | ${BRAND}`} desc={`Un site qui fait sonner votre téléphone : site vitrine à ${e(vitrine)} HTVA, payé une fois, en ligne en ${delaiVitrine}. Textes écrits avec vous, fiche Google incluse, le site est à vous. Devis gratuit en 48 h.`} current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
 
   <section class="fx-hero" aria-labelledby="hero-title">
     <div class="wrap fx-hero-grid">
       <div class="reveal">
-        <p class="kicker">Agence web à Bruxelles et partout en Belgique</p>
-        <h1 class="poster" id="hero-title">Des sites qui font <span class="hl">venir des clients</span>. <span class="hl hl-tomato">Payés une fois.</span></h1>
-        <p class="lead">Sites vitrine dès {e(vitrine)}, en ligne en {delaiVitrine}. Boutiques en ligne, logos et référencement Google pour les commerces, restaurants et indépendants. Deux fondateurs en direct, et un site qui vous appartient.</p>
+        <p class="kicker">Agence web à Bruxelles, pour indépendants et commerces</p>
+        <h1 class="poster" id="hero-title">Un site qui fait sonner <span class="hl">votre téléphone</span>. <span class="hl hl-tomato">{e(vitrine)}, payé une fois.</span></h1>
+        <p class="lead">Vos clients vous cherchent sur leur téléphone avant de pousser la porte. On crée le site qui les décide à vous appeler : textes écrits avec vous, fiche Google réglée, en ligne en {delaiVitrine}. Et le site est à vous.</p>
         <div class="btn-row fx-cta">
-          <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis gratuit <span aria-hidden="true">→</span></a>
-          <a class="btn btn-secondary btn-lg" href="#formules">Voir les 3 prix</a>
+          <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary btn-lg" href="#formules">Voir ce qui est inclus</a>
         </div>
-        <p class="note">Devis ferme sous 48{NB}h · Maquette refaite sans frais si elle ne vous plaît pas</p>
+        <p class="note">Gratuit et sans engagement · Maquette refaite sans frais si elle ne vous plaît pas</p>
         <dl class="fx-stats">
-          <div><dt>Dès {e(vitrine)}</dt><dd>pour un site vitrine, payé une fois</dd></div>
-          <div><dt>{delaiVitrine.split(' ').slice(0, 2).join(NB)}</dt><dd>ouvrables pour le mettre en ligne</dd></div>
+          <div><dt>{e(vitrine)}</dt><dd>le site vitrine, payé une fois</dd></div>
+          <div><dt>{delaiVitrine.split(' ').slice(0, 2).join(NB)}</dt><dd>ouvrables pour être en ligne</dd></div>
           <div><dt>3 fois</dt><dd>sans frais, si vous préférez étaler</dd></div>
         </dl>
       </div>
@@ -114,7 +114,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <span class="glow"></span>
         <div class="browser"><span class="bar"><i></i><i></i><i></i><b>streetsapp.be</b></span><Image src={shotStreet} alt="" widths={[480, 720, 960]} sizes="(max-width: 960px) 90vw, 560px" loading="eager" fetchpriority="high" /></div>
         <div class="phone"><Image src={shotOmiMobile} alt="" widths={[200, 390]} sizes="190px" loading="eager" /></div>
-        <span class="seal"><small>Payé une fois</small><b>{e(vitrine)}</b><small>le site est à vous</small></span>
+        <span class="seal"><small>En ligne en</small><b>{delaiVitrine.split(' ').slice(0, 2).join(NB)}</b><small>ouvrables</small></span>
         <span class="tag-real"><i></i>Vrais sites réalisés par nos soins</span>
       </div>
     </div>
@@ -128,7 +128,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="fx-head rv">
         <h2 class="d-xl" id="pb-title">Votre site vous fait-il <span class="hl hl-pink">perdre des clients</span>{NB}?</h2>
-        <p class="lead">Chaque semaine, des clients vous cherchent en ligne. Cochez ce qui vous ressemble : dix secondes suffisent pour savoir combien vous en perdez.</p>
+        <p class="lead">Chaque semaine, des gens cherchent votre métier près de chez eux. Cochez ce qui vous ressemble : en dix secondes, vous saurez où ils partent.</p>
       </div>
       <div class="diag" id="diag">
         <ul class="pains">{PAINS.map(([t, cout, src, fix], i) => <li>
@@ -155,10 +155,10 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       <div class="cmp-top">
         <div class="rv">
           <h2 class="d-xl" id="cmp-title">Le travail d'une agence. <span class="hl">Le prix d'un freelance.</span></h2>
-          <p class="lead">En Belgique, une agence facture un site vitrine entre {e(5000)} et {e(15000)}, un freelance entre {e(800)} et {e(5000)}. Chez {BRAND}, c'est {e(vitrine)}, écrit noir sur blanc, et vous savez exactement ce que vous recevez.</p>
+          <p class="lead">En Belgique, une agence facture un site vitrine entre {e(5000)} et {e(15000)}, un freelance entre {e(800)} et {e(5000)}. Chez nous, c'est {e(vitrine)}. Le prix est écrit avant que vous signiez, et il ne bouge plus.</p>
           <ul class="cmp-points">
-            <li><b>Un prix fixe.</b> Ce qui est écrit, c'est ce que vous payez.</li>
-            <li><b>Payé une fois.</b> Ou en 3 fois sans frais, si vous préférez.</li>
+            <li><b>Un prix fixe.</b> Le montant du devis est celui de la facture.</li>
+            <li><b>Payé une fois.</b> Ou en 3 fois sans frais, si c'est plus confortable.</li>
             <li><b>Le site est à vous.</b> Domaine, textes et photos à votre nom.</li>
           </ul>
         </div>
@@ -190,9 +190,9 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="panel panel-pink fx-modif">
         <div class="rv">
-          <h2 class="d-xl" id="modif-title">Un horaire, une photo, un nouveau service{NB}? <span class="hl hl-white">On s'en charge.</span></h2>
-          <p class="lead">Avec la maintenance à {e(maintenance)} par mois, sans engagement : hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 heure de modifications chaque mois. Vous écrivez par e-mail ou WhatsApp, on traite sous 2 jours ouvrables.</p>
-          <p class="small">Vous préférez modifier vous-même{NB}? C'est possible aussi : une heure de formation est incluse avec chaque site.</p>
+          <h2 class="d-xl" id="modif-title">Vos horaires changent, un plat arrive à la carte{NB}? <span class="hl hl-white">Un message suffit.</span></h2>
+          <p class="lead">Avec la maintenance à {e(maintenance)} par mois, vous envoyez votre demande par WhatsApp ou par e-mail, et elle est en ligne sous 2 jours ouvrables. Hébergement, nom de domaine, adresse e-mail et sauvegardes sont compris. Vous arrêtez quand vous voulez.</p>
+          <p class="small">Vous préférez le faire vous-même{NB}? Une heure de formation est incluse avec chaque site.</p>
         </div>
         <div class="ticket rv" aria-label="Exemples de modifications">
           <p class="ticket-head"><b>Ce que représente une heure</b><span>à titre indicatif</span></p>
@@ -207,13 +207,13 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="panel panel-lime">
         <div class="fx-head rv">
-          <h2 class="d-xl" id="methode-title">Quelques heures pour vous. <span class="hl hl-white">Cinq jours</span> pour nous.</h2>
-          <p class="lead">Pour un site vitrine, {delaiVitrine} après validation de la maquette. Vous suivez tout sur un lien privé, et on vous dit précisément ce qu'il nous manque.</p>
+          <h2 class="d-xl" id="methode-title">Une heure de votre temps. <span class="hl hl-white">Cinq jours</span> pour être en ligne.</h2>
+          <p class="lead">Vous nous parlez de votre métier. On écrit, on dessine et on construit. Vous suivez tout sur un lien privé et vous validez chaque étape.</p>
         </div>
         <ol class="timeline">{ETAPES.map(([quand, t, txt]) => <li class="rv"><span class="when">{quand}</span><h3>{t}</h3><p>{txt}</p></li>)}</ol>
         <div class="btn-row" style="align-items:center;gap:22px">
-          <a class="btn btn-primary" href="/devis?mode=appel">Réserver l'appel de 30 minutes <span aria-hidden="true">→</span></a>
-          <a class="link-u" href="#formules">Voir les formules</a>
+          <a class="btn btn-primary" href="/devis?mode=appel">Réserver mon appel de 30 minutes <span aria-hidden="true">→</span></a>
+          <a class="link-u" href="#formules">Voir les 3 prix</a>
         </div>
       </div>
     </div>
@@ -224,7 +224,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       <div class="fx-head rv">
         <h2 class="d-xl" id="work-title">De vrais sites, pour de <span class="hl hl-pink">vrais commerces</span>.</h2>
         <div class="fx-head-side">
-          <p class="lead">Une boutique de sportswear, un restaurant bruxellois, une maison de brunch. Des projets en ligne que vous pouvez ouvrir.</p>
+          <p class="lead">Ils sont en ligne, ouvrez-les : une boutique de sportswear, un restaurant à Saint-Josse, une maison de brunch.</p>
           <a class="btn btn-secondary" href="/realisations">Toutes les réalisations <span aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -261,16 +261,16 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="panel panel-royal fx-why">
         <div class="rv">
-          <p class="kicker">Pourquoi c'est moins cher{NB}?</p>
-          <h2 class="d-xl" id="why-title">Moins de tâches répétitives. <span class="hl">Plus de temps</span> pour votre site.</h2>
-          <p class="lead">Monter les pages une à une, les adapter au téléphone, tout retester : c'est ce travail qui faisait grimper les factures. Nos outils et notre méthode le règlent en quelques heures. <b>Ce temps gagné, on ne vous le facture pas.</b></p>
-          <p class="lead">Et personne entre vous et nous : {COFONDATEUR} vous répond, {FONDATEUR.split(' ')[0]} construit votre site.</p>
+          <p class="kicker">Pourquoi {e(vitrine)} et pas {e(5000)}{NB}?</p>
+          <h2 class="d-xl" id="why-title">Les tâches répétitives vont vite. <span class="hl">Votre site reste fait à la main.</span></h2>
+          <p class="lead">Monter les pages une à une, les adapter au téléphone, tout retester : c'est ce travail qui gonflait les factures. Nos outils le font en quelques heures, et <b>ce temps gagné, on ne vous le facture pas.</b></p>
+          <p class="lead">{COFONDATEUR} vous répond, {FONDATEUR.split(' ')[0]} construit votre site. Personne d'autre à rémunérer entre vous et eux.</p>
         </div>
         <div class="why-lists rv">
           <div><h3>Ce qu'on a accéléré</h3><ul class="checks"><li>Mise en page et intégration</li><li>Adaptation au téléphone et à la tablette</li><li>Vérifications techniques : vitesse, liens, balises</li><li>Premiers jets des textes, à partir de vos réponses</li></ul></div>
           <div><h3>Ce qui reste fait <span class="hl">à la main</span></h3><ul class="checks"><li>Comprendre votre métier et vos clients</li><li>Le design et la maquette</li><li>La relecture et le ton de vos textes</li><li>Le contrôle avant la mise en ligne</li><li>Le suivi après la mise en ligne</li></ul></div>
         </div>
-        <p class="why-result">Résultat : un site d'agence, en ligne en quelques jours, à un prix ferme que vous payez une seule fois.</p>
+        <p class="why-result">Un site d'agence, en ligne en quelques jours, à un prix que vous payez une seule fois.</p>
       </div>
     </div>
   </section>
@@ -280,8 +280,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       <div class="panel panel-sky audit">
         <div>
           <p class="kicker">Gratuit, sans engagement</p>
-          <h2 class="d-xl" id="audit-title">Audit gratuit de <span class="hl hl-white">votre visibilité</span>.</h2>
-          <p class="lead" style="margin-top:16px">On analyse votre site, votre fiche Google et votre présence dans les IA. Vous recevez un rapport clair avec trois actions prioritaires, sous 72{NB}h.</p>
+          <h2 class="d-xl" id="audit-title">Où perdez-vous des clients{NB}? <span class="hl hl-white">On vous le dit gratuitement.</span></h2>
+          <p class="lead" style="margin-top:16px">Donnez-nous l'adresse de votre site. On regarde votre site, votre fiche Google et ce que ChatGPT dit de vous, puis on vous envoie sous 72{NB}h les trois corrections qui rapporteront le plus.</p>
         </div>
         <form class="audit-form" action="/devis" method="get">
           <input type="hidden" name="service" value="seo">
@@ -301,8 +301,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="panel panel-white founder founder-duo">
         <div class="founder-txt">
-          <h2 class="d-lg" id="founder-title">Deux fondateurs, <span class="hl">zéro intermédiaire</span>.</h2>
-          <blockquote><p>« Pas de chef de projet entre nous, pas de ticket de support. {COFONDATEUR} est votre contact du premier appel au suivi, {FONDATEUR.split(' ')[0]} construit votre site. Vous parlez toujours à ceux qui font le travail. »</p></blockquote>
+          <h2 class="d-lg" id="founder-title">Deux fondateurs, <span class="hl">un seul numéro</span>.</h2>
+          <blockquote><p>« {COFONDATEUR} répond à vos questions du premier appel jusqu'après la mise en ligne. {FONDATEUR.split(' ')[0]} construit votre site. Quand vous appelez, vous tombez sur l'un de nous deux. »</p></blockquote>
           <div class="btn-row">
             <a class="btn btn-primary" href="/devis?mode=appel">Réserver un appel avec nous</a>
             <a class="btn btn-secondary" href="/a-propos">Qui sommes-nous</a>
@@ -317,9 +317,9 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="fx-head rv"><h2 class="d-xl" id="garanties-title">Ce qu'on vous <span class="hl">garantit</span>.</h2></div>
       <div class="guarantees">
-        <div class="g"><h3>Un prix ferme</h3><p>Le devis détaille tout ce qui est inclus. Ce qui est écrit, c'est ce que vous payez.</p></div>
+        <div class="g"><h3>Un prix ferme</h3><p>Le devis détaille tout ce qui est inclus. Le montant ne change plus après votre accord.</p></div>
         <div class="g"><h3>Maquette refaite si elle ne vous plaît pas</h3><p>Si la première proposition ne vous convient pas, on repart de zéro, sans frais.</p></div>
-        <div class="g"><h3>Un mois de corrections offert</h3><p>Après la mise en ligne, on corrige ce qui ne va pas, sans facture.</p></div>
+        <div class="g"><h3>Un mois de corrections offert</h3><p>Une faute, une photo à changer après la mise en ligne{NB}? On corrige, sans facture.</p></div>
         <div class="g"><h3>Tout vous appartient</h3><p>Nom de domaine, contenus et fichiers du logo sont à votre nom. Vous partez quand vous voulez.</p></div>
       </div>
     </div>
@@ -354,11 +354,11 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       <div class="panel panel-tomato fx-final">
         <div>
           <h2 class="d-xl" id="final-title">Votre site pourrait être en ligne <span class="hl hl-white" id="final-date">dans quelques jours</span>.</h2>
-          <p class="lead">Si on se parle cette semaine : un appel de 30 minutes, un devis ferme sous 48{NB}h, puis {delaiVitrine} après validation de votre maquette.</p>
-          <p class="act-label">Pour commencer : quelle est votre activité{NB}?</p>
+          <p class="lead">Un appel de 30 minutes cette semaine, un devis ferme sous 48{NB}h, puis {delaiVitrine} après validation de votre maquette.</p>
+          <p class="act-label">Pour commencer, dites-nous votre métier{NB}:</p>
           <ul class="act-chips">{ACTIVITES.map(a => <li><a href={`/devis?activite=${encodeURIComponent(a)}`}>{a}</a></li>)}</ul>
           <div class="btn-row" style="align-items:center;gap:20px">
-            <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis gratuit <span aria-hidden="true">→</span></a>
+            <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
             {WHATSAPP && <a class="btn btn-glass" href={WHATSAPP} target="_blank" rel="noopener">Écrire sur WhatsApp</a>}
           </div>
           <p class="note fx-final-note">Date indicative pour un site vitrine : 2 jours pour le devis et la maquette, puis {delaiVitrine}.</p>
