@@ -1300,13 +1300,6 @@ a.m-proof:hover { border-color: var(--hair); }
   --g-coral: radial-gradient(120% 100% at 80% 0%, #FFB0BE 0%, #FF5577 35%, #6E1426 72%, #22201A 100%);
   --violet: #9B7BFF; --orange: #FF9A5E; --magenta: #E77BF7; --coral: #FF7A93; --green: #4ADE80; }
 .fx-spots .d-xl { color: #fff; }
-.cost2 { display: grid; gap: 10px; margin-top: 8px; padding: 22px; border-radius: 22px; background: #fff; box-shadow: 0 14px 34px rgba(23,21,15,.08); }
-.cost2 p { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; font-size: .9375rem; color: var(--muted); }
-.cost2 p b { font-size: 1.375rem; font-weight: 820; letter-spacing: -0.03em; color: var(--ink); white-space: nowrap; }
-.cost2 p:first-child b { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }
-.cost2 p.us { color: var(--ink); font-weight: 650; }
-.cost2 p.us b { background: var(--lime); padding: 0 8px; border-radius: 6px; }
-.cost2 small { font-size: .8125rem; color: var(--muted); }
 .seal b small { font-size: .55em; margin-left: 2px; }
 .options li { padding: 0; }
 .options li a { display: block; padding: 9px 16px; text-decoration: none; color: inherit; border-radius: 100px; }
