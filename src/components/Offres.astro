@@ -6,7 +6,7 @@ import { FORMULES, MAINTENANCE, NB, e } from '../lib/site';
 interface Props { titre?: boolean }
 const { titre = true } = Astro.props;
 ---
-<section class="fx-pricing" id="formules" aria-labelledby="plans-title">
+<section class="fx-pricing on-dark" id="formules" aria-labelledby="plans-title">
   <div class="wrap">
     {titre && <div class="fx-head rv">
       <h2 class="d-xl" id="plans-title">Trois prix. <span class="hl hl-white">Tout compris.</span> Payés une fois.</h2>
@@ -14,7 +14,7 @@ const { titre = true } = Astro.props;
     </div>}
     <div class="tiers">
       {FORMULES.map(f => (
-        <article class={f.recommande ? 'tier featured on-dark' : 'tier'}>
+        <article class={f.recommande ? 'tier featured' : 'tier'}>
           {f.recommande && <span class="flag">Recommandé</span>}
           <div class="tier-top"><h3>{f.nom}</h3></div>
           <p class="tier-for">{f.pour}</p>

@@ -1335,3 +1335,73 @@ a.m-proof:hover { border-color: var(--hair); }
 .receipt .btn { width: 100%; }
 .cmp-src { margin-top: 14px; font-size: .75rem; color: rgba(23,21,15,.65); }
 @media (max-width: 900px) { .cmp-top { grid-template-columns: 1fr; } .receipt { transform: none; } }
+
+/* ---------- Identité Épure Studio (se distingue de Fast On Web) ----------
+   Couleurs du logo : violet et magenta. Fond blanc cassé neutre, panneaux pastel doux,
+   surlignage en trait de marqueur, dégradé violet → magenta pour les accents. */
+:root {
+  --canvas: #F6F5F1; --s2: #ECEAE4; --hair: #DCD8CF; --hair-soft: #E7E4DD;
+  --brand: #5B3FE0; --brand2: #C93BE6;
+  --grad: linear-gradient(120deg, #5B3FE0 0%, #9A3DE8 55%, #C93BE6 100%);
+  --yellow: #ECE6FF; --pink: #FBE4F3; --lime: #DDF2E6; --sky: #E6EEF8; --royal: #4F35D2; --tomato: #C93BE6;
+  --blue: #4B2FD6;
+}
+::selection { background: #D9CCFF; color: var(--night); }
+.poster, .d-xl, .d-lg { font-weight: 760; letter-spacing: -0.045em; }
+.hl { --hl: #CDBFFF; background: linear-gradient(transparent 60%, var(--hl) 60%, var(--hl) 92%, transparent 92%); color: inherit; border-radius: 0; padding: 0 .04em; margin: 0; }
+.hl-pink { --hl: #F4B6E8; } .hl-lime { --hl: #A9E4C5; } .hl-white { --hl: #fff; }
+.hl-tomato { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0; }
+.panel { border-radius: 28px; box-shadow: inset 0 0 0 1px rgba(23,21,15,.05); }
+.panel-royal { --bg: var(--royal); }
+.panel-royal .hl, .fx-final .hl, .on-dark .hl-white { --hl: rgba(255,255,255,.28); }
+.on-dark .hl { --hl: rgba(201,59,230,.6); }
+.kicker::before { width: 9px; height: 9px; border-radius: 50%; transform: none; background: var(--brand2); box-shadow: 0 0 0 4px rgba(201,59,230,.18); }
+.shape { display: none; }
+.btn-accent { background: var(--grad); color: #fff; }
+.btn-accent:hover { background: var(--grad); filter: brightness(1.08); }
+
+/* Hero : halo violet au lieu des formes géométriques, badge prix au lieu du macaron */
+.glow { position: absolute; inset: 4% 0 0 6%; border-radius: 40%; background: radial-gradient(closest-side at 32% 38%, rgba(91,63,224,.32), transparent), radial-gradient(closest-side at 72% 68%, rgba(201,59,230,.28), transparent); filter: blur(24px); }
+.seal, .seal { left: 0; top: 58%; width: auto; aspect-ratio: auto; border-radius: 18px; background: #fff; display: grid; place-items: start; gap: 2px; padding: 14px 18px; box-shadow: 0 18px 40px rgba(23,21,15,.16); }
+.seal small { font-size: .75rem; color: var(--muted); font-weight: 600; }
+.seal b { font-size: 1.875rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (max-width: 560px) { .seal { width: auto; top: 60%; padding: 10px 14px; } .seal b { font-size: 1.375rem; } }
+.tag-real { display: inline-flex; align-items: center; gap: 8px; }
+.tag-real i { width: 8px; height: 8px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 0 4px rgba(34,197,94,.2); }
+.browser, .phone { box-shadow: 0 30px 70px rgba(42,26,110,.22); }
+
+/* Bandeau : sombre et discret */
+.marquee { background: var(--night); color: #fff; border-block: 0; }
+.marquee-track { padding: 12px 0; }
+.marquee-track li { font-weight: 600; font-size: .9375rem; }
+.marquee-track li::after { width: 6px; height: 6px; background: var(--brand2); }
+
+/* Tickets droits */
+.ticket, .receipt { transform: none; }
+.ticket-foot mark { background: #DDF2E6; }
+.timeline li::before { background: var(--brand); }
+
+/* Tarifs sur fond sombre, offre recommandée en carte blanche */
+.fx-pricing { background: var(--canvas); color: var(--ink); }
+.fx-pricing .tiers { gap: 16px; }
+.fx-pricing .tier { border-radius: 28px; }
+.fx-pricing .tier:not(.featured) { background: rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px var(--hair); }
+.fx-pricing .tier.featured { --ink: #17150F; --muted: #5C584E; background: #fff; color: var(--night); box-shadow: 0 0 0 2px transparent, 0 30px 70px rgba(91,63,224,.35); outline: 2px solid transparent; background-image: linear-gradient(#fff, #fff), var(--grad); background-origin: border-box; background-clip: padding-box, border-box; border: 2px solid transparent; }
+.fx-pricing .tier .checks { --check: #B9A8FF; }
+.fx-pricing .tier.featured .checks { --check: var(--brand); }
+.tier .flag { background: var(--grad); color: #fff; }
+.fx-pricing .hl-white { --hl: rgba(201,59,230,.6); }
+.after { background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px var(--hair); }
+
+/* Appel final : dégradé de la marque, texte blanc, calendrier droit */
+.panel-tomato { --bg: var(--grad); background: var(--grad); color: #fff; }
+.panel-tomato .lead, .panel-tomato .small, .panel-tomato .note, .panel-tomato .act-label { color: rgba(255,255,255,.88); }
+.fx-final .btn-primary { background: #fff; color: var(--night); }
+.fx-final .btn-glass { background: rgba(255,255,255,.18); color: #fff; }
+.act-chips a { background: rgba(255,255,255,.16); color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.3); }
+.act-chips a:hover { background: #fff; color: var(--night); }
+.cal { transform: none; color: var(--night); }
+.cal-m { background: var(--night); }
+.cal-ok { background: #DDF2E6; }
+.foot-grid a.btn-accent { color: #fff; }
+.fx-work + .fx-pricing { margin-top: 0; padding-top: 0; }

@@ -111,11 +111,11 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         </dl>
       </div>
       <div class="fx-hero-visual" aria-hidden="true">
-        <span class="shape tri"></span><span class="shape disc-blue"></span><span class="shape disc-yellow"></span>
+        <span class="glow"></span>
         <div class="browser"><span class="bar"><i></i><i></i><i></i><b>streetsapp.be</b></span><Image src={shotStreet} alt="" widths={[480, 720, 960]} sizes="(max-width: 960px) 90vw, 560px" loading="eager" fetchpriority="high" /></div>
         <div class="phone"><Image src={shotOmiMobile} alt="" widths={[200, 390]} sizes="190px" loading="eager" /></div>
-        <span class="seal"><svg viewBox="0 0 120 120"><defs><path id="seal-c" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" /></defs><text><textPath href="#seal-c">Le site vous appartient · Payé une fois ·</textPath></text></svg><b>{e(vitrine).replace(NB + '€', '')}<small>€</small></b></span>
-        <span class="tag-real">Vrais sites réalisés par nos soins</span>
+        <span class="seal"><small>Payé une fois</small><b>{e(vitrine)}</b><small>le site est à vous</small></span>
+        <span class="tag-real"><i></i>Vrais sites réalisés par nos soins</span>
       </div>
     </div>
   </section>
@@ -260,7 +260,6 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   <section class="section-tight" aria-labelledby="why-title">
     <div class="wrap">
       <div class="panel panel-royal fx-why">
-        <span class="shape tri" aria-hidden="true"></span>
         <div class="rv">
           <p class="kicker">Pourquoi c'est moins cher{NB}?</p>
           <h2 class="d-xl" id="why-title">Moins de tâches répétitives. <span class="hl">Plus de temps</span> pour votre site.</h2>
@@ -353,7 +352,6 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   <section class="section-tight" style="margin-top:clamp(48px, 7vw, 96px)" aria-labelledby="final-title">
     <div class="wrap">
       <div class="panel panel-tomato fx-final">
-        <span class="shape disc-yellow" aria-hidden="true"></span><span class="shape disc-night" aria-hidden="true"></span>
         <div>
           <h2 class="d-xl" id="final-title">Votre site pourrait être en ligne <span class="hl hl-white" id="final-date">dans quelques jours</span>.</h2>
           <p class="lead">Si on se parle cette semaine : un appel de 30 minutes, un devis ferme sous 48{NB}h, puis {delaiVitrine} après validation de votre maquette.</p>
