@@ -6,6 +6,7 @@ import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
 import Avis from '../components/Avis.astro';
 import Spots from '../components/Spots.astro';
+import Offres from '../components/Offres.astro';
 import Fondateurs from '../components/Fondateurs.astro';
 import { Image } from 'astro:assets';
 import shotStreet from '../assets/projets/streetsapp.jpg';
@@ -14,14 +15,14 @@ import shotOmi from '../assets/projets/omi-restaurant.jpg';
 import shotOmiMobile from '../assets/projets/omi-restaurant-mobile.jpg';
 import shotOmiMenu from '../assets/projets/omi-menu.jpg';
 import shotObrunch from '../assets/projets/obrunch-house-logo.jpg';
-import { BRAND, COFONDATEUR, EMAIL, FAMS, FONDATEUR, FORMULES, NB, ORG, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
+import { BRAND, COFONDATEUR, EMAIL, FONDATEUR, FORMULES, MAINTENANCE, NB, ORG, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
 
 const prix = (id: string) => SV.find(s => s.id === id)!;
 const vitrine = prix('site-vitrine').prix_unique;
-const maintenance = prix('maintenance').prix_mensuel;
+const maintenance = MAINTENANCE;
 const delaiVitrine = prix('site-vitrine').infos[0].valeur;
-// Coût sur deux ans : un site par abonnement à 99 € par mois (+ 150 € de mise en route), contre notre formule Lancement et la maintenance
-const lancement = FORMULES.find(f => f.id === 'lancement')!;
+// Coût sur deux ans : un site par abonnement à 99 € par mois (+ 150 € de mise en route), contre notre offre Site + logo et la maintenance
+const lancement = FORMULES.find(f => f.id === 'site-logo')!;
 const ABO_2ANS = 150 + 99 * 24;
 const NOUS_2ANS = lancement.prix + maintenance * 24;
 
@@ -73,15 +74,14 @@ const ETAPES: [string, string, string][] = [
 const ACTIVITES = ['Artisan / bâtiment', 'Restaurant / horeca', 'Commerce', 'Santé / bien-être', 'Profession libérale', 'Autre activité'];
 
 const FAQ: [string, string][] = [
-  ['Combien coûte un site ?', `Un site vitrine démarre à ${e(vitrine)}, une boutique en ligne à ${e(prix('e-commerce').prix_unique)} et un logo à ${e(prix('logo').prix_unique)}, hors taxes. Vous payez une fois, en une fois ou en 3 mensualités sans frais. Le prix exact figure sur un devis ferme, envoyé sous 48 h.`],
-  ['Pourquoi payer une fois plutôt qu’un abonnement ?', `Parce que le site devient le vôtre. Un site loué à ${e(99)} par mois coûte environ ${e(ABO_2ANS)} sur deux ans et s'arrête quand vous arrêtez de payer. Notre formule Lancement avec la maintenance revient à ${e(NOUS_2ANS)} sur la même période, logo compris, et le site reste à vous.`],
-  ['Combien de temps faut-il pour créer un site ?', `${delaiVitrine} pour un site vitrine après validation de la maquette, ${prix('e-commerce').infos[0].valeur} pour une boutique en ligne. Le délai exact figure sur votre devis.`],
+  ['Combien coûte un site ?', `Trois prix fixes, hors TVA : ${FORMULES.map(f => `${f.nom.toLowerCase()} ${e(f.prix)}`).join(', ')}. Vous payez une fois, ou en 3 fois sans frais. Ensuite, la maintenance à ${e(MAINTENANCE)} par mois est facultatif.`],
+  ['Pourquoi payer une fois plutôt qu’un abonnement ?', `Parce que le site devient le vôtre. Un site loué à ${e(99)} par mois coûte environ ${e(ABO_2ANS)} sur deux ans et s'arrête quand vous arrêtez de payer. Notre offre Site + logo, avec la maintenance, revient à ${e(NOUS_2ANS)} sur la même période, et le site reste à vous.`],
+  ['Combien de temps faut-il pour créer un site ?', `${FORMULES.map(f => `${f.nom} : ${f.delai}`).join(', ')}, après validation de la maquette.`],
   ['Est-ce que je pourrai modifier mon site moi-même ?', 'Oui. Textes, photos, produits et prix se modifient depuis une interface simple. Une heure de formation est incluse à la livraison.'],
   ['Et si je préfère que vous fassiez les modifications ?', `C'est le rôle de la maintenance, à ${e(maintenance)} par mois sans engagement : hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 h de modifications par mois, traitées sous 2 jours ouvrables.`],
   ['Et si le résultat ne me plaît pas ?', "Vous validez la maquette avant le moindre développement. Si la première proposition ne vous convient pas, on repart de zéro sans frais. Après la mise en ligne, un mois de corrections est offert."],
-  ['Y a-t-il des frais cachés ?', "Non. Le prix du devis est ferme et détaille tout ce qui est inclus. Les seuls coûts réguliers possibles sont la maintenance (sans engagement) et, pour Google Ads, le budget publicitaire que vous fixez vous-même."],
+  ['Y a-t-il des frais cachés ?', "Non. Le prix du devis est ferme et détaille tout ce qui est inclus. Le seul coût régulier possible est la maintenance, facultative et sans engagement."],
   ["Qu'est-ce que la visibilité dans les IA ?", 'De plus en plus de clients posent leurs questions à ChatGPT, Perplexity ou aux réponses IA de Google. On structure votre site et vos informations pour que ces outils vous citent quand on cherche votre métier dans votre ville.'],
-  ['Le budget publicitaire Google Ads est-il compris ?', 'Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond.'],
   ['Travaillez-vous en dehors de Bruxelles ?', "Oui, avec des clients de toute la Belgique. Les échanges se font par téléphone, WhatsApp ou visio, et vous suivez l'avancement sur un lien privé."],
 ];
 
@@ -100,7 +100,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <p class="lead">Sites vitrine dès {e(vitrine)}, en ligne en {delaiVitrine}. Boutiques en ligne, logos et référencement Google pour les commerces, restaurants et indépendants. Deux fondateurs en direct, et un site qui vous appartient.</p>
         <div class="btn-row fx-cta">
           <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis gratuit <span aria-hidden="true">→</span></a>
-          <a class="btn btn-secondary btn-lg" href="#estimer">Estimer mon budget</a>
+          <a class="btn btn-secondary btn-lg" href="#formules">Voir les 3 prix</a>
         </div>
         <p class="note">Devis ferme sous 48{NB}h · Maquette refaite sans frais si elle ne vous plaît pas</p>
         <dl class="fx-stats">
@@ -157,8 +157,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <p class="lead">Chez {BRAND}, vous payez une fois, en 3 fois si vous voulez, et le site est à vous.</p>
         <div class="cost2">
           <p><span>Site loué à {e(99)}/mois, sur 2 ans</span><b>{e(ABO_2ANS)}</b></p>
-          <p class="us"><span>Formule Lancement + maintenance, sur 2 ans</span><b>{e(NOUS_2ANS)}</b></p>
-          <small>Logo et cartes de visite compris, et le site reste à vous.</small>
+          <p class="us"><span>Site + logo + maintenance, sur 2 ans</span><b>{e(NOUS_2ANS)}</b></p>
+          <small>Et le site reste à vous.</small>
         </div>
       </div>
       <div class="panel panel-yellow rv">
@@ -173,7 +173,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   </section>
 
   <div class="on-dark fx-spots">
-    <Spots />
+    <Spots prix={false} />
   </div>
 
   <section class="section-tight" style="margin-top:clamp(48px, 7vw, 96px)" aria-labelledby="modif-title">
@@ -245,62 +245,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
-  <section class="section" id="estimer" aria-labelledby="est-title">
-    <div class="wrap">
-      <div class="fx-head rv">
-        <h2 class="d-xl" id="est-title">Estimez votre budget <span class="hl hl-lime">en 30 secondes</span>.</h2>
-        <p class="lead">La plupart de nos projets se situent entre {e(600)} et {e(3000)}. Sélectionnez vos services pour une première estimation.</p>
-      </div>
-      <div class="estimator" id="estimator">
-        <div class="est-groups">{FAMS.map(f => <div class="est-group"><h3 style={`--c:var(--${f.couleur})`}>{f.nom_court}</h3><div class="toggles">{SV.filter(s => s.famille === f.id).map(s =>
-          <button class="toggle" type="button" aria-pressed="false" data-id={s.id} data-once={s.prix_unique} data-monthly={s.prix_mensuel}>{s.nom_court} <span class="p">{s.prix_unique ? `dès ${e(s.prix_unique)}` : `${e(s.prix_mensuel)}/mois`}</span></button>)}</div></div>)}</div>
-        <div class="est-total" aria-live="polite">
-          <span class="label">Budget de départ estimé</span>
-          <span class="big" id="est-once">0{NB}€</span>
-          <span class="monthly" id="est-monthly">Aucun abonnement</span>
-          <span class="count" id="est-count">Sélectionnez au moins un service</span>
-          <a class="btn btn-primary" id="est-cta" href="/devis" aria-disabled="true">Recevoir le devis détaillé</a>
-          <span class="note">Estimation indicative basée sur nos prix de départ, hors taxes.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="fx-pricing" id="formules" aria-labelledby="plans-title">
-    <div class="wrap">
-      <div class="fx-head rv">
-        <h2 class="d-xl" id="plans-title">Trois formules. <span class="hl hl-white">Un prix ferme.</span> Moins cher qu'en services séparés.</h2>
-        <div class="fx-head-side" style="justify-items:end">
-          <ul class="price-meta"><li>Prix hors taxes</li><li>Payé une fois, ou en 3 fois sans frais</li><li>Le site, le logo et le domaine sont à vous</li></ul>
-          <div class="billing" role="group" aria-label="Mode de paiement">
-            <button type="button" class="bill" data-bill="once" aria-pressed="true">En une fois</button>
-            <button type="button" class="bill" data-bill="monthly" aria-pressed="false">En 3 fois</button>
-          </div>
-        </div>
-      </div>
-      <div class="tiers">
-        {FORMULES.map(f => {
-          const once = e(f.prix), monthly = f.mensuel ? once : e(Math.round(f.prix / 3));
-          const onceL = f.mensuel ? 'par mois, sans engagement' : 'une fois', monthlyL = f.mensuel ? onceL : 'par mois, pendant 3 mois';
-          return (
-          <article class={f.recommande ? 'tier featured on-dark' : 'tier'}>
-            {f.recommande && <span class="flag">Recommandé pour vendre en ligne</span>}
-            <div class="tier-top"><h3>{f.nom}</h3></div>
-            <p class="tier-for">{f.pour}</p>
-            <p class="tier-price price" data-once={once} data-monthly={monthly} data-once-l={onceL} data-monthly-l={monthlyL}><b class="pv">{once}</b><span class="pl">{onceL}</span></p>
-            <p class="tier-setup">au lieu de <s>{e(f.separe)}{f.mensuel ? '/mois' : ''}</s> en services séparés, soit <b style="display:inline">{e(f.separe - f.prix)}{f.mensuel ? '/mois' : ''} d'économie</b></p>
-            <a class={f.recommande ? 'btn btn-accent' : 'btn btn-secondary'} href={`/devis?formule=${f.id}`}>Choisir {f.nom} <span aria-hidden="true">→</span></a>
-            <ul class="checks">{f.inclus.map(x => <li>{x}</li>)}</ul>
-          </article>);
-        })}
-      </div>
-      <div class="options">
-        <h3>Ou à la carte</h3>
-        <ul>{SV.map(s => <li><a href={`/services#${s.id}`}>{s.nom_court} <b>{s.prix_unique ? `dès ${e(s.prix_unique)}` : `${e(s.prix_mensuel)}/mois`}</b></a></li>)}</ul>
-      </div>
-      <p class="small fx-once">Paiement en 3 fois sans frais, par prélèvement. Les services mensuels s'arrêtent avec un mois de préavis.</p>
-    </div>
-  </section>
+  <Offres />
 
   <section class="section-tight" aria-labelledby="why-title">
     <div class="wrap">

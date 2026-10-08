@@ -2,13 +2,14 @@
 // Page Services : générée à partir de src/data/services.json
 // Guide « par où commencer », une fiche par service (promesse, prix, mensualités, réalisation), formules, FAQ
 import Base from '../layouts/Base.astro';
+import Offres from '../components/Offres.astro';
 import ServiceVisual from '../components/ServiceVisual.astro';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import captureOmi from '../assets/projets/omi-restaurant.jpg';
 import captureStreetSapp from '../assets/projets/streetsapp.jpg';
 import logoObrunch from '../assets/projets/obrunch-house-logo.jpg';
-import { BRAND, FORMULES, FAMS, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '../lib/site';
+import { BRAND, FAMS, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '../lib/site';
 
 const BYID = Object.fromEntries(SV.map(s => [s.id, s]));
 const devisLabel = (court: string) => (['SEO', 'Google Ads'].includes(court) ? court : court.toLowerCase());
@@ -93,7 +94,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
-  <nav class="jump" aria-label="Familles de services"><div class="wrap">{FAMS.map(f => <a href={`#${f.id}`} style={`--c:var(--${f.couleur})`}>{f.nom_court}</a>)}<a href="#formules" style="--c:var(--green)">Formules</a><a href="#faq" style="--c:#888">Questions</a></div></nav>
+  <nav class="jump" aria-label="Familles de services"><div class="wrap">{FAMS.map(f => <a href={`#${f.id}`} style={`--c:var(--${f.couleur})`}>{f.nom_court}</a>)}<a href="#formules" style="--c:var(--green)">Les 3 offres</a><a href="#faq" style="--c:#888">Questions</a></div></nav>
 
 {FAMS.map(f => (
   <section class="section" id={f.id} aria-labelledby={`${f.id}-title`} style="padding-top:clamp(48px,6vw,80px)">
@@ -131,23 +132,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   </section>
 ))}
 
-  <section class="section" id="formules" aria-labelledby="formules-title">
-    <div class="wrap">
-      <div class="section-head split">
-        <h2 class="d-xl" id="formules-title">Plusieurs services{NB}? Prenez une formule</h2>
-        <p class="subhead">Les combinaisons les plus demandées, moins chères que les services pris séparément.</p>
-      </div>
-      <div class="plans">{FORMULES.map((f, i) => { const unite = f.mensuel ? '/mois' : ''; return <article class={f.recommande ? 'plan featured' : 'plan'}>
-        {f.recommande && <span class="flag">Recommandé pour vendre en ligne</span>}
-        <h3>{f.nom}</h3>
-        <p class="muted">{f.pour}</p>
-        <p class="price">{e(f.prix)} <small>{unite ? 'par mois' : 'une fois'}</small></p>
-        <p class="was">au lieu de <s>{e(f.separe)}{unite}</s>, soit <b class="save">{e(f.separe - f.prix)}{unite} d'économie</b></p>
-        <a class={f.recommande ? 'btn btn-primary' : 'btn btn-secondary'} href={`/devis?formule=${f.id}`}>Choisir {f.nom}</a>
-      </article>; })}</div>
-      <p class="note" style="margin-top:16px">Prix hors taxes. Paiement en 3 fois sans frais possible pour les formules payées en une fois. <a class="link" href="/#formules">Voir le détail des formules</a></p>
-    </div>
-  </section>
+  <Offres />
 
   <section class="section" id="faq" aria-labelledby="faq-title">
     <div class="wrap faq">

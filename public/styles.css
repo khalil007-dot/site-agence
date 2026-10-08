@@ -1318,3 +1318,5 @@ a.m-proof:hover { border-color: var(--hair); }
 .fx-split.wide .fx-split-txt { position: static; grid-template-columns: 1.1fr 1fr; gap: 18px 56px; align-items: start; }
 .fx-split.wide .fx-split-txt h2 { grid-row: span 3; }
 @media (max-width: 860px) { .fx-split.wide .fx-split-txt { grid-template-columns: 1fr; } .fx-split.wide .fx-split-txt h2 { grid-row: auto; } }
+.after { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; margin-top: 40px; padding: 22px 26px; border-radius: 22px; background: rgba(255,255,255,.55); }
+.after p { max-width: 70ch; }

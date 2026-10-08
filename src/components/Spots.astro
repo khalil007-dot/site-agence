@@ -22,6 +22,9 @@ const depuis = (id: string) => {
   const once = svs.filter(s => s.prix_unique).map(s => s.prix_unique);
   return once.length ? e(Math.min(...once)) : e(Math.min(...svs.map(s => s.prix_mensuel))) + '/mois';
 };
+// Sans les prix sur l'accueil : ils sont réunis dans les 3 offres, pour ne pas perdre le visiteur
+interface Props { prix?: boolean }
+const { prix = true } = Astro.props;
 const UPTIME = Array.from({ length: 30 }, (_, i) => (i % 7 === 3 ? 82 : i % 5 === 1 ? 92 : 100));
 ---
 <section class="section" aria-labelledby="spots-title">
@@ -36,10 +39,10 @@ const UPTIME = Array.from({ length: 30 }, (_, i) => (i % 7 === 3 ? 82 : i % 5 ==
         const [titre, texte] = TXT[f.id];
         return <a class={`spot ${f.couleur}`} href={`/services#${f.id}`} style={`--i:${i}`}>
           <div class="spot-top">
-            <span class="kicker">{f.nom_court} · dès {depuis(f.id)}</span>
+            <span class="kicker">{prix ? <>{f.nom_court} · dès {depuis(f.id)}</> : f.nom_court}</span>
             <h3 class="spot-title">{titre}</h3>
             <p>{texte}</p>
-            <ul class="spot-svcs">{svs.map(s => <li>{s.nom_court} <span>{prixDepart(s)}</span></li>)}</ul>
+            <ul class="spot-svcs">{svs.map(s => <li>{s.nom_court}{prix && <span>{prixDepart(s)}</span>}</li>)}</ul>
             <span class="spot-more">Voir {svs.length > 1 ? `les ${svs.length} services` : 'le détail'}<span aria-hidden="true">→</span></span>
           </div>
 

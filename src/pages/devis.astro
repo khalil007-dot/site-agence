@@ -15,7 +15,7 @@ const [avis] = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.dat
 const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
 // Piège à robots : case invisible pour les humains, cochée par les robots de spam
 // Formule choisie sur l'accueil (?formule=business) : rappelée en haut du formulaire
-const CHOIX = Object.fromEntries(FORMULES.map(f => [f.id, { services: f.services, texte: `Formule ${f.nom} : ${e(f.prix)}${f.mensuel ? ' par mois' : ', ou en 3 fois sans frais'}, hors taxes. Dites-nous en quelques mots ce que vous faites, on s'occupe du reste.` }]));
+const CHOIX = Object.fromEntries(FORMULES.map(f => [f.id, { services: f.services, texte: `${f.nom} : ${e(f.prix)} HTVA, payé une fois ou en 3 fois sans frais. Dites-nous en quelques mots ce que vous faites, on s'occupe du reste.` }]));
 const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">';
 ---
 <Base chemin="devis" title={`Devis gratuit site internet à Bruxelles | ${BRAND}`} desc="Demandez un devis gratuit pour votre site internet, boutique en ligne, logo ou référencement à Bruxelles et en Belgique, ou réservez un appel de 30 minutes." current="devis" sticky={false} schema={[{ '@context': 'https://schema.org', '@type': 'ContactPage', url: SITE_URL + '/devis', about: { '@id': ORG_ID } }]} crumbs={[['Devis', 'devis']]}>

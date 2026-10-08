@@ -54,9 +54,9 @@ Le nom de domaine (10 à 20 € par an), l'hébergement (5 à 30 € par mois), 
 Listez les pages dont vous avez besoin, ce que vos visiteurs doivent pouvoir faire (appeler, réserver, demander un devis) et ce que vous pouvez fournir vous-même. Avec ces trois informations, un prestataire peut vous donner un prix précis.
 
 <div class="callout">
-<h2 style="margin:0;font-size:1.5rem">Estimez votre projet en 30 secondes</h2>
-<p>Notre simulateur donne un budget de départ selon les services choisis.</p>
-<a class="btn btn-primary" href="/#estimer">Utiliser le simulateur</a>
+<h2 style="margin:0;font-size:1.5rem">Nos prix, sans surprise</h2>
+<p>Site vitrine 590 €, site + logo 790 €, boutique en ligne 1 490 €. Hors TVA, payés une fois ou en 3 fois sans frais.</p>
+<a class="btn btn-primary" href="/#formules">Voir ce qui est inclus</a>
 </div>
 
 <p class="note">Les fourchettes de prix sont indicatives.</p>

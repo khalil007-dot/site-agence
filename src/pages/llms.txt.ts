@@ -6,7 +6,7 @@ export async function GET() {
   const price = (s: (typeof SV)[number]) => (s.prix_unique ? `à partir de ${s.prix_unique} € HT` : `à partir de ${s.prix_mensuel} € HT par mois`);
   const famTxt = FAMS.map(f => `\n### ${f.nom}\n` + SV.filter(s => s.famille === f.id).map(s => `- [${s.nom}](${SITE_URL}/services#${s.id}) : ${price(s)}. ${s.pour_qui}\n`).join('')).join('');
   const articles = (await getCollection('articles', p => !p.data.a_paraitre)).sort((a, b) => a.data.ordre - b.data.ordre);
-  const forTxt = FORMULES.map(f => `- ${f.nom} : ${f.inclus.join(', ')}. ${f.prix} € HT${f.mensuel ? ' par mois' : ` une fois, ou ${Math.round(f.prix / 3)} € par mois sur 3 mois`} (au lieu de ${f.separe} € en services séparés).
+  const forTxt = FORMULES.map(f => `- ${f.nom} : ${f.prix} € HTVA, payé une fois ou en 3 fois sans frais, en ligne en ${f.delai}. ${f.inclus.join(', ')}.
 `).join('');
   const artTxt = articles.map(a => `- [${a.data.titre}](${SITE_URL}/${a.id})\n`).join('');
   return new Response(`# ${BRAND}
@@ -21,12 +21,13 @@ export async function GET() {
 - Paiement : 40 % à la signature et 60 % à la mise en ligne, ou en 3 mensualités sans frais
 - Le client est propriétaire de son nom de domaine, de ses contenus et de son logo
 
-## Services et prix de départ
+## Tous les services et prix de départ
 ${famTxt}
-## Formules
-${forTxt}
+## Les 3 offres à prix fixe
+${forTxt}- Maintenance facultative : ${SV.find(s => s.id === 'maintenance')!.prix_mensuel} € HTVA par mois, sans engagement (hébergement, nom de domaine, adresse e-mail, 1 h de modifications par mois).
+
 ## Pages
-- [Accueil](${SITE_URL}/) : présentation, diagnostic, comparatif, simulateur de budget, formules, méthode, audit gratuit, FAQ
+- [Accueil](${SITE_URL}/) : présentation, diagnostic, comparatif, les 3 offres à prix fixe, méthode, audit gratuit, FAQ
 - [Services](${SITE_URL}/services) : détail des ${SV.length} services, délais et prix
 - [Réalisations](${SITE_URL}/realisations)
 - [À propos](${SITE_URL}/a-propos)

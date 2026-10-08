@@ -220,62 +220,57 @@
   ],
   "formules": [
     {
-      "id": "lancement",
-      "nom": "Lancement",
-      "pour": "Pour créer son entreprise avec une image pro dès le premier jour.",
+      "id": "site",
+      "nom": "Site vitrine",
+      "prix": 590,
+      "services": [
+        "site-vitrine"
+      ],
+      "pour": "Pour être trouvé sur Google et recevoir des appels.",
+      "delai": "5 jours ouvrables",
+      "inclus": [
+        "Jusqu'à 5 pages, design sur mesure",
+        "Textes écrits avec vous",
+        "Parfait sur téléphone",
+        "Boutons Appeler et WhatsApp, formulaire, carte",
+        "Fiche Google Business créée ou remise en ordre",
+        "Maquette refaite sans frais si elle ne vous plaît pas"
+      ]
+    },
+    {
+      "id": "site-logo",
+      "nom": "Site + logo",
       "prix": 790,
-      "mensuel": false,
+      "recommande": true,
       "services": [
         "logo",
         "site-vitrine"
       ],
-      "separe_mois_seo": 0,
+      "pour": "Pour démarrer avec une image pro, en ligne comme sur papier.",
+      "delai": "2 semaines",
       "inclus": [
-        "Logo et mini charte graphique",
-        "Site vitrine jusqu'à 5 pages, textes écrits avec vous",
-        "Fiche Google Business créée ou remise en ordre",
+        "Tout le site vitrine",
+        "Votre logo, en 3 propositions",
+        "Couleurs et typographies assorties",
         "Cartes de visite prêtes à imprimer",
-        "En ligne en 5 jours ouvrables après validation de la maquette"
+        "Fichiers du logo pour le web et l'impression"
       ]
     },
     {
-      "id": "commerce",
-      "nom": "Commerce",
-      "pour": "Pour ouvrir une boutique en ligne et vendre dès le premier mois.",
-      "prix": 1990,
-      "mensuel": false,
-      "recommande": true,
+      "id": "boutique",
+      "nom": "Boutique en ligne",
+      "prix": 1490,
       "services": [
-        "logo",
-        "e-commerce",
-        "seo"
+        "e-commerce"
       ],
-      "separe_mois_seo": 3,
+      "pour": "Pour vendre en ligne, jour et nuit.",
+      "delai": "3 semaines",
       "inclus": [
-        "Logo et identité visuelle",
-        "Boutique en ligne complète, paiement par carte et Bancontact",
-        "Photos de vos 20 premiers produits",
-        "3 mois de référencement offerts",
-        "En ligne en 3 semaines"
-      ]
-    },
-    {
-      "id": "visibilite",
-      "nom": "Visibilité",
-      "pour": "Pour faire venir plus de clients sur un site qui existe déjà.",
-      "prix": 490,
-      "mensuel": true,
-      "services": [
-        "seo",
-        "google-ads",
-        "reseaux-sociaux"
-      ],
-      "inclus": [
-        "Référencement Google et visibilité dans les IA",
-        "Campagnes Google Ads",
-        "2 réseaux sociaux, 12 publications",
-        "Un rapport clair chaque mois",
-        "Sans engagement, un mois de préavis"
+        "Boutique complète, produits illimités",
+        "Paiement par carte, Bancontact et Apple Pay",
+        "Import de vos 50 premiers produits",
+        "Livraison, retours et CGV configurés",
+        "Pensée pour acheter en deux clics sur téléphone"
       ]
     }
   ]

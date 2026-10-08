@@ -1,0 +1,33 @@
+---
+// Les 3 offres à prix fixe (src/data/services.json, clé « formules ») : le seul endroit où le visiteur
+// compare des prix. Une ligne seulement pour la maintenance, facultative.
+import { FORMULES, MAINTENANCE, NB, e } from '../lib/site';
+
+interface Props { titre?: boolean }
+const { titre = true } = Astro.props;
+---
+<section class="fx-pricing" id="formules" aria-labelledby="plans-title">
+  <div class="wrap">
+    {titre && <div class="fx-head rv">
+      <h2 class="d-xl" id="plans-title">Trois prix. <span class="hl hl-white">Tout compris.</span> Payés une fois.</h2>
+      <ul class="price-meta"><li>Prix fixes, hors TVA</li><li>Ou en 3 fois sans frais</li><li>Le site et le domaine sont à vous</li></ul>
+    </div>}
+    <div class="tiers">
+      {FORMULES.map(f => (
+        <article class={f.recommande ? 'tier featured on-dark' : 'tier'}>
+          {f.recommande && <span class="flag">Recommandé</span>}
+          <div class="tier-top"><h3>{f.nom}</h3></div>
+          <p class="tier-for">{f.pour}</p>
+          <p class="tier-price"><b>{e(f.prix)}</b><span>HTVA<br>une fois</span></p>
+          <p class="tier-setup"><b>ou 3{NB}×{NB}{e(Math.ceil(f.prix / 3))}, sans frais</b>En ligne en {f.delai}.</p>
+          <a class={f.recommande ? 'btn btn-accent' : 'btn btn-secondary'} href={`/devis?formule=${f.id}`}>Je choisis cette offre <span aria-hidden="true">→</span></a>
+          <ul class="checks">{f.inclus.map(x => <li>{x}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+    <div class="after">
+      <p><b>Maintenance facultative{NB}:</b> hébergement, nom de domaine, adresse e-mail et 1{NB}h de modifications par mois pour <b>{e(MAINTENANCE)} par mois</b>, sans engagement.</p>
+      <a class="link-u" href="/services">Besoin de plus de clients{NB}? Référencement, Google Ads, réseaux sociaux →</a>
+    </div>
+  </div>
+</section>
