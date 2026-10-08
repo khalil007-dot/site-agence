@@ -110,7 +110,7 @@
 ## Proof Points
 **Metrics:** Devis sous 48 h ; site vitrine en 5 jours ouvrables après validation de la maquette (boutique : 3 semaines) ; réponse sous 24 h ouvrées ; 100 % du site, du domaine et des fichiers au nom du client. Résultats clients chiffrés : À compléter.
 **Customers:** Street Sapp (boutique en ligne, streetsapp.be), OMI Restaurant (site, logo, menu, flyer, omi-restaurant.com), O'Brunch House (logo, flyer).
-**Testimonials:** À compléter — aucun avis publié pour l'instant.
+**Testimonials:** Sbai (OMI Restaurant, Saint-Josse) et Mehdi (Street Sapp), textes validés par les clients le 2026-10-08, dans src/content/avis. À venir : Adam, plombier, appels doublés après refonte + SEO + Google Ads (en attente : entreprise, commune, période, chiffres, accord).
 **Value themes:**
 | Theme | Proof |
 |-------|-------|

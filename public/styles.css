@@ -1405,3 +1405,14 @@ a.m-proof:hover { border-color: var(--hair); }
 .cal-ok { background: #DDF2E6; }
 .foot-grid a.btn-accent { color: #fff; }
 .fx-work + .fx-pricing { margin-top: 0; padding-top: 0; }
+
+/* Avis clients */
+.avis-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.avis-card { margin: 0; position: relative; background: #fff; border-radius: 24px; padding: 34px 30px 28px; display: grid; gap: 22px; align-content: space-between; box-shadow: inset 0 0 0 1px var(--hair-soft); }
+.avis-card::before { content: "“"; position: absolute; top: 4px; left: 24px; font-size: 4.5rem; line-height: 1; font-weight: 800; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.avis-card blockquote { margin: 0; padding-top: 18px; }
+.avis-card blockquote p { font-size: 1.1875rem; line-height: 1.45; color: var(--ink); letter-spacing: -0.01em; }
+.avis-card figcaption { display: grid; gap: 2px; padding-top: 18px; border-top: 1px solid var(--hair-soft); }
+.avis-card figcaption b { font-weight: 750; }
+.avis-card figcaption span { font-size: .875rem; color: var(--muted); }
+.section[aria-labelledby="avis-title"] { padding-bottom: var(--section); }
