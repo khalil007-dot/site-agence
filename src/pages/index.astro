@@ -21,10 +21,7 @@ const prix = (id: string) => SV.find(s => s.id === id)!;
 const vitrine = prix('site-vitrine').prix_unique;
 const maintenance = MAINTENANCE;
 const delaiVitrine = prix('site-vitrine').infos[0].valeur;
-// Coût sur deux ans : un site par abonnement à 99 € par mois (+ 150 € de mise en route), contre notre offre Site + logo et la maintenance
-const lancement = FORMULES.find(f => f.id === 'site-logo')!;
-const ABO_2ANS = 150 + 99 * 24;
-const NOUS_2ANS = lancement.prix + maintenance * 24;
+const offreSite = FORMULES.find(f => f.id === 'site')!;
 
 // Bandeau jaune qui défile sous le titre
 const INCLUS = ['Maquette validée avant le code', 'Textes écrits avec vous', 'Parfait sur téléphone', 'Fiche Google', 'Boutons Appeler et WhatsApp', 'Le site vous appartient', 'Paiement en 3 fois sans frais', 'Deux fondateurs en direct'];
@@ -45,15 +42,19 @@ const PAINS: [string, string, string, string][] = [
     'Un interlocuteur joignable, des modifications chaque mois, sans engagement.'],
 ];
 
-// Comparatif : [critère, agence classique, site par abonnement, faire soi-même, nous]
-const COMPARE: [string, string, string, string, string][] = [
-  ['Pour démarrer', `Souvent plus de ${e(3000)}`, `Petite mise en route, puis un loyer chaque mois`, 'Abonnement à l’outil, plus vos soirées', `Site vitrine dès ${e(vitrine)}, payé une fois`],
-  ['Le design', 'Sur mesure', 'Modèle adapté à votre métier', 'Modèle partagé par des milliers de sites', 'Sur mesure, maquette validée avant le code'],
-  ['Les textes', 'Souvent à fournir vous-même', 'Écrits pour vous', 'À écrire vous-même', 'Écrits avec vous'],
-  ['Les modifications', 'Facturées à part', 'Comprises, tant que vous payez', 'À faire vous-même', `Comprises dans la maintenance à ${e(maintenance)}/mois, sans engagement`],
-  ['Votre interlocuteur', 'Un chef de projet', 'Une équipe, souvent sans visage', 'Personne', 'Les fondateurs, en direct'],
-  ['Le site est à vous', 'Oui', 'Loué : il s’arrête avec l’abonnement', 'Impossible de le déplacer', 'Oui, entièrement, dès la mise en ligne'],
+// Comparatif avec ce que le client connaît. Fourchettes de prix observées en Belgique en 2026
+// (flau-design.be, vpixel.be) : [critère, agence classique, freelance, nous]
+const COMPARE: [string, string, string, string][] = [
+  ["Prix d'un site vitrine", `${e(5000)} à ${e(15000)}`, `${e(800)} à ${e(5000)}`, `${e(vitrine)}, prix fixe`],
+  ['Délai', 'Plusieurs semaines, souvent des mois', 'Selon son agenda', `${delaiVitrine}`],
+  ['Le design', 'Sur mesure', 'Souvent un thème acheté', 'Sur mesure, maquette validée avant le code'],
+  ['Les textes', 'Souvent à fournir vous-même', 'À fournir vous-même', 'Écrits avec vous'],
+  ['Fiche Google', 'En option', 'Rarement incluse', 'Incluse'],
+  ['Votre interlocuteur', 'Un chef de projet', 'Une seule personne, parfois injoignable', 'Les deux fondateurs, en direct'],
+  ['Paiement', 'Gros acompte à la signature', 'Variable', 'Une fois, ou en 3 fois sans frais'],
 ];
+// Ticket : ce que comprend le site vitrine, ligne par ligne
+const TICKET = offreSite.inclus;
 
 // Exemples de modifications comprises dans la maintenance : [demande, durée]
 const HEURE: [string, string][] = [
@@ -75,7 +76,7 @@ const ACTIVITES = ['Artisan / bâtiment', 'Restaurant / horeca', 'Commerce', 'Sa
 
 const FAQ: [string, string][] = [
   ['Combien coûte un site ?', `Trois prix fixes, hors TVA : ${FORMULES.map(f => `${f.nom.toLowerCase()} ${e(f.prix)}`).join(', ')}. Vous payez une fois, ou en 3 fois sans frais. Ensuite, la maintenance à ${e(MAINTENANCE)} par mois est facultatif.`],
-  ['Pourquoi payer une fois plutôt qu’un abonnement ?', `Parce que le site devient le vôtre. Un site loué à ${e(99)} par mois coûte environ ${e(ABO_2ANS)} sur deux ans et s'arrête quand vous arrêtez de payer. Notre offre Site + logo, avec la maintenance, revient à ${e(NOUS_2ANS)} sur la même période, et le site reste à vous.`],
+  ['Pourquoi êtes-vous moins chers qu’une agence ?', "Pas de locaux de prestige, pas de commerciaux, pas de chef de projet : vous parlez directement aux deux personnes qui font le travail. Et nos outils règlent en quelques heures les tâches répétitives qui faisaient grimper les factures. Le design, les textes et le contrôle restent faits à la main."],
   ['Combien de temps faut-il pour créer un site ?', `${FORMULES.map(f => `${f.nom} : ${f.delai}`).join(', ')}, après validation de la maquette.`],
   ['Est-ce que je pourrai modifier mon site moi-même ?', 'Oui. Textes, photos, produits et prix se modifient depuis une interface simple. Une heure de formation est incluse à la livraison.'],
   ['Et si je préfère que vous fassiez les modifications ?', `C'est le rôle de la maintenance, à ${e(maintenance)} par mois sans engagement : hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 h de modifications par mois, traitées sous 2 jours ouvrables.`],
@@ -150,24 +151,33 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   </section>
 
   <section class="section" id="comparatif" aria-labelledby="cmp-title">
-    <div class="wrap fx-split wide">
-      <div class="fx-split-txt rv">
-        <h2 class="d-xl" id="cmp-title">Un site d'agence, <span class="hl">sans le loyer</span>.</h2>
-        <p class="lead">Une agence classique facture souvent plusieurs milliers d'euros. Un site par abonnement démarre petit, mais vous le louez : il s'arrête le jour où vous arrêtez de payer.</p>
-        <p class="lead">Chez {BRAND}, vous payez une fois, en 3 fois si vous voulez, et le site est à vous.</p>
-        <div class="cost2">
-          <p><span>Site loué à {e(99)}/mois, sur 2 ans</span><b>{e(ABO_2ANS)}</b></p>
-          <p class="us"><span>Site + logo + maintenance, sur 2 ans</span><b>{e(NOUS_2ANS)}</b></p>
-          <small>Et le site reste à vous.</small>
+    <div class="wrap">
+      <div class="cmp-top">
+        <div class="rv">
+          <h2 class="d-xl" id="cmp-title">Le travail d'une agence. <span class="hl">Le prix d'un freelance.</span></h2>
+          <p class="lead">En Belgique, une agence facture un site vitrine entre {e(5000)} et {e(15000)}, un freelance entre {e(800)} et {e(5000)}. Chez {BRAND}, c'est {e(vitrine)}, écrit noir sur blanc, et vous savez exactement ce que vous recevez.</p>
+          <ul class="cmp-points">
+            <li><b>Un prix fixe.</b> Ce qui est écrit, c'est ce que vous payez.</li>
+            <li><b>Payé une fois.</b> Ou en 3 fois sans frais, si vous préférez.</li>
+            <li><b>Le site est à vous.</b> Domaine, textes et photos à votre nom.</li>
+          </ul>
+        </div>
+        <div class="receipt rv" aria-label={`Ce que comprend le site vitrine à ${e(vitrine)}`}>
+          <p class="receipt-head"><b>Votre site vitrine</b><span>{BRAND}</span></p>
+          <ul>{TICKET.map(t => <li><span>{t}</span><b>inclus</b></li>)}<li><span>Mise en ligne en {delaiVitrine}</span><b>inclus</b></li></ul>
+          <p class="receipt-total"><span>Total, hors TVA</span><b>{e(vitrine)}</b></p>
+          <p class="receipt-foot">Payé une fois · ou 3{NB}×{NB}{e(Math.ceil(vitrine / 3))} sans frais</p>
+          <a class="btn btn-primary" href="/devis?formule=site">Je veux ce site <span aria-hidden="true">→</span></a>
         </div>
       </div>
-      <div class="panel panel-yellow rv">
+      <div class="panel panel-yellow rv cmp-table">
         <div class="table-wrap">
           <table class="fx-compare">
-            <thead><tr><td></td><th scope="col">Agence classique</th><th scope="col">Site par abonnement</th><th scope="col">Faire soi-même</th><th scope="col" class="us" translate="no">{BRAND}</th></tr></thead>
-            <tbody>{COMPARE.map(([c, a, b, d, n]) => <tr><th scope="row">{c}</th><td data-l="Agence classique">{a}</td><td data-l="Site par abonnement">{b}</td><td data-l="Faire soi-même">{d}</td><td class="us" data-l={BRAND}>{n}</td></tr>)}</tbody>
+            <thead><tr><td></td><th scope="col">Agence classique</th><th scope="col">Freelance</th><th scope="col" class="us" translate="no">{BRAND}</th></tr></thead>
+            <tbody>{COMPARE.map(([c, a, b, n]) => <tr><th scope="row">{c}</th><td data-l="Agence classique">{a}</td><td data-l="Freelance">{b}</td><td class="us" data-l={BRAND}>{n}</td></tr>)}</tbody>
           </table>
         </div>
+        <p class="cmp-src">Fourchettes de prix observées en Belgique en 2026.</p>
       </div>
     </div>
   </section>
