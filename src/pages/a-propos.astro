@@ -7,11 +7,11 @@ import Fondateurs from '../components/Fondateurs.astro';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
-import { ABO, BRAND, COFONDATEUR, EMAIL, FONDATEUR, FONDATEURS, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
+import { BRAND, COFONDATEUR, EMAIL, FONDATEUR, FONDATEURS, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
 
 const prenom = FONDATEUR.split(' ')[0];
-// Délai de mise en ligne des formules Essentiel et Business (site par abonnement)
-const delaiAbo = ABO.formules[0].delai.split(' ').slice(0, 2).join(' ');
+// Délai de mise en ligne d'un site vitrine (src/data/services.json)
+const delaiVitrine = (SV.find(s => s.id === 'site-vitrine')?.infos.find(x => x.label === 'Délai moyen')?.valeur ?? '5 jours ouvrables').split(' ').slice(0, 2).join(' ');
 const CLIENTS = [['Street Sapp', logoStreetSapp, 'Boutique en ligne'], ['OMI Restaurant', logoOmi, 'Site, menu et flyer'], ["O'Brunch House", logoObrunch, 'Logo et flyer']] as const;
 
 const prixMaintenance = SV.find(s => s.id === 'maintenance')?.prix_mensuel ?? 39;
@@ -101,7 +101,7 @@ const PERSONS = await Promise.all(FONDATEURS.map(async f => {
       <div class="section-head"><h2 class="d-xl" id="figures-title">En pratique</h2></div>
       <div class="figures">
         <div class="figure rv"><b><em class="cnt" data-count="48">48</em>{NB}h</b><span>pour recevoir un devis détaillé</span></div>
-        <div class="figure rv" style="--d:1"><b>{delaiAbo}</b><span>ouvrables pour mettre votre site en ligne</span></div>
+        <div class="figure rv" style="--d:1"><b>{delaiVitrine}</b><span>ouvrables pour mettre un site vitrine en ligne</span></div>
         <div class="figure rv" style="--d:2"><b><em class="cnt" data-count="24">24</em>{NB}h</b><span>de délai de réponse, jours ouvrés</span></div>
         <div class="figure rv" style="--d:3"><b><em class="cnt" data-count="100">100</em>{NB}%</b><span>du site, du domaine et des fichiers à votre nom</span></div>
       </div>

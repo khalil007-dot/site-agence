@@ -35,7 +35,7 @@ Ces fourchettes sont des ordres de grandeur pour un site vitrine de 3 à 8 pages
 <div class="range"><span>Une agence</span><div class="range-track"><div class="range-bar" style="left:25%;width:75%;background:#6A4CF5">1 500 à 6 000 €</div></div></div>
 </div>
 <div class="range-axis"><span>0 €</span><span>2 000 €</span><span>4 000 €</span><span>6 000 €</span></div>
-</div><figcaption>Ordres de grandeur pour un site de 3 à 8 pages, hors frais annuels. À titre de repère, notre site vitrine démarre à 890 €.</figcaption></figure>
+</div><figcaption>Ordres de grandeur pour un site de 3 à 8 pages, hors frais annuels. À titre de repère, notre site vitrine démarre à 590 €.</figcaption></figure>
 
 ## Ce qui fait varier le prix
 
@@ -54,9 +54,9 @@ Le nom de domaine (10 à 20 € par an), l'hébergement (5 à 30 € par mois), 
 Listez les pages dont vous avez besoin, ce que vos visiteurs doivent pouvoir faire (appeler, réserver, demander un devis) et ce que vous pouvez fournir vous-même. Avec ces trois informations, un prestataire peut vous donner un prix précis.
 
 <div class="callout">
-<h2 style="margin:0;font-size:1.5rem">Plutôt un montant fixe chaque mois ?</h2>
-<p>Nos sites par abonnement sont en ligne en 5 jours ouvrables, dès 49 € HTVA par mois : nom de domaine, hébergement, adresse e-mail et modifications compris.</p>
-<a class="btn btn-primary" href="/#formules">Voir les formules</a>
+<h2 style="margin:0;font-size:1.5rem">Estimez votre projet en 30 secondes</h2>
+<p>Notre simulateur donne un budget de départ selon les services choisis.</p>
+<a class="btn btn-primary" href="/#estimer">Utiliser le simulateur</a>
 </div>
 
 <p class="note">Les fourchettes de prix sont indicatives.</p>

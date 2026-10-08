@@ -36,13 +36,13 @@
       "nom": "Site vitrine",
       "nom_court": "Site vitrine",
       "promesse": "Être trouvé sur Google et recevoir des demandes, même quand vous êtes occupé.",
-      "prix_unique": 890,
+      "prix_unique": 590,
       "prix_mensuel": 0,
       "pour_qui": "Pour les artisans, restaurants, cabinets et indépendants qui veulent être trouvés et recevoir des demandes, sans vendre en ligne.",
       "infos": [
         {
           "label": "Délai moyen",
-          "valeur": "3 semaines"
+          "valeur": "5 jours ouvrables"
         },
         {
           "label": "Pages",
@@ -63,13 +63,13 @@
       "nom": "Boutique en ligne",
       "nom_court": "Boutique en ligne",
       "promesse": "Vendre jour et nuit, avec une boutique qui rassure et se paie en deux clics sur téléphone.",
-      "prix_unique": 2400,
+      "prix_unique": 1490,
       "prix_mensuel": 0,
       "pour_qui": "Pour les marques et commerçants qui veulent vendre sur internet, gérer leurs stocks et suivre leurs commandes au même endroit.",
       "infos": [
         {
           "label": "Délai moyen",
-          "valeur": "6 semaines"
+          "valeur": "3 semaines"
         },
         {
           "label": "Produits",
@@ -91,7 +91,7 @@
       "nom_court": "SEO",
       "promesse": "Apparaître dans les premiers résultats quand on cherche votre métier près de chez vous.",
       "prix_unique": 0,
-      "prix_mensuel": 290,
+      "prix_mensuel": 190,
       "pour_qui": "Pour apparaître dans les premiers résultats Google quand vos clients cherchent votre métier dans votre ville.",
       "infos": [
         {
@@ -118,7 +118,7 @@
       "nom_court": "Google Ads",
       "promesse": "Des appels et des demandes dès la première semaine, en ne payant que les clics.",
       "prix_unique": 0,
-      "prix_mensuel": 250,
+      "prix_mensuel": 190,
       "pour_qui": "Pour obtenir des appels et des demandes dès la première semaine, en payant uniquement quand quelqu'un clique.",
       "infos": [
         {
@@ -144,7 +144,7 @@
       "nom_court": "Réseaux sociaux",
       "promesse": "Être présent chaque semaine sur Instagram, Facebook ou TikTok, sans y passer vos soirées.",
       "prix_unique": 0,
-      "prix_mensuel": 390,
+      "prix_mensuel": 290,
       "pour_qui": "Pour être présent sur Instagram, Facebook ou TikTok avec régularité, sans y passer vos soirées.",
       "infos": [
         {
@@ -169,13 +169,13 @@
       "nom": "Logo et identité visuelle",
       "nom_court": "Logo",
       "promesse": "Une image professionnelle et reconnaissable, partout où vos clients vous voient.",
-      "prix_unique": 450,
+      "prix_unique": 290,
       "prix_mensuel": 0,
       "pour_qui": "Pour les entreprises qui se lancent ou qui veulent moderniser leur image avant de créer leur site.",
       "infos": [
         {
           "label": "Délai moyen",
-          "valeur": "2 semaines"
+          "valeur": "1 semaine"
         },
         {
           "label": "Pistes",
@@ -197,7 +197,7 @@
       "nom_court": "Maintenance",
       "promesse": "Un site toujours rapide, sécurisé et à jour, sans avoir à vous en occuper.",
       "prix_unique": 0,
-      "prix_mensuel": 39,
+      "prix_mensuel": 29,
       "pour_qui": "Pour garder un site rapide, sécurisé et à jour sans avoir à vous en occuper.",
       "infos": [
         {
@@ -210,108 +210,73 @@
         }
       ],
       "inclus": [
-        "Hébergement rapide et certificat de sécurité",
+        "Hébergement rapide, nom de domaine et certificat de sécurité",
+        "Une adresse e-mail pro à votre nom",
         "Sauvegarde chaque jour et mises à jour de sécurité",
-        "30 minutes de modifications par mois",
+        "1 h de modifications par mois, traitées sous 2 jours ouvrables",
         "Surveillance : on est prévenu si le site tombe"
       ]
     }
   ],
-  "abonnement": {
-    "mise_en_route": 149,
-    "engagement_mois": 12,
-    "traitement_jours": 2,
-    "formules": [
-      {
-        "id": "essentiel",
-        "nom": "Essentiel",
-        "pages": 3,
-        "prix": 49,
-        "heures": 1,
-        "delai": "5 jours ouvrables",
-        "pour": "Pour exister en ligne, proprement.",
-        "cible": "Indépendants, professions libérales, activités qui démarrent.",
-        "inclus": [
-          "Site jusqu'à 3 pages",
-          "Design adapté à votre métier et à vos couleurs",
-          "Textes écrits avec vous",
-          "Parfait sur téléphone, tablette et ordinateur",
-          "Boutons Appeler et WhatsApp, formulaire, itinéraire",
-          "Nom de domaine, hébergement, https et une adresse e-mail pro",
-          "Fiche Google Business créée ou remise en ordre",
-          "1 h de modifications par mois"
-        ]
-      },
-      {
-        "id": "business",
-        "nom": "Business",
-        "pages": 8,
-        "prix": 89,
-        "heures": 2,
-        "delai": "5 jours ouvrables",
-        "pour": "Pour recevoir des demandes de devis.",
-        "cible": "Artisans, restaurants, commerces et services qui veulent plus de clients.",
-        "recommande": true,
-        "inclus": [
-          "Jusqu'à 8 pages : une page par service, pour être trouvé sur chacun",
-          "Demande de devis ou de réservation en quelques étapes",
-          "Référencement local : vos services et les communes où vous travaillez",
-          "Vos réalisations et vos avis Google mis en avant",
-          "Statistiques de visites et suivi des demandes reçues",
-          "2 h de modifications par mois",
-          "Ligne directe avec les fondateurs, par téléphone et WhatsApp"
-        ]
-      },
-      {
-        "id": "premium",
-        "nom": "Premium",
-        "pages": 15,
-        "prix": 169,
-        "heures": 3,
-        "delai": "10 jours ouvrables",
-        "pour": "Pour peser dans votre région.",
-        "cible": "Entreprises multi-services, plusieurs zones, clientèle bilingue.",
-        "inclus": [
-          "Jusqu'à 15 pages",
-          "Site bilingue : français et néerlandais ou anglais",
-          "Une page pour chacune de vos principales communes",
-          "Blog ou actualités pour nourrir votre référencement",
-          "Prise de rendez-vous ou réservation en ligne",
-          "Visibilité dans les réponses des IA (ChatGPT, Perplexity, Google)",
-          "Rapport mensuel des visites et des demandes, et un point chaque trimestre",
-          "3 h de modifications par mois, traitées en priorité"
-        ]
-      }
-    ],
-    "options": [
-      [
-        "Langue en plus",
-        15
+  "formules": [
+    {
+      "id": "lancement",
+      "nom": "Lancement",
+      "pour": "Pour créer son entreprise avec une image pro dès le premier jour.",
+      "prix": 790,
+      "mensuel": false,
+      "services": [
+        "logo",
+        "site-vitrine"
       ],
-      [
-        "Page en plus",
-        10
-      ],
-      [
-        "Heure de modifications en plus",
-        25
-      ],
-      [
-        "Réservation en ligne",
-        15
-      ],
-      [
-        "Blog ou actualités",
-        29
-      ],
-      [
-        "Boîte e-mail en plus",
-        5
-      ],
-      [
-        "Référencement renforcé",
-        39
+      "separe_mois_seo": 0,
+      "inclus": [
+        "Logo et mini charte graphique",
+        "Site vitrine jusqu'à 5 pages, textes écrits avec vous",
+        "Fiche Google Business créée ou remise en ordre",
+        "Cartes de visite prêtes à imprimer",
+        "En ligne en 5 jours ouvrables après validation de la maquette"
       ]
-    ]
-  }
+    },
+    {
+      "id": "commerce",
+      "nom": "Commerce",
+      "pour": "Pour ouvrir une boutique en ligne et vendre dès le premier mois.",
+      "prix": 1990,
+      "mensuel": false,
+      "recommande": true,
+      "services": [
+        "logo",
+        "e-commerce",
+        "seo"
+      ],
+      "separe_mois_seo": 3,
+      "inclus": [
+        "Logo et identité visuelle",
+        "Boutique en ligne complète, paiement par carte et Bancontact",
+        "Photos de vos 20 premiers produits",
+        "3 mois de référencement offerts",
+        "En ligne en 3 semaines"
+      ]
+    },
+    {
+      "id": "visibilite",
+      "nom": "Visibilité",
+      "pour": "Pour faire venir plus de clients sur un site qui existe déjà.",
+      "prix": 490,
+      "mensuel": true,
+      "services": [
+        "seo",
+        "google-ads",
+        "reseaux-sociaux"
+      ],
+      "inclus": [
+        "Référencement Google et visibilité dans les IA",
+        "Campagnes Google Ads",
+        "2 réseaux sociaux, 12 publications",
+        "Un rapport clair chaque mois",
+        "Sans engagement, un mois de préavis"
+      ]
+    }
+  ]
 }

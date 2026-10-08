@@ -8,14 +8,14 @@ import { Image } from 'astro:assets';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
-import { ABO, BRAND, CLE_FORMULAIRES, EMAIL, FAMS, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
+import { BRAND, FORMULES, e, CLE_FORMULAIRES, EMAIL, FAMS, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
 
 // Encart de confiance : le premier vrai avis s'il y en a un, sinon les logos des clients
 const [avis] = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.data.ordre);
 const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
 // Piège à robots : case invisible pour les humains, cochée par les robots de spam
 // Formule choisie sur l'accueil (?formule=business) : rappelée en haut du formulaire
-const FORMULES = Object.fromEntries(ABO.formules.map(f => [f.id, `Formule ${f.nom} : ${f.prix} € par mois HTVA, plus ${ABO.mise_en_route} € de mise en route. Dites-nous en quelques mots ce que vous faites, on s'occupe du reste.`]));
+const CHOIX = Object.fromEntries(FORMULES.map(f => [f.id, { services: f.services, texte: `Formule ${f.nom} : ${e(f.prix)}${f.mensuel ? ' par mois' : ', ou en 3 fois sans frais'}, hors taxes. Dites-nous en quelques mots ce que vous faites, on s'occupe du reste.` }]));
 const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">';
 ---
 <Base chemin="devis" title={`Devis gratuit site internet à Bruxelles | ${BRAND}`} desc="Demandez un devis gratuit pour votre site internet, boutique en ligne, logo ou référencement à Bruxelles et en Belgique, ou réservez un appel de 30 minutes." current="devis" sticky={false} schema={[{ '@context': 'https://schema.org', '@type': 'ContactPage', url: SITE_URL + '/devis', about: { '@id': ORG_ID } }]} crumbs={[['Devis', 'devis']]}>
@@ -37,7 +37,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
     <div class="wrap quote-layout">
       <div>
       <div role="tabpanel" id="pane-devis" aria-labelledby="tab-devis">
-      <form class="form-card" id="quote-form" novalidate data-cle={CLE_FORMULAIRES} data-email={EMAIL} data-formules={JSON.stringify(FORMULES)}>
+      <form class="form-card" id="quote-form" novalidate data-cle={CLE_FORMULAIRES} data-email={EMAIL} data-formules={JSON.stringify(CHOIX)}>
         <Fragment set:html={piege} />
         <ol class="progress" aria-label="Étapes du devis"><li aria-current="step">Vos besoins</li><li>Votre projet</li><li>Vos coordonnées</li></ol>
 

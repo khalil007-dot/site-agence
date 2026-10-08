@@ -10,11 +10,10 @@
 **What it does:** Épure Studio conçoit des sites vitrine et des boutiques en ligne, des logos et supports imprimés (menus, flyers, cartes de visite), puis fait venir des clients grâce au référencement Google et IA, à Google Ads et aux réseaux sociaux. Deux fondateurs en direct, du premier appel jusqu'au suivi après la mise en ligne.
 **Product category:** Agence web / création de site internet / agence de communication locale. Recherches typiques : « agence web Bruxelles », « création site internet Bruxelles », « prix site vitrine Belgique », « référencement local Bruxelles ».
 **Product type:** Service (prestations uniques + abonnements mensuels).
-**Business model:** Offre principale depuis le 2026-10-08 : site par abonnement, tout compris (inspiré de Fast On Web). Prix de départ affichés et devis ferme pour le reste.
-- Site par abonnement (HTVA/mois) : Essentiel 49 € (3 pages, 1 h de modifs), Business 89 € (8 pages, 2 h, recommandé), Premium 169 € (15 pages, 3 h, bilingue). 149 € de mise en route. Engagement 12 mois puis résiliable avec 1 mois de préavis. En ligne en 5 jours ouvrables (Premium : 10). Domaine, hébergement, e-mail, fiche Google et modifications compris, demandes traitées sous 2 jours ouvrables. Options de 5 à 39 €/mois. Chiffres modifiables dans src/data/services.json (clé « abonnement »).
-- Uniques : site vitrine dès 890 € HT, boutique en ligne dès 2 400 € HT, logo et identité dès 450 € HT.
-- Mensuels sans engagement (1 mois de préavis) : SEO dès 290 €/mois, Google Ads dès 250 €/mois (hors budget pub), réseaux sociaux dès 390 €/mois, maintenance dès 39 €/mois.
-- Formules : Lancement 1 190 € HT (logo, site 5 pages, fiche Google, cartes de visite), Commerce 3 290 € HT (logo, boutique, photos de 20 produits, 3 mois de SEO), Visibilité 790 € HT/mois (SEO + IA, Google Ads, 2 réseaux).
+**Business model:** Prix payés une fois (prix de départ affichés, devis ferme), baissés le 2026-10-08 pour être plus compétitifs face aux sites par abonnement. Argument clé : « un site d'agence, sans le loyer » (sur 2 ans : 2 526 € pour un site loué à 99 €/mois contre 1 486 € pour Lancement + maintenance, et le site reste au client).
+- Uniques : site vitrine dès 590 € HT (en ligne en 5 jours ouvrables après validation de la maquette), boutique en ligne dès 1 490 € HT (3 semaines), logo et identité dès 290 € HT.
+- Mensuels sans engagement (1 mois de préavis) : SEO dès 190 €/mois, Google Ads dès 190 €/mois (hors budget pub), réseaux sociaux dès 290 €/mois, maintenance dès 29 €/mois (hébergement, domaine, e-mail, 1 h de modifications par mois).
+- Formules : Lancement 790 € HT (logo, site 5 pages, fiche Google, cartes de visite), Commerce 1 990 € HT (logo, boutique, photos de 20 produits, 3 mois de SEO), Visibilité 490 € HT/mois (SEO + IA, Google Ads, 2 réseaux). Chiffres dans src/data/services.json (clé « formules »).
 - Paiement : 40 % à la signature, 60 % à la mise en ligne, ou 3 mensualités sans frais.
 
 ## Target Audience
@@ -109,7 +108,7 @@
 **Personality:** Accessible, honnête, efficace, épuré, orienté résultats.
 
 ## Proof Points
-**Metrics:** Devis sous 48 h ; site vitrine en 3 semaines en moyenne (boutique : 6) ; réponse sous 24 h ouvrées ; 100 % du site, du domaine et des fichiers au nom du client. Résultats clients chiffrés : À compléter.
+**Metrics:** Devis sous 48 h ; site vitrine en 5 jours ouvrables après validation de la maquette (boutique : 3 semaines) ; réponse sous 24 h ouvrées ; 100 % du site, du domaine et des fichiers au nom du client. Résultats clients chiffrés : À compléter.
 **Customers:** Street Sapp (boutique en ligne, streetsapp.be), OMI Restaurant (site, logo, menu, flyer, omi-restaurant.com), O'Brunch House (logo, flyer).
 **Testimonials:** À compléter — aucun avis publié pour l'instant.
 **Value themes:**
@@ -127,5 +126,6 @@
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v3 (2026-10-08) — Retour aux prix payés une fois (baissés : vitrine 590 €, Lancement 790 €…), accueil mélangeant l'ancienne base et le style Fast On Web.
 - v2 (2026-10-08) — Ajout du site par abonnement comme offre principale de l'accueil, sur le modèle de Fast On Web (concurrent direct belge : 55/99/199 €/mois + 150 €, en ligne en 3 jours).
 - v1 (2026-10-07) — Initial context, rédigé automatiquement à partir du site.

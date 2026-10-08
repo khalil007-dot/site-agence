@@ -1,7 +1,7 @@
 ---
 // Squelette commun à toutes les pages : <head>, en-tête, pied de page
 import Logo from '../components/Logo.astro';
-import { ABO, BRAND, BUILD, CLE_ANALYTICS, EMAIL, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e, pageUrl } from '../lib/site';
+import { BRAND, BUILD, CLE_ANALYTICS, EMAIL, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e, pageUrl } from '../lib/site';
 
 interface Props {
   chemin: string; // adresse de la page sans « / » au début ('' pour l'accueil)
@@ -61,8 +61,8 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="/" translate="no"><Logo />{BRAND}</a>
-    <nav class="nav-links" id="nav-links" aria-label="Navigation principale">{links.map(([h, k, t]) => <a href={h} aria-current={k === active ? 'page' : undefined}>{t}</a>)}<a class="mobile-cta" href="/devis">Je veux mon site</a></nav>
-    <div class="nav-cta"><span class="nav-hint">tout compris, dès {e(ABO.formules[0].prix)}/mois</span><a class="btn btn-primary" href="/devis">Je veux mon site <span aria-hidden="true">→</span></a></div>
+    <nav class="nav-links" id="nav-links" aria-label="Navigation principale">{links.map(([h, k, t]) => <a href={h} aria-current={k === active ? 'page' : undefined}>{t}</a>)}<a class="mobile-cta" href="/devis">Demander un devis gratuit</a></nav>
+    <div class="nav-cta"><span class="nav-hint">site vitrine dès {e(SV.find(s => s.id === 'site-vitrine')!.prix_unique)}, payé une fois</span><a class="btn btn-primary" href="/devis">Devis gratuit <span aria-hidden="true">→</span></a></div>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Ouvrir le menu"><span></span></button>
   </div>
 </header>
@@ -76,8 +76,8 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     <div class="foot-grid">
       <div>
         <a class="brand" href="/" translate="no"><Logo />{BRAND}</a>
-        <p class="about">Agence web à Bruxelles. Des sites pros en ligne en 5 jours, tout compris, pour les indépendants, commerces et PME de toute la Belgique.</p>
-        <a class="btn btn-accent" href="/devis" style="margin-top:22px">Je veux mon site</a>
+        <p class="about">Agence web à Bruxelles. Des sites, des marques et de la visibilité qui font venir des clients, pour les indépendants, commerces et PME de toute la Belgique.</p>
+        <a class="btn btn-accent" href="/devis" style="margin-top:22px">Recevoir mon devis gratuit</a>
       </div>
       <div><h2>Services</h2><ul>{SV.slice(0, 5).map(s => <li><a href={`/services#${s.id}`}>{s.nom_court}</a></li>)}</ul></div>
       <div><h2>Et aussi</h2><ul>{SV.slice(5).map(s => <li><a href={`/services#${s.id}`}>{s.nom_court}</a></li>)}</ul></div>
@@ -88,7 +88,7 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 </footer>
 {sticky && <div class="sticky-cta">{WHATSAPP
   ? <a class="btn btn-secondary" href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>
-  : <a class="btn btn-secondary" href={`tel:${TEL_INTL}`}>Appeler</a>}<a class="btn btn-primary" href="/devis">Je veux mon site</a></div>}
+  : <a class="btn btn-secondary" href={`tel:${TEL_INTL}`}>Appeler</a>}<a class="btn btn-primary" href="/devis">Devis gratuit</a></div>}
 {WHATSAPP && <a class="wa-float" href={WHATSAPP} target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c.4.9 1.2 1.7 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .5-.4.7-.5.3-1.2.5-2 .3-2.2-.6-4-2.4-4.6-4.6-.2-.8 0-1.5.3-1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>}
 </body>
 </html>

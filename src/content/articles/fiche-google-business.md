@@ -64,7 +64,7 @@ Une fiche bien remplie ne suffit pas toujours à passer devant des concurrents i
 <div class="callout">
 <h2 style="margin:0;font-size:1.5rem">Votre fiche est-elle bien réglée ?</h2>
 <p>On analyse gratuitement votre fiche Google, votre site et votre présence dans les IA, avec trois actions prioritaires sous 72 h.</p>
-<a class="btn btn-primary" href="/devis?service=seo">Recevoir mon audit gratuit</a>
+<a class="btn btn-primary" href="/#audit">Recevoir mon audit gratuit</a>
 </div>
 
 <p class="note">Sources : <a class="link" href="https://support.google.com/business/answer/7091?hl=fr">Google, « Améliorer votre classement local »</a> et les consignes Google relatives aux fiches d'établissement.</p>

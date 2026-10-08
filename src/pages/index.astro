@@ -1,7 +1,11 @@
 ---
-// Page d'accueil : site par abonnement, tout compris (structure inspirée de Fast On Web)
+// Page d'accueil : la base du site (diagnostic, services, simulateur, formules, audit, garanties)
+// dans le style « panneaux colorés » inspiré de Fast On Web, avec des prix payés une fois.
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
 import Avis from '../components/Avis.astro';
+import Spots from '../components/Spots.astro';
 import Fondateurs from '../components/Fondateurs.astro';
 import { Image } from 'astro:assets';
 import shotStreet from '../assets/projets/streetsapp.jpg';
@@ -10,84 +14,106 @@ import shotOmi from '../assets/projets/omi-restaurant.jpg';
 import shotOmiMobile from '../assets/projets/omi-restaurant-mobile.jpg';
 import shotOmiMenu from '../assets/projets/omi-menu.jpg';
 import shotObrunch from '../assets/projets/obrunch-house-logo.jpg';
-import { ABO, BRAND, COFONDATEUR, EMAIL, FONDATEUR, NB, ORG, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
+import { BRAND, COFONDATEUR, EMAIL, FAMS, FONDATEUR, FORMULES, NB, ORG, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
 
-const [essentiel, business, premium] = ABO.formules;
-const prix = (id: string) => SV.find(s => s.id === id)?.prix_unique ?? 0;
-const mois = (n: number) => `${e(n)}/mois`;
+const prix = (id: string) => SV.find(s => s.id === id)!;
+const vitrine = prix('site-vitrine').prix_unique;
+const maintenance = prix('maintenance').prix_mensuel;
+const delaiVitrine = prix('site-vitrine').infos[0].valeur;
+// Coût sur deux ans : un site par abonnement à 99 € par mois (+ 150 € de mise en route), contre notre formule Lancement et la maintenance
+const lancement = FORMULES.find(f => f.id === 'lancement')!;
+const ABO_2ANS = 150 + 99 * 24;
+const NOUS_2ANS = lancement.prix + maintenance * 24;
 
 // Bandeau jaune qui défile sous le titre
-const INCLUS = ['Design adapté à votre métier', 'Textes écrits avec vous', 'Parfait sur téléphone', 'Nom de domaine', 'Hébergement et https', 'Adresse e-mail pro', 'Fiche Google', 'Modifications comprises', 'Deux fondateurs en direct'];
+const INCLUS = ['Maquette validée avant le code', 'Textes écrits avec vous', 'Parfait sur téléphone', 'Fiche Google', 'Boutons Appeler et WhatsApp', 'Le site vous appartient', 'Paiement en 3 fois sans frais', 'Deux fondateurs en direct'];
 
-// Comparatif : [critère, agence classique, faire soi-même, nous]
-const COMPARE: [string, string, string, string][] = [
-  ['Le design', 'Sur mesure', 'Modèle partagé par des milliers de sites', 'Adapté à votre métier'],
-  ['Les textes', 'Souvent à fournir vous-même', 'À écrire vous-même', 'Écrits avec vous'],
-  ['Les modifications', 'Facturées à part', 'À faire vous-même', 'Comprises chaque mois'],
-  ['Technique et sécurité', 'Contrat de maintenance en plus', 'À gérer vous-même', "On s'en occupe"],
-  ['Votre interlocuteur', 'Un chef de projet', 'Personne', 'Les fondateurs, en direct'],
-  ['Le nom de domaine', 'À votre nom', "Souvent lié à l'outil", 'À votre nom dès le premier jour'],
+// Section « problème » : auto-diagnostic. [ce que vit le client, ce que ça lui coûte, source éventuelle, ce qu'on fait]
+const PAINS: [string, string, string, string][] = [
+  ['On me cherche sur Google… et on tombe sur mon concurrent',
+    "76 % des personnes qui cherchent un commerce proche sur leur téléphone s'y rendent dans la journée. Si ce n'est pas chez vous, c'est chez lui.", 'Étude Google',
+    'Fiche Google optimisée et référencement local sur votre ville et votre métier.'],
+  ['Mon site est lent ou mal affiché sur téléphone',
+    '53 % des visiteurs sur mobile quittent une page qui met plus de 3 secondes à charger. Ils ne reviennent pas.', 'Étude Google',
+    "Un site léger, conçu d'abord pour le téléphone et testé avant la mise en ligne."],
+  ["Des gens visitent mon site, mais personne ne m'appelle",
+    "Sans prix, sans avis et sans bouton visible, le visiteur hésite, puis va comparer ailleurs. Vous attirez des visiteurs qui repartent sans vous contacter.", '',
+    'Boutons Appeler et WhatsApp visibles partout, avis et prix mis en avant.'],
+  ["Plus personne ne s'occupe de mon site",
+    'Horaires faux, photos datées, site qui tombe en panne : vos clients pensent que vous avez fermé, ou que vous ne faites pas attention aux détails.', '',
+    'Un interlocuteur joignable, des modifications chaque mois, sans engagement.'],
 ];
 
-// Exemples de modifications comprises : [demande, durée]
+// Comparatif : [critère, agence classique, site par abonnement, faire soi-même, nous]
+const COMPARE: [string, string, string, string, string][] = [
+  ['Pour démarrer', `Souvent plus de ${e(3000)}`, `Petite mise en route, puis un loyer chaque mois`, 'Abonnement à l’outil, plus vos soirées', `Site vitrine dès ${e(vitrine)}, payé une fois`],
+  ['Le design', 'Sur mesure', 'Modèle adapté à votre métier', 'Modèle partagé par des milliers de sites', 'Sur mesure, maquette validée avant le code'],
+  ['Les textes', 'Souvent à fournir vous-même', 'Écrits pour vous', 'À écrire vous-même', 'Écrits avec vous'],
+  ['Les modifications', 'Facturées à part', 'Comprises, tant que vous payez', 'À faire vous-même', `Comprises dans la maintenance à ${e(maintenance)}/mois, sans engagement`],
+  ['Votre interlocuteur', 'Un chef de projet', 'Une équipe, souvent sans visage', 'Personne', 'Les fondateurs, en direct'],
+  ['Le site est à vous', 'Oui', 'Loué : il s’arrête avec l’abonnement', 'Impossible de le déplacer', 'Oui, entièrement, dès la mise en ligne'],
+];
+
+// Exemples de modifications comprises dans la maintenance : [demande, durée]
 const HEURE: [string, string][] = [
   ['Changer vos horaires de congés', '5 min'],
   ["Remplacer une photo de l'accueil", '10 min'],
   ['Ajouter 6 photos de vos derniers chantiers ou plats', '15 min'],
   ["Réécrire la présentation d'un service", '20 min'],
-  ['Ajouter une page pour un nouveau service', `±${NB}1${NB}h`],
+  ['Ajouter un nouveau service à une page', '±' + NB + '30 min'],
 ];
 
 const ETAPES: [string, string, string][] = [
-  ['Jour 0', 'Vous nous parlez de votre activité', 'Un court formulaire, puis un appel de 20 minutes : vos services, votre zone, vos clients. Rien à préparer.'],
-  [`Jours 1 à 5`, 'On construit votre site', "Design, textes, photos, version mobile, formulaire, fiche Google. Vous suivez l'avancement sur un lien privé et vous validez avant la mise en ligne."],
-  ['Jour 5', 'Votre site est en ligne', 'On branche votre nom de domaine, on déclare le site à Google et on vous montre où arrivent vos demandes.'],
-  ['Ensuite', 'On reste là', "Un texte, une photo, un nouveau service ? Un message suffit, c'est compris dans votre formule."],
+  ['Jour 0', 'Un appel de 30 minutes', 'Votre activité, vos clients, votre zone. Vous recevez un devis ferme sous 48 h. Rien à préparer.'],
+  ['Jours 1 et 2', 'Votre maquette', "Structure, design et textes. Vous validez avant qu'on construise. Si elle ne vous plaît pas, on repart de zéro, sans frais."],
+  ['Jours 3 à 5', 'On construit, vous suivez', 'Développement, photos, version mobile, formulaire, fiche Google. Vous suivez tout sur un lien privé.'],
+  ['Ensuite', 'Mise en ligne et suivi', "Une heure de formation, un mois de corrections offert, puis la maintenance si vous le souhaitez, sans engagement."],
 ];
 
 const ACTIVITES = ['Artisan / bâtiment', 'Restaurant / horeca', 'Commerce', 'Santé / bien-être', 'Profession libérale', 'Autre activité'];
 
 const FAQ: [string, string][] = [
-  [`Combien coûte un site ${BRAND} ?`, `De ${e(essentiel.prix)} à ${e(premium.prix)} HTVA par mois selon la formule, plus ${e(ABO.mise_en_route)} de mise en route, payés une seule fois. Nom de domaine, hébergement, adresse e-mail et modifications sont compris.`],
-  ['Y a-t-il des frais cachés ?', "Non. Le prix mensuel couvre tout ce qui est listé dans votre formule. Si un mois vous demandez plus que vos heures comprises, on vous prévient et on vous donne le prix avant de commencer."],
-  ["Combien de temps dure l'engagement ?", `${ABO.engagement_mois} mois, le temps d'amortir la création du site. Ensuite, la formule continue de mois en mois et s'arrête avec un mois de préavis.`],
-  ['Le site m’appartient-il ?', "Le nom de domaine est enregistré à votre nom dès le premier jour, et vos textes et photos restent les vôtres. Si vous arrêtez après la période d'engagement, on vous remet les fichiers du site et on vous aide à le déplacer."],
-  [`Mon site sera-t-il vraiment en ligne en 5 jours ?`, `Oui pour Essentiel et Business : ${essentiel.delai} après réception de vos informations (Premium : ${premium.delai}). S'il nous manque quelque chose pour tenir ce délai, on vous le dit tout de suite.`],
-  ['Qui écrit les textes ?', 'Nous, à partir de vos réponses et de notre appel. Vous relisez et vous corrigez ce que vous voulez avant la mise en ligne.'],
-  ['Comment je demande une modification ?', `Par e-mail ou WhatsApp, directement aux fondateurs. On la traite sous ${ABO.traitement_jours} jours ouvrables et on vous prévient quand c'est en ligne.`],
-  ["Dois-je m'y connaître en technique ?", 'Non. Nom de domaine, hébergement, sécurité, mises à jour : on s’occupe de tout. Vous nous dites ce que vous voulez, on le fait.'],
-  ['Mon site apparaîtra-t-il sur Google ?', 'Oui : il est déclaré à Google dès la mise en ligne, avec votre fiche Google Business. Pour monter dans les résultats sur votre métier et votre commune, les formules Business et Premium vont plus loin. Personne ne peut honnêtement garantir la première place.'],
-  ["Et si j'ai besoin d'une boutique en ligne ou d'un logo ?", `On les réalise aussi, à prix fixe : boutique en ligne dès ${e(prix('e-commerce'))}, logo dès ${e(prix('logo'))}. Tous les prix sont sur la page Services.`],
+  ['Combien coûte un site ?', `Un site vitrine démarre à ${e(vitrine)}, une boutique en ligne à ${e(prix('e-commerce').prix_unique)} et un logo à ${e(prix('logo').prix_unique)}, hors taxes. Vous payez une fois, en une fois ou en 3 mensualités sans frais. Le prix exact figure sur un devis ferme, envoyé sous 48 h.`],
+  ['Pourquoi payer une fois plutôt qu’un abonnement ?', `Parce que le site devient le vôtre. Un site loué à ${e(99)} par mois coûte environ ${e(ABO_2ANS)} sur deux ans et s'arrête quand vous arrêtez de payer. Notre formule Lancement avec la maintenance revient à ${e(NOUS_2ANS)} sur la même période, logo compris, et le site reste à vous.`],
+  ['Combien de temps faut-il pour créer un site ?', `${delaiVitrine} pour un site vitrine après validation de la maquette, ${prix('e-commerce').infos[0].valeur} pour une boutique en ligne. Le délai exact figure sur votre devis.`],
+  ['Est-ce que je pourrai modifier mon site moi-même ?', 'Oui. Textes, photos, produits et prix se modifient depuis une interface simple. Une heure de formation est incluse à la livraison.'],
+  ['Et si je préfère que vous fassiez les modifications ?', `C'est le rôle de la maintenance, à ${e(maintenance)} par mois sans engagement : hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 h de modifications par mois, traitées sous 2 jours ouvrables.`],
+  ['Et si le résultat ne me plaît pas ?', "Vous validez la maquette avant le moindre développement. Si la première proposition ne vous convient pas, on repart de zéro sans frais. Après la mise en ligne, un mois de corrections est offert."],
+  ['Y a-t-il des frais cachés ?', "Non. Le prix du devis est ferme et détaille tout ce qui est inclus. Les seuls coûts réguliers possibles sont la maintenance (sans engagement) et, pour Google Ads, le budget publicitaire que vous fixez vous-même."],
+  ["Qu'est-ce que la visibilité dans les IA ?", 'De plus en plus de clients posent leurs questions à ChatGPT, Perplexity ou aux réponses IA de Google. On structure votre site et vos informations pour que ces outils vous citent quand on cherche votre métier dans votre ville.'],
+  ['Le budget publicitaire Google Ads est-il compris ?', 'Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond.'],
   ['Travaillez-vous en dehors de Bruxelles ?', "Oui, avec des clients de toute la Belgique. Les échanges se font par téléphone, WhatsApp ou visio, et vous suivez l'avancement sur un lien privé."],
 ];
+
+const posts = (await getCollection('articles')).sort((a, b) => a.data.ordre - b.data.ordre).slice(0, 3);
 
 const WEBSITE = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_URL + '/#site', url: SITE_URL + '/', name: BRAND, inLanguage: 'fr-BE', publisher: { '@id': ORG['@id'] } };
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base chemin="" title={`Création de site internet dès ${e(essentiel.prix)}/mois, en ligne en 5 jours | ${BRAND}`} desc={`Site internet pro en ligne en 5 jours, tout compris : design, textes, nom de domaine, hébergement, e-mail et modifications chaque mois. Dès ${e(essentiel.prix)} HTVA par mois, à Bruxelles et partout en Belgique.`} current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
+<Base chemin="" title={`Agence web à Bruxelles, site vitrine dès ${e(vitrine)} | ${BRAND}`} desc={`Agence web à Bruxelles : site vitrine dès ${e(vitrine)} en ligne en ${delaiVitrine}, boutique en ligne, logo, SEO et Google Ads pour indépendants et PME en Belgique. Payé une fois, le site vous appartient. Devis gratuit sous 48 h.`} current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
 
   <section class="fx-hero" aria-labelledby="hero-title">
     <div class="wrap fx-hero-grid">
       <div class="reveal">
-        <p class="kicker">Création de sites internet pour indépendants, commerces et PME, en Belgique</p>
-        <h1 class="poster" id="hero-title">Votre site pro, <span class="hl">en ligne en 5{NB}jours</span>. <span class="hl hl-tomato">Tout compris.</span></h1>
-        <p class="lead">Pensé pour votre métier, textes écrits avec vous, nom de domaine, hébergement et adresse e-mail inclus. Ensuite, vos modifications sont comprises chaque mois : vous nous écrivez, on s'en charge.</p>
+        <p class="kicker">Agence web à Bruxelles et partout en Belgique</p>
+        <h1 class="poster" id="hero-title">Des sites qui font <span class="hl">venir des clients</span>. <span class="hl hl-tomato">Payés une fois.</span></h1>
+        <p class="lead">Sites vitrine dès {e(vitrine)}, en ligne en {delaiVitrine}. Boutiques en ligne, logos et référencement Google pour les commerces, restaurants et indépendants. Deux fondateurs en direct, et un site qui vous appartient.</p>
         <div class="btn-row fx-cta">
-          <a class="btn btn-primary btn-lg" href="/devis">Je veux mon site <span aria-hidden="true">→</span></a>
-          <a class="btn btn-secondary btn-lg" href="#formules">Voir les formules</a>
+          <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis gratuit <span aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary btn-lg" href="#estimer">Estimer mon budget</a>
         </div>
-        <p class="note">Deux minutes pour démarrer · Aucun paiement à cette étape</p>
+        <p class="note">Devis ferme sous 48{NB}h · Maquette refaite sans frais si elle ne vous plaît pas</p>
         <dl class="fx-stats">
-          <div><dt>1 à 3{NB}h</dt><dd>de modifications comprises chaque mois</dd></div>
-          <div><dt>{ABO.traitement_jours}{NB}jours</dt><dd>ouvrables pour traiter vos demandes</dd></div>
-          <div><dt>Dès {e(essentiel.prix)}</dt><dd>HTVA par mois, tout compris</dd></div>
+          <div><dt>Dès {e(vitrine)}</dt><dd>pour un site vitrine, payé une fois</dd></div>
+          <div><dt>{delaiVitrine.split(' ').slice(0, 2).join(NB)}</dt><dd>ouvrables pour le mettre en ligne</dd></div>
+          <div><dt>3 fois</dt><dd>sans frais, si vous préférez étaler</dd></div>
         </dl>
       </div>
       <div class="fx-hero-visual" aria-hidden="true">
         <span class="shape tri"></span><span class="shape disc-blue"></span><span class="shape disc-yellow"></span>
         <div class="browser"><span class="bar"><i></i><i></i><i></i><b>streetsapp.be</b></span><Image src={shotStreet} alt="" widths={[480, 720, 960]} sizes="(max-width: 960px) 90vw, 560px" loading="eager" fetchpriority="high" /></div>
         <div class="phone"><Image src={shotOmiMobile} alt="" widths={[200, 390]} sizes="190px" loading="eager" /></div>
-        <span class="seal"><svg viewBox="0 0 120 120"><defs><path id="seal-c" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" /></defs><text><textPath href="#seal-c">En ligne en 5 jours · Modifs comprises ·</textPath></text></svg><b>5{NB}j</b></span>
+        <span class="seal"><svg viewBox="0 0 120 120"><defs><path id="seal-c" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" /></defs><text><textPath href="#seal-c">Le site vous appartient · Payé une fois ·</textPath></text></svg><b>{e(vitrine).replace(NB + '€', '')}<small>€</small></b></span>
         <span class="tag-real">Vrais sites réalisés par nos soins</span>
       </div>
     </div>
@@ -97,34 +123,66 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <ul class="marquee-track">{[0, 1].map(c => INCLUS.map(t => <li aria-hidden={c ? 'true' : undefined}>{t}</li>))}</ul>
   </div>
 
+  <section class="section" id="probleme" aria-labelledby="pb-title">
+    <div class="wrap">
+      <div class="fx-head rv">
+        <h2 class="d-xl" id="pb-title">Votre site vous fait-il <span class="hl hl-pink">perdre des clients</span>{NB}?</h2>
+        <p class="lead">Chaque semaine, des clients vous cherchent en ligne. Cochez ce qui vous ressemble : dix secondes suffisent pour savoir combien vous en perdez.</p>
+      </div>
+      <div class="diag" id="diag">
+        <ul class="pains">{PAINS.map(([t, cout, src, fix], i) => <li>
+          <button class="pain" type="button" aria-pressed="false">
+            <span class="pain-n" aria-hidden="true">0{i + 1}</span>
+            <span class="pain-t">« {t} »</span>
+            <span class="pain-cost"><b>Ce que ça vous coûte</b>{cout}{src && <small> ({src})</small>}</span>
+            <span class="pain-fix"><b>Ce qu'on fait</b>{fix}</span>
+            <span class="pain-check" aria-hidden="true"></span>
+          </button>
+        </li>)}</ul>
+        <div class="diag-result" aria-live="polite">
+          <p class="diag-score"><b id="diag-n">0</b><span>/{PAINS.length}</span></p>
+          <p class="diag-msg" id="diag-msg">Cochez les situations qui vous ressemblent.</p>
+          <a class="btn btn-primary" href="#audit">Recevoir mon audit gratuit</a>
+          <p class="diag-note">Gratuit, sans engagement. Trois actions prioritaires sous 72{NB}h.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="comparatif" aria-labelledby="cmp-title">
-    <div class="wrap fx-split">
+    <div class="wrap fx-split wide">
       <div class="fx-split-txt rv">
-        <h2 class="d-xl" id="cmp-title">Un site d'agence, <span class="hl">au prix d'un abonnement</span>.</h2>
-        <p class="lead">Une agence classique facture souvent plusieurs milliers d'euros, puis la maintenance à part. Les outils à faire soi-même coûtent peu, mais vous y laissez vos soirées, et ça se voit.</p>
-        <p class="lead">Chez {BRAND}, deux fondateurs construisent votre site puis s'en occupent, pour un montant fixe chaque mois.</p>
+        <h2 class="d-xl" id="cmp-title">Un site d'agence, <span class="hl">sans le loyer</span>.</h2>
+        <p class="lead">Une agence classique facture souvent plusieurs milliers d'euros. Un site par abonnement démarre petit, mais vous le louez : il s'arrête le jour où vous arrêtez de payer.</p>
+        <p class="lead">Chez {BRAND}, vous payez une fois, en 3 fois si vous voulez, et le site est à vous.</p>
+        <div class="cost2">
+          <p><span>Site loué à {e(99)}/mois, sur 2 ans</span><b>{e(ABO_2ANS)}</b></p>
+          <p class="us"><span>Formule Lancement + maintenance, sur 2 ans</span><b>{e(NOUS_2ANS)}</b></p>
+          <small>Logo et cartes de visite compris, et le site reste à vous.</small>
+        </div>
       </div>
       <div class="panel panel-yellow rv">
         <div class="table-wrap">
           <table class="fx-compare">
-            <thead><tr><td></td><th scope="col">Agence classique</th><th scope="col">Faire soi-même</th><th scope="col" class="us" translate="no">{BRAND}</th></tr></thead>
-            <tbody>
-              {COMPARE.map(([c, a, b, n]) => <tr><th scope="row">{c}</th><td data-l="Agence classique">{a}</td><td data-l="Faire soi-même">{b}</td><td class="us" data-l={BRAND}>{n}</td></tr>)}
-              <tr class="total"><th scope="row">Pour démarrer</th><td data-l="Agence classique">Souvent plus de {e(3000)}, maintenance en plus</td><td data-l="Faire soi-même">Abonnement à l'outil, plus vos heures</td><td class="us" data-l={BRAND}><b>{e(ABO.mise_en_route)}, puis dès {mois(essentiel.prix)}</b><small>Design, textes, domaine, hébergement, modifications, et des humains qui répondent</small></td></tr>
-            </tbody>
+            <thead><tr><td></td><th scope="col">Agence classique</th><th scope="col">Site par abonnement</th><th scope="col">Faire soi-même</th><th scope="col" class="us" translate="no">{BRAND}</th></tr></thead>
+            <tbody>{COMPARE.map(([c, a, b, d, n]) => <tr><th scope="row">{c}</th><td data-l="Agence classique">{a}</td><td data-l="Site par abonnement">{b}</td><td data-l="Faire soi-même">{d}</td><td class="us" data-l={BRAND}>{n}</td></tr>)}</tbody>
           </table>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="modif-title">
+  <div class="on-dark fx-spots">
+    <Spots />
+  </div>
+
+  <section class="section-tight" style="margin-top:clamp(48px, 7vw, 96px)" aria-labelledby="modif-title">
     <div class="wrap">
       <div class="panel panel-pink fx-modif">
         <div class="rv">
           <h2 class="d-xl" id="modif-title">Un horaire, une photo, un nouveau service{NB}? <span class="hl hl-white">On s'en charge.</span></h2>
-          <p class="lead">Votre activité évolue, votre site aussi. Chaque formule comprend 1, 2 ou 3 heures de modifications par mois. Vous envoyez votre demande par e-mail ou WhatsApp, on la traite sous {ABO.traitement_jours} jours ouvrables. Pas de devis pour changer une virgule.</p>
-          <p class="small">Un mois chargé{NB}? On vous prévient avant de dépasser vos heures, avec le prix. <b>Aucune facture surprise.</b></p>
+          <p class="lead">Avec la maintenance à {e(maintenance)} par mois, sans engagement : hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 heure de modifications chaque mois. Vous écrivez par e-mail ou WhatsApp, on traite sous 2 jours ouvrables.</p>
+          <p class="small">Vous préférez modifier vous-même{NB}? C'est possible aussi : une heure de formation est incluse avec chaque site.</p>
         </div>
         <div class="ticket rv" aria-label="Exemples de modifications">
           <p class="ticket-head"><b>Ce que représente une heure</b><span>à titre indicatif</span></p>
@@ -139,12 +197,12 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="panel panel-lime">
         <div class="fx-head rv">
-          <h2 class="d-xl" id="methode-title">Vingt minutes pour vous. <span class="hl hl-white">Cinq jours</span> pour nous.</h2>
-          <p class="lead">Vous répondez à quelques questions, on fait le reste. Le délai démarre quand on a vos informations, et on vous dit précisément ce qu'il manque.</p>
+          <h2 class="d-xl" id="methode-title">Quelques heures pour vous. <span class="hl hl-white">Cinq jours</span> pour nous.</h2>
+          <p class="lead">Pour un site vitrine, {delaiVitrine} après validation de la maquette. Vous suivez tout sur un lien privé, et on vous dit précisément ce qu'il nous manque.</p>
         </div>
         <ol class="timeline">{ETAPES.map(([quand, t, txt]) => <li class="rv"><span class="when">{quand}</span><h3>{t}</h3><p>{txt}</p></li>)}</ol>
         <div class="btn-row" style="align-items:center;gap:22px">
-          <a class="btn btn-primary" href="/devis">Commencer maintenant <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary" href="/devis?mode=appel">Réserver l'appel de 30 minutes <span aria-hidden="true">→</span></a>
           <a class="link-u" href="#formules">Voir les formules</a>
         </div>
       </div>
@@ -187,21 +245,23 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="why-title">
+  <section class="section" id="estimer" aria-labelledby="est-title">
     <div class="wrap">
-      <div class="panel panel-royal fx-why">
-        <span class="shape tri" aria-hidden="true"></span>
-        <div class="rv">
-          <p class="kicker">Pourquoi c'est abordable{NB}?</p>
-          <h2 class="d-xl" id="why-title">Moins de tâches répétitives. <span class="hl">Plus de temps</span> pour votre site.</h2>
-          <p class="lead">Monter les pages une à une, les adapter au téléphone, tout retester : c'est ce travail qui faisait grimper les factures. Nos outils et notre méthode le règlent en quelques heures. <b>Ce temps gagné, on ne vous le facture pas.</b></p>
-          <p class="lead">Et personne entre vous et nous : {COFONDATEUR} vous répond, {FONDATEUR.split(' ')[0]} construit votre site.</p>
+      <div class="fx-head rv">
+        <h2 class="d-xl" id="est-title">Estimez votre budget <span class="hl hl-lime">en 30 secondes</span>.</h2>
+        <p class="lead">La plupart de nos projets se situent entre {e(600)} et {e(3000)}. Sélectionnez vos services pour une première estimation.</p>
+      </div>
+      <div class="estimator" id="estimator">
+        <div class="est-groups">{FAMS.map(f => <div class="est-group"><h3 style={`--c:var(--${f.couleur})`}>{f.nom_court}</h3><div class="toggles">{SV.filter(s => s.famille === f.id).map(s =>
+          <button class="toggle" type="button" aria-pressed="false" data-id={s.id} data-once={s.prix_unique} data-monthly={s.prix_mensuel}>{s.nom_court} <span class="p">{s.prix_unique ? `dès ${e(s.prix_unique)}` : `${e(s.prix_mensuel)}/mois`}</span></button>)}</div></div>)}</div>
+        <div class="est-total" aria-live="polite">
+          <span class="label">Budget de départ estimé</span>
+          <span class="big" id="est-once">0{NB}€</span>
+          <span class="monthly" id="est-monthly">Aucun abonnement</span>
+          <span class="count" id="est-count">Sélectionnez au moins un service</span>
+          <a class="btn btn-primary" id="est-cta" href="/devis" aria-disabled="true">Recevoir le devis détaillé</a>
+          <span class="note">Estimation indicative basée sur nos prix de départ, hors taxes.</span>
         </div>
-        <div class="why-lists rv">
-          <div><h3>Ce qu'on a accéléré</h3><ul class="checks"><li>Mise en page et intégration</li><li>Adaptation au téléphone et à la tablette</li><li>Vérifications techniques : vitesse, liens, balises</li><li>Premiers jets des textes, à partir de vos réponses</li></ul></div>
-          <div><h3>Ce qui reste fait <span class="hl">à la main</span></h3><ul class="checks"><li>Comprendre votre métier et vos clients</li><li>Le choix du design</li><li>La relecture et le ton de vos textes</li><li>Le contrôle avant la mise en ligne</li><li>Vos demandes de modifications</li></ul></div>
-        </div>
-        <p class="why-result">Résultat : un site pensé par des professionnels, en ligne en quelques jours, pour le prix d'un abonnement.</p>
       </div>
     </div>
   </section>
@@ -209,50 +269,76 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   <section class="fx-pricing" id="formules" aria-labelledby="plans-title">
     <div class="wrap">
       <div class="fx-head rv">
-        <h2 class="d-xl" id="plans-title">Trois formules. <span class="hl hl-white">Un prix clair.</span> Rien de caché.</h2>
-        <ul class="price-meta"><li>Prix HTVA, par mois</li><li>Modifications comprises chaque mois</li><li>{e(ABO.mise_en_route)} de mise en route, une seule fois</li><li>Engagement {ABO.engagement_mois} mois, puis résiliable chaque mois</li></ul>
+        <h2 class="d-xl" id="plans-title">Trois formules. <span class="hl hl-white">Un prix ferme.</span> Moins cher qu'en services séparés.</h2>
+        <div class="fx-head-side" style="justify-items:end">
+          <ul class="price-meta"><li>Prix hors taxes</li><li>Payé une fois, ou en 3 fois sans frais</li><li>Le site, le logo et le domaine sont à vous</li></ul>
+          <div class="billing" role="group" aria-label="Mode de paiement">
+            <button type="button" class="bill" data-bill="once" aria-pressed="true">En une fois</button>
+            <button type="button" class="bill" data-bill="monthly" aria-pressed="false">En 3 fois</button>
+          </div>
+        </div>
       </div>
       <div class="tiers">
-        {ABO.formules.map((f, i) => (
+        {FORMULES.map(f => {
+          const once = e(f.prix), monthly = f.mensuel ? once : e(Math.round(f.prix / 3));
+          const onceL = f.mensuel ? 'par mois, sans engagement' : 'une fois', monthlyL = f.mensuel ? onceL : 'par mois, pendant 3 mois';
+          return (
           <article class={f.recommande ? 'tier featured on-dark' : 'tier'}>
-            {f.recommande && <span class="flag">Recommandé</span>}
-            <div class="tier-top"><h3>{f.nom}</h3><span>Jusqu'à {f.pages} pages</span></div>
+            {f.recommande && <span class="flag">Recommandé pour vendre en ligne</span>}
+            <div class="tier-top"><h3>{f.nom}</h3></div>
             <p class="tier-for">{f.pour}</p>
-            <p class="tier-price"><b>{f.prix}{NB}€</b><span>/mois<br>HTVA</span></p>
-            <p class="tier-setup"><b>+ {e(ABO.mise_en_route)} de mise en route, une seule fois</b>{f.heures}{NB}h de modifications comprises chaque mois. Mise en ligne : {f.delai}.</p>
+            <p class="tier-price price" data-once={once} data-monthly={monthly} data-once-l={onceL} data-monthly-l={monthlyL}><b class="pv">{once}</b><span class="pl">{onceL}</span></p>
+            <p class="tier-setup">au lieu de <s>{e(f.separe)}{f.mensuel ? '/mois' : ''}</s> en services séparés, soit <b style="display:inline">{e(f.separe - f.prix)}{f.mensuel ? '/mois' : ''} d'économie</b></p>
             <a class={f.recommande ? 'btn btn-accent' : 'btn btn-secondary'} href={`/devis?formule=${f.id}`}>Choisir {f.nom} <span aria-hidden="true">→</span></a>
-            <p class="tier-who">{f.cible}</p>
-            {i > 0 && <p class="tier-plus">Tout {ABO.formules[i - 1].nom}, et{NB}:</p>}
             <ul class="checks">{f.inclus.map(x => <li>{x}</li>)}</ul>
-          </article>
-        ))}
+          </article>);
+        })}
       </div>
       <div class="options">
-        <h3>Options à la carte</h3>
-        <ul>{ABO.options.map(([n, p]) => <li>{n} <b>+{e(p as number)}</b></li>)}</ul>
+        <h3>Ou à la carte</h3>
+        <ul>{SV.map(s => <li><a href={`/services#${s.id}`}>{s.nom_court} <b>{s.prix_unique ? `dès ${e(s.prix_unique)}` : `${e(s.prix_mensuel)}/mois`}</b></a></li>)}</ul>
       </div>
-      <p class="small fx-once">Prix HTVA par mois, à ajouter à n'importe quelle formule. Vous préférez payer une seule fois{NB}? Site vitrine dès {e(prix('site-vitrine'))}, boutique en ligne dès {e(prix('e-commerce'))}, logo dès {e(prix('logo'))}. <a class="link-u" href="/services">Voir tous les services</a></p>
+      <p class="small fx-once">Paiement en 3 fois sans frais, par prélèvement. Les services mensuels s'arrêtent avec un mois de préavis.</p>
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="seo-title">
+  <section class="section-tight" aria-labelledby="why-title">
     <div class="wrap">
-      <div class="panel panel-sky fx-seo">
-        <figure class="serp-card rv" aria-hidden="true">
-          <p class="serp-q">électricien schaerbeek</p>
-          <p class="serp-url">votre-entreprise.be › electricien-schaerbeek</p>
-          <p class="serp-t">Électricien à Schaerbeek : dépannage et rénovation | Votre Entreprise</p>
-          <p class="serp-d">Intervention rapide à Schaerbeek et environs. Devis gratuit, prix clairs. Appelez-nous ou demandez un devis en ligne.</p>
-          <p class="serp-chips"><span style="--c:var(--lime)">Titre optimisé</span><span style="--c:var(--yellow)">Une page par service</span><span style="--c:var(--pink)">Commune ciblée</span></p>
-          <span class="serp-lines"><i></i><i></i><i></i></span>
-          <figcaption>Exemple fictif, pour illustrer</figcaption>
-        </figure>
+      <div class="panel panel-royal fx-why">
+        <span class="shape tri" aria-hidden="true"></span>
         <div class="rv">
-          <h2 class="d-xl" id="seo-title">Être trouvé sur Google{NB}? <span class="hl hl-white">C'est prévu dès le premier jour.</span></h2>
-          <p class="lead">Chaque site est rapide, parfait sur téléphone, bien structuré et déclaré à Google dès la mise en ligne. Avec Business et Premium, on travaille aussi vos services, vos communes et votre présence dans les réponses des IA.</p>
-          <p class="small">Ce qu'on ne fera jamais : vous promettre la première place. Personne ne peut honnêtement la garantir.</p>
-          <a class="btn btn-primary" href="/services#seo">Notre offre de référencement <span aria-hidden="true">→</span></a>
+          <p class="kicker">Pourquoi c'est moins cher{NB}?</p>
+          <h2 class="d-xl" id="why-title">Moins de tâches répétitives. <span class="hl">Plus de temps</span> pour votre site.</h2>
+          <p class="lead">Monter les pages une à une, les adapter au téléphone, tout retester : c'est ce travail qui faisait grimper les factures. Nos outils et notre méthode le règlent en quelques heures. <b>Ce temps gagné, on ne vous le facture pas.</b></p>
+          <p class="lead">Et personne entre vous et nous : {COFONDATEUR} vous répond, {FONDATEUR.split(' ')[0]} construit votre site.</p>
         </div>
+        <div class="why-lists rv">
+          <div><h3>Ce qu'on a accéléré</h3><ul class="checks"><li>Mise en page et intégration</li><li>Adaptation au téléphone et à la tablette</li><li>Vérifications techniques : vitesse, liens, balises</li><li>Premiers jets des textes, à partir de vos réponses</li></ul></div>
+          <div><h3>Ce qui reste fait <span class="hl">à la main</span></h3><ul class="checks"><li>Comprendre votre métier et vos clients</li><li>Le design et la maquette</li><li>La relecture et le ton de vos textes</li><li>Le contrôle avant la mise en ligne</li><li>Le suivi après la mise en ligne</li></ul></div>
+        </div>
+        <p class="why-result">Résultat : un site d'agence, en ligne en quelques jours, à un prix ferme que vous payez une seule fois.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="audit" aria-labelledby="audit-title">
+    <div class="wrap">
+      <div class="panel panel-sky audit">
+        <div>
+          <p class="kicker">Gratuit, sans engagement</p>
+          <h2 class="d-xl" id="audit-title">Audit gratuit de <span class="hl hl-white">votre visibilité</span>.</h2>
+          <p class="lead" style="margin-top:16px">On analyse votre site, votre fiche Google et votre présence dans les IA. Vous recevez un rapport clair avec trois actions prioritaires, sous 72{NB}h.</p>
+        </div>
+        <form class="audit-form" action="/devis" method="get">
+          <input type="hidden" name="service" value="seo">
+          <input type="hidden" name="audit" value="1">
+          <label for="audit-url">Adresse de votre site</label>
+          <div class="audit-row">
+            <input id="audit-url" name="site" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="www.votre-site.be…" required>
+            <button class="btn btn-primary" type="submit">Recevoir mon audit gratuit</button>
+          </div>
+          <p class="small">Pas encore de site{NB}? Indiquez le nom de votre entreprise.</p>
+        </form>
       </div>
     </div>
   </section>
@@ -273,7 +359,29 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
+  <section class="section" id="garanties" aria-labelledby="garanties-title">
+    <div class="wrap">
+      <div class="fx-head rv"><h2 class="d-xl" id="garanties-title">Ce qu'on vous <span class="hl">garantit</span>.</h2></div>
+      <div class="guarantees">
+        <div class="g"><h3>Un prix ferme</h3><p>Le devis détaille tout ce qui est inclus. Ce qui est écrit, c'est ce que vous payez.</p></div>
+        <div class="g"><h3>Maquette refaite si elle ne vous plaît pas</h3><p>Si la première proposition ne vous convient pas, on repart de zéro, sans frais.</p></div>
+        <div class="g"><h3>Un mois de corrections offert</h3><p>Après la mise en ligne, on corrige ce qui ne va pas, sans facture.</p></div>
+        <div class="g"><h3>Tout vous appartient</h3><p>Nom de domaine, contenus et fichiers du logo sont à votre nom. Vous partez quand vous voulez.</p></div>
+      </div>
+    </div>
+  </section>
+
   <Avis max={3} />
+
+  <section class="section" aria-labelledby="blog-title">
+    <div class="wrap">
+      <div class="fx-head rv">
+        <h2 class="d-xl" id="blog-title">Conseils</h2>
+        <p class="lead"><a class="link-u" href="/conseils">Tous les articles</a></p>
+      </div>
+      <div class="posts">{posts.map(p => <PostCard post={p} />)}</div>
+    </div>
+  </section>
 
   <section class="section" id="faq" aria-labelledby="faq-title">
     <div class="wrap faq">
@@ -287,25 +395,25 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="final-title">
+  <section class="section-tight" style="margin-top:clamp(48px, 7vw, 96px)" aria-labelledby="final-title">
     <div class="wrap">
       <div class="panel panel-tomato fx-final">
         <span class="shape disc-yellow" aria-hidden="true"></span><span class="shape disc-night" aria-hidden="true"></span>
         <div>
-          <h2 class="d-xl" id="final-title">Votre site pourrait être en ligne <span class="hl hl-white" id="final-date">dans 5 jours ouvrables</span>.</h2>
-          <p class="lead">Si vous nous envoyez vos informations aujourd'hui. Deux minutes de questions, un appel, et on s'occupe du reste.</p>
+          <h2 class="d-xl" id="final-title">Votre site pourrait être en ligne <span class="hl hl-white" id="final-date">dans quelques jours</span>.</h2>
+          <p class="lead">Si on se parle cette semaine : un appel de 30 minutes, un devis ferme sous 48{NB}h, puis {delaiVitrine} après validation de votre maquette.</p>
           <p class="act-label">Pour commencer : quelle est votre activité{NB}?</p>
           <ul class="act-chips">{ACTIVITES.map(a => <li><a href={`/devis?activite=${encodeURIComponent(a)}`}>{a}</a></li>)}</ul>
           <div class="btn-row" style="align-items:center;gap:20px">
-            <a class="btn btn-primary btn-lg" href="/devis">Je veux mon site <span aria-hidden="true">→</span></a>
-            <span class="small">Sans engagement à ce stade · Réponse sous 24{NB}h ouvrées</span>
+            <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis gratuit <span aria-hidden="true">→</span></a>
+            {WHATSAPP && <a class="btn btn-glass" href={WHATSAPP} target="_blank" rel="noopener">Écrire sur WhatsApp</a>}
           </div>
-          <p class="note fx-final-note">Formules Essentiel et Business : {essentiel.delai} après réception de vos informations. Premium : environ {premium.delai}.</p>
+          <p class="note fx-final-note">Date indicative pour un site vitrine : 2 jours pour le devis et la maquette, puis {delaiVitrine}.</p>
         </div>
-        <div class="cal" aria-hidden="true" data-jours="5">
+        <div class="cal" aria-hidden="true" data-jours="7">
           <span class="cal-m">bientôt</span>
           <span class="cal-d">en ligne</span>
-          <b class="cal-n">5{NB}j</b>
+          <b class="cal-n">7{NB}j</b>
           <span class="cal-ok">Site en ligne</span>
         </div>
       </div>

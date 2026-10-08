@@ -302,13 +302,13 @@ if (form) {
   const q = new URLSearchParams(location.search);
   // Venu d'un onglet métier de l'accueil : le secteur commence la description du projet
   if (q.get('activite') && !form.msg.value) form.msg.value = q.get('activite') + ' : ';
-  // Venu d'une formule de l'accueil (?formule=business) : site vitrine coché, formule rappelée
+  // Venu d'une formule (?formule=lancement) : ses services cochés, la formule rappelée
   const formule = JSON.parse(form.dataset.formules || '{}')[q.get('formule')];
   if (formule) {
-    form.querySelector('input[value="site-vitrine"]').checked = true;
-    if (!form.msg.value) form.msg.value = formule.split(' :')[0] + ' : ';
+    formule.services.forEach(id => { const box = form.querySelector(`input[name="services"][value="${id}"]`); if (box) box.checked = true; });
+    if (!form.msg.value) form.msg.value = formule.texte.split(' :')[0] + ' : ';
     const note = document.getElementById('audit-note');
-    note.textContent = formule;
+    note.textContent = formule.texte;
     note.hidden = false;
   }
   if (q.get('audit') && q.get('site')) {
@@ -435,12 +435,12 @@ const bills = document.querySelectorAll('.bill');
 bills.forEach(b => b.addEventListener('click', () => {
   bills.forEach(x => x.setAttribute('aria-pressed', x === b));
   const mode = b.dataset.bill;
-  document.querySelectorAll('.plan .price').forEach(p => {
+  document.querySelectorAll('.price[data-once]').forEach(p => {
     p.querySelector('.pv').textContent = p.dataset[mode];
     p.querySelector('.pl').textContent = p.dataset[mode + 'L'];
   });
   // « au lieu de … » compare des prix payés en une fois : masqué en mode mensuel
-  document.querySelectorAll('.plan .was[data-once]').forEach(w => { w.hidden = mode === 'monthly'; });
+  document.querySelectorAll('.was[data-once]').forEach(w => { w.hidden = mode === 'monthly'; });
 }));
 
 // Page devis : devis écrit ou rendez-vous téléphonique (?mode=appel)
