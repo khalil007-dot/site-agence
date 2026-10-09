@@ -61,6 +61,24 @@
       "skillPath": "skills/directory-submissions/SKILL.md",
       "computedHash": "c1e8659f7491f04ccd1a62f95a15cc78c6bef25655df31853b67ba5a64300381"
     },
+    "google-ads-api-account-diagnostics": {
+      "source": "google/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ads/google-ads-api-account-diagnostics/SKILL.md",
+      "computedHash": "39c12f8700756f969500dfc81d1462ed12644441f26a415d8270366cbecab2cc"
+    },
+    "google-ads-api-mcp-setup": {
+      "source": "google/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ads/google-ads-api-mcp-setup/SKILL.md",
+      "computedHash": "324d49f2cba8f42847433503fe0ed3af1eb2f933929cc39164e0acb4e34240a7"
+    },
+    "google-ads-api-quickstart": {
+      "source": "google/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ads/google-ads-api-quickstart/SKILL.md",
+      "computedHash": "7938e80f143dd75cf5857c57bc105c56e24e2bc23d3c7a0938d0f35e22c161fe"
+    },
     "humaniseur-fr": {
       "source": "samber/cc-skills",
       "sourceType": "github",
