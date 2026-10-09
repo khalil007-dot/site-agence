@@ -2,7 +2,7 @@
 
 La fiche se crée sur **business.google.com**, connecté au compte Google qui gérera l'agence (de préférence celui de contact@epurestudio.be ; ajouter l'autre fondateur ensuite comme administrateur). Compter 20 minutes, puis la validation de Google (vidéo, quelques jours).
 
-Images prêtes dans `ressources/google-business/` : `logo.png`, `couverture.png` (1600 × 900), et 8 photos dans `photos/`. La couverture montre les sites d'OMI Restaurant et de Street Sapp, sans texte ni prix, l'essentiel au centre car Google la recadre selon l'écran ; elle se régénère avec `bash outils/og-image.sh` (modèle : `outils/couverture-google.html`).
+Images prêtes dans `ressources/google-business/` : `logo.png`, `couverture.png` (1600 × 900), et 8 photos dans `photos/`. La couverture montre l'agence au travail (le site d'OMI Restaurant en cours de conception avec les curseurs de Khalil et Wassim, le code, la version mobile, « Agence de création de sites web · Bruxelles »), sans prix, l'essentiel au centre car Google la recadre selon l'écran ; elle se régénère avec `bash outils/og-image.sh` (modèle : `outils/couverture-google.html`).
 
 ## 1. Création (dans l'ordre des écrans)
 
