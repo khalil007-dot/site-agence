@@ -53,8 +53,8 @@ Les prix vont ici, pas dans la description. Les 3 offres de site ont un prix fix
 
 | Service | Prix | Description (300 caractères max.) |
 |---|---|---|
-| Site vitrine | 590 € HT, prix fixe | Site de 5 pages sur mesure pensé pour le téléphone, textes écrits avec vous, boutons Appeler et WhatsApp, fiche Google réglée. En ligne en 5 jours ouvrables. Payé une fois ou en 3 fois sans frais. |
-| Site + logo | 790 € HT, prix fixe | Le site vitrine, votre logo en 3 propositions et des cartes de visite assorties. En ligne en 2 semaines. |
+| Site vitrine | 890 € HT, prix fixe | Site de 5 pages sur mesure pensé pour le téléphone, textes écrits avec vous, boutons Appeler et WhatsApp, fiche Google réglée. En ligne en 5 jours ouvrables. Payé une fois ou en 3 fois sans frais. |
+| Site + logo | 990 € HT, prix fixe | Le site vitrine, votre logo en 3 propositions, des cartes de visite et des visuels pour vos réseaux assortis, et 3 mois de maintenance offerts. En ligne en 2 semaines. |
 | Boutique en ligne | 1 490 € HT, prix fixe | Boutique rapide sur mobile, produits illimités, paiement Bancontact et carte, 50 premiers produits importés. En ligne en 3 semaines. |
 | Logo et identité visuelle | dès 290 € HT | Logo, couleurs et polices, déclinés pour l'enseigne, les réseaux et les imprimés. Fichiers à votre nom. |
 | Supports imprimés | sur devis | Menus, flyers, cartes de visite assortis à votre marque. |
@@ -68,8 +68,8 @@ Les prix vont ici, pas dans la description. Les 3 offres de site ont un prix fix
 
 | Produit | Prix | Description |
 |---|---|---|
-| Site vitrine | 590 € HT | Jusqu'à 5 pages sur mesure, textes écrits avec vous, fiche Google réglée. En ligne en 5 jours ouvrables. |
-| Site + logo | 790 € HT | Le site vitrine, votre logo en 3 propositions et des cartes de visite assorties. En ligne en 2 semaines. |
+| Site vitrine | 890 € HT | Jusqu'à 5 pages sur mesure, textes écrits avec vous, fiche Google réglée. En ligne en 5 jours ouvrables. |
+| Site + logo | 990 € HT | Le site vitrine, votre logo en 3 propositions, des cartes de visite et des visuels pour vos réseaux assortis, et 3 mois de maintenance offerts. En ligne en 2 semaines. |
 | Boutique en ligne | 1 490 € HT | Boutique complète, paiement Bancontact et carte, 50 premiers produits importés. En ligne en 3 semaines. |
 
 Bouton de chaque produit : « En savoir plus » vers `https://epurestudio.be/?utm_source=google&utm_medium=fiche&utm_campaign=gbp-produits#formules`.

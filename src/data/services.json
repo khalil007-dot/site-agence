@@ -36,7 +36,7 @@
       "nom": "Site vitrine",
       "nom_court": "Site vitrine",
       "promesse": "Être trouvé sur Google et recevoir des demandes, même quand vous êtes occupé.",
-      "prix_unique": 590,
+      "prix_unique": 890,
       "prix_mensuel": 0,
       "pour_qui": "Pour les artisans, restaurants, cabinets et indépendants qui veulent recevoir des appels et des demandes, sans vendre en ligne.",
       "infos": [
@@ -222,7 +222,7 @@
     {
       "id": "site",
       "nom": "Site vitrine",
-      "prix": 590,
+      "prix": 890,
       "services": [
         "site-vitrine"
       ],
@@ -240,20 +240,21 @@
     {
       "id": "site-logo",
       "nom": "Site + logo",
-      "prix": 790,
+      "prix": 990,
       "recommande": true,
       "services": [
         "logo",
         "site-vitrine"
       ],
-      "pour": "Pour démarrer avec une image pro, en ligne comme sur papier.",
+      "pour": "Pour démarrer avec une image pro, en ligne comme sur papier. Pris séparément : plus de 1 260 €.",
       "delai": "2 semaines",
       "inclus": [
         "Tout ce que comprend le site vitrine",
         "Votre logo : 3 propositions, vous choisissez",
         "Couleurs et typographies assorties",
         "Cartes de visite prêtes à imprimer",
-        "Fichiers du logo pour le web et l'impression"
+        "Visuels pour vos réseaux : photo de profil et bannières",
+        "3 mois de maintenance offerts"
       ]
     },
     {

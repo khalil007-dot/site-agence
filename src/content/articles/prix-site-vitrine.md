@@ -36,7 +36,7 @@ Ces fourchettes sont des ordres de grandeur pour un site vitrine de 3 à 8 pages
 <div class="range"><span>Une agence</span><div class="range-track"><div class="range-bar" style="left:33.3%;width:66.7%;background:#6A4CF5">5 000 à 15 000 €</div></div></div>
 </div>
 <div class="range-axis"><span>0 €</span><span>5 000 €</span><span>10 000 €</span><span>15 000 €</span></div>
-</div><figcaption>Ordres de grandeur pour un site de 3 à 8 pages, hors frais annuels. À titre de repère, notre site vitrine coûte 590 €, prix fixe.</figcaption></figure>
+</div><figcaption>Ordres de grandeur pour un site de 3 à 8 pages, hors frais annuels. À titre de repère, notre site vitrine coûte 890 €, prix fixe.</figcaption></figure>
 
 ## Ce qui fait varier le prix
 
@@ -56,7 +56,7 @@ Listez les pages dont vous avez besoin, ce que vos visiteurs doivent pouvoir fai
 
 <div class="callout">
 <h2 style="margin:0;font-size:1.5rem">Nos prix, sans surprise</h2>
-<p>Site vitrine 590 €, site + logo 790 €, boutique en ligne 1 490 €. Hors TVA, payés une fois ou en 3 fois sans frais.</p>
+<p>Site vitrine 890 €, site + logo 990 €, boutique en ligne 1 490 €. Hors TVA, payés une fois ou en 3 fois sans frais.</p>
 <a class="btn btn-primary" href="/#formules">Voir les 3 offres</a>
 </div>
 
