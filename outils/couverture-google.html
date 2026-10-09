@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Couverture de la fiche Google Business (1600 × 900). Régénérer avec : bash outils/og-image.sh
-     Une scène de travail d'agence : un site en cours de conception (calques, maquette, couleurs), le code, la version mobile
-     et les curseurs des deux fondateurs. Google recadre la couverture selon l'écran : tout l'important reste au centre, pas de prix. -->
+     Un mur de sites d'exemple pour des commerces de tous les métiers (tous fictifs), le logo au centre.
+     Google recadre la couverture selon l'écran : tout l'important reste au centre, pas de prix. -->
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -9,151 +9,91 @@
   @font-face { font-family: "Mona Sans"; font-weight: 200 900; src: url("../public/fonts/mona-sans-latin.woff2") format("woff2"); }
   * { box-sizing: border-box; }
   html, body { margin: 0; width: 1600px; height: 900px; overflow: hidden; }
-  body { background: #F6F5F1; font-family: "Mona Sans", sans-serif; color: #17150F; position: relative; }
-  .halo { position: absolute; border-radius: 50%; filter: blur(100px); }
-  .halo.a { left: 300px; top: 160px; width: 600px; height: 600px; background: rgba(91,63,224,.28); }
-  .halo.b { left: 760px; top: 260px; width: 600px; height: 600px; background: rgba(201,59,230,.22); }
+  body { background: #E9E6F5; font-family: "Mona Sans", sans-serif; color: #17150F; position: relative; }
 
-  .head { position: absolute; left: 0; right: 0; top: 40px; text-align: center; }
-  .brand { display: inline-flex; align-items: center; gap: 14px; font-size: 32px; font-weight: 650; letter-spacing: -0.02em; }
-  .brand svg { width: 48px; height: 48px; }
-  .sub { margin-top: 8px; font-size: 22px; font-weight: 550; color: #5C584E; letter-spacing: -0.01em; }
+  .wall { position: absolute; left: 50%; top: 50%; width: 1940px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px;
+    transform: translate(-50%, -50%) perspective(2400px) rotateX(18deg) rotateZ(-9deg); }
+  .site { height: 250px; border-radius: 12px; overflow: hidden; background: var(--bg); box-shadow: 0 18px 40px rgba(40,20,90,.18); display: flex; flex-direction: column; }
+  .site .bar { height: 22px; flex: none; display: flex; align-items: center; gap: 5px; padding: 0 10px; background: rgba(0,0,0,.06); }
+  .site .bar i { width: 7px; height: 7px; border-radius: 50%; background: rgba(0,0,0,.18); }
+  .site nav { display: flex; align-items: center; gap: 10px; padding: 10px 16px; font-size: 13px; font-weight: 700; color: var(--ink); }
+  .site nav span { width: 28px; height: 5px; border-radius: 3px; background: currentColor; opacity: .25; }
+  .site nav span:first-of-type { margin-left: auto; }
+  .site .hero { flex: 1; display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; padding: 4px 16px 16px; align-items: center; }
+  .site h3 { margin: 0; font-size: 24px; line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); font-family: var(--f, "Mona Sans"); font-weight: var(--w, 700); }
+  .site p { margin: 8px 0 12px; font-size: 11px; color: var(--ink); opacity: .7; }
+  .site .btn { display: inline-block; padding: 7px 12px; border-radius: var(--r, 6px); background: var(--acc); color: var(--on, #fff); font-size: 11px; font-weight: 700; }
+  .site .img { height: 100%; min-height: 150px; border-radius: 8px; background: var(--img); display: grid; place-items: center; }
+  .site .img svg { width: 58%; height: 58%; }
 
-  /* Outil de conception */
-  .app { position: absolute; left: 290px; top: 170px; width: 1020px; height: 620px; border-radius: 16px; overflow: hidden; background: #fff;
-    box-shadow: 0 40px 90px rgba(23,21,15,.22), 0 0 0 1px rgba(23,21,15,.08); display: grid; grid-template-rows: 40px 1fr; }
-  .bar { display: flex; align-items: center; gap: 8px; padding: 0 16px; background: #ECEAE4; font-size: 13px; color: #5C584E; }
-  .bar i { width: 12px; height: 12px; border-radius: 50%; background: #DCD8CF; }
-  .bar b { margin-left: 14px; font-weight: 600; color: #17150F; }
-  .bar .share { margin-left: auto; padding: 5px 12px; border-radius: 6px; color: #fff; font-weight: 600;
-    background: linear-gradient(120deg, #5B3FE0, #C93BE6); }
-  .body { display: grid; grid-template-columns: 190px 1fr 190px; min-height: 0; }
-  .side { padding: 16px 14px; font-size: 13px; border-right: 1px solid #ECEAE4; }
-  .side.r { border-right: 0; border-left: 1px solid #ECEAE4; }
-  .side h4 { margin: 0 0 10px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #8A857A; font-weight: 650; }
-  .layer { padding: 7px 8px; border-radius: 6px; display: flex; align-items: center; gap: 8px; color: #3A372F; }
-  .layer::before { content: ""; width: 10px; height: 10px; border: 1.5px solid #B8B2A5; border-radius: 2px; }
-  .layer.on { background: #ECE6FF; color: #4F35D2; font-weight: 600; }
-  .layer.on::before { border-color: #5B3FE0; }
-  .sw { display: flex; gap: 8px; margin-bottom: 18px; }
-  .sw span { width: 30px; height: 30px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
-  .font { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 2px; }
-  .muted { color: #8A857A; font-size: 12px; margin-bottom: 18px; }
-  .prop { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #F1EFEA; color: #5C584E; }
-  .prop b { color: #17150F; font-weight: 600; }
-
-  .canvas { background: #EFEDE8; position: relative; padding: 26px 30px; }
-  .page { background: #fff; border-radius: 6px; height: 100%; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.06); position: relative; }
-  .nav { height: 34px; display: flex; align-items: center; gap: 14px; padding: 0 18px; }
-  .nav .logo { width: 46px; height: 12px; border-radius: 3px; background: #17150F; }
-  .nav .l { width: 40px; height: 7px; border-radius: 4px; background: #DCD8CF; }
-  .nav .btn { margin-left: auto; width: 70px; height: 18px; border-radius: 4px; background: #8B4A23; }
-  .hero { height: 250px; position: relative; background: #F3E6D0; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 22px; padding: 0 26px; outline: 2px solid #5B3FE0; outline-offset: -1px; }
-  .hero .tag { position: absolute; left: -2px; top: -22px; background: #5B3FE0; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 7px; border-radius: 4px 4px 0 0; }
-  .hero .ht { font: 400 34px/1.05 Georgia, serif; color: #3B2414; letter-spacing: -0.01em; }
-  .hero .hp { margin-top: 10px; font-size: 12px; color: #7A5A42; }
-  .hero .hb { display: inline-block; margin-top: 14px; padding: 8px 14px; border-radius: 6px; background: #8B4A23; color: #fff; font-size: 12px; font-weight: 650; }
-  .pain { height: 196px; border-radius: 10px; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20140%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%2245%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23F0B56A%22/%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23C9772F%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%238B4A23%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse%20cx%3D%22100%22%20cy%3D%22112%22%20rx%3D%2282%22%20ry%3D%2210%22%20fill%3D%22%23000%22%20opacity%3D%22.12%22/%3E%3Cpath%20d%3D%22M18%2088C14%2052%2058%2026%20104%2026s84%2022%2080%2058c-3%2024-40%2030-82%2030S21%20110%2018%2088z%22%20fill%3D%22url%28%23g%29%22/%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23F6D7A6%22%20stroke-width%3D%227%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.9%22%3E%3Cpath%20d%3D%22M58%2052q12%2018%206%2040%22/%3E%3Cpath%20d%3D%22M92%2044q12%2020%206%2046%22/%3E%3Cpath%20d%3D%22M126%2044q12%2020%206%2046%22/%3E%3Cpath%20d%3D%22M158%2054q9%2014%204%2032%22/%3E%3C/g%3E%3C/svg%3E") center / 82% no-repeat, linear-gradient(160deg, #EBD6B5, #D9BB8E); }
-  .hero .h { position: absolute; width: 8px; height: 8px; background: #fff; border: 2px solid #5B3FE0; }
-  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 16px 18px; }
-  .card { height: 150px; border-radius: 6px; background: #F3F1EC; padding: 10px; }
-  .card i { display: block; height: 84px; border-radius: 4px; background: #E3DFD6; margin-bottom: 8px; }
-  .card u { display: block; height: 7px; width: 80%; border-radius: 4px; background: #DCD8CF; margin-bottom: 6px; }
-  .card u + u { width: 55%; }
-
-  .cursor { position: absolute; display: flex; align-items: flex-start; z-index: 5; }
-  .cursor svg { width: 22px; height: 22px; }
-  .cursor span { margin: 16px 0 0 -4px; padding: 4px 9px; border-radius: 6px; color: #fff; font-size: 13px; font-weight: 600; }
-
-  /* Code */
-  .code { position: absolute; left: 150px; top: 560px; width: 380px; border-radius: 12px; background: #17150F; color: #E7E4DD;
-    font: 500 14px/1.65 ui-monospace, "SF Mono", Menlo, monospace; padding: 16px 18px; box-shadow: 0 30px 60px rgba(23,21,15,.35); transform: rotate(-3deg); z-index: 3; }
-  .code .k { color: #E77BF7; } .code .a { color: #9B7BFF; } .code .s { color: #8FE3B0; } .code .c { color: #8A857A; }
-
-  /* Téléphone */
-  .phone { position: absolute; left: 1250px; top: 400px; width: 220px; height: 450px; border-radius: 36px; background: #17150F; padding: 9px;
-    box-shadow: 0 30px 70px rgba(23,21,15,.32); transform: rotate(5deg); z-index: 3; }
-  .screen { width: 100%; height: 100%; border-radius: 28px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
-  .screen .ph { height: 190px; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20140%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%2245%25%22%20cy%3D%2235%25%22%20r%3D%2270%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23F0B56A%22/%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23C9772F%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%238B4A23%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse%20cx%3D%22100%22%20cy%3D%22112%22%20rx%3D%2282%22%20ry%3D%2210%22%20fill%3D%22%23000%22%20opacity%3D%22.12%22/%3E%3Cpath%20d%3D%22M18%2088C14%2052%2058%2026%20104%2026s84%2022%2080%2058c-3%2024-40%2030-82%2030S21%20110%2018%2088z%22%20fill%3D%22url%28%23g%29%22/%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23F6D7A6%22%20stroke-width%3D%227%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.9%22%3E%3Cpath%20d%3D%22M58%2052q12%2018%206%2040%22/%3E%3Cpath%20d%3D%22M92%2044q12%2020%206%2046%22/%3E%3Cpath%20d%3D%22M126%2044q12%2020%206%2046%22/%3E%3Cpath%20d%3D%22M158%2054q9%2014%204%2032%22/%3E%3C/g%3E%3C/svg%3E") center / 80% no-repeat, linear-gradient(160deg, #EBD6B5, #D9BB8E); }
-  .screen .t { padding: 14px 14px 4px; font: 400 21px/1.15 Georgia, serif; }
-  .screen .d { padding: 0 14px; font-size: 11px; color: #8A857A; }
-  .screen .b { margin: 10px 14px 0; padding: 10px; border-radius: 8px; text-align: center; font-size: 13px; font-weight: 650; color: #fff; background: #8B4A23; }
-  .screen .b.w { margin-top: 8px; background: #25D366; }
-
-  .ok { position: absolute; left: 1150px; top: 118px; z-index: 4; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px;
-    background: #fff; font-size: 16px; font-weight: 650; box-shadow: 0 16px 40px rgba(23,21,15,.18); transform: rotate(3deg); }
-  .ok b { width: 24px; height: 24px; border-radius: 50%; background: #3F9B3A; color: #fff; display: grid; place-items: center; font-size: 14px; }
+  .card { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 660px; padding: 46px 40px 40px; border-radius: 24px;
+    background: rgba(255,255,255,.96); text-align: center; box-shadow: 0 40px 100px rgba(40,20,90,.35), 0 0 0 1px rgba(23,21,15,.06); }
+  .card::before { content: ""; position: absolute; inset: 0 0 auto; height: 6px; border-radius: 24px 24px 0 0; background: linear-gradient(120deg, #5B3FE0, #9A3DE8 55%, #C93BE6); }
+  .brand { display: inline-flex; align-items: center; gap: 16px; font-size: 46px; font-weight: 700; letter-spacing: -0.03em; }
+  .brand svg { width: 66px; height: 66px; }
+  .sub { margin-top: 14px; font-size: 27px; font-weight: 600; letter-spacing: -0.015em; }
+  .sub em { font-style: normal; background: linear-gradient(transparent 60%, #D4C8FF 60%, #D4C8FF 94%, transparent 94%); }
+  .trades { margin-top: 12px; font-size: 19px; color: #5C584E; font-weight: 500; }
 </style>
 </head>
 <body>
-  <div class="halo a"></div>
-  <div class="halo b"></div>
+  <div class="wall" id="wall"></div>
 
-  <div class="head">
+  <div class="card">
     <div class="brand"><svg viewBox="0 0 28 28"><rect width="28" height="28" rx="8" fill="#17150F"/><path d="M19 8.5H9.5v11H19M9.5 14h7" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21.5" cy="5.5" r="3" fill="#C93BE6"/></svg>Épure Studio</div>
-    <div class="sub">Agence de création de sites web · Bruxelles</div>
+    <div class="sub"><em>Agence de création de sites web</em></div>
+    <div class="trades">Restaurants, commerces et indépendants · Bruxelles</div>
   </div>
 
-  <div class="app">
-    <div class="bar"><i></i><i></i><i></i><b>Boulangerie du Parc — Accueil</b><span class="share">Envoyer au client</span></div>
-    <div class="body">
-      <div class="side">
-        <h4>Calques</h4>
-        <div class="layer">Menu</div>
-        <div class="layer on">Bannière</div>
-        <div class="layer">Nos pains</div>
-        <div class="layer">Commande</div>
-        <div class="layer">Avis clients</div>
-        <div class="layer">Horaires</div>
-        <div class="layer">Pied de page</div>
-      </div>
-      <div class="canvas">
-        <div class="page">
-          <div class="nav"><span class="logo"></span><span class="l"></span><span class="l"></span><span class="l"></span><span class="btn"></span></div>
-          <div class="hero"><span class="tag">Bannière · 1440 × 720</span>
-            <div><div class="ht">Le bon pain<br>du quartier</div><div class="hp">Cuit sur place, chaque matin.</div><span class="hb">Commander</span></div><div class="pain"></div>
-            <span class="h" style="left:-4px;top:-4px"></span><span class="h" style="right:-4px;top:-4px"></span>
-            <span class="h" style="left:-4px;bottom:-4px"></span><span class="h" style="right:-4px;bottom:-4px"></span></div>
-          <div class="grid3">
-            <div class="card"><i></i><u></u><u></u></div>
-            <div class="card"><i></i><u></u><u></u></div>
-            <div class="card"><i></i><u></u><u></u></div>
-          </div>
-        </div>
-        <div class="cursor" style="left:470px;top:150px"><svg viewBox="0 0 24 24"><path d="M3 2l7 19 2.5-7.5L20 11z" fill="#5B3FE0" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg><span style="background:#5B3FE0">Khalil</span></div>
-        <div class="cursor" style="left:180px;top:330px"><svg viewBox="0 0 24 24"><path d="M3 2l7 19 2.5-7.5L20 11z" fill="#C93BE6" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg><span style="background:#C93BE6">Wassim</span></div>
-      </div>
-      <div class="side r">
-        <h4>Couleurs</h4>
-        <div class="sw"><span style="background:#8B4A23"></span><span style="background:#3B2414"></span><span style="background:#F3E6D0"></span><span style="background:#fff"></span></div>
-        <h4>Typographie</h4>
-        <div class="font" style="font-family:Georgia,serif;font-weight:400">Aa</div>
-        <div class="muted">Titres · Serif</div>
-        <h4>Bannière</h4>
-        <div class="prop">Largeur <b>100 %</b></div>
-        <div class="prop">Hauteur <b>720</b></div>
-        <div class="prop">Mobile <b>Oui</b></div>
-        <div class="prop">Bouton <b>Commander</b></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ok"><b>✓</b>Maquette validée par le client</div>
-
-  <div class="code">
-<span class="c">&lt;!-- Bannière --&gt;</span><br>
-<span class="k">&lt;section</span> <span class="a">class</span>=<span class="s">"hero"</span><span class="k">&gt;</span><br>
-&nbsp;&nbsp;<span class="k">&lt;h1&gt;</span>Le bon pain du quartier<span class="k">&lt;/h1&gt;</span><br>
-&nbsp;&nbsp;<span class="k">&lt;a</span> <span class="a">href</span>=<span class="s">"tel:+32…"</span><span class="k">&gt;</span>Appeler<span class="k">&lt;/a&gt;</span><br>
-<span class="k">&lt;/section&gt;</span>
-  </div>
-
-  <div class="phone"><div class="screen">
-    <div class="ph"></div>
-    <div class="t">Le bon pain du quartier</div>
-    <div class="d">Tous les jours · 7 h – 19 h</div>
-    <div class="b">Appeler</div>
-    <div class="b w">WhatsApp</div>
-  </div></div>
+<script>
+  // Icônes au trait, 24 × 24
+  const I = {
+    pain: '<path d="M3 15c-1-5 4-9 9-9s10 4 9 9c-.4 3-4 4-9 4s-8.6-1-9-4z"/><path d="M8 9q2 3 1 7M12 8q2 3 1 8M16 9q2 3 1 7"/>',
+    ciseaux: '<circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8 16 19 3M16 16 5 3"/>',
+    goutte: '<path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/><path d="M9 15a3 3 0 0 0 3 3"/>',
+    couverts: '<path d="M7 3v18M4 3v5a3 3 0 0 0 6 0V3M17 21V3c-2 1-3 4-3 8h3"/>',
+    fleur: '<circle cx="12" cy="9" r="2.5"/><path d="M12 6.5a3 3 0 1 1 2.4 1.2M14.4 9a3 3 0 1 1-1.2 2.4M12 11.5a3 3 0 1 1-2.4-1.2M9.6 9a3 3 0 1 1 1.2-2.4M12 12v9M12 17c-2-2-5-2-5-2s1 3 5 3"/>',
+    voiture: '<path d="M3 16v-3l2-5h14l2 5v3z"/><circle cx="7.5" cy="16.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/><path d="M5 12h14"/>',
+    dent: '<path d="M7 3c-3 0-4 3-3 6 .7 2 1 4 1.5 7S7 21 8 21s1.5-6 4-6 3 6 4 6 2-2 2.5-5 .8-5 1.5-7c1-3 0-6-3-6-2 0-3 1-5 1S9 3 7 3z"/>',
+    sac: '<path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+    haltere: '<path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/>',
+    tasse: '<path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 2v3M12 2v3"/>',
+    balance: '<path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/>',
+    eclair: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+    pizza: '<path d="M12 21 3 6c6-3 12-3 18 0z"/><circle cx="10" cy="9" r="1.2"/><circle cx="14" cy="12" r="1.2"/><circle cx="11" cy="15" r="1.2"/>',
+    maison: '<path d="M3 11 12 4l9 7M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+    patte: '<circle cx="7" cy="9" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="17" cy="9" r="2"/><path d="M8 17c0-3 2-5 4-5s4 2 4 5-2 3-4 3-4 0-4-3z"/>',
+  };
+  // Métiers fictifs : nom, titre, bouton, icône, fond, texte, accent, fond de l'image, police, graisse, texte du bouton, arrondi du bouton
+  const S = [
+    ['Le Fournil', 'Le bon pain du quartier', 'Commander', 'pain', '#F6EBDD', '#3B2414', '#8B4A23', '#E8CFA8', 'Georgia, serif', 400],
+    ['Salon Mila', 'Coiffure & barbier', 'Prendre rendez-vous', 'ciseaux', '#151515', '#fff', '#F2A7C3', '#2A2A2A', null, 700, '#151515', '99px'],
+    ['Dépanno Plomberie', 'Fuite ? On arrive en 1 h', 'Appeler', 'goutte', '#EAF2FB', '#0E2A47', '#F26B1D', '#CFE2F6'],
+    ['Trattoria Nonna', 'Pâtes fraîches maison', 'Réserver', 'couverts', '#F3EFE3', '#1E3A2B', '#1E5B3A', '#DCE8D5', 'Georgia, serif', 400],
+    ['Atelier Pétale', 'Fleurs pour chaque moment', 'Commander', 'fleur', '#FBEFF1', '#4A2330', '#C24D6E', '#F6D5DD', 'Georgia, serif', 400, null, '99px'],
+    ['Garage du Centre', 'Entretien toutes marques', 'Devis gratuit', 'voiture', '#1B1E24', '#fff', '#FFC93C', '#2B3039', null, 800, '#1B1E24'],
+    ['Cabinet Sourire', 'Votre dentiste à deux pas', 'Prendre RDV', 'dent', '#F2F8F8', '#123B3E', '#1F8A8A', '#D4ECEC'],
+    ['Maison Lin', 'Nouvelle collection', 'Découvrir', 'sac', '#EFE9E1', '#1A1A1A', '#1A1A1A', '#DDD3C6', 'Georgia, serif', 400, null, '0'],
+    ['Studio Forme', 'Votre séance d\'essai offerte', 'Réserver', 'haltere', '#101010', '#fff', '#C6F432', '#222', null, 800, '#101010', '99px'],
+    ['Café des Arts', 'Brunch tous les jours', 'Voir la carte', 'tasse', '#FFF4E3', '#3A2A1A', '#D9822B', '#F7DDB8', 'Georgia, serif', 400],
+    ['Cabinet Delvaux', 'Avocats en droit des affaires', 'Nous contacter', 'balance', '#F4F3EF', '#1C2541', '#1C2541', '#DADCE6', 'Georgia, serif', 400],
+    ['Élec Express', 'Électricien agréé', 'Appeler', 'eclair', '#FFFBEA', '#2B2300', '#2B2300', '#FFE680', null, 800, '#FFE680'],
+    ['Pizza Forno', 'Cuite au feu de bois', 'Commander', 'pizza', '#FFF0EA', '#4A1608', '#D7361B', '#FBD3C4', null, 800, null, '99px'],
+    ['Immo Horizon', 'Vendre au juste prix', 'Estimer mon bien', 'maison', '#EEF1F8', '#162447', '#3557C9', '#D6DEF3'],
+    ['Toilettage Câlin', 'Le salon de vos compagnons', 'Prendre RDV', 'patte', '#F5F0FF', '#2E1B5C', '#7A4FE0', '#E2D8FB', null, 700, null, '99px'],
+  ];
+  const wall = document.getElementById('wall');
+  for (let k = 0; k < 25; k++) {
+    const [nom, titre, btn, ico, bg, ink, acc, img, f, w, on, r] = S[k % S.length];
+    const d = document.createElement('div');
+    d.className = 'site';
+    d.style.cssText = `--bg:${bg};--ink:${ink};--acc:${acc};--img:${img};--w:${w || 700};${f ? `--f:${f};` : ''}${on ? `--on:${on};` : ''}${r ? `--r:${r};` : ''}`;
+    d.innerHTML = `<div class="bar"><i></i><i></i><i></i></div>
+      <nav>${nom}<span></span><span></span><span></span></nav>
+      <div class="hero"><div><h3>${titre}</h3><p>Bruxelles · ouvert aujourd'hui</p><span class="btn">${btn}</span></div>
+      <div class="img"><svg viewBox="0 0 24 24" fill="none" stroke="${ink}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${I[ico]}</svg></div></div>`;
+    wall.appendChild(d);
+  }
+</script>
 </body>
 </html>
