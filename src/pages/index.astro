@@ -242,6 +242,30 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
+  <section class="section-tight" aria-labelledby="final-title">
+    <div class="wrap">
+      <div class="panel panel-tomato fx-final">
+        <div>
+          <h2 class="d-xl" id="final-title">Votre site pourrait être en ligne <span class="hl hl-white" id="final-date">dans quelques jours</span>.</h2>
+          <p class="lead">Un appel de 30 minutes cette semaine, un devis ferme sous 48{NB}h, puis {delaiVitrine} après votre accord.</p>
+          <p class="act-label">Pour commencer, dites-nous votre métier{NB}:</p>
+          <ul class="act-chips">{ACTIVITES.map(a => <li><a href={`/devis?activite=${encodeURIComponent(a)}`}>{a}</a></li>)}</ul>
+          <div class="btn-row" style="align-items:center;gap:20px">
+            <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
+            {WHATSAPP && <a class="btn btn-glass" href={WHATSAPP} target="_blank" rel="noopener">Écrire sur WhatsApp</a>}
+          </div>
+          <p class="note fx-final-note">Date indicative pour un site vitrine : 2 jours pour le devis, puis {delaiVitrine} après votre accord.</p>
+        </div>
+        <div class="cal" aria-hidden="true" data-jours="7">
+          <span class="cal-m">bientôt</span>
+          <span class="cal-d">en ligne</span>
+          <b class="cal-n">7{NB}j</b>
+          <span class="cal-ok">Site en ligne</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section-tight" aria-labelledby="founder-title">
     <div class="wrap">
       <div class="panel panel-white founder founder-duo">
@@ -349,27 +373,4 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
-  <section class="section-tight" style="margin-top:clamp(48px, 7vw, 96px)" aria-labelledby="final-title">
-    <div class="wrap">
-      <div class="panel panel-tomato fx-final">
-        <div>
-          <h2 class="d-xl" id="final-title">Votre site pourrait être en ligne <span class="hl hl-white" id="final-date">dans quelques jours</span>.</h2>
-          <p class="lead">Un appel de 30 minutes cette semaine, un devis ferme sous 48{NB}h, puis {delaiVitrine} après votre accord.</p>
-          <p class="act-label">Pour commencer, dites-nous votre métier{NB}:</p>
-          <ul class="act-chips">{ACTIVITES.map(a => <li><a href={`/devis?activite=${encodeURIComponent(a)}`}>{a}</a></li>)}</ul>
-          <div class="btn-row" style="align-items:center;gap:20px">
-            <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
-            {WHATSAPP && <a class="btn btn-glass" href={WHATSAPP} target="_blank" rel="noopener">Écrire sur WhatsApp</a>}
-          </div>
-          <p class="note fx-final-note">Date indicative pour un site vitrine : 2 jours pour le devis, puis {delaiVitrine} après votre accord.</p>
-        </div>
-        <div class="cal" aria-hidden="true" data-jours="7">
-          <span class="cal-m">bientôt</span>
-          <span class="cal-d">en ligne</span>
-          <b class="cal-n">7{NB}j</b>
-          <span class="cal-ok">Site en ligne</span>
-        </div>
-      </div>
-    </div>
-  </section>
 </Base>
