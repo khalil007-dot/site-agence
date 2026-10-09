@@ -15,5 +15,13 @@
   "date_maj": "2026-10-08",
   "cle_formulaires": "",
   "whatsapp": true,
-  "cle_analytics": ""
+  "cle_analytics": "",
+  "google_ads": "",
+  "conversions": {
+    "devis": "",
+    "audit": "",
+    "appel": "",
+    "telephone": "",
+    "whatsapp": ""
+  }
 }

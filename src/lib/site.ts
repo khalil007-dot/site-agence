@@ -33,6 +33,12 @@ export const WHATSAPP = reglages.whatsapp
   : '';
 // Jeton Cloudflare Web Analytics : statistiques de visite sans cookies (vide = désactivé)
 export const CLE_ANALYTICS = reglages.cle_analytics;
+// Google Ads (« AW-123456789 ») et libellé de chaque conversion, créés dans Google Ads → Objectifs → Conversions.
+// Vide = aucun script Google et aucun bandeau cookies. Le script ne se charge qu'après accord du visiteur.
+export const GOOGLE_ADS = reglages.google_ads;
+export const CONVERSIONS: Record<string, string> = Object.fromEntries(
+  Object.entries(reglages.conversions).filter(([, label]) => label).map(([nom, label]) => [nom, `${GOOGLE_ADS}/${label}`]),
+);
 export const TODAY = reglages.date_maj;
 // Numéro de la mise en ligne, ajouté à styles.css et main.js pour que le cache ne serve jamais une ancienne version
 export const BUILD = Date.now().toString(36);

@@ -1,6 +1,48 @@
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.documentElement.classList.add('js');
 
+// Google Ads (réglages : google_ads et conversions). Le script Google ne se charge qu'après « Accepter »
+// dans le bandeau ; le choix est retenu sur l'appareil. Sans identifiant, rien de tout ça ne s'exécute.
+const ADS = window.EPURE_ADS;
+const chargerAds = () => {
+  if (window.gtag) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'denied', analytics_storage: 'denied' });
+  gtag('js', new Date());
+  gtag('config', ADS.id);
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ADS.id);
+  document.head.append(s);
+};
+// Conversion : envoyée seulement si le visiteur a accepté et si son libellé est dans les réglages
+const conversion = nom => {
+  const cible = ADS && ADS.conv[nom];
+  if (cible && window.gtag) gtag('event', 'conversion', { send_to: cible });
+};
+if (ADS) {
+  let choix = null;
+  try { choix = localStorage.getItem('epure-consent'); } catch {}
+  const bandeau = document.getElementById('consent');
+  if (choix === '1') chargerAds();
+  else if (choix === null && bandeau) bandeau.hidden = false;
+  document.addEventListener('click', e => {
+    const bouton = e.target.closest('[data-consent]');
+    if (bouton) {
+      const oui = bouton.dataset.consent === '1';
+      try { localStorage.setItem('epure-consent', oui ? '1' : '0'); } catch {}
+      bandeau.hidden = true;
+      if (oui) chargerAds();
+    }
+    if (e.target.closest('[data-consent-open]') && bandeau) bandeau.hidden = false;
+    // Clics sur le numéro et sur WhatsApp, partout sur le site
+    const lien = e.target.closest('a[href]');
+    if (lien && lien.href.startsWith('tel:')) conversion('telephone');
+    else if (lien && /wa\.me\//.test(lien.href)) conversion('whatsapp');
+  });
+}
+
 // Apparition au défilement (.rv) et chiffres qui défilent ([data-count])
 const countUp = el => {
   const fin = +el.dataset.count, t0 = performance.now(), dur = 1100;
@@ -391,6 +433,7 @@ if (form) {
     btn.disabled = false;
     btn.textContent = texteBouton;
     if (!ok) return;
+    conversion(audit ? 'audit' : 'devis');
     document.getElementById('recap').textContent = chosen.join(', ');
     document.getElementById('recap-mail').textContent = form.email.value.trim();
     if (audit) {
@@ -542,6 +585,7 @@ if (modes) {
     btn.disabled = false;
     btn.textContent = texteBouton;
     if (!ok) return;
+    conversion('appel');
     document.getElementById('call-recap').textContent = 'le ' + longFmt.format(chosenDay) + ' à ' + chosenHour;
     document.getElementById('call-tel').textContent = call['c-tel'].value.trim();
     document.getElementById('call-step').hidden = true;

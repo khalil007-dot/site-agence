@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { ADRESSE, BRAND, CLE_FORMULAIRES, CODE_POSTAL, EMAIL, FONDATEUR, NUMERO_ENTREPRISE, TEL, TEL_INTL, VILLE, WHATSAPP } from '../lib/site';
+import { ADRESSE, BRAND, CLE_FORMULAIRES, CODE_POSTAL, EMAIL, FONDATEUR, GOOGLE_ADS, NUMERO_ENTREPRISE, TEL, TEL_INTL, VILLE, WHATSAPP } from '../lib/site';
 
 // Adresse complète si elle est renseignée dans les réglages, sinon la ville seule
 const lieu = ADRESSE ? `${ADRESSE}, ${[CODE_POSTAL, VILLE].filter(Boolean).join(' ')}` : VILLE;
@@ -28,9 +28,13 @@ const envoi = CLE_FORMULAIRES
       <p>Les informations envoyées via les formulaires de devis et de rendez-vous servent uniquement à répondre à votre demande. Elles sont conservées au maximum 3 ans puis supprimées, et ne sont jamais revendues.</p>
       <p>Pour nous parvenir, elles passent par {envoi}.{WHATSAPP && ' Si vous nous écrivez sur WhatsApp, vos messages sont aussi traités par WhatsApp (Meta).'} Ces services peuvent stocker les données hors de l'Union européenne, avec les garanties prévues par le RGPD.</p>
       <p>Vous pouvez demander l'accès, la correction ou la suppression de vos données en écrivant à <a class="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>. Vous pouvez aussi adresser une réclamation à l'Autorité de protection des données (APD).</p>
-      <h2>Cookies</h2>
+      <h2 id="cookies">Cookies</h2>
       {/* Cloudflare ajoute lui-même Web Analytics quand il est activé sur le domaine, même sans jeton dans les réglages */}
-      <p>Ce site n'utilise aucun cookie. Les visites sont comptées de façon anonyme avec Cloudflare Web Analytics, sans cookie ni suivi d'un site à l'autre.</p>
+      {GOOGLE_ADS ? <Fragment>
+        <p>Les visites sont comptées de façon anonyme avec Cloudflare Web Analytics, sans cookie ni suivi d'un site à l'autre.</p>
+        <p>Si vous cliquez sur « Accepter » dans le bandeau, Google Ads (Google Ireland Limited) dépose des cookies de mesure, par exemple « _gcl_au », conservés au maximum 90 jours. Ils nous indiquent quelle annonce vous a amené sur le site et si vous nous avez ensuite contactés (formulaire, appel ou WhatsApp). Ils ne servent pas à vous montrer de la publicité personnalisée.</p>
+        <p>Sans votre accord, aucun script Google n'est chargé. Vous pouvez changer d'avis à tout moment avec le lien « Cookies » en bas de chaque page.</p>
+      </Fragment> : <p>Ce site n'utilise aucun cookie. Les visites sont comptées de façon anonyme avec Cloudflare Web Analytics, sans cookie ni suivi d'un site à l'autre.</p>}
     </div>
   </section>
 </Base>
