@@ -66,9 +66,9 @@ Une étude de LocaliQ sur plus de 16 000 campagnes en 2025 donne un coût moyen 
 - Mesurez les appels et les formulaires, sinon impossible de savoir ce qui marche.
 
 <div class="callout">
-<h2 style="margin:0;font-size:1.5rem">Calculez ce que Google peut vous rapporter</h2>
-<p>Notre comparateur estime ce que vous perdez aujourd'hui face aux concurrents mieux placés, selon votre métier et la valeur d'un client.</p>
-<a class="btn btn-primary" href="/#comparateur">Utiliser le comparateur</a>
+<h2 style="margin:0;font-size:1.5rem">Faites le calcul pour votre métier</h2>
+<p>Donnez-nous l'adresse de votre site. Sous 72 h, on vous dit si Google Ads peut être rentable pour vous, et ce qu'il faut corriger avant de lancer une campagne.</p>
+<a class="btn btn-primary" href="/#audit">Recevoir mon audit gratuit</a>
 </div>
 
 <p class="note">Chiffres de référence : <a class="link" href="https://searchengineland.com/google-ads-costs-keep-rising-but-conversion-rates-improved-in-2025-477927">LocaliQ, Search Advertising Benchmarks 2025</a>, rapporté par Search Engine Land. L'exemple chiffré est une illustration, pas une promesse de résultat.</p>

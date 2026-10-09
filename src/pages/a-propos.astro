@@ -17,8 +17,8 @@ const CLIENTS = [['Street Sapp', logoStreetSapp, 'Boutique en ligne'], ['OMI Res
 const prixMaintenance = SV.find(s => s.id === 'maintenance')?.prix_mensuel ?? 39;
 // [titre, promesse, concrètement (verso de la carte)]
 const METHODE: [string, string, string][] = [
-  ['Zéro intermédiaire', `Pas de chef de projet ni de sous-traitant qui change à chaque appel. ${COFONDATEUR} est votre contact, ${prenom} construit votre site.`, "Un numéro direct et WhatsApp, une réponse sous 24 h ouvrées, et les modifications faites par ceux qui ont construit le site."],
-  ['Vous validez avant qu’on construise', "Chaque page passe par une maquette. Si la première ne vous plaît pas, on repart de zéro, sans frais.", "Une maquette sur un lien privé, des allers-retours jusqu'à votre accord écrit, puis seulement le développement."],
+  ['Toujours les mêmes interlocuteurs', `${COFONDATEUR} est votre contact, ${prenom} construit votre site. Ce sont eux du premier appel aux modifications.`, "Un numéro direct et WhatsApp, une réponse sous 24 h ouvrées. Les modifications sont faites par ceux qui ont construit le site."],
+  ['Vous validez avant qu’on construise', "Vous voyez le design avant le site. Si la première maquette ne vous plaît pas, on repart de zéro, sans frais.", "Une maquette sur un lien privé, des allers-retours jusqu'à votre accord écrit. La construction commence seulement ensuite."],
   ['Des prix clairs, un devis ferme', "Nos prix sont affichés sur le site. Le devis détaille tout ce qui est inclus, et le montant ne bouge plus.", "40 % à la signature et 60 % à la mise en ligne, ou 3 mensualités sans frais. Aucun coût caché."],
   ['On reste après la mise en ligne', "Un mois de corrections offert, puis une maintenance sans engagement si vous la souhaitez. Et vous gardez nos numéros.", `30 jours de corrections inclus, puis la maintenance à ${prixMaintenance} € par mois si vous la souhaitez, sans engagement.`],
 ];
@@ -45,7 +45,7 @@ const PERSONS = await Promise.all(FONDATEURS.map(async f => {
   <section class="page-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Deux fondateurs, zéro intermédiaire.</h1>
-      <p class="lead">Nous sommes {COFONDATEUR} et {prenom}, à Bruxelles. L'un vous accompagne du premier appel au suivi, l'autre construit votre site. Ensemble, on crée pour les commerçants et les indépendants des sites qui font venir des clients.</p>
+      <p class="lead">Nous sommes {COFONDATEUR} et {prenom}, à Bruxelles. L'un vous accompagne du premier appel au suivi, l'autre construit votre site. Ensemble, on crée des sites qui font venir des clients aux commerçants et aux indépendants.</p>
       <div class="btn-row" style="margin-top:28px">
         <a class="btn btn-primary" href="/devis?mode=appel">Réserver un appel avec nous</a>
         <a class="btn btn-secondary" href="/realisations">Voir nos réalisations</a>
@@ -63,7 +63,7 @@ const PERSONS = await Promise.all(FONDATEURS.map(async f => {
     <div class="wrap">
       <div class="story story-wide rv">
         <h2 class="d-md" id="story-title">Pourquoi <span translate="no">{BRAND}</span> existe</h2>
-        <p>Beaucoup de commerçants se retrouvent coincés entre deux options : faire leur site eux-mêmes un dimanche soir, ou payer une agence où ils ne parlent jamais à la personne qui fait le travail. Entre les deux, il manquait une équipe joignable, qui explique simplement et qui rend des comptes sur les résultats.</p>
+        <p>Beaucoup de commerçants se retrouvent coincés entre deux options : faire leur site eux-mêmes un dimanche soir, ou payer une agence où ils ne parlent jamais à la personne qui fait le travail. Il manquait une option entre les deux : une équipe joignable, qui explique simplement et qui rend des comptes sur les résultats.</p>
         <p>On s'est associés pour ça, avec deux métiers complémentaires. {COFONDATEUR} s'occupe du commercial, du marketing et de la relation client : comprendre votre activité, construire l'offre qui vous convient, suivre vos résultats. {prenom}, développeur de formation, s'occupe de la stratégie et de la technique, après avoir conçu des sites, des logiciels sur mesure et des outils de gestion financière.</p>
         <p>Une « épure », c'est le dessin qui ne garde que l'essentiel. C'est notre façon de travailler : un site clair, rapide sur téléphone, avec ce qui pousse vos visiteurs à vous appeler, et rien de superflu.</p>
         <blockquote class="story-quote"><p>« On juge notre travail au nombre d'appels que vous recevez. »</p></blockquote>
@@ -74,7 +74,7 @@ const PERSONS = await Promise.all(FONDATEURS.map(async f => {
   <section class="section" aria-labelledby="clients-title">
     <div class="wrap">
       <div class="trust">
-        <h2 class="small muted" id="clients-title">Ils nous ont confié leur site, leur logo ou leur visibilité</h2>
+        <h2 class="small muted" id="clients-title">Ils nous ont confié leur site ou leur image</h2>
         <ul class="client-cards">{CLIENTS.map(([nom, src, quoi], i) => <li class="rv" style={`--d:${i}`}><a href="/realisations"><Image src={src} alt={nom} height={120} /><span class="cc-info"><b>{nom}</b>{quoi}</span></a></li>)}</ul>
         <p class="muted small">Survolez ou touchez un logo pour voir le projet.</p>
       </div>

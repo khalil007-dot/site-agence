@@ -13,7 +13,7 @@ lecture: 3
 ordre: 1
 ---
 
-Un site vitrine coûte entre 0 et 6 000 € en Belgique selon que vous le faites vous-même, avec un freelance ou avec une agence, plus 100 à 600 € par an d'hébergement et de maintenance. C'est la première question que se pose un commerçant ou un indépendant, et la réponse varie de quelques centaines à plusieurs milliers d'euros. Voici d'où viennent ces écarts et comment estimer votre propre budget.
+En Belgique, un site vitrine coûte de 0 € si vous le faites vous-même à 15 000 € avec une agence, plus 100 à 600 € par an pour l'hébergement et la maintenance. L'écart est énorme, et il s'explique. Voici ce qui fait varier le prix, et comment estimer votre budget.
 
 ## Les trois façons de faire un site
 
@@ -21,8 +21,8 @@ Un site vitrine coûte entre 0 et 6 000 € en Belgique selon que vous le faites
 <thead><tr><th scope="col">Solution</th><th scope="col">Coût de départ</th><th scope="col">Coût annuel</th></tr></thead>
 <tbody>
 <tr><td>Le faire soi-même (Wix, Squarespace…)</td><td>0 €</td><td>200 à 400 €</td></tr>
-<tr><td>Un freelance</td><td>800 à 2 500 €</td><td>100 à 300 €</td></tr>
-<tr><td>Une agence</td><td>1 500 à 6 000 €</td><td>200 à 600 €</td></tr>
+<tr><td>Un freelance</td><td>800 à 5 000 €</td><td>100 à 300 €</td></tr>
+<tr><td>Une agence</td><td>5 000 à 15 000 €</td><td>200 à 600 €</td></tr>
 </tbody>
 </table></div>
 
@@ -31,12 +31,12 @@ Ces fourchettes sont des ordres de grandeur pour un site vitrine de 3 à 8 pages
 <figure class="fig"><div class="fig-box">
 <span class="fig-tag">Coût de départ d'un site vitrine</span>
 <div class="ranges">
-<div class="range"><span>Le faire soi-même</span><div class="range-track"><div class="range-bar" style="left:0;width:10%;background:#8A8A8A">0 €</div></div></div>
-<div class="range"><span>Un freelance</span><div class="range-track"><div class="range-bar" style="left:13.3%;width:28.4%;background:#FF7A3D">800 à 2 500 €</div></div></div>
-<div class="range"><span>Une agence</span><div class="range-track"><div class="range-bar" style="left:25%;width:75%;background:#6A4CF5">1 500 à 6 000 €</div></div></div>
+<div class="range"><span>Le faire soi-même</span><div class="range-track"><div class="range-bar" style="left:0;width:8%;background:#8A8A8A">0 €</div></div></div>
+<div class="range"><span>Un freelance</span><div class="range-track"><div class="range-bar" style="left:5.3%;width:28%;background:#FF7A3D">800 à 5 000 €</div></div></div>
+<div class="range"><span>Une agence</span><div class="range-track"><div class="range-bar" style="left:33.3%;width:66.7%;background:#6A4CF5">5 000 à 15 000 €</div></div></div>
 </div>
-<div class="range-axis"><span>0 €</span><span>2 000 €</span><span>4 000 €</span><span>6 000 €</span></div>
-</div><figcaption>Ordres de grandeur pour un site de 3 à 8 pages, hors frais annuels. À titre de repère, notre site vitrine démarre à 590 €.</figcaption></figure>
+<div class="range-axis"><span>0 €</span><span>5 000 €</span><span>10 000 €</span><span>15 000 €</span></div>
+</div><figcaption>Ordres de grandeur pour un site de 3 à 8 pages, hors frais annuels. À titre de repère, notre site vitrine coûte 590 €, prix fixe.</figcaption></figure>
 
 ## Ce qui fait varier le prix
 
@@ -57,7 +57,7 @@ Listez les pages dont vous avez besoin, ce que vos visiteurs doivent pouvoir fai
 <div class="callout">
 <h2 style="margin:0;font-size:1.5rem">Nos prix, sans surprise</h2>
 <p>Site vitrine 590 €, site + logo 790 €, boutique en ligne 1 490 €. Hors TVA, payés une fois ou en 3 fois sans frais.</p>
-<a class="btn btn-primary" href="/#formules">Voir ce qui est inclus</a>
+<a class="btn btn-primary" href="/#formules">Voir les 3 offres</a>
 </div>
 
 <p class="note">Les fourchettes de prix sont indicatives.</p>

@@ -30,7 +30,7 @@ Votre logo apparaîtra en tout petit : icône de réseau social, onglet de navig
 
 ## 2. Un logo qui ne marche qu'en couleur
 
-Fax, tampon, gravure, impression en noir sur un ticket de caisse : il faut une version noir et blanc qui reste forte. Si votre logo repose entièrement sur un dégradé ou une couleur précise, il perd son identité dès qu'on l'imprime en une couleur.
+Tampon, gravure, impression en noir sur un ticket de caisse ou une facture : il faut une version noir et blanc qui reste forte. Si votre logo repose entièrement sur un dégradé ou une couleur précise, il perd son identité dès qu'on l'imprime en une couleur.
 
 ## 3. Ne pas recevoir les fichiers sources
 

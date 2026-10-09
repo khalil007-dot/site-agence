@@ -12,11 +12,11 @@ lecture: 4
 ordre: 5
 ---
 
-Le bon réseau n'est pas celui qui a le plus d'utilisateurs, mais celui où vos clients passent du temps et où vous pouvez publier régulièrement. Pour la plupart des commerces locaux, Instagram reste la base. TikTok est un excellent accélérateur si vous êtes à l'aise en vidéo et si vos produits se montrent bien en mouvement.
+Le bon réseau est celui où vos clients passent du temps et où vous pouvez publier régulièrement. Pour la plupart des commerces locaux, Instagram reste la base. TikTok est un excellent accélérateur si vous êtes à l'aise en vidéo et si vos produits se montrent bien en mouvement.
 
 ## Ce que disent les chiffres en Belgique
 
-Début 2025, Instagram comptait 4,9 millions d'utilisateurs en Belgique, et TikTok 3,7 millions d'utilisateurs de 18 ans et plus. Facebook reste devant avec 6,4 millions d'utilisateurs, et touche davantage une clientèle plus âgée. Les trois réseaux sont donc massivement utilisés : la différence se fait sur le type de contenu et sur votre clientèle.
+Début 2025, Instagram comptait 4,9 millions d'utilisateurs en Belgique, et TikTok 3,7 millions d'utilisateurs de 18 ans et plus. Facebook reste devant avec 6,4 millions d'utilisateurs, avec une clientèle plus âgée. Les trois réseaux sont donc massivement utilisés : la différence se fait sur le type de contenu et sur votre clientèle.
 
 <figure class="fig"><div class="fig-box">
 <span class="fig-tag">Le même commerce, deux façons de se montrer</span>

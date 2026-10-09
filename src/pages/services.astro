@@ -27,13 +27,16 @@ const PREUVES: Record<string, { img: ImageMetadata; client: string; quoi: string
 
 // Guide « Par où commencer ? » : [situation, conseil, services recommandés]
 const GUIDE: [string, string, string[]][] = [
-  ['Je lance mon activité', "Commencez par le logo : les couleurs du site en découlent. Puis un site vitrine pour être trouvé dès l'ouverture.", ['logo', 'site-vitrine']],
-  ["J'ai un site, mais peu de demandes", "Il vous manque des visiteurs. Le référencement en amène durablement, Google Ads dès la première semaine.", ['seo', 'google-ads']],
+  ['Je lance mon activité', "Commencez par le logo : les couleurs du site en découlent. Puis un site vitrine pour être trouvé dès l'ouverture. L'offre Site + logo réunit les deux à un prix plus bas.", ['logo', 'site-vitrine']],
+  ["J'ai un site, mais peu de demandes", "Il vous manque sans doute des visiteurs. Google Ads en amène dès la première semaine, le référencement en amène durablement.", ['google-ads', 'seo']],
   ['Je veux vendre en ligne', "Une boutique pensée pour le téléphone, une image soignée, puis du référencement pour attirer les acheteurs.", ['e-commerce', 'logo', 'seo']],
   ['Je veux être présent sur les réseaux', "Une image soignée d'abord, puis des publications régulières à vos couleurs, sans y passer vos soirées.", ['logo', 'reseaux-sociaux']],
   ["Je veux qu'on s'occupe de mon site", "Hébergement, sauvegardes, mises à jour et petites modifications chaque mois, sans engagement.", ['maintenance']],
 ];
 const budget = (ids: string[]) => {
+  // Logo + site vitrine = l'offre « Site + logo », moins chère que les deux additionnés
+  const offre = FORMULES.find(f => f.services.length === ids.length && f.services.every(id => ids.includes(id)));
+  if (offre) return e(offre.prix);
   const once = ids.reduce((t, id) => t + BYID[id].prix_unique, 0), mois = ids.reduce((t, id) => t + BYID[id].prix_mensuel, 0);
   return [once && e(once), mois && e(mois) + '/mois'].filter(Boolean).join(' + ');
 };

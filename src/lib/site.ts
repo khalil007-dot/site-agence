@@ -20,8 +20,8 @@ export const COFONDATEUR = reglages.cofondateur;
 // Les deux fondateurs : photo dans src/assets/fondateurs/<id>.jpg
 // pid : identifiant unique de la personne pour Google, le même sur toutes les pages
 export const FONDATEURS = [
-  { id: 'wassim', nom: COFONDATEUR, profil: reglages.profil_cofondateur, role: 'Commercial, marketing et relation client', mission: "Votre contact du premier appel au suivi : comprendre votre activité, construire l'offre avec vous, suivre vos résultats." },
-  { id: 'khalil', nom: FONDATEUR, profil: reglages.profil_fondateur, role: 'Stratégie et développement', mission: 'La stratégie, puis la construction de votre site, ou de votre boutique : solide, rapide, pensée pour vendre.' },
+  { id: 'wassim', nom: COFONDATEUR, profil: reglages.profil_cofondateur, role: 'Commercial, marketing et relation client', mission: "Votre contact du premier appel au suivi : il comprend votre activité, construit l'offre avec vous et suit vos résultats." },
+  { id: 'khalil', nom: FONDATEUR, profil: reglages.profil_fondateur, role: 'Stratégie et développement', mission: 'Il conçoit et construit votre site ou votre boutique : rapide, solide et pensé pour faire appeler ou acheter.' },
 ].map(f => ({ ...f, pid: reglages.url_site + '/a-propos#' + f.id }));
 // Référence courte à une personne, pour l'auteur d'un article ou les fondateurs de l'agence
 export const personRef = (f: (typeof FONDATEURS)[number]) => ({ '@type': 'Person', '@id': f.pid, name: f.nom, url: reglages.url_site + '/a-propos' });

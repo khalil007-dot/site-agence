@@ -12,7 +12,7 @@
       "couleur": "orange",
       "nom_court": "Se faire connaître",
       "nom": "Vous faire connaître",
-      "accroche": "Un beau site ne sert à rien si personne ne le trouve. On fait venir les visiteurs."
+      "accroche": "Un site ne rapporte que s'il est trouvé. On vous amène les visiteurs."
     },
     {
       "id": "image",
@@ -38,7 +38,7 @@
       "promesse": "Être trouvé sur Google et recevoir des demandes, même quand vous êtes occupé.",
       "prix_unique": 590,
       "prix_mensuel": 0,
-      "pour_qui": "Pour les artisans, restaurants, cabinets et indépendants qui veulent être trouvés et recevoir des demandes, sans vendre en ligne.",
+      "pour_qui": "Pour les artisans, restaurants, cabinets et indépendants qui veulent recevoir des appels et des demandes, sans vendre en ligne.",
       "infos": [
         {
           "label": "Délai moyen",
@@ -62,7 +62,7 @@
       "famille": "creer",
       "nom": "Boutique en ligne",
       "nom_court": "Boutique en ligne",
-      "promesse": "Vendre jour et nuit, avec une boutique qui rassure et se paie en deux clics sur téléphone.",
+      "promesse": "Vendre jour et nuit, avec une boutique qui inspire confiance et se paie en deux clics sur téléphone.",
       "prix_unique": 1490,
       "prix_mensuel": 0,
       "pour_qui": "Pour les marques et commerçants qui veulent vendre sur internet, gérer leurs stocks et suivre leurs commandes au même endroit.",
@@ -92,7 +92,7 @@
       "promesse": "Apparaître dans les premiers résultats quand on cherche votre métier près de chez vous.",
       "prix_unique": 0,
       "prix_mensuel": 190,
-      "pour_qui": "Pour apparaître dans les premiers résultats Google quand vos clients cherchent votre métier dans votre ville.",
+      "pour_qui": "Pour les commerces et indépendants qui vivent des clients de leur quartier ou de leur ville.",
       "infos": [
         {
           "label": "Premiers effets",
@@ -119,7 +119,7 @@
       "promesse": "Des appels et des demandes dès la première semaine, en ne payant que les clics.",
       "prix_unique": 0,
       "prix_mensuel": 190,
-      "pour_qui": "Pour obtenir des appels et des demandes dès la première semaine, en payant uniquement quand quelqu'un clique.",
+      "pour_qui": "Pour ceux qui ont besoin de demandes rapidement : une ouverture, une saison chargée, un nouveau service.",
       "infos": [
         {
           "label": "Mise en route",
@@ -145,7 +145,7 @@
       "promesse": "Être présent chaque semaine sur Instagram, Facebook ou TikTok, sans y passer vos soirées.",
       "prix_unique": 0,
       "prix_mensuel": 290,
-      "pour_qui": "Pour être présent sur Instagram, Facebook ou TikTok avec régularité, sans y passer vos soirées.",
+      "pour_qui": "Pour les commerces que l'on choisit sur photo : restaurants, coiffeurs, boutiques, salles de sport.",
       "infos": [
         {
           "label": "Publications",
@@ -195,10 +195,10 @@
       "famille": "entretenir",
       "nom": "Maintenance et hébergement",
       "nom_court": "Maintenance",
-      "promesse": "Un site toujours rapide, sécurisé et à jour, sans avoir à vous en occuper.",
+      "promesse": "Un site toujours rapide, sécurisé et à jour, sans vous en occuper.",
       "prix_unique": 0,
       "prix_mensuel": 29,
-      "pour_qui": "Pour garder un site rapide, sécurisé et à jour sans avoir à vous en occuper.",
+      "pour_qui": "Pour ceux qui préfèrent envoyer un message plutôt que modifier leur site eux-mêmes.",
       "infos": [
         {
           "label": "Réponse",
@@ -231,7 +231,7 @@
       "inclus": [
         "Jusqu'à 5 pages, design sur mesure",
         "Textes écrits avec vous",
-        "Parfait sur téléphone",
+        "Pensé d'abord pour le téléphone",
         "Boutons Appeler et WhatsApp, formulaire, carte",
         "Fiche Google Business créée ou remise en ordre",
         "Maquette refaite sans frais si elle ne vous plaît pas"
@@ -249,8 +249,8 @@
       "pour": "Pour démarrer avec une image pro, en ligne comme sur papier.",
       "delai": "2 semaines",
       "inclus": [
-        "Tout le site vitrine",
-        "Votre logo, en 3 propositions",
+        "Tout ce que comprend le site vitrine",
+        "Votre logo : 3 propositions, vous choisissez",
         "Couleurs et typographies assorties",
         "Cartes de visite prêtes à imprimer",
         "Fichiers du logo pour le web et l'impression"
@@ -270,7 +270,7 @@
         "Paiement par Bancontact, carte et Apple Pay",
         "Import de vos 50 premiers produits",
         "Livraison, retours et CGV configurés",
-        "Pensée pour acheter en deux clics sur téléphone"
+        "Achat en deux clics sur téléphone"
       ]
     }
   ]

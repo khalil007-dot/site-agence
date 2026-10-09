@@ -47,7 +47,7 @@ Tarifs Shopify relevés sur shopify.com le 7 octobre 2026. Attention à un déta
 - Vous avez déjà un site WordPress et voulez y ajouter une boutique.
 - Vous avez besoin de fonctions sur mesure : produits configurables, prix par client professionnel, réservation.
 - Vous voulez garder la main sur tout, sans dépendre d'une plateforme.
-- Quelqu'un s'occupe des mises à jour, sinon la boutique devient lente et vulnérable.
+- Quelqu'un peut s'occuper des mises à jour : sans elles, la boutique devient lente et vulnérable.
 
 ## Ce qui compte plus que la plateforme
 
