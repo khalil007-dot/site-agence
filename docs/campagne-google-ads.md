@@ -39,7 +39,7 @@ Tester : ouvrir le site, accepter le bandeau, envoyer un devis de test, puis vé
 - **Langue** : français (ajouter néerlandais plus tard seulement avec des annonces en néerlandais).
 - **Horaires** : du lundi au vendredi, 8 h 30 à 18 h 30, quand quelqu'un peut décrocher.
 - **Budget** : 10 à 15 € par jour pour commencer (300 à 450 € par mois).
-- **Enchères** : « Maximiser les clics » avec un plafond de 3 € par clic pendant les 2 à 3 premières semaines, puis « Maximiser les conversions » une fois 15 à 20 conversions enregistrées.
+- **Enchères** : « Maximiser les conversions » sans objectif de CPA dès que la balise de conversion est en place (ou « CPC manuel » avec un plafond de 3 € si Google le propose). Pas de « Maximiser les clics » : il achète les clics les moins chers, rarement ceux qui demandent un devis. Passer à un CPA cible seulement après 30 conversions en 30 jours, en le réglant près du coût réel, puis par pas de 10 à 15 % (skill `ads`, guide Réseau de Recherche).
 - **Page d'arrivée** : l'accueil pour le groupe « site internet », `/services#site-vitrine` pour « site vitrine », `/services#e-commerce` pour « boutique ».
 
 ### Groupes d'annonces et mots-clés
@@ -103,7 +103,7 @@ Descriptions (90 caractères max.) :
 |---|---|---|
 | Chaque jour la 1re semaine | Termes de recherche | Exclure tout ce qui n'est pas un client potentiel |
 | Chaque semaine | Coût par conversion, taux de clic (viser plus de 5 %) | Couper les mots-clés chers sans conversion après 30 à 40 € dépensés |
-| Après 15 à 20 conversions | Volume de conversions | Passer en « Maximiser les conversions » |
+| Après 30 conversions en 30 jours | Volume de conversions | Fixer un CPA cible proche du coût réel, ajusté par pas de 10 à 15 % |
 | Chaque mois | Devis signés venant des annonces | Comparer au budget : un site vitrine signé rembourse environ 2 mois de campagne |
 
 Repère de rentabilité : avec 400 € par mois, il faut au moins 1 site vitrine signé par mois pour que la campagne soit rentable. Les demandes reçues indiquent « Venu de » et « Campagne » : mettre `utm_source=google&utm_medium=cpc&utm_campaign=site` dans le « Suffixe de l'URL finale » de la campagne (Paramètres → Options d'URL) pour les reconnaître.
