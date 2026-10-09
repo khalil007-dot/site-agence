@@ -97,6 +97,60 @@ Descriptions (90 caractères max.) :
 - **Appel** : 0467 66 26 29, aux mêmes horaires que la campagne.
 - **Lieu** : via la fiche Google Business reliée.
 
+## 3 bis. Groupe d'annonces « Boutique en ligne » (à ajouter après la création de la campagne)
+
+Groupe séparé du site vitrine : autre prix, autre acheteur, autre page d'arrivée. Ajout : campagne → Groupes d'annonces → « + ».
+
+- **URL finale** : `https://epurestudio.be/services#e-commerce` · chemins `boutique` / `e-commerce`
+- **Mots-clés** :
+
+```
+"création boutique en ligne"
+"création boutique en ligne bruxelles"
+"création site e-commerce"
+"création site ecommerce"
+"création site e-commerce bruxelles"
+"site e-commerce prix"
+"prix boutique en ligne"
+"devis site e-commerce"
+"création site shopify"
+"agence shopify bruxelles"
+"création site woocommerce"
+[création boutique en ligne]
+[boutique en ligne prix]
+```
+
+- **Exclusions croisées** (pour que chaque recherche aille dans un seul groupe) : dans le groupe site vitrine, exclure en expression `"boutique en ligne"`, `"e-commerce"`, `"ecommerce"`, `"shopify"`, `"woocommerce"` ; dans le groupe boutique, exclure `"site vitrine"`.
+
+Titres (30 caractères max., comptés) :
+
+1. Création boutique en ligne (26) — épinglé en position 1
+2. Boutique en ligne 1 490 € (25)
+3. Prix fixe, payé une fois (24)
+4. En ligne en 3 semaines (22)
+5. Paiement Bancontact et carte (28)
+6. Shopify ou WooCommerce (22)
+7. Produits illimités (18)
+8. 50 premiers produits importés (29)
+9. Achat en 2 clics sur mobile (27)
+10. Livraison et CGV configurées (28)
+11. Agence web à Bruxelles (22)
+12. Devis gratuit sous 48 h (23)
+13. La boutique est à votre nom (27)
+14. Ou 3 × 497 € sans frais (23)
+15. Vendez jour et nuit (19)
+
+Descriptions (90 caractères max., comptées) :
+
+1. Boutique en ligne complète à 1 490 € HTVA, prix fixe. En ligne en 3 semaines. (77)
+2. Paiement Bancontact, carte et Apple Pay. Vos 50 premiers produits importés. (75)
+3. Pensée pour acheter en deux clics sur téléphone. Livraison, retours et CGV réglés. (82)
+4. Shopify ou WooCommerce selon vos besoins. Devis gratuit et ferme sous 48 h. (75)
+
+Lien annexe propre au groupe : `Exemple : Street Sapp` → https://epurestudio.be/realisations (« Boutique sportswear en ligne » / « Paiement Bancontact intégré »).
+
+Budget : les clics « boutique » coûtent souvent plus cher. Avec 10 à 15 € par jour au total, surveiller que ce groupe ne prive pas le site vitrine ; s'il dépense plus de la moitié sans demande après 2 semaines, le passer dans une campagne séparée avec son propre budget.
+
 ## 4. Suivi
 
 | Quand | Quoi regarder | Action |
