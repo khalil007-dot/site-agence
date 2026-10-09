@@ -42,8 +42,8 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
         <ol class="progress" aria-label="Étapes du devis"><li aria-current="step">Vos besoins</li><li>Votre projet</li><li>Vos coordonnées</li></ol>
 
         <div class="step" id="step-1">
-          <h2>De quoi avez-vous besoin ?</h2>
-          <p>Cochez un ou plusieurs services. Vous hésitez ? Cochez ce qui s'en rapproche, on vous conseillera.</p>
+          <h2>De quoi avez-vous besoin{NB}?</h2>
+          <p>Cochez un ou plusieurs services. Vous hésitez{NB}? Cochez ce qui s'en rapproche, on vous conseillera.</p>
           {FAMS.map(f => <div class="pick-group"><h3 style={`--c:var(--${f.couleur})`}>{f.nom_court}</h3><div class="pick">{SV.filter(s => s.famille === f.id).map(s => <Fragment><input type="checkbox" id={`s-${s.id}`} name="services" value={s.id}><label for={`s-${s.id}`}>{s.nom.split(' (')[0]}</label></Fragment>)}</div></div>)}
           <p class="step-error" id="err-step-1" role="alert"></p>
           <div class="step-actions"><span></span><button class="btn btn-primary" type="button" data-next>Continuer</button></div>
@@ -60,8 +60,8 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
         </div>
 
         <div class="step" id="step-3" hidden>
-          <h2>Où vous envoyer le devis ?</h2>
-          <p>Vous recevez votre devis par e-mail sous 48{NB}h ouvrées.</p>
+          <h2 id="step-3-titre">Où vous envoyer le devis{NB}?</h2>
+          <p id="step-3-txt">Vous recevez votre devis par e-mail sous 48{NB}h ouvrées.</p>
           <div class="row-2">
             <div class="field"><label for="nom">Nom</label><input type="text" id="nom" name="nom" autocomplete="name" required aria-describedby="err-nom"><p class="error" id="err-nom"></p></div>
             <div class="field"><label for="entreprise">Entreprise <span class="opt">(facultatif)</span></label><input type="text" id="entreprise" name="entreprise" autocomplete="organization"></div>
@@ -72,13 +72,13 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
           </div>
           <div class="step-actions"><button class="btn btn-secondary" type="button" data-prev>Retour</button><button class="btn btn-primary" type="submit">Recevoir mon devis gratuit</button></div>
           <p class="send-error" id="err-envoi-devis" role="alert"></p>
-          <p class="reassure">Gratuit et sans engagement. Vos coordonnées servent uniquement à préparer votre devis. <a class="link" href="/mentions-legales#donnees">Confidentialité</a></p>
+          <p class="reassure">Gratuit et sans engagement. Vos coordonnées servent uniquement à vous répondre. <a class="link" href="/mentions-legales#donnees">Confidentialité</a></p>
         </div>
 
         <div class="step done-box" id="step-done" hidden>
           <span class="ok" aria-hidden="true"></span>
           <h2 tabindex="-1">Demande reçue</h2>
-          <p class="muted">Votre devis pour <strong style="color:var(--ink)" id="recap"></strong> arrive à l'adresse <strong style="color:var(--ink)" id="recap-mail"></strong> sous 48{NB}h ouvrées.</p>
+          <p class="muted" id="done-txt">Votre devis pour <strong style="color:var(--ink)" id="recap"></strong> arrive à l'adresse <strong style="color:var(--ink)" id="recap-mail"></strong> sous 48{NB}h ouvrées.</p>
           <a class="btn btn-secondary" href="/realisations">Voir nos réalisations en attendant</a>
         </div>
       </form>
@@ -113,7 +113,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
       <aside class="side" aria-label="Informations">
         <div class="side-card grad">
           <h2>Ce qui se passe ensuite</h2>
-          <ol><li>Sous 48{NB}h : votre devis détaillé, ou l'appel au créneau choisi</li><li>Wassim répond à toutes vos questions, par téléphone ou WhatsApp</li><li>Vous signez seulement si la proposition vous convient</li></ol>
+          <ol><li>Vous recevez votre devis sous 48{NB}h, ou on vous appelle au créneau choisi</li><li>Wassim répond à toutes vos questions, par téléphone ou WhatsApp</li><li>Vous signez seulement si la proposition vous convient</li></ol>
         </div>
         {avis ? (
           <div class="side-card plain">
@@ -128,7 +128,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
           </div>
         )}
         <div class="side-card plain">
-          <h2>Vous préférez écrire ou appeler ?</h2>
+          <h2>Vous préférez écrire ou appeler{NB}?</h2>
           <a class="big link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
           <a class="big link" href={`tel:${TEL_INTL}`}>{TEL}</a>
           {WHATSAPP && <a class="btn btn-secondary" href={WHATSAPP} target="_blank" rel="noopener" style="justify-self:start">Écrire sur WhatsApp</a>}

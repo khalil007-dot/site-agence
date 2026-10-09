@@ -80,11 +80,11 @@ if (diag) {
   const n = document.getElementById('diag-n');
   const msg = document.getElementById('diag-msg');
   const MSG = [
-    'Cochez les situations qui vous ressemblent.',
-    "Un point à corriger. C'est souvent rapide, et ça se voit vite sur vos demandes.",
-    'Deux points à corriger : votre site vous fait probablement perdre des clients chaque semaine.',
-    'Trois points à corriger : vos concurrents récupèrent une partie de vos clients.',
-    'Les quatre : votre site travaille contre vous. Bonne nouvelle, tout se corrige en même temps.',
+    'Cliquez sur les problèmes qui vous concernent.',
+    'Un problème. Il se règle vite, et vous verrez la différence sur vos appels.',
+    'Deux problèmes. Vous perdez sans doute des clients chaque semaine.',
+    'Trois problèmes. Une partie de vos clients part chez vos concurrents.',
+    'Les quatre. Bonne nouvelle : un nouveau site les règle tous en même temps.',
   ];
   pains.forEach(b => b.addEventListener('click', () => {
     b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true');
@@ -248,7 +248,7 @@ async function envoyer(formEl, champs, errId) {
   // la même demande, déjà rédigée, par WhatsApp ou par e-mail : aucun prospect n'est perdu.
   const echec = () => {
     const texte = Object.entries(champs).filter(([k]) => k !== 'subject').map(([k, v]) => `${k} : ${v}`).join('\n');
-    err.append("L'envoi automatique n'a pas fonctionné. Envoyez-nous la même demande, déjà rédigée, en un clic : ");
+    err.append("Votre demande n'est pas partie. Elle est déjà rédigée : envoyez-la en un clic ");
     const wa = document.querySelector('.wa-float');
     const liens = [];
     if (wa) {
@@ -311,11 +311,16 @@ if (form) {
     note.textContent = formule.texte;
     note.hidden = false;
   }
-  if (q.get('audit') && q.get('site')) {
+  // Venu du bloc « Audit gratuit » : seulement le nom et l'e-mail à donner, et on parle d'audit, pas de devis
+  const audit = q.get('audit') && q.get('site');
+  if (audit) {
     form.site.value = q.get('site');
     const note = document.getElementById('audit-note');
-    note.textContent = 'Audit gratuit demandé pour ' + q.get('site') + '. Complétez le formulaire pour le recevoir sous 72 h.';
+    note.textContent = 'Audit gratuit de ' + q.get('site') + ' : il ne manque que votre nom et votre e-mail.';
     note.hidden = false;
+    document.getElementById('step-3-titre').textContent = 'Où vous envoyer l\u2019audit\u00a0?';
+    document.getElementById('step-3-txt').textContent = 'Vous recevez votre audit gratuit par e-mail sous 72\u00a0h ouvrées : les 3 corrections les plus utiles pour votre site.';
+    form.querySelector('button[type="submit"]').textContent = 'Recevoir mon audit gratuit';
   }
 
   const show = i => {
@@ -331,6 +336,9 @@ if (form) {
     form.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   };
 
+  // Audit gratuit : services déjà choisis, on va directement aux coordonnées
+  if (audit) show(2);
+
   const setError = (field, text) => {
     field.setAttribute('aria-invalid', text ? 'true' : 'false');
     document.getElementById('err-' + field.id).textContent = text;
@@ -345,7 +353,7 @@ if (form) {
     },
     () => true,
     () => {
-      const nom = setError(form.nom, form.nom.value.trim() ? '' : 'Indiquez votre nom pour qu\'on sache à qui adresser le devis.');
+      const nom = setError(form.nom, form.nom.value.trim() ? '' : 'Indiquez votre nom.');
       const mail = setError(form.email, /^\S+@\S+\.\S+$/.test(form.email.value.trim()) ? '' : 'Cette adresse e-mail semble incomplète. Exemple : prenom@domaine.be');
       if (!nom) form.nom.focus(); else if (!mail) form.email.focus();
       return nom && mail;
@@ -366,7 +374,7 @@ if (form) {
     btn.textContent = 'Envoi…';
     const chosen = [...form.querySelectorAll('input[name="services"]:checked')].map(i => i.nextElementSibling.textContent);
     const ok = await envoyer(form, {
-      subject: 'Demande de devis : ' + form.nom.value.trim(),
+      subject: (audit ? 'Demande d\'audit gratuit : ' : 'Demande de devis : ') + form.nom.value.trim(),
       email: form.email.value.trim(),
       'Nom': form.nom.value.trim(),
       'Entreprise': form.entreprise.value.trim() || '-',
@@ -385,6 +393,14 @@ if (form) {
     if (!ok) return;
     document.getElementById('recap').textContent = chosen.join(', ');
     document.getElementById('recap-mail').textContent = form.email.value.trim();
+    if (audit) {
+      const t = document.getElementById('done-txt');
+      t.textContent = 'Votre audit gratuit de ' + q.get('site') + ' arrive à l\u2019adresse ';
+      const b = document.createElement('strong');
+      b.style.color = 'var(--ink)';
+      b.textContent = form.email.value.trim();
+      t.append(b, ' sous 72\u00a0h ouvrées.');
+    }
     steps.forEach(s => { s.hidden = true; });
     marks.forEach(m => { m.classList.add('done'); m.removeAttribute('aria-current'); });
     const done = document.getElementById('step-done');
