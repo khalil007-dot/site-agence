@@ -615,12 +615,17 @@ a.m-proof:hover { border-color: var(--hair); }
 @media (max-width: 760px) { .videos { grid-template-columns: 1fr 1fr; } .videos .video:last-child { display: none; } }
 
 /* Garanties */
-.guarantees { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-.g { background: var(--s1); border-radius: 20px; padding: 26px; display: grid; gap: 12px; align-content: start; }
-.g::before { content: ""; width: 36px; height: 36px; border-radius: 50%; background: var(--g-violet); }
-.g:nth-child(2)::before { background: var(--g-orange); } .g:nth-child(3)::before { background: var(--g-magenta); } .g:nth-child(4)::before { background: var(--g-coral); }
+.guarantees { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.g { --gbg: var(--yellow); position: relative; background: var(--gbg); border-radius: 22px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 12px; transition: transform .25s ease, box-shadow .25s ease; }
+.g:nth-child(2) { --gbg: var(--pink); } .g:nth-child(3) { --gbg: var(--lime); } .g:nth-child(4) { --gbg: var(--sky); }
+.g:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(60, 40, 140, .12); }
+.g-ico { width: 52px; height: 52px; border-radius: 15px; background: #fff; color: var(--brand, var(--royal)); display: grid; place-items: center; box-shadow: 0 6px 16px rgba(60, 40, 140, .1); margin-bottom: 6px; }
+.g-ico svg { width: 26px; height: 26px; }
 .g h3 { font-size: 1.1875rem; letter-spacing: -0.025em; line-height: 1.2; }
-.g p { color: var(--muted); font-size: .9375rem; }
+.g p { color: var(--muted); font-size: .9375rem; line-height: 1.5; }
+.g-tag { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 99px; background: #fff; font-size: .8125rem; font-weight: 700; }
+.g-tag::before { content: "✓"; width: 17px; height: 17px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--grad, var(--royal)); color: #fff; font-size: 10px; font-weight: 800; }
+.g > p { margin-bottom: 10px; }
 @media (max-width: 960px) { .guarantees { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .guarantees { grid-template-columns: 1fr; } }
 
