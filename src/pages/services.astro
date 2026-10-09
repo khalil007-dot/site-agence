@@ -9,9 +9,11 @@ import type { ImageMetadata } from 'astro';
 import captureOmi from '../assets/projets/omi-restaurant.jpg';
 import captureStreetSapp from '../assets/projets/streetsapp.jpg';
 import logoObrunch from '../assets/projets/obrunch-house-logo.jpg';
-import { BRAND, FAMS, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '../lib/site';
+import { BRAND, FAMS, FORMULES, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '../lib/site';
 
 const BYID = Object.fromEntries(SV.map(s => [s.id, s]));
+// Services vendus seuls à prix fixe dans les 3 offres (site vitrine, boutique) : pas de « À partir de »
+const FIXES = new Set(FORMULES.filter(f => f.services.length === 1).map(f => f.services[0]));
 const devisLabel = (court: string) => (['SEO', 'Google Ads'].includes(court) ? court : court.toLowerCase());
 // Paiement en 3 mensualités sans frais pour les services payés en une fois
 const mensualite = (p: number) => e(Math.round(p / 3));
@@ -28,7 +30,7 @@ const GUIDE: [string, string, string[]][] = [
   ['Je lance mon activité', "Commencez par le logo : les couleurs du site en découlent. Puis un site vitrine pour être trouvé dès l'ouverture.", ['logo', 'site-vitrine']],
   ["J'ai un site, mais peu de demandes", "Il vous manque des visiteurs. Le référencement en amène durablement, Google Ads dès la première semaine.", ['seo', 'google-ads']],
   ['Je veux vendre en ligne', "Une boutique pensée pour le téléphone, une image soignée, puis du référencement pour attirer les acheteurs.", ['e-commerce', 'logo', 'seo']],
-  ['Je veux être présent sur les réseaux', "Une image soignée d'abord, puis des publications régulières à vos couleurs, sans y passer vos soirées.", ['reseaux-sociaux', 'logo']],
+  ['Je veux être présent sur les réseaux', "Une image soignée d'abord, puis des publications régulières à vos couleurs, sans y passer vos soirées.", ['logo', 'reseaux-sociaux']],
   ["Je veux qu'on s'occupe de mon site", "Hébergement, sauvegardes, mises à jour et petites modifications chaque mois, sans engagement.", ['maintenance']],
 ];
 const budget = (ids: string[]) => {
@@ -37,8 +39,8 @@ const budget = (ids: string[]) => {
 };
 
 const FAQ: [string, string][] = [
-  ['Les prix affichés sont-ils les vrais prix ?', "Oui. Les 3 offres de site ont un prix fixe, hors TVA. Pour les autres services, c'est un prix de départ : le devis gratuit donne le montant exact selon votre projet, et il ne bouge plus ensuite."],
-  ['Puis-je payer en plusieurs fois ?', "Oui. En une fois (40 % à la signature, 60 % à la mise en ligne) ou en 3 mensualités sans frais pour les services payés en une fois."],
+  ['Les prix affichés sont-ils les vrais prix ?', "Oui. Le site vitrine, le site + logo et la boutique ont un prix fixe, hors TVA. Pour les autres services, c'est un prix de départ : le devis gratuit donne le montant exact selon votre projet, et il ne bouge plus ensuite."],
+  ['Puis-je payer en plusieurs fois ?', "Oui, de deux façons : 40 % à la signature et 60 % à la mise en ligne, ou 3 mensualités sans frais. Cela vaut pour les sites et le logo ; les services mensuels se paient chaque mois."],
   ['Les services mensuels m’engagent-ils longtemps ?', "La maintenance est sans engagement. Le référencement demande 3 mois au départ, le temps que Google prenne en compte le travail. Ensuite, vous arrêtez avec un mois de préavis."],
   ['Le budget Google Ads est-il compris ?', "Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond."],
   ['À qui appartient le site ?', "À vous : nom de domaine, contenus, fichiers du logo. Si vous partez, vous gardez tout."],
@@ -108,14 +110,14 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <p class="svc-promise">{s.promesse}</p>
           <p class="for">{s.pour_qui}</p>
           <div class="svc-price">
-            <span class="svc-from">À partir de</span>
+            <span class="svc-from">{FIXES.has(s.id) ? 'Prix fixe' : 'À partir de'}</span>
             <b>{prixDepart(s)}</b>
             {s.prix_unique > 0 && <span class="svc-12">ou {mensualite(s.prix_unique)}/mois pendant 3 mois, sans frais</span>}
           </div>
           <dl class="svc-facts">{s.infos.map(x => <div><dt>{x.label}</dt><dd>{x.valeur}</dd></div>)}</dl>
           <div class="btn-row svc-ctas">
             <a class="btn btn-primary" href={`/devis?service=${s.id}`}>Devis {devisLabel(s.nom_court)}</a>
-            {WHATSAPP && <a class="btn btn-secondary" href={WHATSAPP.split('?')[0] + '?text=' + encodeURIComponent(`Bonjour, j'ai une question sur le service ${s.nom_court}.`)} target="_blank" rel="noopener">Une question ?</a>}
+            {WHATSAPP && <a class="btn btn-secondary" href={WHATSAPP.split('?')[0] + '?text=' + encodeURIComponent(`Bonjour, j'ai une question sur le service ${s.nom_court}.`)} target="_blank" rel="noopener">Une question{NB}?</a>}
           </div>
         </div>
         <div class="svc-side">

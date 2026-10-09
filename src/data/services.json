@@ -46,7 +46,7 @@
         },
         {
           "label": "Pages",
-          "valeur": "1 à 8"
+          "valeur": "1 à 5"
         }
       ],
       "inclus": [
@@ -78,7 +78,7 @@
       ],
       "inclus": [
         "Shopify ou WooCommerce, selon votre budget et vos besoins",
-        "Paiement par carte, Apple Pay et PayPal",
+        "Paiement par Bancontact, carte, Apple Pay et PayPal",
         "Fiches produit, panier et commande pensés pour le téléphone",
         "Livraison, retours, CGV et mentions légales configurés",
         "Import de vos 50 premiers produits"
@@ -267,7 +267,7 @@
       "delai": "3 semaines",
       "inclus": [
         "Boutique complète, produits illimités",
-        "Paiement par carte, Bancontact et Apple Pay",
+        "Paiement par Bancontact, carte et Apple Pay",
         "Import de vos 50 premiers produits",
         "Livraison, retours et CGV configurés",
         "Pensée pour acheter en deux clics sur téléphone"
