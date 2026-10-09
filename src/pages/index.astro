@@ -124,101 +124,6 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <ul class="marquee-track">{[0, 1].map(c => INCLUS.map(t => <li aria-hidden={c ? 'true' : undefined}>{t}</li>))}</ul>
   </div>
 
-  <section class="section" id="probleme" aria-labelledby="pb-title">
-    <div class="wrap">
-      <div class="fx-head rv">
-        <h2 class="d-xl" id="pb-title">Votre site vous fait-il <span class="hl hl-pink">perdre des clients</span>{NB}?</h2>
-        <p class="lead">Chaque semaine, des gens cherchent votre métier près de chez eux. Cochez ce qui vous ressemble : en dix secondes, vous saurez où ils partent.</p>
-      </div>
-      <div class="diag" id="diag">
-        <ul class="pains">{PAINS.map(([t, cout, src, fix], i) => <li>
-          <button class="pain" type="button" aria-pressed="false">
-            <span class="pain-n" aria-hidden="true">0{i + 1}</span>
-            <span class="pain-t">« {t} »</span>
-            <span class="pain-cost"><b>Ce que ça vous coûte</b>{cout}{src && <small> ({src})</small>}</span>
-            <span class="pain-fix"><b>Ce qu'on fait</b>{fix}</span>
-            <span class="pain-check" aria-hidden="true"></span>
-          </button>
-        </li>)}</ul>
-        <div class="diag-result" aria-live="polite">
-          <p class="diag-score"><b id="diag-n">0</b><span>/{PAINS.length}</span></p>
-          <p class="diag-msg" id="diag-msg">Cochez les situations qui vous ressemblent.</p>
-          <a class="btn btn-primary" href="#audit">Recevoir mon audit gratuit</a>
-          <p class="diag-note">Gratuit, sans engagement. Trois actions prioritaires sous 72{NB}h.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="comparatif" aria-labelledby="cmp-title">
-    <div class="wrap">
-      <div class="cmp-top">
-        <div class="rv">
-          <h2 class="d-xl" id="cmp-title">Le travail d'une agence. <span class="hl">Le prix d'un freelance.</span></h2>
-          <p class="lead">En Belgique, une agence facture un site vitrine entre {e(5000)} et {e(15000)}, un freelance entre {e(800)} et {e(5000)}. Chez nous, c'est {e(vitrine)}. Le prix est écrit avant que vous signiez, et il ne bouge plus.</p>
-          <ul class="cmp-points">
-            <li><b>Un prix fixe.</b> Le montant du devis est celui de la facture.</li>
-            <li><b>Payé une fois.</b> Ou en 3 fois sans frais, si c'est plus confortable.</li>
-            <li><b>Le site est à vous.</b> Domaine, textes et photos à votre nom.</li>
-          </ul>
-        </div>
-        <div class="receipt rv" aria-label={`Ce que comprend le site vitrine à ${e(vitrine)}`}>
-          <p class="receipt-head"><b>Votre site vitrine</b><span>{BRAND}</span></p>
-          <ul>{TICKET.map(t => <li><span>{t}</span><b>inclus</b></li>)}<li><span>Mise en ligne en {delaiVitrine}</span><b>inclus</b></li></ul>
-          <p class="receipt-total"><span>Total, hors TVA</span><b>{e(vitrine)}</b></p>
-          <p class="receipt-foot">Payé une fois · ou 3{NB}×{NB}{e(Math.ceil(vitrine / 3))} sans frais</p>
-          <a class="btn btn-primary" href="/devis?formule=site">Je veux ce site <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-      <div class="panel panel-yellow rv cmp-table">
-        <div class="table-wrap">
-          <table class="fx-compare">
-            <thead><tr><td></td><th scope="col">Agence classique</th><th scope="col">Freelance</th><th scope="col" class="us" translate="no">{BRAND}</th></tr></thead>
-            <tbody>{COMPARE.map(([c, a, b, n]) => <tr><th scope="row">{c}</th><td data-l="Agence classique">{a}</td><td data-l="Freelance">{b}</td><td class="us" data-l={BRAND}>{n}</td></tr>)}</tbody>
-          </table>
-        </div>
-        <p class="cmp-src">Fourchettes de prix observées en Belgique en 2026.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="on-dark fx-spots">
-    <Spots prix={false} />
-  </div>
-
-  <section class="section-tight" style="margin-top:clamp(48px, 7vw, 96px)" aria-labelledby="modif-title">
-    <div class="wrap">
-      <div class="panel panel-pink fx-modif">
-        <div class="rv">
-          <h2 class="d-xl" id="modif-title">Vos horaires changent, un plat arrive à la carte{NB}? <span class="hl hl-white">Un message suffit.</span></h2>
-          <p class="lead">Avec la maintenance à {e(maintenance)} par mois, vous envoyez votre demande par WhatsApp ou par e-mail, et elle est en ligne sous 2 jours ouvrables. Hébergement, nom de domaine, adresse e-mail et sauvegardes sont compris. Vous arrêtez quand vous voulez.</p>
-          <p class="small">Vous préférez le faire vous-même{NB}? Une heure de formation est incluse avec chaque site.</p>
-        </div>
-        <div class="ticket rv" aria-label="Exemples de modifications">
-          <p class="ticket-head"><b>Ce que représente une heure</b><span>à titre indicatif</span></p>
-          <ul>{HEURE.map(([t, d]) => <li><span>{t}</span><b>{d}</b></li>)}</ul>
-          <p class="ticket-foot"><b>En plus sur votre facture{NB}:</b> <mark>0{NB}€</mark></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-tight" id="methode" aria-labelledby="methode-title">
-    <div class="wrap">
-      <div class="panel panel-lime">
-        <div class="fx-head rv">
-          <h2 class="d-xl" id="methode-title">Une heure de votre temps. <span class="hl hl-white">Cinq jours</span> pour être en ligne.</h2>
-          <p class="lead">Vous nous parlez de votre métier. On écrit, on dessine et on construit. Vous suivez tout sur un lien privé et vous validez chaque étape.</p>
-        </div>
-        <ol class="timeline">{ETAPES.map(([quand, t, txt]) => <li class="rv"><span class="when">{quand}</span><h3>{t}</h3><p>{txt}</p></li>)}</ol>
-        <div class="btn-row" style="align-items:center;gap:22px">
-          <a class="btn btn-primary" href="/devis?mode=appel">Réserver mon appel de 30 minutes <span aria-hidden="true">→</span></a>
-          <a class="link-u" href="#formules">Voir les 3 prix</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section on-dark fx-work" aria-labelledby="work-title">
     <div class="wrap">
       <div class="fx-head rv">
@@ -259,6 +164,50 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
 
   <Offres />
 
+  <section class="section" id="garanties" aria-labelledby="garanties-title">
+    <div class="wrap">
+      <div class="fx-head rv"><h2 class="d-xl" id="garanties-title">Ce qu'on vous <span class="hl">garantit</span>.</h2></div>
+      <div class="guarantees">
+        <div class="g"><h3>Un prix ferme</h3><p>Le devis détaille tout ce qui est inclus. Le montant ne change plus après votre accord.</p></div>
+        <div class="g"><h3>Maquette refaite si elle ne vous plaît pas</h3><p>Si la première proposition ne vous convient pas, on repart de zéro, sans frais.</p></div>
+        <div class="g"><h3>Un mois de corrections offert</h3><p>Une faute, une photo à changer après la mise en ligne{NB}? On corrige, sans facture.</p></div>
+        <div class="g"><h3>Tout vous appartient</h3><p>Nom de domaine, contenus et fichiers du logo sont à votre nom. Vous partez quand vous voulez.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="comparatif" aria-labelledby="cmp-title">
+    <div class="wrap">
+      <div class="cmp-top">
+        <div class="rv">
+          <h2 class="d-xl" id="cmp-title">Le travail d'une agence. <span class="hl">Le prix d'un freelance.</span></h2>
+          <p class="lead">En Belgique, une agence facture un site vitrine entre {e(5000)} et {e(15000)}, un freelance entre {e(800)} et {e(5000)}. Chez nous, c'est {e(vitrine)}. Le prix est écrit avant que vous signiez, et il ne bouge plus.</p>
+          <ul class="cmp-points">
+            <li><b>Un prix fixe.</b> Le montant du devis est celui de la facture.</li>
+            <li><b>Payé une fois.</b> Ou en 3 fois sans frais, si c'est plus confortable.</li>
+            <li><b>Le site est à vous.</b> Domaine, textes et photos à votre nom.</li>
+          </ul>
+        </div>
+        <div class="receipt rv" aria-label={`Ce que comprend le site vitrine à ${e(vitrine)}`}>
+          <p class="receipt-head"><b>Votre site vitrine</b><span>{BRAND}</span></p>
+          <ul>{TICKET.map(t => <li><span>{t}</span><b>inclus</b></li>)}<li><span>Mise en ligne en {delaiVitrine}</span><b>inclus</b></li></ul>
+          <p class="receipt-total"><span>Total, hors TVA</span><b>{e(vitrine)}</b></p>
+          <p class="receipt-foot">Payé une fois · ou 3{NB}×{NB}{e(Math.ceil(vitrine / 3))} sans frais</p>
+          <a class="btn btn-primary" href="/devis?formule=site">Je veux ce site <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="panel panel-yellow rv cmp-table">
+        <div class="table-wrap">
+          <table class="fx-compare">
+            <thead><tr><td></td><th scope="col">Agence classique</th><th scope="col">Freelance</th><th scope="col" class="us" translate="no">{BRAND}</th></tr></thead>
+            <tbody>{COMPARE.map(([c, a, b, n]) => <tr><th scope="row">{c}</th><td data-l="Agence classique">{a}</td><td data-l="Freelance">{b}</td><td class="us" data-l={BRAND}>{n}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <p class="cmp-src">Fourchettes de prix observées en Belgique en 2026.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="section-tight" aria-labelledby="why-title">
     <div class="wrap">
       <div class="panel panel-royal fx-why">
@@ -273,6 +222,85 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <div><h3>Ce qui reste fait <span class="hl">à la main</span></h3><ul class="checks"><li>Comprendre votre métier et vos clients</li><li>Le design et la maquette</li><li>La relecture et le ton de vos textes</li><li>Le contrôle avant la mise en ligne</li><li>Le suivi après la mise en ligne</li></ul></div>
         </div>
         <p class="why-result">Un site d'agence, en ligne en quelques jours, à un prix que vous payez une seule fois.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="methode" aria-labelledby="methode-title">
+    <div class="wrap">
+      <div class="panel panel-lime">
+        <div class="fx-head rv">
+          <h2 class="d-xl" id="methode-title">Une heure de votre temps. <span class="hl hl-white">Cinq jours</span> pour être en ligne.</h2>
+          <p class="lead">Vous nous parlez de votre métier. On écrit, on dessine et on construit. Vous suivez tout sur un lien privé et vous validez chaque étape.</p>
+        </div>
+        <ol class="timeline">{ETAPES.map(([quand, t, txt]) => <li class="rv"><span class="when">{quand}</span><h3>{t}</h3><p>{txt}</p></li>)}</ol>
+        <div class="btn-row" style="align-items:center;gap:22px">
+          <a class="btn btn-primary" href="/devis?mode=appel">Réserver mon appel de 30 minutes <span aria-hidden="true">→</span></a>
+          <a class="link-u" href="#formules">Voir les 3 prix</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="founder-title">
+    <div class="wrap">
+      <div class="panel panel-white founder founder-duo">
+        <div class="founder-txt">
+          <h2 class="d-lg" id="founder-title">Deux fondateurs, <span class="hl">un seul numéro</span>.</h2>
+          <blockquote><p>« {COFONDATEUR} répond à vos questions du premier appel jusqu'après la mise en ligne. {FONDATEUR.split(' ')[0]} construit votre site. Quand vous appelez, vous tombez sur l'un de nous deux. »</p></blockquote>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/devis?mode=appel">Réserver un appel avec nous</a>
+            <a class="btn btn-secondary" href="/a-propos">Qui sommes-nous</a>
+          </div>
+        </div>
+        <Fondateurs mission={false} />
+      </div>
+    </div>
+  </section>
+
+  <div class="on-dark fx-spots">
+    <Spots prix={false} />
+  </div>
+
+  <section class="section-tight" style="margin-top:clamp(48px, 7vw, 96px)" aria-labelledby="modif-title">
+    <div class="wrap">
+      <div class="panel panel-pink fx-modif">
+        <div class="rv">
+          <h2 class="d-xl" id="modif-title">Vos horaires changent, un plat arrive à la carte{NB}? <span class="hl hl-white">Un message suffit.</span></h2>
+          <p class="lead">Avec la maintenance à {e(maintenance)} par mois, vous envoyez votre demande par WhatsApp ou par e-mail, et elle est en ligne sous 2 jours ouvrables. Hébergement, nom de domaine, adresse e-mail et sauvegardes sont compris. Vous arrêtez quand vous voulez.</p>
+          <p class="small">Vous préférez le faire vous-même{NB}? Une heure de formation est incluse avec chaque site.</p>
+        </div>
+        <div class="ticket rv" aria-label="Exemples de modifications">
+          <p class="ticket-head"><b>Ce que représente une heure</b><span>à titre indicatif</span></p>
+          <ul>{HEURE.map(([t, d]) => <li><span>{t}</span><b>{d}</b></li>)}</ul>
+          <p class="ticket-foot"><b>En plus sur votre facture{NB}:</b> <mark>0{NB}€</mark></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="probleme" aria-labelledby="pb-title">
+    <div class="wrap">
+      <div class="fx-head rv">
+        <h2 class="d-xl" id="pb-title">Votre site vous fait-il <span class="hl hl-pink">perdre des clients</span>{NB}?</h2>
+        <p class="lead">Chaque semaine, des gens cherchent votre métier près de chez eux. Cochez ce qui vous ressemble : en dix secondes, vous saurez où ils partent.</p>
+      </div>
+      <div class="diag" id="diag">
+        <ul class="pains">{PAINS.map(([t, cout, src, fix], i) => <li>
+          <button class="pain" type="button" aria-pressed="false">
+            <span class="pain-n" aria-hidden="true">0{i + 1}</span>
+            <span class="pain-t">« {t} »</span>
+            <span class="pain-cost"><b>Ce que ça vous coûte</b>{cout}{src && <small> ({src})</small>}</span>
+            <span class="pain-fix"><b>Ce qu'on fait</b>{fix}</span>
+            <span class="pain-check" aria-hidden="true"></span>
+          </button>
+        </li>)}</ul>
+        <div class="diag-result" aria-live="polite">
+          <p class="diag-score"><b id="diag-n">0</b><span>/{PAINS.length}</span></p>
+          <p class="diag-msg" id="diag-msg">Cochez les situations qui vous ressemblent.</p>
+          <a class="btn btn-primary" href="#audit">Recevoir mon audit gratuit</a>
+          <p class="diag-note">Gratuit, sans engagement. Trois actions prioritaires sous 72{NB}h.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -299,30 +327,14 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="founder-title">
-    <div class="wrap">
-      <div class="panel panel-white founder founder-duo">
-        <div class="founder-txt">
-          <h2 class="d-lg" id="founder-title">Deux fondateurs, <span class="hl">un seul numéro</span>.</h2>
-          <blockquote><p>« {COFONDATEUR} répond à vos questions du premier appel jusqu'après la mise en ligne. {FONDATEUR.split(' ')[0]} construit votre site. Quand vous appelez, vous tombez sur l'un de nous deux. »</p></blockquote>
-          <div class="btn-row">
-            <a class="btn btn-primary" href="/devis?mode=appel">Réserver un appel avec nous</a>
-            <a class="btn btn-secondary" href="/a-propos">Qui sommes-nous</a>
-          </div>
-        </div>
-        <Fondateurs mission={false} />
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <div>
+        <h2 class="d-xl" id="faq-title">Les questions qu'on nous pose <span class="hl hl-lime">avant de se lancer</span>.</h2>
+        <p class="lead" style="margin-top:18px">Une autre question{NB}? Écrivez-nous à <a class="link-u" href={`mailto:${EMAIL}`}>{EMAIL}</a>{WHATSAPP && <> ou <a class="link-u" href={WHATSAPP} target="_blank" rel="noopener">sur WhatsApp</a></>}.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="section" id="garanties" aria-labelledby="garanties-title">
-    <div class="wrap">
-      <div class="fx-head rv"><h2 class="d-xl" id="garanties-title">Ce qu'on vous <span class="hl">garantit</span>.</h2></div>
-      <div class="guarantees">
-        <div class="g"><h3>Un prix ferme</h3><p>Le devis détaille tout ce qui est inclus. Le montant ne change plus après votre accord.</p></div>
-        <div class="g"><h3>Maquette refaite si elle ne vous plaît pas</h3><p>Si la première proposition ne vous convient pas, on repart de zéro, sans frais.</p></div>
-        <div class="g"><h3>Un mois de corrections offert</h3><p>Une faute, une photo à changer après la mise en ligne{NB}? On corrige, sans facture.</p></div>
-        <div class="g"><h3>Tout vous appartient</h3><p>Nom de domaine, contenus et fichiers du logo sont à votre nom. Vous partez quand vous voulez.</p></div>
+      <div class="faq-list">
+        {FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
       </div>
     </div>
   </section>
@@ -334,18 +346,6 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <p class="lead"><a class="link-u" href="/conseils">Tous les articles</a></p>
       </div>
       <div class="posts">{posts.map(p => <PostCard post={p} />)}</div>
-    </div>
-  </section>
-
-  <section class="section" id="faq" aria-labelledby="faq-title">
-    <div class="wrap faq">
-      <div>
-        <h2 class="d-xl" id="faq-title">Les questions qu'on nous pose <span class="hl hl-lime">avant de se lancer</span>.</h2>
-        <p class="lead" style="margin-top:18px">Une autre question{NB}? Écrivez-nous à <a class="link-u" href={`mailto:${EMAIL}`}>{EMAIL}</a>{WHATSAPP && <> ou <a class="link-u" href={WHATSAPP} target="_blank" rel="noopener">sur WhatsApp</a></>}.</p>
-      </div>
-      <div class="faq-list">
-        {FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
-      </div>
     </div>
   </section>
 

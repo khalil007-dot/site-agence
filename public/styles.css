@@ -1404,7 +1404,7 @@ a.m-proof:hover { border-color: var(--hair); }
 .cal-m { background: var(--night); }
 .cal-ok { background: #DDF2E6; }
 .foot-grid a.btn-accent { color: #fff; }
-.fx-work + .fx-pricing { margin-top: 0; padding-top: 0; }
+.marquee + .fx-work { margin-top: 0; }
 
 /* Avis clients */
 .avis-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
