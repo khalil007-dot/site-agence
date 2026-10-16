@@ -1,0 +1,153 @@
+---
+// Page d'arrivée des annonces Google « création site internet Bruxelles » : le titre reprend la recherche,
+// une seule action (devis ou appel), sans blog, quiz ni audit. Hors index Google pour ne pas concurrencer l'accueil.
+import Base from '../layouts/Base.astro';
+import Avis from '../components/Avis.astro';
+import Offres from '../components/Offres.astro';
+import { Image } from 'astro:assets';
+import shotStreet from '../assets/projets/streetsapp.jpg';
+import shotStreetMobile from '../assets/projets/streetsapp-mobile.jpg';
+import shotOmi from '../assets/projets/omi-restaurant.jpg';
+import shotOmiMobile from '../assets/projets/omi-restaurant-mobile.jpg';
+import { BRAND, FORMULES, HORAIRES, MAINTENANCE, NB, SV, TEL, TEL_INTL, WHATSAPP, e } from '../lib/site';
+
+const vitrine = SV.find(s => s.id === 'site-vitrine')!.prix_unique;
+const delai = SV.find(s => s.id === 'site-vitrine')!.infos[0].valeur;
+const jours = delai.split(' ').slice(0, 2).join(NB);
+const TICKET = FORMULES.find(f => f.id === 'site')!.inclus;
+
+const ETAPES: [string, string, string][] = [
+  ['Avant de commencer', 'Un appel de 30 minutes', 'Vous nous parlez de votre activité et de vos clients. Sous 48 h, vous recevez un devis ferme.'],
+  ['Jours 1 et 2', 'Votre maquette', 'Le design et les textes de votre page d’accueil, sur un lien privé. Si elle ne vous plaît pas, on recommence sans frais.'],
+  ['Jours 3 à 5', 'On construit, vous suivez', 'Les autres pages, la version mobile, le formulaire et votre fiche Google.'],
+  ['Après la mise en ligne', 'On reste joignables', 'Une heure de formation et un mois de corrections offerts.'],
+];
+
+const FAQ: [string, string][] = [
+  ['Combien coûte la création d’un site internet à Bruxelles ?', `Chez nous, ${e(vitrine)} HTVA pour un site vitrine sur mesure, payé une fois ou en 3 fois sans frais. En Belgique, une agence facture souvent entre ${e(5000)} et ${e(15000)}, un freelance entre ${e(800)} et ${e(5000)}.`],
+  ['Combien de temps pour être en ligne ?', `${delai} après votre accord sur le devis, maquette comprise.`],
+  ['Faut-il que j’écrive les textes ?', 'Non. On les écrit avec vous à partir d’un appel de 30 minutes, puis vous les validez.'],
+  ['Est-ce que le site m’appartient ?', 'Oui. Le nom de domaine, les textes et les photos sont à votre nom. Vous partez quand vous voulez.'],
+  ['Y a-t-il un abonnement obligatoire ?', `Non. La maintenance à ${e(MAINTENANCE)} par mois est facultative et sans engagement.`],
+  ['Vous vous déplacez à Bruxelles ?', 'Oui, on peut se voir à Bruxelles. La plupart des clients préfèrent un appel ou une visio, et suivent l’avancement sur un lien privé.'],
+];
+---
+<Base chemin="creation-site-internet-bruxelles" title={`Création de site internet à Bruxelles : ${e(vitrine)}, en ligne en ${jours} | ${BRAND}`} desc={`Création de site internet à Bruxelles pour indépendants et commerces : ${e(vitrine)} HTVA, prix fixe, en ligne en ${delai}. Textes écrits avec vous, fiche Google incluse. Devis gratuit en 48 h.`} noindex>
+
+  <section class="fx-hero" aria-labelledby="hero-title">
+    <div class="wrap fx-hero-grid">
+      <div class="reveal">
+        <p class="kicker">Agence web à Bruxelles · deux fondateurs en direct</p>
+        <h1 class="poster" id="hero-title">Création de site internet à Bruxelles. <span class="hl hl-tomato">{e(vitrine)}, en ligne en {jours}.</span></h1>
+        <p class="lead">Un site vitrine sur mesure qui fait appeler vos clients : textes écrits avec vous, pensé pour le téléphone, fiche Google réglée. Prix fixe, payé une fois. Le site vous appartient.</p>
+        <div class="btn-row fx-cta">
+          <a class="btn btn-primary btn-lg" href="/devis?formule=site">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary btn-lg" href={`tel:${TEL_INTL}`}>Nous appeler<span class="tel-num">{NB}· {TEL}</span></a>
+        </div>
+        <p class="note">Gratuit et sans engagement · Maquette refaite sans frais si elle ne vous plaît pas · On répond {HORAIRES}</p>
+        <dl class="fx-stats">
+          <div><dt>{e(vitrine)}</dt><dd>HTVA, payé une fois</dd></div>
+          <div><dt>{jours}</dt><dd>ouvrables pour être en ligne</dd></div>
+          <div><dt>3 fois</dt><dd>sans frais, si vous préférez étaler</dd></div>
+        </dl>
+      </div>
+      <div class="fx-hero-visual" aria-hidden="true">
+        <span class="glow"></span>
+        <div class="browser"><span class="bar"><i></i><i></i><i></i><b>streetsapp.be</b></span><Image src={shotStreet} alt="" widths={[480, 720, 960]} sizes="(max-width: 960px) 90vw, 560px" loading="eager" fetchpriority="high" /></div>
+        <div class="phone"><Image src={shotOmiMobile} alt="" widths={[200, 390]} sizes="190px" loading="eager" /></div>
+        <span class="seal"><small>En ligne en</small><b>{jours}</b><small>ouvrables</small></span>
+        <span class="tag-real"><i></i>Vrais sites réalisés par nos soins</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-dark fx-work" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="fx-head rv">
+        <h2 class="d-xl" id="work-title">Des sites déjà en ligne, <span class="hl hl-pink">à Bruxelles et en Belgique</span>.</h2>
+        <div class="fx-head-side"><p class="lead">Ouvrez-les : une boutique de sportswear et un restaurant à Saint-Josse.</p></div>
+      </div>
+      <div class="works">
+        <a class="work rv" href="https://streetsapp.be/" target="_blank" rel="noopener">
+          <div class="work-card" style="--bg:var(--royal)">
+            <div class="browser"><span class="bar"><i></i><i></i><i></i><b>streetsapp.be</b></span><Image src={shotStreet} alt="Page d'accueil de la boutique en ligne Street Sapp" widths={[480, 800]} sizes="(max-width: 760px) 80vw, 520px" /></div>
+            <div class="phone"><Image src={shotStreetMobile} alt="" widths={[200, 390]} sizes="150px" /></div>
+          </div>
+          <h3>Street Sapp</h3><p>Boutique en ligne · Sportswear et sneakers · Belgique</p>
+        </a>
+        <a class="work rv" href="https://omi-restaurant.com/" target="_blank" rel="noopener">
+          <div class="work-card" style="--bg:var(--tomato)">
+            <div class="browser"><span class="bar"><i></i><i></i><i></i><b>omi-restaurant.com</b></span><Image src={shotOmi} alt="Page d'accueil du site du restaurant OMI" widths={[480, 800]} sizes="(max-width: 760px) 80vw, 520px" /></div>
+            <div class="phone"><Image src={shotOmiMobile} alt="" widths={[200, 390]} sizes="150px" /></div>
+          </div>
+          <h3>OMI Restaurant</h3><p>Site vitrine, logo, menu et flyer · Saint-Josse, Bruxelles</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Avis max={3} />
+
+  <section class="section" id="comparatif" aria-labelledby="cmp-title">
+    <div class="wrap">
+      <div class="cmp-top">
+        <div class="rv">
+          <h2 class="d-xl" id="cmp-title">Le travail d'une agence. <span class="hl">Le prix d'un freelance.</span></h2>
+          <p class="lead">À Bruxelles, une agence facture un site vitrine entre {e(5000)} et {e(15000)}. Chez nous, c'est {e(vitrine)}, écrit dans le devis avant que vous signiez.</p>
+          <ul class="cmp-points">
+            <li><b>Un prix fixe.</b> Le montant du devis est celui de la facture.</li>
+            <li><b>Payé une fois.</b> Ou en 3 fois sans frais.</li>
+            <li><b>Le site est à vous.</b> Domaine, textes et photos à votre nom.</li>
+          </ul>
+        </div>
+        <div class="receipt rv" aria-label={`Ce que comprend le site vitrine à ${e(vitrine)}`}>
+          <p class="receipt-head"><b>Votre site vitrine</b><span>{BRAND}</span></p>
+          <ul>{TICKET.map(t => <li><span>{t}</span><b>inclus</b></li>)}<li><span>Mise en ligne en {delai}</span><b>inclus</b></li></ul>
+          <p class="receipt-total"><span>Total, hors TVA</span><b>{e(vitrine)}</b></p>
+          <p class="receipt-foot">Payé une fois · ou 3{NB}×{NB}{e(Math.ceil(vitrine / 3))} sans frais</p>
+          <a class="btn btn-primary" href="/devis?formule=site">Je veux ce site <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="methode-title">
+    <div class="wrap">
+      <div class="panel panel-lime">
+        <div class="fx-head rv">
+          <h2 class="d-xl" id="methode-title">Une heure de votre temps. <span class="hl hl-white">Cinq jours</span> pour être en ligne.</h2>
+        </div>
+        <ol class="timeline">{ETAPES.map(([quand, t, txt]) => <li class="rv"><span class="when">{quand}</span><h3>{t}</h3><p>{txt}</p></li>)}</ol>
+        <div class="btn-row" style="align-items:center;gap:22px">
+          <a class="btn btn-primary" href="/devis?mode=appel">Réserver mon appel de 30 minutes <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Offres />
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <div><h2 class="d-xl" id="faq-title">Vos questions <span class="hl hl-lime">avant de vous lancer</span>.</h2></div>
+      <div class="faq-list">{FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="final-title">
+    <div class="wrap">
+      <div class="panel panel-tomato fx-final">
+        <div>
+          <h2 class="d-xl" id="final-title">Votre site en ligne <span class="hl hl-white">dans {jours}</span>.</h2>
+          <p class="lead">Un appel de 30 minutes, un devis ferme sous 48{NB}h, puis {delai} après votre accord.</p>
+          <div class="btn-row" style="align-items:center;gap:20px">
+            <a class="btn btn-primary btn-lg" href="/devis?formule=site">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
+            <a class="btn btn-glass" href={`tel:${TEL_INTL}`}>Nous appeler<span class="tel-num">{NB}· {TEL}</span></a>
+            {WHATSAPP && <a class="btn btn-glass" href={WHATSAPP} target="_blank" rel="noopener">Écrire sur WhatsApp</a>}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>
