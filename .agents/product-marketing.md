@@ -1,7 +1,7 @@
 # Product Marketing Context
 
 **Document version:** v1
-**Last updated:** 2026-10-07
+**Last updated:** 2026-10-16
 
 > Rédigé automatiquement à partir du site (pages, FAQ, services.json, llms.txt). Les points marqués « À compléter » ne figurent pas sur le site : à confirmer par Khalil et Wassim.
 
@@ -10,10 +10,10 @@
 **What it does:** Épure Studio conçoit des sites vitrine et des boutiques en ligne, des logos et supports imprimés (menus, flyers, cartes de visite), puis fait venir des clients grâce au référencement Google et IA, à Google Ads et aux réseaux sociaux. Deux fondateurs en direct, du premier appel jusqu'au suivi après la mise en ligne.
 **Product category:** Agence web / création de site internet / agence de communication locale. Recherches typiques : « agence web Bruxelles », « création site internet Bruxelles », « prix site vitrine Belgique », « référencement local Bruxelles ».
 **Product type:** Service (prestations uniques + abonnements mensuels).
-**Business model:** Prix payés une fois (prix de départ affichés, devis ferme), baissés le 2026-10-08 pour être plus compétitifs face aux sites par abonnement. Argument clé : « Le travail d'une agence. Le prix d'un freelance. » (agence 5 000 à 15 000 €, freelance 800 à 5 000 €, nous 590 €).
-- Uniques : site vitrine dès 590 € HT (en ligne en 5 jours ouvrables après validation de la maquette), boutique en ligne dès 1 490 € HT (3 semaines), logo et identité dès 290 € HT.
+**Business model:** Prix payés une fois (prix de départ affichés, devis ferme), baissés le 2026-10-08 pour être plus compétitifs face aux sites par abonnement. Argument clé : « Le travail d'une agence. Le prix d'un freelance. » (agence 5 000 à 15 000 €, freelance 800 à 5 000 €, nous 890 €).
+- Uniques : site vitrine dès 890 € HT (en ligne en 5 jours ouvrables après validation de la maquette), boutique en ligne dès 1 490 € HT (3 semaines), logo et identité dès 290 € HT.
 - Mensuels sans engagement (1 mois de préavis) : SEO dès 190 €/mois, Google Ads dès 190 €/mois (hors budget pub), réseaux sociaux dès 290 €/mois, maintenance dès 29 €/mois (hébergement, domaine, e-mail, 1 h de modifications par mois).
-- Accueil et page Services : 3 offres à prix fixe seulement, Site vitrine 590 €, Site + logo 790 € (recommandée), Boutique en ligne 1 490 €, HTVA, payées une fois ou en 3 fois sans frais, plus la maintenance facultative à 29 €/mois. Les autres prix (SEO, Ads, réseaux) restent sur la page Services. Règle : jamais plus de 3 prix à comparer. Données dans src/data/services.json (clé « formules »).
+- Accueil et page Services : 3 offres à prix fixe seulement, Site vitrine 890 €, Site + logo 990 € (recommandée), Boutique en ligne 1 490 €, HTVA, payées une fois ou en 3 fois sans frais, plus la maintenance facultative à 29 €/mois. Les autres prix (SEO, Ads, réseaux) restent sur la page Services. Règle : jamais plus de 3 prix à comparer. Données dans src/data/services.json (clé « formules »).
 - Paiement : 40 % à la signature, 60 % à la mise en ligne, ou 3 mensualités sans frais.
 
 ## Target Audience
@@ -126,6 +126,7 @@
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v6 (2026-10-16) — Prix à jour (vitrine 890 €, site + logo 990 €). Audit CRO : boutons de l'accueil vers /devis?formule=site, bouton « Nous appeler » et numéro dans l'en-tête, question budget remplacée par « Avez-vous déjà un site ? », quiz et audit déplacés sous la FAQ, horaires 8 h 30 – 22 h dans les réglages.
 - v5 (2026-10-08) — Textes du site réécrits pour convertir (skills copywriting, cro, marketing-psychology) : accroche « Un site qui fait sonner votre téléphone. 590 €, payé une fois. », CTA « Recevoir mon devis en 48 h ».
 - v4 (2026-10-08) — Grille simplifiée à 3 offres après un audit CRO (plus de 40 montants sur l'accueil, client perdu).
 - v3 (2026-10-08) — Retour aux prix payés une fois (baissés : vitrine 590 €, Lancement 790 €…), accueil mélangeant l'ancienne base et le style Fast On Web.

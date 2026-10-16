@@ -1,6 +1,6 @@
 // llms.txt : résumé du site pour les assistants IA
 import { getCollection } from 'astro:content';
-import { BRAND, EMAIL, FAMS, FONDATEURS, FORMULES, SITE_URL, SV, TEL } from '../lib/site';
+import { BRAND, EMAIL, FAMS, FONDATEURS, FORMULES, HORAIRES, SITE_URL, SV, TEL } from '../lib/site';
 
 export async function GET() {
   const price = (s: (typeof SV)[number]) => (s.prix_unique ? `à partir de ${s.prix_unique} € HT` : `à partir de ${s.prix_mensuel} € HT par mois`);
@@ -18,7 +18,7 @@ export async function GET() {
 - Zone : Bruxelles et toute la Belgique, à distance ou sur place
 - Langue : français
 - Devis gratuit sous 48 h, ou appel de 30 minutes : ${SITE_URL}/devis
-- Contact : ${EMAIL} ou ${TEL}, du lundi au vendredi de 9 h à 18 h
+- Contact : ${EMAIL} ou ${TEL}, ${HORAIRES}
 - Fondateurs : ${FONDATEURS.map(f => `${f.nom} (${f.role.toLowerCase()})`).join(' et ')}
 - Paiement : 40 % à la signature et 60 % à la mise en ligne, ou en 3 mensualités sans frais
 - Le client est propriétaire de son nom de domaine, de ses contenus et de son logo

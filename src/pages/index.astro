@@ -15,7 +15,7 @@ import shotOmi from '../assets/projets/omi-restaurant.jpg';
 import shotOmiMobile from '../assets/projets/omi-restaurant-mobile.jpg';
 import shotOmiMenu from '../assets/projets/omi-menu.jpg';
 import shotObrunch from '../assets/projets/obrunch-house-logo.jpg';
-import { BRAND, COFONDATEUR, EMAIL, FONDATEUR, FORMULES, MAINTENANCE, NB, ORG, SITE_URL, SV, WHATSAPP, e } from '../lib/site';
+import { BRAND, COFONDATEUR, EMAIL, FONDATEUR, FORMULES, MAINTENANCE, NB, ORG, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e } from '../lib/site';
 
 const prix = (id: string) => SV.find(s => s.id === id)!;
 const vitrine = prix('site-vitrine').prix_unique;
@@ -100,10 +100,10 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <h1 class="poster" id="hero-title">Un site qui fait sonner <span class="hl">votre téléphone</span>. <span class="hl hl-tomato">{e(vitrine)}, payé une fois.</span></h1>
         <p class="lead">Vos clients vous cherchent sur leur téléphone avant de pousser la porte. On crée le site qui les décide à vous appeler : textes écrits avec vous, fiche Google réglée, en ligne en {delaiVitrine}. Le site vous appartient.</p>
         <div class="btn-row fx-cta">
-          <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
-          <a class="btn btn-secondary btn-lg" href="#formules">Voir les 3 offres</a>
+          <a class="btn btn-primary btn-lg" href="/devis?formule=site">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary btn-lg" href={`tel:${TEL_INTL}`}>Nous appeler<span class="tel-num">{NB}· {TEL}</span></a>
         </div>
-        <p class="note">Gratuit et sans engagement · Maquette refaite sans frais si elle ne vous plaît pas</p>
+        <p class="note">Gratuit et sans engagement · Maquette refaite sans frais si elle ne vous plaît pas · <a class="link-u" href="#formules">Voir les 3 offres</a></p>
         <dl class="fx-stats">
           <div><dt>{e(vitrine)}</dt><dd>le site vitrine, payé une fois</dd></div>
           <div><dt>{delaiVitrine.split(' ').slice(0, 2).join(NB)}</dt><dd>ouvrables pour être en ligne</dd></div>
@@ -236,7 +236,8 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <p class="act-label">Pour commencer, dites-nous votre métier{NB}:</p>
           <ul class="act-chips">{ACTIVITES.map(a => <li><a href={`/devis?activite=${encodeURIComponent(a)}`}>{a}</a></li>)}</ul>
           <div class="btn-row" style="align-items:center;gap:20px">
-            <a class="btn btn-primary btn-lg" href="/devis">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
+            <a class="btn btn-primary btn-lg" href="/devis?formule=site">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
+            <a class="btn btn-glass" href={`tel:${TEL_INTL}`}>Nous appeler<span class="tel-num">{NB}· {TEL}</span></a>
             {WHATSAPP && <a class="btn btn-glass" href={WHATSAPP} target="_blank" rel="noopener">Écrire sur WhatsApp</a>}
           </div>
           <p class="note fx-final-note">Date indicative pour un site vitrine : 2 jours pour le devis, puis {delaiVitrine} après votre accord.</p>
@@ -288,6 +289,18 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <div>
+        <h2 class="d-xl" id="faq-title">Les questions qu'on nous pose <span class="hl hl-lime">avant de se lancer</span>.</h2>
+        <p class="lead" style="margin-top:18px">Une autre question{NB}? Écrivez-nous à <a class="link-u" href={`mailto:${EMAIL}`}>{EMAIL}</a>{WHATSAPP && <> ou <a class="link-u" href={WHATSAPP} target="_blank" rel="noopener">sur WhatsApp</a></>}.</p>
+      </div>
+      <div class="faq-list">
+        {FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="probleme" aria-labelledby="pb-title">
     <div class="wrap">
       <div class="fx-head rv">
@@ -332,18 +345,6 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           </div>
           <p class="small">Pas encore de site{NB}? Indiquez le nom de votre entreprise.</p>
         </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="faq" aria-labelledby="faq-title">
-    <div class="wrap faq">
-      <div>
-        <h2 class="d-xl" id="faq-title">Les questions qu'on nous pose <span class="hl hl-lime">avant de se lancer</span>.</h2>
-        <p class="lead" style="margin-top:18px">Une autre question{NB}? Écrivez-nous à <a class="link-u" href={`mailto:${EMAIL}`}>{EMAIL}</a>{WHATSAPP && <> ou <a class="link-u" href={WHATSAPP} target="_blank" rel="noopener">sur WhatsApp</a></>}.</p>
-      </div>
-      <div class="faq-list">
-        {FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
       </div>
     </div>
   </section>

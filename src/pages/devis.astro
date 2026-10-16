@@ -8,7 +8,7 @@ import { Image } from 'astro:assets';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
-import { BRAND, FORMULES, e, CLE_FORMULAIRES, EMAIL, FAMS, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
+import { BRAND, FORMULES, e, CLE_FORMULAIRES, EMAIL, FAMS, HORAIRES, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
 
 // Encart de confiance : le premier vrai avis s'il y en a un, sinon les logos des clients
 const [avis] = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.data.ordre);
@@ -52,7 +52,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
         <div class="step" id="step-2" hidden>
           <h2>Parlez-nous de votre projet</h2>
           <p>Ces réponses nous aident à vous proposer la bonne offre.</p>
-          <div class="pick-group"><h3>Budget envisagé</h3><Radios name="budget" options={["Je ne sais pas encore","Moins de 600 €","600 à 1 000 €","1 000 à 2 000 €","Plus de 2 000 €"]} /></div>
+          <div class="pick-group"><h3>Avez-vous déjà un site{NB}?</h3><Radios name="existant" options={["Non, ce sera mon premier","Oui, il faut le refaire","Oui, je veux l'améliorer"]} /></div>
           <div class="pick-group"><h3>Pour quand ?</h3><Radios name="delai" options={["Pas de date précise","Dans le mois","D'ici 3 mois"]} /></div>
           <div class="field"><label for="msg">Votre activité en quelques mots <span class="opt">(facultatif)</span></label><textarea id="msg" name="msg" rows="4" placeholder="Ex. : je vends des bougies artisanales et je veux une boutique en ligne avant Noël…"></textarea></div>
           <div class="field"><label for="site">Site actuel <span class="opt">(facultatif)</span></label><input type="text" id="site" name="site" inputmode="url" autocomplete="url" spellcheck="false" placeholder="www.votre-site.be…"></div>
@@ -132,7 +132,7 @@ const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" a
           <a class="big link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
           <a class="big link" href={`tel:${TEL_INTL}`}>{TEL}</a>
           {WHATSAPP && <a class="btn btn-secondary" href={WHATSAPP} target="_blank" rel="noopener" style="justify-self:start">Écrire sur WhatsApp</a>}
-          <p class="muted small">Lundi au vendredi, 9{NB}h à 18{NB}h</p>
+          <p class="muted small">On répond {HORAIRES}.</p>
         </div>
       </aside>
     </div>

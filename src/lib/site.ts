@@ -9,6 +9,11 @@ export const EMAIL = reglages.email;
 export const TEL = reglages.telephone;
 // 0467 66 26 29 → +32467662629 (format international pour les liens « appeler »)
 export const TEL_INTL = '+32' + TEL.replace(/\D/g, '').replace(/^0/, '');
+// Horaires où l'on répond au téléphone, du lundi au vendredi : « 08:30 » → « 8 h 30 », « 22:00 » → « 22 h »
+export const OUVERTURE = reglages.ouverture;
+export const FERMETURE = reglages.fermeture;
+const heure = (h: string) => { const [hh, mm] = h.split(':'); return +hh + NB + 'h' + (mm === '00' ? '' : NB + mm); };
+export const HORAIRES = `du lundi au vendredi, de ${heure(OUVERTURE)} à ${heure(FERMETURE)}`;
 export const VILLE = reglages.ville;
 export const ADRESSE = reglages.adresse;
 export const CODE_POSTAL = reglages.code_postal;
@@ -63,7 +68,7 @@ export const ORG = {
   ...(NUMERO_ENTREPRISE && { vatID: NUMERO_ENTREPRISE }),
   ...(RESEAUX.length && { sameAs: RESEAUX }),
   areaServed: [{ '@type': 'City', name: 'Bruxelles' }, { '@type': 'Country', name: 'Belgique' }],
-  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: OUVERTURE, closes: FERMETURE }],
   knowsLanguage: ['fr'],
   founder: FONDATEURS.map(personRef),
   hasOfferCatalog: {

@@ -423,7 +423,7 @@ if (form) {
       'Téléphone': form.tel.value.trim() || '-',
       'Services': chosen.join(', '),
       'Secteur': q.get('activite') || '-',
-      'Budget': form.budget.value,
+      'Site existant': form.existant.value,
       'Délai': form.delai.value,
       'Activité': form.msg.value.trim() || '-',
       'Site actuel': form.site.value.trim() || '-',

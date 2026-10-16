@@ -111,7 +111,12 @@ h1, h2, h3, h4 { margin: 0; font-weight: 720; text-wrap: balance; }
 .nav-links a[aria-current="page"] { color: var(--ink); background: var(--s2); }
 .nav-cta { display: flex; gap: 14px; align-items: center; }
 .nav-hint { font-size: .8125rem; color: var(--muted); white-space: nowrap; }
-@media (max-width: 1240px) { .nav-hint { display: none; } }
+.nav-tel { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: .9375rem; color: var(--ink); text-decoration: none; white-space: nowrap; }
+.nav-tel svg { width: 18px; height: 18px; flex: none; }
+.nav-tel:hover { color: var(--blue); }
+@media (max-width: 1400px) { .nav-hint { display: none; } }
+/* Numéro affiché à côté de « Nous appeler » sur ordinateur, où l'on ne peut pas toujours appeler d'un clic */
+@media (max-width: 720px) { .tel-num { display: none; } }
 .nav .btn { padding: .7em 1.1em; font-size: .9375rem; }
 .menu-btn { display: none; margin-left: auto; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--s2); cursor: pointer; }
 .menu-btn span, .menu-btn span::before, .menu-btn span::after { display: block; width: 18px; height: 1.5px; background: var(--ink); margin: 0 auto; position: relative; transition: transform .2s; }

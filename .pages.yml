@@ -225,6 +225,16 @@ content:
         description: "Ex. : 0467 66 26 29"
         type: string
         required: true
+      - name: ouverture
+        label: Ouverture (téléphone)
+        description: "Du lundi au vendredi. Format 08:30"
+        type: string
+        required: true
+      - name: fermeture
+        label: Fermeture (téléphone)
+        description: "Format 22:00"
+        type: string
+        required: true
       - name: ville
         label: Ville
         type: string
