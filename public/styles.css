@@ -1208,6 +1208,8 @@ a.m-proof:hover { border-color: var(--hair); }
 .work-card .phone { right: 6%; bottom: -12%; width: 26%; }
 .work-card.flat { padding: 0; }
 .work-card.flat img { width: 100%; height: 100%; object-fit: cover; }
+.work-logos { list-style: none; margin: 0 0 clamp(36px, 5vw, 56px); padding: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px clamp(28px, 4vw, 52px); }
+.work-logos img { height: 40px; width: auto; max-width: 160px; object-fit: contain; opacity: .8; }
 .work h3 { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.025em; }
 .work p { color: var(--muted); font-size: .9375rem; }
 @media (max-width: 760px) { .works { grid-template-columns: 1fr; gap: 36px; } .work:nth-child(even) { margin-top: 0; } .work-card { padding: 22px 22px 0; border-radius: 24px; } }

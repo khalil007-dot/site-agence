@@ -15,6 +15,21 @@ import shotOmi from '../assets/projets/omi-restaurant.jpg';
 import shotOmiMobile from '../assets/projets/omi-restaurant-mobile.jpg';
 import shotOmiMenu from '../assets/projets/omi-menu.jpg';
 import shotObrunch from '../assets/projets/obrunch-house-logo.jpg';
+import shotPlombier from '../assets/projets/plombier-urgent-bruxelles.jpg';
+import shotPlombierMobile from '../assets/projets/plombier-urgent-bruxelles-mobile.jpg';
+import shotBarber from '../assets/projets/barber-club-ahmed.jpg';
+import shotBarberMobile from '../assets/projets/barber-club-ahmed-mobile.jpg';
+import shotBhna from '../assets/projets/beauty-has-no-age.jpg';
+import shotBhnaMobile from '../assets/projets/beauty-has-no-age-mobile.jpg';
+import shotLiege from '../assets/projets/plombier-urgent-liege.jpg';
+import shotLiegeMobile from '../assets/projets/plombier-urgent-liege-mobile.jpg';
+import logoStreetSapp from '../assets/clients/street-sapp.png';
+import logoOmi from '../assets/clients/omi.png';
+import logoObrunch from '../assets/clients/obrunch-house.png';
+import logoPlombier from '../assets/clients/plombier-urgent.png';
+import logoBarber from '../assets/clients/barber-club-ahmed.png';
+import logoBhna from '../assets/clients/beauty-has-no-age.png';
+import logoLiege from '../assets/clients/liege-plomberie.png';
 import { BRAND, COFONDATEUR, EMAIL, FONDATEUR, FORMULES, MAINTENANCE, NB, ORG, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e } from '../lib/site';
 
 const prix = (id: string) => SV.find(s => s.id === id)!;
@@ -22,6 +37,17 @@ const vitrine = prix('site-vitrine').prix_unique;
 const maintenance = MAINTENANCE;
 const delaiVitrine = prix('site-vitrine').infos[0].valeur;
 const offreSite = FORMULES.find(f => f.id === 'site')!;
+
+// Sites en ligne montrés dans « De vrais sites » : [nom, adresse, capture ordinateur, capture téléphone, fond, description]
+const SITES = [
+  ['Plombier Urgent', 'plombier-urgent-bruxelles.be', shotPlombier, shotPlombierMobile, 'var(--royal)', 'Site et Google Ads · Dépannage 24 h/24 · Bruxelles'],
+  ['Barber Club by Ahmed', 'barberclubbyahmed.com', shotBarber, shotBarberMobile, 'var(--tomato)', 'Site avec réservation en ligne · Schaerbeek'],
+  ['Beauty Has No Age', 'bhna.be', shotBhna, shotBhnaMobile, 'var(--yellow)', 'Site vitrine · Institut de beauté · Drogenbos'],
+  ['Street Sapp', 'streetsapp.be', shotStreet, shotStreetMobile, 'var(--royal)', 'Boutique en ligne · Sportswear et sneakers · Belgique'],
+  ['OMI Restaurant', 'omi-restaurant.com', shotOmi, shotOmiMobile, 'var(--tomato)', 'Site vitrine, logo, menu et flyer · Saint-Josse'],
+  ['Liège Plomberie & Débouchage', 'plombier-urgent-liege.be', shotLiege, shotLiegeMobile, 'var(--sky)', 'Site vitrine · Plombier 24 h/24 · Liège'],
+] as const;
+const LOGOS = [['Plombier Urgent', logoPlombier], ['Barber Club by Ahmed', logoBarber], ['Beauty Has No Age', logoBhna], ['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch], ['Liège Plomberie', logoLiege]] as const;
 
 // Bandeau qui défile sous le titre
 const INCLUS = ['Maquette validée par vous', 'Textes écrits avec vous', 'Pensé pour le téléphone', 'Fiche Google incluse', 'Boutons Appeler et WhatsApp', 'Le site vous appartient', 'Paiement en 3 fois sans frais', 'Deux fondateurs en direct'];
@@ -129,25 +155,21 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       <div class="fx-head rv">
         <h2 class="d-xl" id="work-title">De vrais sites, pour de <span class="hl hl-pink">vrais commerces</span>.</h2>
         <div class="fx-head-side">
-          <p class="lead">Les deux sites sont en ligne, ouvrez-les : une boutique de sportswear et un restaurant à Saint-Josse. Dessous, le menu d'OMI et le logo d'une maison de brunch.</p>
+          <p class="lead">Six sites en ligne, ouvrez-les : deux plombiers à Bruxelles et à Liège, un barbier à Schaerbeek, un institut de beauté, une boutique de sportswear et un restaurant à Saint-Josse. Dessous, le menu d'OMI et le logo d'une maison de brunch.</p>
           <a class="btn btn-secondary" href="/realisations">Toutes les réalisations <span aria-hidden="true">→</span></a>
         </div>
       </div>
+      <ul class="work-logos rv" aria-label="Ils nous ont confié leur site ou leur image">{LOGOS.map(([nom, src]) => <li><Image src={src} alt={nom} height={96} /></li>)}</ul>
       <div class="works">
-        <a class="work rv" href="https://streetsapp.be/" target="_blank" rel="noopener">
-          <div class="work-card" style="--bg:var(--royal)">
-            <div class="browser"><span class="bar"><i></i><i></i><i></i><b>streetsapp.be</b></span><Image src={shotStreet} alt="Page d'accueil de la boutique en ligne Street Sapp" widths={[480, 800]} sizes="(max-width: 760px) 80vw, 520px" /></div>
-            <div class="phone"><Image src={shotStreetMobile} alt="" widths={[200, 390]} sizes="150px" /></div>
-          </div>
-          <h3>Street Sapp</h3><p>Boutique en ligne · Sportswear et sneakers · Belgique</p>
-        </a>
-        <a class="work rv" href="https://omi-restaurant.com/" target="_blank" rel="noopener">
-          <div class="work-card" style="--bg:var(--tomato)">
-            <div class="browser"><span class="bar"><i></i><i></i><i></i><b>omi-restaurant.com</b></span><Image src={shotOmi} alt="Page d'accueil du site du restaurant OMI" widths={[480, 800]} sizes="(max-width: 760px) 80vw, 520px" /></div>
-            <div class="phone"><Image src={shotOmiMobile} alt="" widths={[200, 390]} sizes="150px" /></div>
-          </div>
-          <h3>OMI Restaurant</h3><p>Site vitrine, logo, menu et flyer · Bruxelles</p>
-        </a>
+        {SITES.map(([nom, domaine, shot, mobile, fond, quoi]) => (
+          <a class="work rv" href={`https://${domaine}/`} target="_blank" rel="noopener">
+            <div class="work-card" style={`--bg:${fond}`}>
+              <div class="browser"><span class="bar"><i></i><i></i><i></i><b>{domaine}</b></span><Image src={shot} alt={`Page d'accueil du site ${nom}`} widths={[480, 800]} sizes="(max-width: 760px) 80vw, 520px" /></div>
+              <div class="phone"><Image src={mobile} alt="" widths={[200, 390]} sizes="150px" /></div>
+            </div>
+            <h3>{nom}</h3><p>{quoi}</p>
+          </a>
+        ))}
         <a class="work rv" href="/realisations?type=logo">
           <div class="work-card flat" style="--bg:var(--pink)"><Image src={shotOmiMenu} alt="Couverture du menu du restaurant OMI" widths={[480, 800]} sizes="(max-width: 760px) 90vw, 560px" /></div>
           <h3>OMI Restaurant</h3><p>Logo et menu</p>
