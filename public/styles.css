@@ -1303,6 +1303,15 @@ a.m-proof:hover { border-color: var(--hair); }
   --g-coral: radial-gradient(120% 100% at 80% 0%, #FFB0BE 0%, #FF5577 35%, #6E1426 72%, #22201A 100%);
   --violet: #9B7BFF; --orange: #FF9A5E; --magenta: #E77BF7; --coral: #FF7A93; --green: #4ADE80; }
 .fx-spots .d-xl { color: #fff; }
+/* Version compacte sur l'accueil */
+.fx-spots .d-xl { font-size: clamp(1.75rem, 3.4vw, 2.75rem); }
+.fx-spots .section-head { margin-bottom: clamp(20px, 3vw, 32px); }
+.fx-spots .spot { min-height: 0; gap: 18px; border-radius: 24px; }
+.fx-spots .spot-top { gap: 10px; }
+.fx-spots .spot .spot-title { font-size: clamp(1.375rem, 2vw, 1.75rem); }
+.fx-spots .spot p { font-size: .9375rem; }
+.fx-spots .sv { height: 180px; }
+.fx-spots .subhead { font-size: 1.0625rem; }
 .seal b small { font-size: .55em; margin-left: 2px; }
 .options li { padding: 0; }
 .options li a { display: block; padding: 9px 16px; text-decoration: none; color: inherit; border-radius: 100px; }
