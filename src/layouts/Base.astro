@@ -87,9 +87,7 @@ const FAV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     <div class="foot-bottom"><span><span translate="no">{BRAND}</span>, Bruxelles, Belgique.</span><span class="foot-legal"><a href="/mentions-legales">Mentions légales et confidentialité</a>{GOOGLE_ADS && <button class="foot-cookies" type="button" data-consent-open>Cookies</button>}</span></div>
   </div>
 </footer>
-{sticky && <div class="sticky-cta">{WHATSAPP
-  ? <a class="btn btn-secondary" href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>
-  : <a class="btn btn-secondary" href={`tel:${TEL_INTL}`}>Appeler</a>}<a class="btn btn-primary" href="/devis">Devis gratuit</a></div>}
+{sticky && <div class="sticky-cta"><a class="btn btn-secondary" href={`tel:${TEL_INTL}`}>Appeler</a>{WHATSAPP && <a class="btn btn-secondary" href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>}<a class="btn btn-primary" href="/devis">Devis</a></div>}
 {WHATSAPP && <a class="wa-float" href={WHATSAPP} target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c.4.9 1.2 1.7 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .5-.4.7-.5.3-1.2.5-2 .3-2.2-.6-4-2.4-4.6-4.6-.2-.8 0-1.5.3-1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>}
 {GOOGLE_ADS && <div class="consent" id="consent" role="dialog" aria-labelledby="consent-t" hidden>
   <p id="consent-t"><b>Mesure des publicités</b>Avec votre accord, Google nous dit quelle annonce vous a amené ici. On garde ainsi les annonces utiles et on arrête les autres. <a class="link" href="/mentions-legales#cookies">En savoir plus</a></p>

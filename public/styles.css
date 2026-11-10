@@ -1462,3 +1462,29 @@ a.m-proof:hover { border-color: var(--hair); }
   .consent p b { display: inline; font-size: inherit; margin: 0 4px 0 0; }
   .consent-btns .btn { flex: 1; padding: 8px 14px; font-size: .875rem; }
 }
+
+/* ---------- Accueil court, tourné vers le contact ---------- */
+/* Titre plus petit sur ordinateur : les deux boutons restent visibles à l'arrivée */
+@media (min-width: 961px) { .fx-hero .poster { font-size: clamp(2.7rem, 4.4vw, 4.1rem); max-width: 13ch; } .fx-hero .lead { margin-top: 20px; } .fx-cta { margin-top: 26px; } }
+.hero-proof { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--hair); max-width: 600px; }
+.hero-proof p { font-size: .8125rem; font-weight: 600; color: var(--muted); margin: 0 0 12px; }
+.hero-proof ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.hero-proof img { height: 24px; width: auto; max-width: 96px; object-fit: contain; filter: invert(1); opacity: .7; }
+.methode { margin-top: clamp(28px, 4vw, 44px); }
+.methode > .d-md { margin-bottom: 28px; max-width: 30ch; }
+.methode .timeline { margin-bottom: 28px; }
+.contact-btns { gap: 10px; }
+.audit-mini { display: grid; gap: 12px; margin-top: 28px; padding: 20px; border-radius: 22px; background: var(--s1, #fff); box-shadow: inset 0 0 0 1px var(--hair-soft); }
+.audit-mini label { font-size: .9375rem; line-height: 1.45; color: var(--muted); }
+.audit-mini label b { color: var(--ink); }
+.audit-mini .audit-row { box-shadow: inset 0 0 0 1px var(--hair); }
+/* Barre fixe sur téléphone : Appeler, WhatsApp et Devis */
+@media (max-width: 720px) { .sticky-cta { gap: 6px; padding: 6px; } .sticky-cta .btn { padding: 12px 8px; font-size: .9375rem; } }
+/* Bandeau cookies sur ordinateur : fine bande en bas, qui ne cache plus le haut de page */
+@media (min-width: 721px) {
+  .consent { left: 0; right: 0; bottom: 0; max-width: none; border-radius: 0; padding: 12px max(16px, calc((100vw - 1240px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .consent p { font-size: .875rem; }
+  .consent p b { display: inline; font-size: inherit; margin: 0 6px 0 0; }
+  .consent-btns { flex: none; }
+  .consent-btns .btn { padding: 8px 16px; font-size: .875rem; }
+}
