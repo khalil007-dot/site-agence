@@ -7,12 +7,16 @@ import Fondateurs from '../components/Fondateurs.astro';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
+import logoPlombier from '../assets/clients/plombier-urgent.png';
+import logoBarber from '../assets/clients/barber-club-ahmed.png';
+import logoBhna from '../assets/clients/beauty-has-no-age.png';
+import logoLiege from '../assets/clients/liege-plomberie.png';
 import { BRAND, COFONDATEUR, EMAIL, FONDATEUR, FONDATEURS, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
 
 const prenom = FONDATEUR.split(' ')[0];
 // Délai de mise en ligne d'un site vitrine (src/data/services.json)
 const delaiVitrine = (SV.find(s => s.id === 'site-vitrine')?.infos.find(x => x.label === 'Délai moyen')?.valeur ?? '5 jours ouvrables').split(' ').slice(0, 2).join(' ');
-const CLIENTS = [['Street Sapp', logoStreetSapp, 'Boutique en ligne'], ['OMI Restaurant', logoOmi, 'Site, menu et flyer'], ["O'Brunch House", logoObrunch, 'Logo et flyer']] as const;
+const CLIENTS = [['Street Sapp', logoStreetSapp, 'Boutique en ligne'], ['OMI Restaurant', logoOmi, 'Site, menu et flyer'], ["O'Brunch House", logoObrunch, 'Logo et flyer'], ['Plombier Urgent', logoPlombier, 'Site et Google Ads'], ['Barber Club by Ahmed', logoBarber, 'Site avec réservation'], ['Beauty Has No Age', logoBhna, 'Site vitrine'], ['Liège Plomberie', logoLiege, 'Site vitrine']] as const;
 
 const prixMaintenance = SV.find(s => s.id === 'maintenance')?.prix_mensuel ?? 39;
 // [titre, promesse, concrètement (verso de la carte)]

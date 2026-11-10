@@ -8,11 +8,15 @@ import { Image } from 'astro:assets';
 import logoStreetSapp from '../assets/clients/street-sapp.png';
 import logoOmi from '../assets/clients/omi.png';
 import logoObrunch from '../assets/clients/obrunch-house.png';
+import logoPlombier from '../assets/clients/plombier-urgent.png';
+import logoBarber from '../assets/clients/barber-club-ahmed.png';
+import logoBhna from '../assets/clients/beauty-has-no-age.png';
+import logoLiege from '../assets/clients/liege-plomberie.png';
 import { BRAND, FORMULES, e, CLE_FORMULAIRES, EMAIL, FAMS, HORAIRES, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
 
 // Encart de confiance : le premier vrai avis s'il y en a un, sinon les logos des clients
 const [avis] = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.data.ordre);
-const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch]] as const;
+const CLIENTS = [['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch], ['Plombier Urgent', logoPlombier], ['Barber Club by Ahmed', logoBarber], ['Beauty Has No Age', logoBhna], ['Liège Plomberie', logoLiege]] as const;
 // Piège à robots : case invisible pour les humains, cochée par les robots de spam
 // Formule choisie sur l'accueil (?formule=business) : rappelée en haut du formulaire
 const CHOIX = Object.fromEntries(FORMULES.map(f => [f.id, { services: f.services, texte: `${f.nom} : ${e(f.prix)} HTVA, payé une fois ou en 3 fois sans frais. Dites-nous en quelques mots ce que vous faites, on s'occupe du reste.` }]));

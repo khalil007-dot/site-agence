@@ -709,7 +709,7 @@ a.m-proof:hover { border-color: var(--hair); }
 .send-error a { color: inherit; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .side-logos { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-.side-logos img { height: 40px; width: auto; filter: invert(1); opacity: .85; }
+.side-logos img { height: 40px; width: auto; max-width: 100%; object-fit: contain; filter: invert(1); opacity: .85; }
 
 /* Bouton WhatsApp flottant (masqué sur mobile quand la barre du bas est là) */
 .wa-float { position: fixed; z-index: 41; right: 20px; bottom: calc(20px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 8px; padding: 12px 18px 12px 14px; border-radius: 100px; background: #25D366; color: #06331A; font-weight: 600; font-size: .9375rem; text-decoration: none; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
@@ -852,14 +852,15 @@ a.m-proof:hover { border-color: var(--hair); }
 .tilt:hover::after { opacity: 1; }
 
 /* À propos : logos clients qui révèlent le projet */
-.client-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 220px)); gap: 12px; justify-content: center; }
+.client-cards { list-style: none; margin: 0 auto; padding: 0; max-width: 916px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.client-cards li { flex: 0 0 220px; }
 .client-cards a { position: relative; display: grid; place-items: center; height: 140px; border-radius: 20px; background: var(--night); border: 1px solid var(--hair-soft); overflow: hidden; text-decoration: none; }
-.client-cards img { height: 64px; width: auto; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s; }
+.client-cards img { height: 64px; width: auto; max-width: 80%; object-fit: contain; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s; }
 .cc-info { position: absolute; inset: 0; display: grid; place-content: center; gap: 4px; text-align: center; padding: 12px; background: var(--g-violet); font-size: .875rem; color: rgba(23,21,15,.8); opacity: 0; transform: translateY(14px); transition: opacity .3s, transform .35s cubic-bezier(.2,.8,.2,1); }
 .cc-info b { color: var(--night); font-size: 1.0625rem; letter-spacing: -0.02em; }
 .client-cards a:hover .cc-info, .client-cards a:focus-visible .cc-info { opacity: 1; transform: none; }
 .client-cards a:hover img, .client-cards a:focus-visible img { transform: scale(.85); opacity: 0; }
-@media (max-width: 560px) { .client-cards { grid-template-columns: repeat(3, 1fr); } .client-cards a { height: 110px; } .client-cards img { height: 44px; } .cc-info { font-size: .75rem; } .cc-info b { font-size: .875rem; } }
+@media (max-width: 560px) { .client-cards li { flex-basis: calc((100% - 24px) / 3); } .client-cards a { height: 110px; } .client-cards img { height: 44px; } .cc-info { font-size: .75rem; } .cc-info b { font-size: .875rem; } }
 
 /* À propos : engagements qui se retournent */
 .flips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
