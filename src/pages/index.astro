@@ -7,7 +7,7 @@ import Avis from '../components/Avis.astro';
 import Offres from '../components/Offres.astro';
 import Preuve from '../components/Preuve.astro';
 import Contact from '../components/Contact.astro';
-import { LOGOS } from '../lib/clients';
+import ClientCards from '../components/ClientCards.astro';
 import { Image } from 'astro:assets';
 import shotStreet from '../assets/projets/streetsapp.jpg';
 import shotStreetMobile from '../assets/projets/streetsapp-mobile.jpg';
@@ -102,7 +102,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <a class="btn btn-secondary" href="/realisations">Toutes les réalisations <span aria-hidden="true">→</span></a>
         </div>
       </div>
-      <ul class="work-logos rv" aria-label="Ils nous ont confié leur site ou leur image">{LOGOS.map(([nom, src]) => <li><Image src={src} alt={nom} height={96} /></li>)}</ul>
+      <div class="work-clients"><ClientCards /></div>
       <div class="works">
         {SITES.map(([nom, domaine, shot, mobile, fond, quoi]) => (
           <a class="work rv" href={`https://${domaine}/`} target="_blank" rel="noopener">

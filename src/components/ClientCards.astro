@@ -1,0 +1,7 @@
+---
+// Cartes des clients : le logo, puis au survol (ou au toucher) le nom et le projet. Un clic ouvre le site
+// du client, ou la page Réalisations s'il n'a pas de site. Données : src/lib/clients.ts
+import { Image } from 'astro:assets';
+import { LOGOS } from '../lib/clients';
+---
+<ul class="client-cards">{LOGOS.map(([nom, src, quoi, lien], i) => <li class="rv" style={`--d:${i}`}><a href={lien || '/realisations'} target={lien ? '_blank' : undefined} rel={lien ? 'noopener' : undefined}><Image src={src} alt={nom} height={120} /><span class="cc-info"><b>{nom}</b>{quoi}</span></a></li>)}</ul>

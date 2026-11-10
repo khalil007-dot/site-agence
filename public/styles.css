@@ -1553,3 +1553,12 @@ a.m-proof:hover { border-color: var(--hair); }
 .sx-garanties li span { font-size: .9375rem; color: rgba(23,21,15,.78); }
 @media (max-width: 960px) { .sx-garanties ul { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .sx-garanties ul { grid-template-columns: 1fr; } .sx-card-head { flex-direction: column; } .sx-price { justify-items: start; text-align: left; } }
+/* Accueil : cartes des clients dans la section sombre des réalisations */
+.work-clients { margin-bottom: clamp(28px, 4vw, 44px); }
+.on-dark .client-cards a { background: var(--s1); }
+.work-clients .client-cards { max-width: none; }
+.work-clients .client-cards li { flex-basis: calc((100% - 72px) / 7); min-width: 120px; }
+.work-clients .client-cards a { height: 110px; }
+.work-clients .client-cards img { height: 46px; }
+@media (max-width: 960px) { .work-clients .client-cards li { flex-basis: calc((100% - 36px) / 4); } }
+@media (max-width: 560px) { .work-clients .client-cards li { flex-basis: calc((100% - 24px) / 3); min-width: 0; } }
