@@ -418,10 +418,10 @@ footer { padding: 72px 0 40px; margin-top: clamp(48px, 6vw, 80px); }
 .jump a { flex: none; text-decoration: none; font-size: .875rem; font-weight: 500; padding: 8px 14px; border-radius: 100px; display: flex; align-items: center; gap: 8px; color: var(--muted); background: var(--s1); }
 .jump a::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
 .jump a:hover { color: var(--ink); }
-.fam-banner { border-radius: 30px; padding: clamp(28px, 5vw, 56px); min-height: 240px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; align-items: end; }
+.fam-banner { border-radius: 26px; padding: clamp(22px, 3.5vw, 38px); min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; align-items: end; }
 .fam-banner p { color: rgba(23,21,15,.78); max-width: 40ch; font-size: 1.1875rem; }
 @media (max-width: 760px) { .fam-banner { grid-template-columns: 1fr; } }
-.svc { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 5vw, 64px); padding: clamp(36px, 5vw, 56px) 0; border-bottom: 1px solid var(--hair-soft); }
+.svc { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 5vw, 64px); padding: clamp(28px, 4vw, 44px) 0; border-bottom: 1px solid var(--hair-soft); }
 .svc:last-child { border-bottom: 0; }
 .svc h3 { font-size: clamp(1.75rem, 3vw, 2.375rem); letter-spacing: -0.045em; line-height: 1.05; }
 .svc .for { margin-top: 14px; color: var(--muted); max-width: 46ch; }
@@ -1503,3 +1503,6 @@ a.m-proof:hover { border-color: var(--hair); }
 @media (max-width: 760px) { .rappel-row { grid-template-columns: 1fr; } .rappel-row .btn { margin-top: 0; width: 100%; } }
 .hero-lead { display: grid; gap: 10px; }
 .hero-lead p { margin: 0; }
+/* Page Services : haut de page compact comme l'accueil */
+@media (min-width: 961px) { .sv-head .poster { font-size: clamp(2.7rem, 4.6vw, 4.4rem); } }
+.sv-head .lead { max-width: 60ch; }

@@ -5,7 +5,9 @@
 import Base from '../layouts/Base.astro';
 import Avis from '../components/Avis.astro';
 import Offres from '../components/Offres.astro';
-import Fondateurs from '../components/Fondateurs.astro';
+import Preuve from '../components/Preuve.astro';
+import Contact from '../components/Contact.astro';
+import { LOGOS } from '../lib/clients';
 import { Image } from 'astro:assets';
 import shotStreet from '../assets/projets/streetsapp.jpg';
 import shotStreetMobile from '../assets/projets/streetsapp-mobile.jpg';
@@ -21,14 +23,7 @@ import shotBhna from '../assets/projets/beauty-has-no-age.jpg';
 import shotBhnaMobile from '../assets/projets/beauty-has-no-age-mobile.jpg';
 import shotLiege from '../assets/projets/plombier-urgent-liege.jpg';
 import shotLiegeMobile from '../assets/projets/plombier-urgent-liege-mobile.jpg';
-import logoStreetSapp from '../assets/clients/street-sapp.png';
-import logoOmi from '../assets/clients/omi.png';
-import logoObrunch from '../assets/clients/obrunch-house.png';
-import logoPlombier from '../assets/clients/plombier-urgent.png';
-import logoBarber from '../assets/clients/barber-club-ahmed.png';
-import logoBhna from '../assets/clients/beauty-has-no-age.png';
-import logoLiege from '../assets/clients/liege-plomberie.png';
-import { BRAND, CLE_FORMULAIRES, COFONDATEUR, EMAIL, FONDATEUR, FORMULES, HORAIRES, MAINTENANCE, NB, ORG, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e } from '../lib/site';
+import { BRAND, EMAIL, FORMULES, MAINTENANCE, NB, ORG, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e } from '../lib/site';
 
 const prix = (id: string) => SV.find(s => s.id === id)!;
 const vitrine = prix('site-vitrine').prix_unique;
@@ -36,8 +31,6 @@ const maintenance = MAINTENANCE;
 const delaiVitrine = prix('site-vitrine').infos[0].valeur;
 // Offre d'appel : la page d'accueil du futur site, montrée gratuitement avant toute signature
 const DELAI_MAQUETTE = `72${NB}h ouvrées`;
-// Piège à robots du formulaire de rappel : case invisible pour les humains
-const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">';
 
 // Sites en ligne montrés dans « De vrais sites » : [nom, adresse, capture ordinateur, capture téléphone, fond, description]
 const SITES = [
@@ -48,7 +41,6 @@ const SITES = [
   ['OMI Restaurant', 'omi-restaurant.com', shotOmi, shotOmiMobile, 'var(--tomato)', 'Site vitrine, logo, menu et flyer · Saint-Josse'],
   ['Liège Plomberie & Débouchage', 'plombier-urgent-liege.be', shotLiege, shotLiegeMobile, 'var(--sky)', 'Site vitrine · Plombier 24 h/24 · Liège'],
 ] as const;
-const LOGOS = [['Plombier Urgent', logoPlombier], ['Barber Club by Ahmed', logoBarber], ['Beauty Has No Age', logoBhna], ['Street Sapp', logoStreetSapp], ['OMI Restaurant', logoOmi], ["O'Brunch House", logoObrunch], ['Liège Plomberie', logoLiege]] as const;
 
 const ETAPES: [string, string, string][] = [
   ['Avant de commencer', 'Un appel de 30 minutes', 'Vous nous parlez de vos clients et de ce qui vous rend différent. Sous 48 h, vous recevez un devis ferme. Les 5 jours démarrent quand vous l’acceptez.'],
@@ -90,10 +82,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <a class="btn btn-secondary btn-lg" href={`tel:${TEL_INTL}`}>Appeler le {TEL}</a>
         </div>
         <p class="note">Votre page d'accueil sous {DELAI_MAQUETTE} · Gratuit, sans engagement · Vous signez seulement si elle vous plaît · <a class="link-u" href="#formules">Voir les 3 offres</a></p>
-        <div class="hero-proof">
-          <p>{LOGOS.length} entreprises nous ont confié leur site ou leur image</p>
-          <ul aria-label="Nos clients">{LOGOS.map(([nom, src]) => <li><Image src={src} alt={nom} height={64} /></li>)}</ul>
-        </div>
+        <Preuve />
       </div>
       <div class="fx-hero-visual" aria-hidden="true">
         <span class="glow"></span>
@@ -163,34 +152,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     </div>
   </section>
 
-  <section class="section-tight" id="contact" aria-labelledby="contact-title">
-    <div class="wrap">
-      <div class="panel panel-white founder founder-duo">
-        <div class="founder-txt">
-          <h2 class="d-lg" id="contact-title">Parlez directement à <span class="hl">{COFONDATEUR} ou {FONDATEUR.split(' ')[0]}</span>.</h2>
-          <blockquote><p>« Pas de standard ni de chef de projet : quand vous appelez, vous tombez sur l'un de nous deux. »</p></blockquote>
-          <form class="rappel" id="rappel-form" novalidate data-cle={CLE_FORMULAIRES} data-email={EMAIL}>
-            <Fragment set:html={piege} />
-            <div id="rappel-step">
-              <p class="rappel-t"><b>Laissez votre numéro, on vous rappelle.</b> Dans la journée, {HORAIRES}.</p>
-              <div class="rappel-row">
-                <div class="field"><label for="r-nom">Prénom</label><input type="text" id="r-nom" name="nom" autocomplete="given-name" required aria-describedby="err-r-nom"><p class="error" id="err-r-nom"></p></div>
-                <div class="field"><label for="r-tel">Téléphone</label><input type="tel" id="r-tel" name="tel" autocomplete="tel" inputmode="tel" required placeholder="0470 12 34 56…" aria-describedby="err-r-tel"><p class="error" id="err-r-tel"></p></div>
-                <button class="btn btn-primary btn-lg" type="submit">Rappelez-moi</button>
-              </div>
-              <p class="step-error" id="err-envoi-rappel" role="alert"></p>
-            </div>
-            <div id="rappel-done" hidden>
-              <h3 tabindex="-1">C'est noté, <span id="rappel-prenom"></span>{NB}!</h3>
-              <p>On vous rappelle au <b id="rappel-num"></b> dans la journée.</p>
-            </div>
-          </form>
-          <p class="contact-autres">Ou directement : <a class="link-u" href={`tel:${TEL_INTL}`}>{TEL}</a>{WHATSAPP && <> · <a class="link-u" href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a></>} · <a class="link-u" href="/devis?maquette=1">maquette gratuite</a></p>
-        </div>
-        <Fondateurs mission={false} />
-      </div>
-    </div>
-  </section>
+  <Contact />
 
   <section class="section" id="faq" aria-labelledby="faq-title">
     <div class="wrap faq">

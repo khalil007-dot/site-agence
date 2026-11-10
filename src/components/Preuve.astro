@@ -1,0 +1,9 @@
+---
+// Ligne de confiance sous les boutons du haut de page : les logos des clients, en petit
+import { Image } from 'astro:assets';
+import { LOGOS } from '../lib/clients';
+---
+<div class="hero-proof">
+  <p>{LOGOS.length} entreprises nous ont confié leur site ou leur image</p>
+  <ul aria-label="Nos clients">{LOGOS.map(([nom, src]) => <li><Image src={src} alt={nom} height={64} /></li>)}</ul>
+</div>

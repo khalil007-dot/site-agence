@@ -1,15 +1,19 @@
 ---
 // Page Services : générée à partir de src/data/services.json
-// Guide « par où commencer », une fiche par service (promesse, prix, mensualités, réalisation), formules, FAQ
+// Haut de page tourné vers le contact (maquette gratuite, appel, logos clients), guide « par où commencer »,
+// une fiche par service (promesse, prix, mensualités, réalisation), avis, formules, contact, FAQ
 import Base from '../layouts/Base.astro';
 import Offres from '../components/Offres.astro';
-import ServiceVisual from '../components/ServiceVisual.astro';
+import Avis from '../components/Avis.astro';
+import Preuve from '../components/Preuve.astro';
+import Contact from '../components/Contact.astro';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import captureOmi from '../assets/projets/omi-restaurant.jpg';
+import captureBarber from '../assets/projets/barber-club-ahmed.jpg';
+import capturePlombier from '../assets/projets/plombier-urgent-bruxelles.jpg';
 import captureStreetSapp from '../assets/projets/streetsapp.jpg';
 import logoObrunch from '../assets/projets/obrunch-house-logo.jpg';
-import { BRAND, FAMS, FORMULES, NB, ORG_ID, SITE_URL, SV, WHATSAPP, e, prixDepart } from '../lib/site';
+import { BRAND, EMAIL, FAMS, FORMULES, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e, prixDepart } from '../lib/site';
 
 const BYID = Object.fromEntries(SV.map(s => [s.id, s]));
 // Services vendus seuls à prix fixe dans les 3 offres (site vitrine, boutique) : pas de « À partir de »
@@ -20,9 +24,11 @@ const mensualite = (p: number) => e(Math.round(p / 3));
 
 // Vraies réalisations à montrer à côté d'un service
 const PREUVES: Record<string, { img: ImageMetadata; client: string; quoi: string; lien?: string }> = {
-  'site-vitrine': { img: captureOmi, client: 'OMI Restaurant', quoi: 'Site vitrine avec réservation', lien: 'https://omi-restaurant.com/' },
+  'site-vitrine': { img: captureBarber, client: 'Barber Club by Ahmed', quoi: 'Site vitrine avec réservation en ligne', lien: 'https://barberclubbyahmed.com/' },
   'e-commerce': { img: captureStreetSapp, client: 'Street Sapp', quoi: 'Boutique en ligne de sportswear', lien: 'https://streetsapp.be/' },
   logo: { img: logoObrunch, client: "O'Brunch House", quoi: 'Logo, puis flyer assorti' },
+  seo: { img: capturePlombier, client: 'Plombier Urgent', quoi: 'Une page par commune de Bruxelles', lien: 'https://plombier-urgent-bruxelles.be/' },
+  'google-ads': { img: capturePlombier, client: 'Plombier Urgent', quoi: 'Une annonce et une page par commune', lien: 'https://plombier-urgent-bruxelles.be/' },
 };
 
 // Guide « Par où commencer ? » : [situation, conseil, services recommandés]
@@ -42,6 +48,7 @@ const budget = (ids: string[]) => {
 };
 
 const FAQ: [string, string][] = [
+  ['La maquette gratuite, c’est vraiment gratuit ?', 'Oui. Vous nous dites le nom de votre commerce et ce que vous faites, et sous 72 h ouvrées on vous montre la page d’accueil de votre futur site. Si elle vous plaît, on vous envoie le devis. Sinon, vous ne nous devez rien.'],
   ['Les prix affichés sont-ils les vrais prix ?', "Oui. Le site vitrine, le site + logo et la boutique ont un prix fixe, hors TVA. Pour les autres services, c'est un prix de départ : le devis gratuit donne le montant exact selon votre projet, et il ne bouge plus ensuite."],
   ['Puis-je payer en plusieurs fois ?', "Oui, de deux façons : 40 % à la signature et 60 % à la mise en ligne, ou 3 mensualités sans frais. Cela vaut pour les sites et le logo ; les services mensuels se paient chaque mois."],
   ['Les services mensuels m’engagent-ils longtemps ?', "La maintenance est sans engagement. Le référencement demande 3 mois au départ, le temps que Google prenne en compte le travail. Ensuite, vous arrêtez avec un mois de préavis."],
@@ -67,15 +74,16 @@ const SERVICES_LD = {
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
 <Base chemin="services" title={`Services et prix : sites et SEO à Bruxelles | ${BRAND}`} desc={`Site vitrine dès ${e(SV.find(s => s.id === "site-vitrine")!.prix_unique)}, boutique en ligne, logo, SEO, Google Ads et réseaux sociaux à Bruxelles : ce qui est inclus, délais, prix et paiement en 3 fois.`} current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
-  <section class="page-head" aria-labelledby="page-title">
+  <section class="page-head sv-head" aria-labelledby="page-title">
     <div class="wrap reveal">
       <h1 class="poster" id="page-title">Nos services, avec leur prix.</h1>
-      <p class="lead">{SV.length} services pour créer votre site, soigner votre image et faire venir des clients. Pour chacun, vous voyez ce qu'il vous rapporte, ce qui est inclus, le délai et le prix. Vous hésitez{NB}? Le guide juste en dessous vous dit par où commencer.</p>
-      <div class="btn-row" style="margin-top:28px">
-        <a class="btn btn-primary" href="#guide">Trouver le bon service</a>
-        <a class="btn btn-secondary" href="/devis">Demander un devis gratuit</a>
+      <p class="lead">Créer votre site, soigner votre image, faire venir des clients. Pour chaque service, vous voyez ce qu'il vous rapporte, ce qui est inclus, le délai et le prix. Vous hésitez{NB}? <a class="link-u" href="#guide">Le guide vous dit par où commencer</a>.</p>
+      <div class="btn-row fx-cta">
+        <a class="btn btn-primary btn-lg" href="/devis?maquette=1">Voir ma maquette gratuite <span aria-hidden="true">→</span></a>
+        <a class="btn btn-secondary btn-lg" href={`tel:${TEL_INTL}`}>Appeler le {TEL}</a>
       </div>
-      <ul class="badges" style="margin-top:24px" aria-label="Nos engagements"><li>Prix affichés, devis ferme</li><li>Maquette refaite sans frais si elle ne vous plaît pas</li><li>Paiement en 3 fois sans frais</li><li>Le site vous appartient</li></ul>
+      <p class="note">Prix affichés, devis ferme · Paiement en 3 fois sans frais · Votre page d'accueil gratuite avant de signer · Le site vous appartient</p>
+      <Preuve />
     </div>
   </section>
 
@@ -124,7 +132,6 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           </div>
         </div>
         <div class="svc-side">
-          <ServiceVisual id={s.id} couleur={f.couleur} />
           <span class="m-label">Ce qui est inclus</span>
           <ul class="included" style={`--c:var(--${f.couleur})`}>{s.inclus.map(x => <li>{x}</li>)}</ul>
           {pr && (pr.lien
@@ -137,25 +144,17 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
   </section>
 ))}
 
+  <Avis max={4} />
+
   <Offres />
+
+  <Contact />
 
   <section class="section" id="faq" aria-labelledby="faq-title">
     <div class="wrap faq">
-      <div><h2 class="d-xl" id="faq-title">Prix, paiement, engagement</h2><p class="subhead" style="margin-top:18px">Les questions qu'on nous pose avant de signer.</p></div>
+      <div><h2 class="d-xl" id="faq-title">Prix, paiement, engagement</h2><p class="lead" style="margin-top:18px">Les questions qu'on nous pose avant de signer. Une autre question{NB}? Appelez le <a class="link-u" href={`tel:${TEL_INTL}`}>{TEL}</a>{WHATSAPP && <>, écrivez-nous <a class="link-u" href={WHATSAPP} target="_blank" rel="noopener">sur WhatsApp</a></>} ou à <a class="link-u" href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p></div>
       <div class="faq-list">{FAQ.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="final-title">
-    <div class="wrap">
-      <div class="final">
-        <h2 class="d-xl" id="final-title">Pas sûr de ce qu'il vous faut{NB}?</h2>
-        <p class="lead" style="color:rgba(255,255,255,.85)">Décrivez votre activité en deux minutes. Vous recevez sous 48{NB}h un devis clair avec les services qui vous rapporteront le plus, et seulement ceux-là.</p>
-        <div class="btn-row" style="justify-content:center">
-          <a class="btn btn-primary" href="/devis">Recevoir mon devis gratuit</a>
-          <a class="btn btn-glass" href="/devis?mode=appel">Réserver un appel</a>
-        </div>
-      </div>
-    </div>
-  </section>
 </Base>

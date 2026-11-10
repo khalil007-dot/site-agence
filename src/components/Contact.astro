@@ -1,0 +1,38 @@
+---
+// Dernier appel des pages : les deux fondateurs, le formulaire « On vous rappelle » (prénom et téléphone,
+// envoyé par public/main.js) et les autres moyens de nous joindre
+import Fondateurs from './Fondateurs.astro';
+import { CLE_FORMULAIRES, COFONDATEUR, EMAIL, FONDATEUR, HORAIRES, NB, TEL, TEL_INTL, WHATSAPP } from '../lib/site';
+
+// Piège à robots : case invisible pour les humains, cochée par les robots de spam
+const piege = '<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">';
+---
+<section class="section-tight" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="panel panel-white founder founder-duo">
+      <div class="founder-txt">
+        <h2 class="d-lg" id="contact-title">Parlez directement à <span class="hl">{COFONDATEUR} ou {FONDATEUR.split(' ')[0]}</span>.</h2>
+        <blockquote><p>« Pas de standard ni de chef de projet : quand vous appelez, vous tombez sur l'un de nous deux. »</p></blockquote>
+        <form class="rappel" id="rappel-form" novalidate data-cle={CLE_FORMULAIRES} data-email={EMAIL}>
+          <Fragment set:html={piege} />
+          <div id="rappel-step">
+            <p class="rappel-t"><b>Laissez votre numéro, on vous rappelle.</b> Dans la journée, {HORAIRES}.</p>
+            <div class="rappel-row">
+              <div class="field"><label for="r-nom">Prénom</label><input type="text" id="r-nom" name="nom" autocomplete="given-name" required aria-describedby="err-r-nom"><p class="error" id="err-r-nom"></p></div>
+              <div class="field"><label for="r-tel">Téléphone</label><input type="tel" id="r-tel" name="tel" autocomplete="tel" inputmode="tel" required placeholder="0470 12 34 56…" aria-describedby="err-r-tel"><p class="error" id="err-r-tel"></p></div>
+              <button class="btn btn-primary btn-lg" type="submit">Rappelez-moi</button>
+            </div>
+            <p class="step-error" id="err-envoi-rappel" role="alert"></p>
+          </div>
+          <div id="rappel-done" hidden>
+            <h3 tabindex="-1">C'est noté, <span id="rappel-prenom"></span>{NB}!</h3>
+            <p>On vous rappelle au <b id="rappel-num"></b> dans la journée.</p>
+          </div>
+        </form>
+        <p class="contact-autres">Ou directement : <a class="link-u" href={`tel:${TEL_INTL}`}>{TEL}</a>{WHATSAPP && <> · <a class="link-u" href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a></>} · <a class="link-u" href="/devis?maquette=1">maquette gratuite</a></p>
+      </div>
+      <Fondateurs mission={false} />
+    </div>
+  </div>
+</section>
+
