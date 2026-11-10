@@ -85,6 +85,24 @@
       "skillPath": "skills/humaniseur-fr/SKILL.md",
       "computedHash": "da20525befd2d3508b86a5bb2457ba9204d7eb12c8746e9a9651c85a632abe24"
     },
+    "image": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/image/SKILL.md",
+      "computedHash": "381f05007757111f1d5b08c6cb40f283f7ecda71cb7d0cfe58744ad8f301c65b"
+    },
+    "influencer-marketing": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/influencer-marketing/SKILL.md",
+      "computedHash": "7f93fe66e8011cf4146f59fee63f01dd8c7e9f45021583c5f807ecfd46f853a4"
+    },
+    "marketing-plan": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/marketing-plan/SKILL.md",
+      "computedHash": "0a3a756d6a79fe3bda10b7bed5b7608e5e5ca206e0a8703724b2d326ad43c456"
+    },
     "marketing-psychology": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
@@ -97,6 +115,12 @@
       "skillPath": "skills/product-marketing/SKILL.md",
       "computedHash": "b8a9cd747705923a7a29cda12e478594e3a5062d8f7c7bfbf19d7fc0b24cee76"
     },
+    "referrals": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/referrals/SKILL.md",
+      "computedHash": "54a60b8e5735412d931338f6e5ea884b114cd06b3dfd2592f2b33b9d29e9fdc8"
+    },
     "schema": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
@@ -108,6 +132,18 @@
       "sourceType": "github",
       "skillPath": "skills/seo-audit/SKILL.md",
       "computedHash": "01f9f8a3feb3ea69c6c212d61189c610f96ef2cc363adc27fd314d78254bf6ae"
+    },
+    "social": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/social/SKILL.md",
+      "computedHash": "6e1d533c62abb5dcb92775fd5aabc198923a198a7e1e498cac585be3c467b270"
+    },
+    "video": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/video/SKILL.md",
+      "computedHash": "35382cb46e02686cca2485826ddfc6b0376d112c8f6b30dcbac3966ae3b6aa90"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
