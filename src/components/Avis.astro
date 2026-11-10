@@ -10,7 +10,7 @@ const avis = (await getCollection('avis')).sort((a, b) => a.data.ordre - b.data.
 {avis.length > 0 && (
   <section class="section" aria-labelledby="avis-title">
     <div class="wrap">
-      <div class="fx-head rv"><h2 class="d-xl" id="avis-title">Ce qu'en disent <span class="hl">nos clients</span>.</h2><p class="lead">Leurs mots, publiés avec leur accord.</p></div>
+      <div class="avis-head rv"><h2 class="d-md" id="avis-title">Ce qu'en disent <span class="hl">nos clients</span>.</h2><p class="muted small">Leurs mots, publiés avec leur accord.</p></div>
       <div class="avis-list">
         {avis.map(({ data: a }) => (
           <figure class="avis-card rv">
