@@ -24,29 +24,29 @@ const ETAPES: [string, string, string][] = [
 ];
 
 const FAQ: [string, string][] = [
-  ['Combien coûte la création d’un site internet à Bruxelles ?', `Chez nous, ${e(vitrine)} HTVA pour un site vitrine sur mesure, payé une fois ou en 3 fois sans frais. En Belgique, une agence facture souvent entre ${e(5000)} et ${e(15000)}, un freelance entre ${e(800)} et ${e(5000)}.`],
+  ['Combien coûte la création d’un site internet à Bruxelles ?', `Chez nous, à partir de ${e(vitrine)} HTVA pour un site vitrine sur mesure, payé une fois ou en 3 fois sans frais. En Belgique, une agence facture souvent entre ${e(5000)} et ${e(15000)}, un freelance entre ${e(800)} et ${e(5000)}.`],
   ['Combien de temps pour être en ligne ?', `${delai} après votre accord sur le devis, maquette comprise.`],
   ['Faut-il que j’écrive les textes ?', 'Non. On les écrit avec vous à partir d’un appel de 30 minutes, puis vous les validez.'],
   ['Est-ce que le site m’appartient ?', 'Oui. Le nom de domaine, les textes et les photos sont à votre nom. Vous partez quand vous voulez.'],
-  ['Y a-t-il un abonnement obligatoire ?', `Non. La maintenance à ${e(MAINTENANCE)} par mois est facultative et sans engagement.`],
+  ['Y a-t-il un abonnement obligatoire ?', `Non. La maintenance, à partir de ${e(MAINTENANCE)} par mois, est facultative et sans engagement.`],
   ['Vous vous déplacez à Bruxelles ?', 'Oui, on peut se voir à Bruxelles. La plupart des clients préfèrent un appel ou une visio, et suivent l’avancement sur un lien privé.'],
 ];
 ---
-<Base chemin="creation-site-internet-bruxelles" title={`Création de site internet à Bruxelles : ${e(vitrine)}, en ligne en ${jours} | ${BRAND}`} desc={`Création de site internet à Bruxelles pour indépendants et commerces : ${e(vitrine)} HTVA, prix fixe, en ligne en ${delai}. Textes écrits avec vous, fiche Google incluse. Devis gratuit en 48 h.`} noindex>
+<Base chemin="creation-site-internet-bruxelles" title={`Création de site internet à Bruxelles dès ${e(vitrine)}, en ligne en ${jours} | ${BRAND}`} desc={`Création de site internet à Bruxelles pour indépendants et commerces : à partir de ${e(vitrine)} HTVA, devis ferme, en ligne en ${delai}. Textes écrits avec vous, fiche Google incluse. Devis gratuit en 48 h.`} noindex>
 
   <section class="fx-hero" aria-labelledby="hero-title">
     <div class="wrap fx-hero-grid">
       <div class="reveal">
         <p class="kicker">Agence web à Bruxelles · deux fondateurs en direct</p>
-        <h1 class="poster" id="hero-title">Création de site internet à Bruxelles. <span class="hl hl-tomato">{e(vitrine)}, en ligne en {jours}.</span></h1>
-        <p class="lead">Un site vitrine sur mesure qui fait appeler vos clients : textes écrits avec vous, pensé pour le téléphone, fiche Google réglée. Prix fixe, payé une fois. Le site vous appartient.</p>
+        <h1 class="poster" id="hero-title">Création de site internet à Bruxelles. <span class="hl hl-tomato">À partir de {e(vitrine)}, en ligne en {jours}.</span></h1>
+        <p class="lead">Un site vitrine sur mesure qui fait appeler vos clients : textes écrits avec vous, pensé pour le téléphone, fiche Google réglée. Devis ferme, payé une fois. Le site vous appartient.</p>
         <div class="btn-row fx-cta">
           <a class="btn btn-primary btn-lg" href="/devis?formule=site">Recevoir mon devis en 48{NB}h <span aria-hidden="true">→</span></a>
           <a class="btn btn-secondary btn-lg" href={`tel:${TEL_INTL}`}>Nous appeler<span class="tel-num">{NB}· {TEL}</span></a>
         </div>
         <p class="note">Gratuit et sans engagement · Maquette refaite sans frais si elle ne vous plaît pas · On répond {HORAIRES}</p>
         <dl class="fx-stats">
-          <div><dt>{e(vitrine)}</dt><dd>HTVA, payé une fois</dd></div>
+          <div><dt>{e(vitrine)}</dt><dd>à partir de, HTVA, payé une fois</dd></div>
           <div><dt>{jours}</dt><dd>ouvrables pour être en ligne</dd></div>
           <div><dt>3 fois</dt><dd>sans frais, si vous préférez étaler</dd></div>
         </dl>
@@ -93,17 +93,17 @@ const FAQ: [string, string][] = [
       <div class="cmp-top">
         <div class="rv">
           <h2 class="d-xl" id="cmp-title">Le travail d'une agence. <span class="hl">Le prix d'un freelance.</span></h2>
-          <p class="lead">À Bruxelles, une agence facture un site vitrine entre {e(5000)} et {e(15000)}. Chez nous, c'est {e(vitrine)}, écrit dans le devis avant que vous signiez.</p>
+          <p class="lead">À Bruxelles, une agence facture un site vitrine entre {e(5000)} et {e(15000)}. Chez nous, c'est à partir de {e(vitrine)}, et le prix exact est écrit dans le devis avant que vous signiez.</p>
           <ul class="cmp-points">
-            <li><b>Un prix fixe.</b> Le montant du devis est celui de la facture.</li>
+            <li><b>Un devis ferme.</b> Le montant du devis est celui de la facture.</li>
             <li><b>Payé une fois.</b> Ou en 3 fois sans frais.</li>
             <li><b>Le site est à vous.</b> Domaine, textes et photos à votre nom.</li>
           </ul>
         </div>
-        <div class="receipt rv" aria-label={`Ce que comprend le site vitrine à ${e(vitrine)}`}>
+        <div class="receipt rv" aria-label={`Ce que comprend le site vitrine à partir de ${e(vitrine)}`}>
           <p class="receipt-head"><b>Votre site vitrine</b><span>{BRAND}</span></p>
           <ul>{TICKET.map(t => <li><span>{t}</span><b>inclus</b></li>)}<li><span>Mise en ligne en {delai}</span><b>inclus</b></li></ul>
-          <p class="receipt-total"><span>Total, hors TVA</span><b>{e(vitrine)}</b></p>
+          <p class="receipt-total"><span>À partir de, hors TVA</span><b>{e(vitrine)}</b></p>
           <p class="receipt-foot">Payé une fois · ou 3{NB}×{NB}{e(Math.ceil(vitrine / 3))} sans frais</p>
           <a class="btn btn-primary" href="/devis?formule=site">Je veux ce site <span aria-hidden="true">→</span></a>
         </div>

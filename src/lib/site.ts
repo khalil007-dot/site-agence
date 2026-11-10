@@ -62,7 +62,7 @@ export const ORG = {
   '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': ORG_ID,
   name: BRAND, url: SITE_URL + '/', email: EMAIL, telephone: TEL_INTL, image: SITE_URL + '/og-image.png',
   logo: SITE_URL + '/logo.png', priceRange: `${services.formules[0].prix} € - ${services.formules[2].prix} €`,
-  description: `Agence web à Bruxelles : sites internet à prix fixe pour indépendants, commerces et PME. Site vitrine ${services.formules[0].prix} €, site + logo ${services.formules[1].prix} €, boutique en ligne ${services.formules[2].prix} € HTVA, payés une fois. Référencement, Google Ads et réseaux sociaux.`,
+  description: `Agence web à Bruxelles : sites internet pour indépendants, commerces et PME. Site vitrine à partir de ${services.formules[0].prix} €, site + logo à partir de ${services.formules[1].prix} €, boutique en ligne à partir de ${services.formules[2].prix} € HTVA, payés une fois. Référencement, Google Ads et réseaux sociaux.`,
   address: {
     '@type': 'PostalAddress', ...(ADRESSE && { streetAddress: ADRESSE }), ...(CODE_POSTAL && { postalCode: CODE_POSTAL }),
     addressLocality: 'Bruxelles', addressRegion: 'Région de Bruxelles-Capitale', addressCountry: 'BE',
@@ -74,7 +74,7 @@ export const ORG = {
   knowsLanguage: ['fr'],
   founder: FONDATEURS.map(personRef),
   hasOfferCatalog: {
-    '@type': 'OfferCatalog', name: 'Sites internet à prix fixe',
+    '@type': 'OfferCatalog', name: 'Sites internet',
     itemListElement: services.formules.map(f => ({
       '@type': 'Offer', name: f.nom, description: `${f.pour} En ligne en ${f.delai}. ${f.inclus.join(', ')}.`, url: SITE_URL + '/#formules',
       price: String(f.prix), priceCurrency: 'EUR', availability: 'https://schema.org/InStock',
@@ -93,6 +93,6 @@ export const CAT_LABEL = Object.fromEntries(CATS);
 export const PAGES: [string, string][] = [['', '1.0'], ['services', '0.9'], ['realisations', '0.7'], ['a-propos', '0.6'], ['conseils', '0.6'], ['devis', '0.8']];
 export const pageUrl = (chemin: string) => SITE_URL + '/' + chemin;
 
-// Les 3 offres affichées partout (accueil, services, devis) : un prix fixe chacune, payable en 3 fois
+// Les 3 offres affichées partout (accueil, services, devis) : un prix de départ chacune, payable en 3 fois
 export const FORMULES = services.formules;
 export const MAINTENANCE = services.services.find(s => s.id === 'maintenance')!.prix_mensuel;

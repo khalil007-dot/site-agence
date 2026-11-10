@@ -1,6 +1,6 @@
 ---
 // Page Services, pensée pour faire contacter : les 7 services et leur prix visibles dès l'arrivée,
-// guide « par où commencer », les 3 offres à prix fixe, une carte par service (résultat, inclus, prix,
+// guide « par où commencer », les 3 offres, une carte par service (résultat, inclus, prix,
 // délai, vraie réalisation), garanties, avis, contact, FAQ. Prix et contenus : src/data/services.json
 import Base from '../layouts/Base.astro';
 import Offres from '../components/Offres.astro';
@@ -16,12 +16,10 @@ import logoObrunch from '../assets/projets/obrunch-house-logo.jpg';
 import { BRAND, EMAIL, FAMS, FORMULES, NB, ORG_ID, SITE_URL, SV, TEL, TEL_INTL, WHATSAPP, e, prixDepart } from '../lib/site';
 
 const BYID = Object.fromEntries(SV.map(s => [s.id, s]));
-// Services vendus seuls à prix fixe dans les 3 offres (site vitrine, boutique) : pas de « dès »
-const FIXES = new Set(FORMULES.filter(f => f.services.length === 1).map(f => f.services[0]));
 const devisLabel = (court: string) => (['SEO', 'Google Ads'].includes(court) ? court : court.toLowerCase());
 // Paiement en 3 mensualités sans frais pour les services payés en une fois
 const mensualite = (p: number) => e(Math.round(p / 3));
-const prixAffiche = (s: (typeof SV)[number]) => (FIXES.has(s.id) ? '' : 'dès ') + prixDepart(s);
+const prixAffiche = (s: (typeof SV)[number]) => 'à partir de ' + prixDepart(s);
 
 // Ce que le service change pour le client, en une phrase (titre de sa carte)
 const RESULTAT: Record<string, string> = {
@@ -70,7 +68,7 @@ const GARANTIES: [string, string][] = [
 const FAQ: [string, string][] = [
   ['Je ne sais pas de quoi j’ai besoin. Comment choisir ?', `Appelez-nous au ${TEL} ou demandez la maquette gratuite. On regarde votre activité et on vous conseille seulement ce qui vous rapportera des clients. Dans la plupart des cas, un site vitrine et une fiche Google bien faits suffisent pour commencer.`],
   ['La maquette gratuite, c’est vraiment gratuit ?', 'Oui. Vous nous dites le nom de votre commerce et ce que vous faites, et sous 72 h ouvrées on vous montre la page d’accueil de votre futur site. Si elle vous plaît, on vous envoie le devis. Sinon, vous ne nous devez rien.'],
-  ['Les prix affichés sont-ils les vrais prix ?', "Oui. Le site vitrine, le site + logo et la boutique ont un prix fixe, hors TVA. Pour les autres services, c'est un prix de départ : le devis gratuit donne le montant exact selon votre projet, et il ne bouge plus ensuite."],
+  ['Les prix affichés sont-ils les vrais prix ?', "Ce sont des prix de départ, hors TVA, pour un projet courant. Le devis gratuit donne le montant exact selon votre projet (nombre de pages, de produits, de langues…), et il ne bouge plus ensuite."],
   ['Puis-je payer en plusieurs fois ?', "Oui, de deux façons : 40 % à la signature et 60 % à la mise en ligne, ou 3 mensualités sans frais. Cela vaut pour les sites et le logo ; les services mensuels se paient chaque mois."],
   ['Les services mensuels m’engagent-ils longtemps ?', "La maintenance est sans engagement. Le référencement demande 3 mois au départ, le temps que Google prenne en compte le travail. Ensuite, vous arrêtez avec un mois de préavis."],
   ['Le budget Google Ads est-il compris ?', "Non. Le prix couvre la création et le suivi des campagnes. Le budget versé à Google est payé directement par vous, et vous fixez son plafond."],
@@ -94,14 +92,14 @@ const SERVICES_LD = {
 };
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base chemin="services" title={`Services et prix : site, logo, SEO et Google Ads à Bruxelles | ${BRAND}`} desc={`Site vitrine ${e(BYID['site-vitrine'].prix_unique)}, boutique en ligne, logo, SEO, Google Ads, réseaux sociaux et maintenance à Bruxelles. Prix affichés, maquette gratuite avant de signer, paiement en 3 fois.`} current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
+<Base chemin="services" title={`Services et prix : site, logo, SEO et Google Ads à Bruxelles | ${BRAND}`} desc={`Site vitrine à partir de ${e(BYID['site-vitrine'].prix_unique)}, boutique en ligne, logo, SEO, Google Ads, réseaux sociaux et maintenance à Bruxelles. Prix affichés, maquette gratuite avant de signer, paiement en 3 fois.`} current="services" schema={[SERVICES_LD, FAQ_LD]} crumbs={[['Services', 'services']]}>
 
   <section class="sx-hero" aria-labelledby="page-title">
     <div class="wrap sx-hero-grid">
       <div class="reveal">
         <p class="kicker">Services et prix · Bruxelles et toute la Belgique</p>
         <h1 class="poster" id="page-title">Tout ce qu'il faut pour que vos clients <span class="hl">vous appellent</span>.</h1>
-        <p class="lead">Un site qui donne envie de vous contacter, une image qui inspire confiance et des visiteurs qui arrivent par Google. Chaque prix est écrit sur cette page, et le devis ne bouge plus.</p>
+        <p class="lead">Un site qui donne envie de vous contacter, une image qui inspire confiance et des visiteurs qui arrivent par Google. Chaque prix de départ est écrit sur cette page, et le devis ne bouge plus.</p>
         <div class="btn-row fx-cta">
           <a class="btn btn-primary btn-lg" href="/devis?maquette=1">Voir ma maquette gratuite <span aria-hidden="true">→</span></a>
           <a class="btn btn-secondary btn-lg" href={`tel:${TEL_INTL}`}>Appeler le {TEL}</a>
@@ -127,7 +125,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <div class="gtabs" role="tablist" aria-label="Votre situation">{GUIDE.map(([sit], i) => <button class="gtab" type="button" role="tab" id={`gt-${i}`} aria-controls={`gp-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{sit}</button>)}</div>
         {GUIDE.map(([sit, conseil, ids], i) => <div class="gpanel" role="tabpanel" id={`gp-${i}`} aria-labelledby={`gt-${i}`} hidden={i !== 0}>
           <p class="gconseil">{conseil}</p>
-          <div class="grecos">{ids.map(id => <a class="greco" href={`#${id}`}><span>{BYID[id].nom_court}</span><b>{prixDepart(BYID[id])}</b><small>Voir le détail ↓</small></a>)}</div>
+          <div class="grecos">{ids.map(id => <a class="greco" href={`#${id}`}><span>{BYID[id].nom_court}</span><small class="greco-from">à partir de</small><b>{prixDepart(BYID[id])}</b><small>Voir le détail ↓</small></a>)}</div>
           <div class="gfoot">
             <span class="m-budget">Budget de départ : <b>{budget(ids)}</b></span>
             <a class="btn btn-primary" href={`/devis?service=${ids.join(',')}`}>Devis pour ces services</a>
@@ -157,7 +155,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
                     <h3 id={`${s.id}-t`}>{s.nom}</h3>
                     <p class="sx-res">{RESULTAT[s.id]}</p>
                   </div>
-                  <p class="sx-price"><small>{FIXES.has(s.id) ? 'Prix fixe' : 'À partir de'}</small><b>{prixDepart(s)}</b>{s.prix_unique > 0 && <span>ou 3{NB}×{NB}{mensualite(s.prix_unique)} sans frais</span>}</p>
+                  <p class="sx-price"><small>À partir de</small><b>{prixDepart(s)}</b>{s.prix_unique > 0 && <span>ou 3{NB}×{NB}{mensualite(s.prix_unique)} sans frais</span>}</p>
                 </header>
                 <p class="sx-for">{s.promesse} {s.pour_qui}</p>
                 <ul class="checks sx-inclus">{s.inclus.map(x => <li>{x}</li>)}</ul>

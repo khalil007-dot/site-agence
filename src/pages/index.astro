@@ -51,11 +51,11 @@ const ETAPES: [string, string, string][] = [
 
 const FAQ: [string, string][] = [
   ['La maquette gratuite, c’est vraiment gratuit ?', `Oui. Vous nous dites le nom de votre commerce et ce que vous faites, et sous ${DELAI_MAQUETTE} on vous montre la page d’accueil de votre futur site. Si elle vous plaît, on vous envoie le devis. Sinon, vous ne nous devez rien.`],
-  ['Combien coûte un site ?', `Trois prix fixes, hors TVA : ${FORMULES.map(f => `${f.nom.toLowerCase()} ${e(f.prix)}`).join(', ')}. Vous payez une fois, ou en 3 fois sans frais. Ensuite, la maintenance à ${e(MAINTENANCE)} par mois est facultative.`],
+  ['Combien coûte un site ?', `Trois offres, hors TVA : ${FORMULES.map(f => `${f.nom.toLowerCase()} à partir de ${e(f.prix)}`).join(', ')}. Le devis donne le prix exact de votre projet, et il ne bouge plus. Vous payez une fois, ou en 3 fois sans frais. Ensuite, la maintenance à partir de ${e(MAINTENANCE)} par mois est facultative.`],
   ['Pourquoi êtes-vous moins chers qu’une agence ?', "Vous parlez directement aux deux personnes qui font le travail : personne d'autre à payer entre vous et nous. Nos outils règlent en quelques heures les tâches répétitives qui gonflaient les factures. Le design, les textes et le contrôle restent faits à la main."],
   ['Combien de temps faut-il pour créer un site ?', `${FORMULES.map(f => `${f.delai} pour ${f.id === 'boutique' ? 'une' : 'un'} ${f.nom.toLowerCase()}`).join(', ')}, à compter de votre accord sur le devis. La maquette fait partie de ce délai.`],
   ['Est-ce que je pourrai modifier mon site moi-même ?', 'Oui. Textes, photos, produits et prix se modifient depuis une interface simple. Une heure de formation est incluse à la livraison.'],
-  ['Et si je préfère que vous fassiez les modifications ?', `C'est le rôle de la maintenance, à ${e(maintenance)} par mois sans engagement : hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 h de modifications par mois, traitées sous 2 jours ouvrables.`],
+  ['Et si je préfère que vous fassiez les modifications ?', `C'est le rôle de la maintenance, à partir de ${e(maintenance)} par mois sans engagement : hébergement, nom de domaine, adresse e-mail, sauvegardes et 1 h de modifications par mois, traitées sous 2 jours ouvrables.`],
   ['Et si le résultat ne me plaît pas ?', "Vous validez la maquette avant le moindre développement. Si la première proposition ne vous convient pas, on repart de zéro sans frais. Après la mise en ligne, un mois de corrections est offert."],
   ['Y a-t-il des frais cachés ?', "Non. Le prix du devis est ferme et détaille tout ce qui est inclus. Le seul coût régulier possible est la maintenance, facultative et sans engagement."],
   ["Qu'est-ce que la visibilité dans les IA ?", 'De plus en plus de clients posent leurs questions à ChatGPT, Perplexity ou aux réponses IA de Google. On structure votre site et vos informations pour que ces outils vous citent quand on cherche votre métier dans votre ville.'],
@@ -65,13 +65,13 @@ const FAQ: [string, string][] = [
 const WEBSITE = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_URL + '/#site', url: SITE_URL + '/', name: BRAND, inLanguage: 'fr-BE', publisher: { '@id': ORG['@id'] } };
 const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Base chemin="" title={`Création de site internet à Bruxelles dès ${e(vitrine)} | ${BRAND}`} desc={`Site vitrine à ${e(vitrine)} HTVA, payé une fois et en ligne en ${delaiVitrine}. Textes écrits avec vous, fiche Google incluse, le site est à vous. Devis gratuit en 48 h.`} current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
+<Base chemin="" title={`Création de site internet à Bruxelles dès ${e(vitrine)} | ${BRAND}`} desc={`Site vitrine à partir de ${e(vitrine)} HTVA, payé une fois et en ligne en ${delaiVitrine}. Textes écrits avec vous, fiche Google incluse, le site est à vous. Devis gratuit en 48 h.`} current="index" schema={[ORG, WEBSITE, FAQ_LD]}>
 
   <section class="fx-hero" aria-labelledby="hero-title">
     <div class="wrap fx-hero-grid">
       <div class="reveal">
         <p class="kicker">Agence web à Bruxelles, pour indépendants et commerces</p>
-        <h1 class="poster" id="hero-title">Un site qui fait sonner <span class="hl">votre téléphone</span>. <span class="hl hl-tomato">{e(vitrine)}, payé une fois.</span></h1>
+        <h1 class="poster" id="hero-title">Un site qui fait sonner <span class="hl">votre téléphone</span>. <span class="hl hl-tomato">À partir de {e(vitrine)}, payé une fois.</span></h1>
         <div class="lead hero-lead">
           <p><b class="lead-b">Un site qui donne envie de vous appeler.</b></p>
           <p>Quand un client vous trouve sur Google, il veut comprendre ce que vous proposez et pouvoir vous joindre en un clic. On crée votre site pour ça.</p>
@@ -133,7 +133,7 @@ const FAQ_LD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
     <div class="wrap">
       <div class="fx-head rv">
         <h2 class="d-xl" id="garanties-title">Le travail d'une agence. <span class="hl">Le prix d'un freelance.</span></h2>
-        <p class="lead">En Belgique, un site vitrine coûte entre {e(5000)} et {e(15000)} en agence, entre {e(800)} et {e(5000)} chez un freelance. Chez nous, c'est {e(vitrine)}, avec quatre engagements écrits.</p>
+        <p class="lead">En Belgique, un site vitrine coûte entre {e(5000)} et {e(15000)} en agence, entre {e(800)} et {e(5000)} chez un freelance. Chez nous, c'est à partir de {e(vitrine)}, avec quatre engagements écrits.</p>
       </div>
       <div class="guarantees">
         <div class="g rv"><span class="g-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></span><h3>Un prix ferme</h3><p>Le devis détaille tout ce qui est inclus. Le montant ne change plus après votre accord.</p><span class="g-tag">0{NB}€ de supplément</span></div>
