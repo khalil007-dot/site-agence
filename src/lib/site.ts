@@ -38,6 +38,8 @@ export const WHATSAPP = reglages.whatsapp
   : '';
 // Jeton Cloudflare Web Analytics : statistiques de visite sans cookies (vide = désactivé)
 export const CLE_ANALYTICS = reglages.cle_analytics;
+// Microsoft Clarity (enregistrements de visites et cartes de clics), chargé seulement après « Accepter »
+export const CLARITY = reglages.clarity;
 // Google Ads (« AW-123456789 ») et libellé de chaque conversion, créés dans Google Ads → Objectifs → Conversions.
 // Vide = aucun script Google et aucun bandeau cookies. Le script ne se charge qu'après accord du visiteur.
 export const GOOGLE_ADS = reglages.google_ads;

@@ -1,11 +1,22 @@
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.documentElement.classList.add('js');
 
-// Google Ads (réglages : google_ads et conversions). Le script Google ne se charge qu'après « Accepter »
-// dans le bandeau ; le choix est retenu sur l'appareil. Sans identifiant, rien de tout ça ne s'exécute.
+// Google Ads (réglages : google_ads et conversions) et Microsoft Clarity (réglage : clarity). Leurs scripts
+// ne se chargent qu'après « Accepter » dans le bandeau ; le choix est retenu sur l'appareil.
+// Sans identifiant, rien de tout ça ne s'exécute.
 const ADS = window.EPURE_ADS;
-const chargerAds = () => {
-  if (window.gtag) return;
+const CLARITY = window.EPURE_CLARITY;
+const chargerClarity = () => {
+  if (!CLARITY || window.clarity) return;
+  window.clarity = function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.clarity.ms/tag/' + encodeURIComponent(CLARITY);
+  document.head.append(s);
+};
+const chargerMesure = () => {
+  chargerClarity();
+  if (!ADS || window.gtag) return;
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { dataLayer.push(arguments); };
   gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'denied', analytics_storage: 'denied' });
@@ -21,11 +32,11 @@ const conversion = nom => {
   const cible = ADS && ADS.conv[nom];
   if (cible && window.gtag) gtag('event', 'conversion', { send_to: cible });
 };
-if (ADS) {
+if (ADS || CLARITY) {
   let choix = null;
   try { choix = localStorage.getItem('epure-consent'); } catch {}
   const bandeau = document.getElementById('consent');
-  if (choix === '1') chargerAds();
+  if (choix === '1') chargerMesure();
   else if (choix === null && bandeau) bandeau.hidden = false;
   document.addEventListener('click', e => {
     const bouton = e.target.closest('[data-consent]');
@@ -33,7 +44,7 @@ if (ADS) {
       const oui = bouton.dataset.consent === '1';
       try { localStorage.setItem('epure-consent', oui ? '1' : '0'); } catch {}
       bandeau.hidden = true;
-      if (oui) chargerAds();
+      if (oui) chargerMesure();
     }
     if (e.target.closest('[data-consent-open]') && bandeau) bandeau.hidden = false;
     // Clics sur le numéro et sur WhatsApp, partout sur le site
@@ -353,6 +364,24 @@ if (form) {
     note.textContent = formule.texte;
     note.hidden = false;
   }
+  // Venu de « Voir ma maquette gratuite » (?maquette=1) : site vitrine coché, on demande le commerce
+  // et l'activité, puis où envoyer la maquette
+  const maquette = q.get('maquette') === '1';
+  if (maquette) {
+    const box = form.querySelector('input[name="services"][value="site-vitrine"]');
+    if (box) box.checked = true;
+    if (!form.msg.value) form.msg.value = 'Nom du commerce : \nActivité : ';
+    const note = document.getElementById('audit-note');
+    note.textContent = 'Maquette gratuite : dites-nous le nom de votre commerce et ce que vous faites. Sous 72\u00a0h ouvrées, on vous montre la page d\u2019accueil de votre futur site. Vous signez seulement si elle vous plaît.';
+    note.hidden = false;
+    document.getElementById('page-title').textContent = 'Votre maquette gratuite';
+    const titre2 = form.querySelector('#step-2 h2');
+    titre2.textContent = 'Parlez-nous de votre commerce';
+    titre2.nextElementSibling.textContent = 'Votre maquette gratuite arrive sous 72\u00a0h ouvrées. Vous signez seulement si elle vous plaît.';
+    document.getElementById('step-3-titre').textContent = 'Où vous envoyer la maquette\u00a0?';
+    document.getElementById('step-3-txt').textContent = 'Vous recevez le lien de votre future page d\u2019accueil par e-mail sous 72\u00a0h ouvrées. Laissez aussi votre téléphone si vous préférez qu\u2019on vous la présente.';
+    form.querySelector('button[type="submit"]').textContent = 'Recevoir ma maquette gratuite';
+  }
   // Venu du bloc « Audit gratuit » : seulement le nom et l'e-mail à donner, et on parle d'audit, pas de devis
   const audit = q.get('audit') && q.get('site');
   if (audit) {
@@ -378,8 +407,9 @@ if (form) {
     form.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   };
 
-  // Audit gratuit : services déjà choisis, on va directement aux coordonnées
+  // Audit gratuit : services déjà choisis, on va directement aux coordonnées ; maquette : à la description
   if (audit) show(2);
+  else if (maquette) show(1);
 
   const setError = (field, text) => {
     field.setAttribute('aria-invalid', text ? 'true' : 'false');
@@ -416,7 +446,7 @@ if (form) {
     btn.textContent = 'Envoi…';
     const chosen = [...form.querySelectorAll('input[name="services"]:checked')].map(i => i.nextElementSibling.textContent);
     const ok = await envoyer(form, {
-      subject: (audit ? 'Demande d\'audit gratuit : ' : 'Demande de devis : ') + form.nom.value.trim(),
+      subject: (audit ? 'Demande d\'audit gratuit : ' : maquette ? 'Demande de maquette gratuite : ' : 'Demande de devis : ') + form.nom.value.trim(),
       email: form.email.value.trim(),
       'Nom': form.nom.value.trim(),
       'Entreprise': form.entreprise.value.trim() || '-',
@@ -428,6 +458,7 @@ if (form) {
       'Activité': form.msg.value.trim() || '-',
       'Site actuel': form.site.value.trim() || '-',
       'Audit gratuit demandé': q.get('audit') ? 'Oui' : 'Non',
+      'Maquette gratuite demandée': maquette ? 'Oui' : 'Non',
       ...provenance(),
     }, 'err-envoi-devis');
     btn.disabled = false;
@@ -439,6 +470,14 @@ if (form) {
     if (audit) {
       const t = document.getElementById('done-txt');
       t.textContent = 'Votre audit gratuit de ' + q.get('site') + ' arrive à l\u2019adresse ';
+      const b = document.createElement('strong');
+      b.style.color = 'var(--ink)';
+      b.textContent = form.email.value.trim();
+      t.append(b, ' sous 72\u00a0h ouvrées.');
+    }
+    if (maquette) {
+      const t = document.getElementById('done-txt');
+      t.textContent = 'Le lien de votre maquette gratuite arrive à l\u2019adresse ';
       const b = document.createElement('strong');
       b.style.color = 'var(--ink)';
       b.textContent = form.email.value.trim();
@@ -592,6 +631,40 @@ if (modes) {
     const done = document.getElementById('call-done');
     done.hidden = false;
     done.querySelector('h2').focus();
+  });
+}
+
+// Accueil : « On vous rappelle », prénom et téléphone seulement
+const rappel = document.getElementById('rappel-form');
+if (rappel) {
+  rappel.addEventListener('submit', async e => {
+    e.preventDefault();
+    const nom = rappel['r-nom'], tel = rappel['r-tel'];
+    const erreur = (f, texte) => { f.setAttribute('aria-invalid', texte ? 'true' : 'false'); document.getElementById('err-' + f.id).textContent = texte; return !texte; };
+    const nomOk = erreur(nom, nom.value.trim() ? '' : 'Indiquez votre prénom.');
+    const telOk = erreur(tel, tel.value.replace(/\D/g, '').length >= 9 ? '' : 'Indiquez un numéro pour qu\'on puisse vous rappeler.');
+    if (!nomOk) { nom.focus(); return; }
+    if (!telOk) { tel.focus(); return; }
+    const btn = rappel.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Envoi…';
+    const ok = await envoyer(rappel, {
+      subject: 'À rappeler : ' + nom.value.trim() + ' ' + tel.value.trim(),
+      'Prénom': nom.value.trim(),
+      'Téléphone': tel.value.trim(),
+      'Demande': 'Être rappelé dans la journée',
+      ...provenance(),
+    }, 'err-envoi-rappel');
+    btn.disabled = false;
+    btn.textContent = 'Rappelez-moi';
+    if (!ok) return;
+    conversion('appel');
+    document.getElementById('rappel-prenom').textContent = nom.value.trim();
+    document.getElementById('rappel-num').textContent = tel.value.trim();
+    document.getElementById('rappel-step').hidden = true;
+    const fin = document.getElementById('rappel-done');
+    fin.hidden = false;
+    fin.querySelector('h3').focus();
   });
 }
 

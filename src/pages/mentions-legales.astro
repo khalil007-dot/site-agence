@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { ADRESSE, BRAND, CLE_FORMULAIRES, CODE_POSTAL, EMAIL, FONDATEUR, GOOGLE_ADS, NUMERO_ENTREPRISE, TEL, TEL_INTL, VILLE, WHATSAPP } from '../lib/site';
+import { ADRESSE, BRAND, CLARITY, CLE_FORMULAIRES, CODE_POSTAL, EMAIL, FONDATEUR, GOOGLE_ADS, NUMERO_ENTREPRISE, TEL, TEL_INTL, VILLE, WHATSAPP } from '../lib/site';
 
 // Adresse complète si elle est renseignée dans les réglages, sinon la ville seule
 const lieu = ADRESSE ? `${ADRESSE}, ${[CODE_POSTAL, VILLE].filter(Boolean).join(' ')}` : VILLE;
@@ -30,10 +30,11 @@ const envoi = CLE_FORMULAIRES
       <p>Vous pouvez demander l'accès, la correction ou la suppression de vos données en écrivant à <a class="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>. Vous pouvez aussi adresser une réclamation à l'Autorité de protection des données (APD).</p>
       <h2 id="cookies">Cookies</h2>
       {/* Cloudflare ajoute lui-même Web Analytics quand il est activé sur le domaine, même sans jeton dans les réglages */}
-      {GOOGLE_ADS ? <Fragment>
+      {GOOGLE_ADS || CLARITY ? <Fragment>
         <p>Les visites sont comptées de façon anonyme avec Cloudflare Web Analytics, sans cookie ni suivi d'un site à l'autre.</p>
-        <p>Si vous cliquez sur « Accepter » dans le bandeau, Google Ads (Google Ireland Limited) dépose des cookies de mesure, par exemple « _gcl_au », conservés au maximum 90 jours. Ils nous indiquent quelle annonce vous a amené sur le site et si vous nous avez ensuite contactés (formulaire, appel ou WhatsApp). Ils ne servent pas à vous montrer de la publicité personnalisée.</p>
-        <p>Sans votre accord, aucun script Google n'est chargé. Vous pouvez changer d'avis à tout moment avec le lien « Cookies » en bas de chaque page.</p>
+        {GOOGLE_ADS && <p>Si vous cliquez sur « Accepter » dans le bandeau, Google Ads (Google Ireland Limited) dépose des cookies de mesure, par exemple « _gcl_au », conservés au maximum 90 jours. Ils nous indiquent quelle annonce vous a amené sur le site et si vous nous avez ensuite contactés (formulaire, appel ou WhatsApp). Ils ne servent pas à vous montrer de la publicité personnalisée.</p>}
+        {CLARITY && <p>Si vous cliquez sur « Accepter », Microsoft Clarity (Microsoft Ireland Operations Limited) enregistre aussi, sans votre nom, vos clics, vos défilements et vos déplacements sur les pages, avec des cookies comme « _clck » et « _clsk » conservés au maximum un an. Les textes saisis dans les formulaires sont masqués. Ces données nous montrent où le site est peu clair, pour l'améliorer.</p>}
+        <p>Sans votre accord, aucun de ces scripts n'est chargé. Vous pouvez changer d'avis à tout moment avec le lien « Cookies » en bas de chaque page.</p>
       </Fragment> : <p>Ce site n'utilise aucun cookie. Les visites sont comptées de façon anonyme avec Cloudflare Web Analytics, sans cookie ni suivi d'un site à l'autre.</p>}
     </div>
   </section>

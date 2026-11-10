@@ -283,6 +283,10 @@ content:
         label: Jeton Cloudflare Web Analytics
         description: Facultatif. Pour compter les visites, sans cookies.
         type: string
+      - name: clarity
+        label: Identifiant Microsoft Clarity
+        description: Facultatif. Pour voir des enregistrements de visites et les cartes de clics (clarity.microsoft.com). Chargé seulement si le visiteur accepte les cookies.
+        type: string
       - name: cle_formulaires
         label: Clé Web3Forms
         description: Facultatif. Reçue par e-mail sur web3forms.com. Sans elle, les formulaires passent par FormSubmit (à activer une fois via l'e-mail reçu).
