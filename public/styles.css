@@ -1501,3 +1501,5 @@ a.m-proof:hover { border-color: var(--hair); }
 #rappel-done h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; }
 .contact-autres { font-size: .9375rem; color: var(--muted); }
 @media (max-width: 760px) { .rappel-row { grid-template-columns: 1fr; } .rappel-row .btn { margin-top: 0; width: 100%; } }
+.hero-lead { display: grid; gap: 10px; }
+.hero-lead p { margin: 0; }
