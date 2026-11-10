@@ -1208,8 +1208,24 @@ a.m-proof:hover { border-color: var(--hair); }
 .work-card .phone { right: 6%; bottom: -12%; width: 26%; }
 .work-card.flat { padding: 0; }
 .work-card.flat img { width: 100%; height: 100%; object-fit: cover; }
-.work-logos { list-style: none; margin: 0 0 clamp(36px, 5vw, 56px); padding: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px clamp(28px, 4vw, 52px); }
-.work-logos img { height: 40px; width: auto; max-width: 160px; object-fit: contain; opacity: .8; }
+.work-logos { list-style: none; margin: 0 0 clamp(28px, 4vw, 44px); padding: clamp(18px, 2.4vw, 26px) clamp(16px, 2.4vw, 28px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 22px clamp(20px, 2.6vw, 36px); border: 1px solid var(--hair); border-radius: 22px; }
+.work-logos img { height: 50px; width: auto; max-width: 160px; object-fit: contain; opacity: .9; }
+/* Version compacte sur l'accueil : 4 colonnes, cartes alignées */
+.works-compact .works { grid-template-columns: repeat(4, 1fr); gap: 28px 16px; }
+.works-compact .work:nth-child(even) { margin-top: 0; }
+.works-compact .work-card { padding: 18px 18px 0; border-radius: 20px; margin-bottom: 10px; }
+.works-compact .work-card.flat { padding: 0; }
+.works-compact .work-card .browser { border-radius: 8px 8px 0 0; }
+.works-compact .work-card .phone { border-radius: 14px; padding: 3px; }
+.works-compact .work-card .phone img { border-radius: 11px; }
+.works-compact .browser .bar { height: 20px; padding: 0 8px; gap: 4px; font-size: .625rem; }
+.works-compact .browser .bar i { width: 6px; height: 6px; }
+.works-compact .browser .bar b { margin-left: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.works-compact .work h3 { font-size: 1.0625rem; }
+.works-compact .work p { font-size: .8125rem; }
+.works-compact .fx-head .d-xl { font-size: clamp(1.9rem, 3.6vw, 3rem); }
+@media (max-width: 1000px) { .works-compact .works { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 760px) { .works-compact .works { gap: 22px 12px; } .works-compact .work-card { padding: 12px 12px 0; border-radius: 16px; } .work-logos img { height: 40px; max-width: 130px; } }
 .work h3 { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.025em; }
 .work p { color: var(--muted); font-size: .9375rem; }
 @media (max-width: 760px) { .works { grid-template-columns: 1fr; gap: 36px; } .work:nth-child(even) { margin-top: 0; } .work-card { padding: 22px 22px 0; border-radius: 24px; } }
