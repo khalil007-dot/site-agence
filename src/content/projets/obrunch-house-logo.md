@@ -6,7 +6,7 @@ image_alt: "Logo d'O'Brunch House, une tasse verte fumante avec couverts croisé
 etiquette: Logo
 lien: https://www.facebook.com/p/o_brunch_house-100091440482277/
 accueil: false
-ordre: 5
+ordre: 9
 couleur: violet
 maquette: logos
 ---
